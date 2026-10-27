@@ -23,6 +23,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from . import coverage as coverage_stage
+from .dedupe import dedupe_regions
 from . import leaders as leaders_stage
 from . import plate as plate_stage
 from . import regions as regions_stage
@@ -148,8 +149,18 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     # 1. Read + translate ---------------------------------------------------------
     started = time.perf_counter()
     regions, usage = regions_stage.read_regions(image_bytes, width, height, register)
+    before_dedupe = len(regions)
+    regions = dedupe_regions(regions)
     job.regions = regions
-    job.add_stage("read", _ms(started), usage.spark_cost(), **usage.to_dict(), regions=len(regions))
+    job.add_stage(
+        "read",
+        _ms(started),
+        usage.spark_cost(),
+        **usage.to_dict(),
+        regions=len(regions),
+        regions_before_dedupe=before_dedupe,
+        duplicates_dropped=before_dedupe - len(regions),
+    )
     if not regions:
         job.warnings.append("no text regions found")
         _finish(job, folder, source, source)
