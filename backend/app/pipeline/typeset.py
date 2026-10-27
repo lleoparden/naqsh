@@ -1,60 +1,37 @@
-"""Typesetting stage: fit an Arabic line into the space the original lettering had.
+"""Typesetting: fit a shaped Arabic line into the space the original lettering had.
 
-Phase 2 uses arabic-reshaper + bidi with presentation-form fonts (Noto Kufi / Noto
-Naskh). Phase 3 replaces this with a HarfBuzz shaper and a style matcher; the
-interface (``fit_text`` returning display lines and a size) is designed to survive
-that swap.
-
-Fitting measures *ink*, not the em box: a Kufi alef or a final kaf easily extends
-past its nominal size, and that is exactly how text gets clipped in a caption bar.
+Fitting uses HarfBuzz-shaped ink extents (not advance widths), so diacritics above
+and descenders below are inside the measurement. Lines are balanced when there are
+two of them: the break point with the smallest widest-line wins.
 """
 
 from __future__ import annotations
 
-from pathlib import Path
-
-import arabic_reshaper
-from bidi.algorithm import get_display
-from PIL import ImageFont
-
+from .shaping import FONTS, available_families, measure, shape_line
 from .types import Layout
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-FONT_DIR = REPO_ROOT / "assets" / "fonts"
-
-FONTS: dict[str, Path] = {
-    # Comic lettering reads best in a geometric kufi; naskh is the publishing option.
-    "kufi": FONT_DIR / "NotoKufiArabic-Variable.ttf",
-    "naskh": FONT_DIR / "NotoNaskhArabic-Variable.ttf",
-    "amiri": FONT_DIR / "Amiri-Regular.ttf",
-}
-
-DEFAULT_FAMILY = "kufi"
-LINE_GAP_RATIO = 0.18
+DEFAULT_FAMILY = "tajawal"
+LINE_GAP_RATIO = 0.20
 
 
-def display_text(text: str) -> str:
-    """Reshape and reorder for rendering by a non-shaping rasteriser."""
-    return get_display(arabic_reshaper.reshape(text.strip()))
+def family_for(font_style: str, style: str = "") -> str:
+    """Map Spark's style words to one of the bundled OFL families."""
+    text = f"{font_style} {style}".lower()
+    if any(word in text for word in ("naskh", "serif", "calligraph", "print", "engraved")):
+        return "naskh"
+    if "amiri" in text:
+        return "amiri"
+    if any(word in text for word in ("bold", "title", "display", "heavy", "chalk")):
+        return "tajawal-bold"
+    return "tajawal"
 
 
-def available_families() -> list[str]:
-    return [name for name, path in FONTS.items() if path.is_file()]
-
-
-def _font(family: str, size: int) -> ImageFont.FreeTypeFont:
-    path = FONTS.get(family) or FONTS[DEFAULT_FAMILY]
-    if not path.is_file():
-        raise FileNotFoundError(f"font missing: {path}")
-    return ImageFont.truetype(str(path), max(6, size))
-
-
-def _wrap(words: list[str], font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
+def _wrap(words: list[str], family: str, size: int, max_width: int) -> list[str]:
     lines: list[str] = []
     current: list[str] = []
     for word in words:
         candidate = " ".join([*current, word])
-        width = font.getlength(display_text(candidate))
+        width, _height = measure(candidate, family, size)
         if current and width > max_width:
             lines.append(" ".join(current))
             current = [word]
@@ -65,17 +42,29 @@ def _wrap(words: list[str], font: ImageFont.FreeTypeFont, max_width: int) -> lis
     return lines
 
 
-def _measure(lines: list[str], font: ImageFont.FreeTypeFont, size: int) -> tuple[int, int]:
-    """Ink width and stacked ink height for display lines."""
-    widths: list[int] = []
-    heights: list[int] = []
-    for line in lines:
-        box = font.getbbox(display_text(line))
-        widths.append(box[2] - box[0])
-        heights.append(box[3] - box[1])
+def _block_height(lines: list[str], family: str, size: int) -> int:
     gap = int(round(size * LINE_GAP_RATIO))
-    total_height = sum(heights) + gap * (len(lines) - 1)
-    return max(widths, default=0), total_height
+    heights = [measure(line, family, size)[1] for line in lines]
+    return sum(heights) + gap * max(0, len(lines) - 1)
+
+
+def _widest(lines: list[str], family: str, size: int) -> int:
+    return max((measure(line, family, size)[0] for line in lines), default=0)
+
+
+def _balanced(words: list[str], family: str, size: int, max_width: int) -> list[str]:
+    """For two lines, pick the split with the smallest widest line."""
+    if len(words) < 2:
+        return [" ".join(words)]
+    best: tuple[int, list[str]] | None = None
+    for split in range(1, len(words)):
+        candidate = [" ".join(words[:split]), " ".join(words[split:])]
+        if _widest(candidate, family, size) > max_width:
+            continue
+        widest = _widest(candidate, family, size)
+        if best is None or widest < best[0]:
+            best = (widest, candidate)
+    return best[1] if best else _wrap(words, family, size, max_width)
 
 
 def fit_text(
@@ -86,39 +75,57 @@ def fit_text(
     family: str = DEFAULT_FAMILY,
     max_size: int | None = None,
     min_size: int = 10,
-    padding: int = 6,
+    padding: int | None = None,
 ) -> Layout:
-    """Largest size at which the whole line fits, wrapping only when it must."""
-    width = max(8, int(box_width * 0.94) - 2 * padding)
-    # Spark's boxes are a little loose around a caption bar; 0.82 of the box height
-    # is the conservative budget that keeps descenders inside the artwork.
-    height = max(8, int(box_height * 0.82) - 2 * padding)
-    words = [w for w in text.split() if w]
+    # Thin caption lines need proportionally less padding than a big bubble.
+    if padding is None:
+        padding = max(2, min(6, int(min(box_width, box_height) * 0.04)))
+    width = max(8, int(box_width * 0.96) - 2 * padding)
+    height = max(8, int(box_height * 0.95) - 2 * padding)
+    words = [word for word in text.split() if word]
     if not words:
         return Layout(lines=[], size=min_size, line_height=min_size, width=0, height=0)
 
-    upper = min(max_size or height, height, max(12, int(height * 1.1)))
+    upper = min(max_size or height, height, 220)
     for size in range(upper, min_size - 1, -1):
-        font = _font(family, size)
-        lines = _wrap(words, font, width)
-        ink_width, ink_height = _measure(lines, font, size)
-        if ink_width <= width and ink_height <= height:
-            return Layout(
-                lines=[display_text(line) for line in lines],
-                size=size,
-                line_height=int(round(size * (1 + LINE_GAP_RATIO))),
-                width=ink_width,
-                height=ink_height,
-            )
+        lines = _wrap(words, family, size, width)
+        if _widest(lines, family, size) > width:
+            continue
+        if _block_height(lines, family, size) > height:
+            continue
+        if len(lines) == 2:
+            lines = _balanced(words, family, size, width)
+        widest = _widest(lines, family, size)
+        block = _block_height(lines, family, size)
+        return Layout(
+            lines=lines,
+            size=size,
+            line_height=int(round(size * (1 + LINE_GAP_RATIO))),
+            width=widest,
+            height=block,
+        )
 
-    font = _font(family, min_size)
-    lines = _wrap(words, font, width)
-    ink_width, ink_height = _measure(lines, font, min_size)
+    lines = _wrap(words, family, min_size, width)
     return Layout(
-        lines=[display_text(line) for line in lines],
+        lines=lines,
         size=min_size,
         line_height=int(round(min_size * (1 + LINE_GAP_RATIO))),
-        width=ink_width,
-        height=ink_height,
+        width=_widest(lines, family, min_size),
+        height=_block_height(lines, family, min_size),
         overflow=True,
     )
+
+
+def shaped_lines(lines: list[str], family: str, size: int) -> list:
+    return [shape_line(line, family, size) for line in lines]
+
+
+__all__ = [
+    "DEFAULT_FAMILY",
+    "FONTS",
+    "available_families",
+    "family_for",
+    "fit_text",
+    "shape_line",
+    "shaped_lines",
+]

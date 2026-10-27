@@ -8,6 +8,6 @@ numpy==2.2.1
 opencv-python-headless==4.13.0.92
 httpx==0.28.1
 meta-sam-parser==0.1.0
-arabic-reshaper==3.0.0
-python-bidi==0.6.3
+uharfbuzz==0.57.0
+freetype-py==2.5.1
 pytest==8.3.4

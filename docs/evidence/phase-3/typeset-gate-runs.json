@@ -1,0 +1,576 @@
+[
+  {
+    "page": "01-comic-flat",
+    "register": "egyptian",
+    "job": "d3dbface16b8",
+    "cost": 0.023329,
+    "ms": 48264,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          306,
+          330,
+          982,
+          457
+        ],
+        "family": "tajawal-bold",
+        "size": 108,
+        "lines": [
+          "الفصل الأول"
+        ],
+        "fits": true,
+        "text": "الفصل الأول"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          131,
+          520,
+          465,
+          732
+        ],
+        "family": "tajawal-bold",
+        "size": 88,
+        "lines": [
+          "عيش",
+          "طازة؟"
+        ],
+        "fits": true,
+        "text": "عيش طازة؟"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          778,
+          528,
+          1178,
+          712
+        ],
+        "family": "tajawal",
+        "size": 73,
+        "lines": [
+          "كل يوم",
+          "الصبح"
+        ],
+        "fits": true,
+        "text": "كل يوم الصبح"
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "page": "01-comic-flat",
+    "register": "msa",
+    "job": "e5ad91a72f51",
+    "cost": 0.022959,
+    "ms": 43375,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          307,
+          323,
+          986,
+          474
+        ],
+        "family": "tajawal-bold",
+        "size": 118,
+        "lines": [
+          "الفصل الأول"
+        ],
+        "fits": true,
+        "text": "الفصل الأول"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          137,
+          545,
+          461,
+          726
+        ],
+        "family": "tajawal-bold",
+        "size": 72,
+        "lines": [
+          "خبز طازج؟"
+        ],
+        "fits": true,
+        "text": "خبز طازج؟"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          800,
+          553,
+          1160,
+          726
+        ],
+        "family": "tajawal",
+        "size": 94,
+        "lines": [
+          "كل صباح"
+        ],
+        "fits": true,
+        "text": "كل صباح"
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "page": "03-menu-paper",
+    "register": "egyptian",
+    "job": "e13f9585b24f",
+    "cost": 0.029668,
+    "ms": 95587,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          244,
+          311,
+          1047,
+          442
+        ],
+        "family": "naskh",
+        "size": 87,
+        "lines": [
+          "بيت الكشري"
+        ],
+        "fits": true,
+        "text": "بيت الكشري"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          296,
+          536,
+          997,
+          570
+        ],
+        "family": "tajawal",
+        "size": 18,
+        "lines": [
+          "المشهور عندنا فريش وبيتي"
+        ],
+        "fits": true,
+        "text": "المشهور عندنا فريش وبيتي"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          122,
+          772,
+          608,
+          826
+        ],
+        "family": "tajawal-bold",
+        "size": 31,
+        "lines": [
+          "كشري 45"
+        ],
+        "fits": true,
+        "text": "كشري 45"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          122,
+          851,
+          608,
+          904
+        ],
+        "family": "tajawal-bold",
+        "size": 31,
+        "lines": [
+          "شاي بالنعناع 10"
+        ],
+        "fits": true,
+        "text": "شاي بالنعناع 10"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          122,
+          929,
+          608,
+          985
+        ],
+        "family": "tajawal-bold",
+        "size": 40,
+        "lines": [
+          "شوربة عدس 25"
+        ],
+        "fits": true,
+        "text": "شوربة عدس 25"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          659,
+          772,
+          1171,
+          826
+        ],
+        "family": "tajawal-bold",
+        "size": 39,
+        "lines": [
+          "طعمية 20"
+        ],
+        "fits": true,
+        "text": "طعمية 20"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          659,
+          851,
+          1171,
+          904
+        ],
+        "family": "tajawal-bold",
+        "size": 38,
+        "lines": [
+          "بسبوسة 30"
+        ],
+        "fits": true,
+        "text": "بسبوسة 30"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          659,
+          929,
+          1171,
+          985
+        ],
+        "family": "tajawal-bold",
+        "size": 41,
+        "lines": [
+          "رز بلبن 30"
+        ],
+        "fits": true,
+        "text": "رز بلبن 30"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          387,
+          1716,
+          916,
+          1749
+        ],
+        "family": "naskh",
+        "size": 17,
+        "lines": [
+          "فاتحين كل يوم 11 الصبح 10 بالليل"
+        ],
+        "fits": true,
+        "text": "فاتحين كل يوم 11 الصبح 10 بالليل"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          86,
+          1830,
+          495,
+          1857
+        ],
+        "family": "tajawal",
+        "size": 12,
+        "lines": [
+          "كله بيتقدم فريش"
+        ],
+        "fits": true,
+        "text": "كله بيتقدم فريش"
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "page": "03-menu-paper",
+    "register": "msa",
+    "job": "e834f71d2fc0",
+    "cost": 0.045196,
+    "ms": 149226,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          237,
+          282,
+          1053,
+          407
+        ],
+        "family": "naskh",
+        "size": 95,
+        "lines": [
+          "بيت الكشري"
+        ],
+        "fits": true,
+        "text": "بيت الكشري"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          284,
+          503,
+          996,
+          540
+        ],
+        "family": "tajawal",
+        "size": 23,
+        "lines": [
+          "الأطباق المميزة طازجة وبيتية"
+        ],
+        "fits": true,
+        "text": "الأطباق المميزة طازجة وبيتية"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          109,
+          710,
+          585,
+          772
+        ],
+        "family": "tajawal-bold",
+        "size": 37,
+        "lines": [
+          "كشري 45"
+        ],
+        "fits": true,
+        "text": "كشري 45"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          668,
+          710,
+          1171,
+          772
+        ],
+        "family": "tajawal-bold",
+        "size": 46,
+        "lines": [
+          "فلافل 20"
+        ],
+        "fits": true,
+        "text": "فلافل 20"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          109,
+          814,
+          585,
+          876
+        ],
+        "family": "tajawal-bold",
+        "size": 37,
+        "lines": [
+          "شاي بالنعناع 10"
+        ],
+        "fits": true,
+        "text": "شاي بالنعناع 10"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          668,
+          812,
+          1171,
+          876
+        ],
+        "family": "tajawal-bold",
+        "size": 48,
+        "lines": [
+          "بسبوسة 30"
+        ],
+        "fits": true,
+        "text": "بسبوسة 30"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          109,
+          918,
+          585,
+          979
+        ],
+        "family": "tajawal-bold",
+        "size": 43,
+        "lines": [
+          "شوربة عدس 25"
+        ],
+        "fits": true,
+        "text": "شوربة عدس 25"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          668,
+          916,
+          1171,
+          979
+        ],
+        "family": "tajawal-bold",
+        "size": 42,
+        "lines": [
+          "أرز باللبن 30"
+        ],
+        "fits": true,
+        "text": "أرز باللبن 30"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          367,
+          1668,
+          915,
+          1707
+        ],
+        "family": "naskh",
+        "size": 24,
+        "lines": [
+          "مفتوح يوميا 11 صباحا - 10 مساء"
+        ],
+        "fits": true,
+        "text": "مفتوح يوميا 11 صباحا - 10 مساء"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          83,
+          1826,
+          463,
+          1855
+        ],
+        "family": "tajawal",
+        "size": 13,
+        "lines": [
+          "جميع الأطباق تقدم طازجة"
+        ],
+        "fits": true,
+        "text": "جميع الأطباق تقدم طازجة"
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "page": "04-chalkboard",
+    "register": "egyptian",
+    "job": "431ee5c7e5f7",
+    "cost": 0.024978,
+    "ms": 71589,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          219,
+          207,
+          1084,
+          355
+        ],
+        "family": "tajawal-bold",
+        "size": 128,
+        "lines": [
+          "عرض النهاردة"
+        ],
+        "fits": true,
+        "text": "عرض النهاردة"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          259,
+          657,
+          1052,
+          791
+        ],
+        "family": "tajawal-bold",
+        "size": 94,
+        "lines": [
+          "شاي بالنعناع 25"
+        ],
+        "fits": true,
+        "text": "شاي بالنعناع 25"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          307,
+          851,
+          1103,
+          954
+        ],
+        "family": "tajawal-bold",
+        "size": 85,
+        "lines": [
+          "بسبوسة 30"
+        ],
+        "fits": true,
+        "text": "بسبوسة 30"
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "page": "04-chalkboard",
+    "register": "msa",
+    "job": "5ce5a9930634",
+    "cost": 0.036214,
+    "ms": 87434,
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          205,
+          1052,
+          342
+        ],
+        "family": "tajawal-bold",
+        "size": 118,
+        "lines": [
+          "عرض اليوم"
+        ],
+        "fits": true,
+        "text": "عرض اليوم"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          256,
+          637,
+          1055,
+          787
+        ],
+        "family": "tajawal-bold",
+        "size": 107,
+        "lines": [
+          "شاي بالنعناع 25"
+        ],
+        "fits": true,
+        "text": "شاي بالنعناع 25"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          326,
+          843,
+          1103,
+          956
+        ],
+        "family": "tajawal-bold",
+        "size": 95,
+        "lines": [
+          "بسبوسة 30"
+        ],
+        "fits": true,
+        "text": "بسبوسة 30"
+      }
+    ],
+    "overflow": []
+  }
+]

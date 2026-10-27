@@ -7,6 +7,7 @@ is a failed translation for this product.
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .meta import MetaAPIError, Usage, spark_json
@@ -31,7 +32,7 @@ For each region return:
 - "id": short stable id, t1, t2, ...
 - "source_text": the exact words you can read, in their original language and case. Empty string if unreadable.
 - "bbox_norm": [x0, y0, x1, y1] as fractions of the image width and height (0-1), tight around the lettering block, not the whole bubble or page.
-- "translation_ar": the Arabic a professional letterer would set in that space, same meaning and tone. Keep numbers, prices and proper nouns accurate. It must be short enough to fit the same block.
+- "translation_ar": the Arabic a professional letterer would set in that space, same meaning and tone. Keep numbers, prices and proper nouns accurate. It must be short enough to fit the same block. Never include dot leaders, ellipses or decorative dots copied from the layout — translate the words and keep the digits only.
 - "style": one of "speech", "caption", "title", "label".
 - "font_style": one short phrase about the original lettering (e.g. "bold rounded uppercase sans", "handwritten brush script").
 - "color": approximate hex colour of the original lettering, like "#1b4f52".
@@ -72,6 +73,7 @@ def read_regions(image_png: bytes, width: int, height: int, register: str) -> tu
         if bbox.width < 8 or bbox.height < 8:
             continue
         translation = str(item.get("translation_ar") or "").strip()
+        translation = _strip_leaders(translation)
         if not translation:
             continue
         regions.append(
@@ -86,6 +88,13 @@ def read_regions(image_png: bytes, width: int, height: int, register: str) -> tu
             )
         )
     return regions, usage
+
+
+def _strip_leaders(text: str) -> str:
+    """Remove dot leaders and decorative dot runs copied from a menu layout."""
+    cleaned = re.sub(r"[.·•…]{3,}", " ", text)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned)
+    return cleaned.strip(" .·•…")
 
 
 def _parse_color(value: Any) -> tuple[int, int, int]:
