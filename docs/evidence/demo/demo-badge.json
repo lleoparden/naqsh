@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "name": "badge on result page",
+      "ok": true,
+      "detail": "replaying a recorded run — comic"
+    },
+    {
+      "name": "clean hides dev status",
+      "ok": true,
+      "detail": "matches: 0"
+    },
+    {
+      "name": "stage replay visible",
+      "ok": true,
+      "detail": "sections: 1"
+    },
+    {
+      "name": "receipt after replay",
+      "ok": true,
+      "detail": "receipt sections: 1, health matches: 0"
+    },
+    {
+      "name": "editor link",
+      "ok": true,
+      "detail": "demo-e242166e"
+    },
+    {
+      "name": "badge in editor",
+      "ok": true,
+      "detail": "job demo-e242166e"
+    }
+  ]
+}
