@@ -1,0 +1,30 @@
+[
+  {
+    "job": "6a8aa7a0829b",
+    "retranslate_cost_usd": 0.000764,
+    "layers": 4,
+    "text_layers": 3,
+    "covers": 1,
+    "svg_bytes": 5363337,
+    "zip_bytes": 10331880,
+    "png_bytes": 1782538,
+    "svg_vs_png_mean_abs_diff": 0.12,
+    "svg_vs_png_pixels_over_40": 0.092,
+    "editor_png": "L:\\naqsh\\docs\\evidence\\phase-6\\gate-6a8aa7a0829b-editor.png",
+    "svg_render_png": "L:\\naqsh\\docs\\evidence\\phase-6\\gate-6a8aa7a0829b-svg-render.png"
+  },
+  {
+    "job": "e13f9585b24f",
+    "retranslate_cost_usd": 0.001994,
+    "layers": 11,
+    "text_layers": 10,
+    "covers": 1,
+    "svg_bytes": 7653001,
+    "zip_bytes": 14672057,
+    "png_bytes": 2659472,
+    "svg_vs_png_mean_abs_diff": 0.55,
+    "svg_vs_png_pixels_over_40": 0.432,
+    "editor_png": "L:\\naqsh\\docs\\evidence\\phase-6\\gate-e13f9585b24f-editor.png",
+    "svg_render_png": "L:\\naqsh\\docs\\evidence\\phase-6\\gate-e13f9585b24f-svg-render.png"
+  }
+]

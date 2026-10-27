@@ -17,6 +17,7 @@ from starlette.concurrency import run_in_threadpool
 
 from .config import settings
 from .pipeline import document as document_module
+from .pipeline import export as export_module
 from .pipeline import job as job_module
 from .pipeline import spend
 from .pipeline.meta import MetaAPIError, spark_translate
@@ -241,3 +242,57 @@ def retranslate_region(job_id: str, body: dict[str, object]) -> dict[str, object
     layer.lines = lines
     document_module.save_document(folder, doc)
     return {"layer": layer.to_dict(), "cost_usd": round(cost, 6), "usage": usage.to_dict()}
+
+
+@app.get("/api/jobs/{job_id}/export.svg")
+def export_svg(job_id: str) -> Response:
+    folder, doc = _document(job_id)
+    return Response(
+        content=export_module.build_svg(doc, folder, outlined=False),
+        media_type="image/svg+xml",
+        headers={"Content-Disposition": f'inline; filename="naqsh-{job_id}.svg"'},
+    )
+
+
+@app.get("/api/jobs/{job_id}/export-outlined.svg")
+def export_svg_outlined(job_id: str) -> Response:
+    folder, doc = _document(job_id)
+    return Response(
+        content=export_module.build_svg(doc, folder, outlined=True),
+        media_type="image/svg+xml",
+        headers={"Content-Disposition": f'inline; filename="naqsh-{job_id}-outlined.svg"'},
+    )
+
+
+@app.get("/api/jobs/{job_id}/export.png")
+def export_png(job_id: str) -> Response:
+    folder, doc = _document(job_id)
+    image = export_module.render_png(doc, folder)
+    buffer = io.BytesIO()
+    image.save(buffer, format="PNG")
+    return Response(
+        content=buffer.getvalue(),
+        media_type="image/png",
+        headers={"Content-Disposition": f'attachment; filename="naqsh-{job_id}.png"'},
+    )
+
+
+@app.get("/api/jobs/{job_id}/export.zip")
+def export_zip(job_id: str) -> Response:
+    folder, doc = _document(job_id)
+    return Response(
+        content=export_module.build_bundle(doc, folder),
+        media_type="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="naqsh-{job_id}.zip"'},
+    )
+
+
+@app.get("/api/fonts/{name}")
+def get_font(name: str) -> FileResponse:
+    allowed = {info[2] for info in export_module.FONT_NAMES.values()} | set(export_module.LICENSES.values())
+    if name not in allowed:
+        raise HTTPException(status_code=404, detail="font not found")
+    path = (REPO_ROOT / "assets" / "fonts" / name).resolve()
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="font not found")
+    return FileResponse(path, media_type="font/ttf", headers={"Cache-Control": "public, max-age=86400"})
