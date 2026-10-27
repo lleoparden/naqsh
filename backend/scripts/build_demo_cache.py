@@ -1,0 +1,117 @@
+"""Build the demo cache from real, already-paid job runs.
+
+For each curated fixture: verify a real run exists, rebuild its editable document
+from the receipt (so a previous demo edit cannot leak in), and write a compact copy
+under ``fixtures/demo/<name>``:
+
+- ``receipt.json``  the real job receipt, timings and cost untouched
+- ``document.json`` the editable document (regions, both registers, lines)
+- ``plate.webp``    lossless copy of the cleaned composite
+- ``source.jpg``    the uploaded page, high quality, for the before/after slider
+- ``masks.zip``     the per-region SAM masks
+- ``manifest.json`` (root) maps the fixture's SHA-256 to its cache entry
+
+Output PNGs are not stored: the demo loader re-renders them from the document.
+
+Usage: python backend/scripts/build_demo_cache.py
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+import zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from PIL import Image  # noqa: E402
+
+from app.pipeline import document as document_module  # noqa: E402
+from app.pipeline.job import JOBS_DIR, load_job  # noqa: E402
+
+REPO = Path(__file__).resolve().parents[2]
+FIXTURES = REPO / "assets" / "generated" / "fixtures"
+OUT = REPO / "fixtures" / "demo"
+
+# name -> (real job id, fixture file, what it is for)
+CURATED = {
+    "comic": ("d3dbface16b8", "01-comic-flat.png", "flat comic page, three regions"),
+    "menu": ("e13f9585b24f", "03-menu-paper.png", "dense menu with prices and leaders"),
+    "chalkboard": ("605213b894ff", "04-chalkboard.png", "chalk text on a dark board"),
+    "sfx-comic": ("6a8aa7a0829b", "07-comic-sfx.png", "captions plus a kept sound effect"),
+    "label-fail": ("5d6de0e0c1be", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
+}
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def build(name: str, job_id: str, fixture: str, note: str) -> dict:
+    receipt = load_job(job_id)
+    if receipt is None:
+        raise SystemExit(f"{name}: job {job_id} not found")
+    folder = JOBS_DIR / job_id
+    target = OUT / name
+    target.mkdir(parents=True, exist_ok=True)
+
+    # Canonical document from the receipt, not whatever edits were left on disk.
+    document = document_module.layout_document(document_module.document_from_job(receipt))
+    (target / "receipt.json").write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    (target / "document.json").write_text(
+        json.dumps(document.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
+    composite = Image.open(folder / "composite.png").convert("RGB")
+    composite.save(target / "plate.webp", "WEBP", lossless=True, method=4)
+    source = Image.open(folder / "source.png").convert("RGB")
+    source.save(target / "source.jpg", "JPEG", quality=90, optimize=True)
+
+    with zipfile.ZipFile(target / "masks.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+        for mask in sorted(folder.glob("mask-*.png")):
+            archive.write(mask, mask.name)
+
+    fixture_path = FIXTURES / fixture
+    entry = {
+        "name": name,
+        "note": note,
+        "fixture": fixture,
+        "sha256": sha256(fixture_path),
+        "job_id": job_id,
+        "width": int(receipt["width"]),
+        "height": int(receipt["height"]),
+        "regions": len(receipt.get("regions") or []),
+        "total_ms": receipt.get("total_ms"),
+        "total_cost_usd": receipt.get("total_cost_usd"),
+        "recorded_stages": [
+            {"name": stage.get("name"), "ms": stage.get("ms"), "cost_usd": stage.get("cost_usd")}
+            for stage in receipt.get("stages") or []
+        ],
+        "files": {
+            "receipt": "receipt.json",
+            "document": "document.json",
+            "plate": "plate.webp",
+            "source": "source.jpg",
+            "masks": "masks.zip",
+        },
+        "exported": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+    }
+    print(name, f"{entry['regions']} regions", f"{entry['total_ms']} ms", f"${entry['total_cost_usd']:.4f}")
+    return entry
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    manifest = []
+    for name, (job_id, fixture, note) in CURATED.items():
+        manifest.append(build(name, job_id, fixture, note))
+    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    total = sum(path.stat().st_size for path in OUT.rglob("*") if path.is_file())
+    print(f"manifest: {len(manifest)} fixtures, {total / 1e6:.2f} MB")
+
+
+if __name__ == "__main__":
+    main()

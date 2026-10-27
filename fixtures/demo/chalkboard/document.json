@@ -1,0 +1,135 @@
+{
+  "id": "605213b894ff",
+  "width": 1280,
+  "height": 1920,
+  "register": "egyptian",
+  "numerals": "latin",
+  "images": {
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "source": "source.png"
+  },
+  "layers": [
+    {
+      "id": "t1",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "Today's Special",
+      "arabic": {
+        "egyptian": "عرض النهاردة",
+        "msa": "عرض النهاردة"
+      },
+      "box": [
+        237,
+        207,
+        1069,
+        363
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 123,
+      "lines": [
+        {
+          "text": "عرض النهاردة",
+          "size": 123,
+          "x": 653.0,
+          "baseline": 316.0,
+          "width": 726,
+          "height": 110
+        }
+      ],
+      "align": "center",
+      "color": [
+        242,
+        232,
+        155
+      ],
+      "z": 0,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": []
+    },
+    {
+      "id": "t2",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "MINT TEA 25",
+      "arabic": {
+        "egyptian": "شاي نعناع 25",
+        "msa": "شاي نعناع 25"
+      },
+      "box": [
+        261,
+        682,
+        1065,
+        816
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 16,
+      "lines": [
+        {
+          "text": "شاي نعناع 25",
+          "size": 16,
+          "x": 663.0,
+          "baseline": 752.0,
+          "width": 95,
+          "height": 20
+        }
+      ],
+      "align": "center",
+      "color": [
+        237,
+        237,
+        237
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": []
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "BASBOUSA 30",
+      "arabic": {
+        "egyptian": "بسبوسة 30",
+        "msa": "بسبوسة 30"
+      },
+      "box": [
+        314,
+        899,
+        1130,
+        1002
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 36,
+      "lines": [
+        {
+          "text": "بسبوسة 30",
+          "size": 36,
+          "x": 722.0,
+          "baseline": 959.0,
+          "width": 185,
+          "height": 35
+        }
+      ],
+      "align": "center",
+      "color": [
+        237,
+        237,
+        237
+      ],
+      "z": 2,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": []
+    }
+  ]
+}

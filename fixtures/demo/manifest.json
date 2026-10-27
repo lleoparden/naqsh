@@ -1,0 +1,307 @@
+[
+  {
+    "name": "comic",
+    "note": "flat comic page, three regions",
+    "fixture": "01-comic-flat.png",
+    "sha256": "3b8b2958fd4b470b689abecde02c9b4ba17282be24ecd3bf411ed189dd60f94f",
+    "job_id": "d3dbface16b8",
+    "width": 1280,
+    "height": 1920,
+    "regions": 3,
+    "total_ms": 48264,
+    "total_cost_usd": 0.023329,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 4691,
+        "cost_usd": 0.0065
+      },
+      {
+        "name": "segment",
+        "ms": 7023,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 16737,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 14439,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 2602,
+        "cost_usd": 0.001984
+      },
+      {
+        "name": "final_check",
+        "ms": 2551,
+        "cost_usd": 0.002345
+      },
+      {
+        "name": "typeset",
+        "ms": 221,
+        "cost_usd": 0.0
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip"
+    },
+    "exported": "2026-10-27"
+  },
+  {
+    "name": "menu",
+    "note": "dense menu with prices and leaders",
+    "fixture": "03-menu-paper.png",
+    "sha256": "4393a5a9a192f70afe6588bc77870d981f9154a4fc2161b3f83428fe64e84630",
+    "job_id": "e13f9585b24f",
+    "width": 1280,
+    "height": 1920,
+    "regions": 10,
+    "total_ms": 95587,
+    "total_cost_usd": 0.029668,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 6783,
+        "cost_usd": 0.009998
+      },
+      {
+        "name": "segment",
+        "ms": 13488,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 22196,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 45766,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 3388,
+        "cost_usd": 0.003617
+      },
+      {
+        "name": "final_check",
+        "ms": 3634,
+        "cost_usd": 0.003553
+      },
+      {
+        "name": "typeset",
+        "ms": 332,
+        "cost_usd": 0.0
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip"
+    },
+    "exported": "2026-10-27"
+  },
+  {
+    "name": "chalkboard",
+    "note": "chalk text on a dark board",
+    "fixture": "04-chalkboard.png",
+    "sha256": "984b4c40db5eb00654d291fac1c8d19816ea33b2ee473c3bab0ba8c6232ed64e",
+    "job_id": "605213b894ff",
+    "width": 1280,
+    "height": 1920,
+    "regions": 3,
+    "total_ms": 56130,
+    "total_cost_usd": 0.022422,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 6612,
+        "cost_usd": 0.006555
+      },
+      {
+        "name": "segment",
+        "ms": 14725,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 15901,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 14057,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 2515,
+        "cost_usd": 0.001762
+      },
+      {
+        "name": "final_check",
+        "ms": 2111,
+        "cost_usd": 0.001605
+      },
+      {
+        "name": "typeset",
+        "ms": 209,
+        "cost_usd": 0.0
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip"
+    },
+    "exported": "2026-10-27"
+  },
+  {
+    "name": "sfx-comic",
+    "note": "captions plus a kept sound effect",
+    "fixture": "07-comic-sfx.png",
+    "sha256": "213a084ec418c3f946cf885d5050b3eb8ebdc6409d6056694764494e8f17da6b",
+    "job_id": "6a8aa7a0829b",
+    "width": 1280,
+    "height": 1920,
+    "regions": 3,
+    "total_ms": 45491,
+    "total_cost_usd": 0.025176,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 5280,
+        "cost_usd": 0.007112
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "segment",
+        "ms": 5114,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 16538,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 9796,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 2645,
+        "cost_usd": 0.001227
+      },
+      {
+        "name": "final_check",
+        "ms": 3747,
+        "cost_usd": 0.002489
+      },
+      {
+        "name": "typeset",
+        "ms": 200,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "selfcheck",
+        "ms": 2171,
+        "cost_usd": 0.001847
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip"
+    },
+    "exported": "2026-10-27"
+  },
+  {
+    "name": "label-fail",
+    "note": "photo label, plate failure (honest limit)",
+    "fixture": "05-label-kraft.png",
+    "sha256": "d00a0bc1b03c56a34ffd53c8a9e639182b09b109e474ab630620c0ecadbcd5ee",
+    "job_id": "5d6de0e0c1be",
+    "width": 1280,
+    "height": 1920,
+    "regions": 3,
+    "total_ms": 73612,
+    "total_cost_usd": 0.035134,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 5237,
+        "cost_usd": 0.00633
+      },
+      {
+        "name": "segment",
+        "ms": 8001,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 14010,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 14680,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 3613,
+        "cost_usd": 0.001924
+      },
+      {
+        "name": "retry",
+        "ms": 17936,
+        "cost_usd": 0.012137
+      },
+      {
+        "name": "repair",
+        "ms": 6670,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "final_check",
+        "ms": 3298,
+        "cost_usd": 0.002243
+      },
+      {
+        "name": "typeset",
+        "ms": 167,
+        "cost_usd": 0.0
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip"
+    },
+    "exported": "2026-10-27"
+  }
+]

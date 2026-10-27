@@ -1,0 +1,231 @@
+{
+  "id": "6a8aa7a0829b",
+  "register": "egyptian",
+  "width": 1280,
+  "height": 1920,
+  "artifacts": {
+    "source": "source.png",
+    "mask_overlay": "masks-overlay.png",
+    "plate_raw": "plate-raw.png",
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "before_after": "before-after.png"
+  },
+  "stages": [
+    {
+      "name": "read",
+      "ms": 5280,
+      "cost_usd": 0.007112,
+      "input_tokens": 3786,
+      "output_tokens": 560,
+      "reasoning_tokens": 302,
+      "images": 0,
+      "regions": 3
+    },
+    {
+      "name": "policy",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "translated": [
+        "t1",
+        "t2"
+      ],
+      "skipped": [],
+      "optional": [
+        "t3"
+      ],
+      "keep_numerals": []
+    },
+    {
+      "name": "segment",
+      "ms": 5114,
+      "cost_usd": 0.0025,
+      "masks": 2,
+      "concepts": "box prompts + ink extent",
+      "leaders": []
+    },
+    {
+      "name": "clean_plate",
+      "ms": 16538,
+      "cost_usd": 0.01,
+      "images": 1,
+      "plate_size": [
+        1280,
+        1920
+      ]
+    },
+    {
+      "name": "register_composite",
+      "ms": 9796,
+      "cost_usd": 0.0,
+      "shift": [
+        0,
+        2
+      ],
+      "vertical_only": true,
+      "scale_ratio": [
+        1.0,
+        1.0
+      ],
+      "flat_interiors_cleaned": 2,
+      "outside_untouched_mean_diff_is_tautological": 0.0,
+      "ring_mean_abs_diff": 11.39,
+      "ring_max_abs_diff": 15.58,
+      "ring_per_region": [
+        15.58,
+        7.19
+      ],
+      "ring_band_px": [
+        8,
+        24
+      ]
+    },
+    {
+      "name": "verify",
+      "ms": 2645,
+      "cost_usd": 0.001227,
+      "checked": 2,
+      "residual": [],
+      "notes": {
+        "t1": "clean empty yellow box",
+        "t2": "clean empty yellow box"
+      }
+    },
+    {
+      "name": "final_check",
+      "ms": 3747,
+      "cost_usd": 0.002489,
+      "checked": 3,
+      "residual": [
+        "t3"
+      ],
+      "notes": {
+        "t1": "empty yellow caption box, no text",
+        "t2": "empty yellow caption box, no text",
+        "t3": "large yellow KRAAK! lettering"
+      }
+    },
+    {
+      "name": "typeset",
+      "ms": 200,
+      "cost_usd": 0.0,
+      "regions": 2,
+      "strategies": {
+        "t1": "muse",
+        "t2": "muse"
+      },
+      "types": {
+        "t1": "caption",
+        "t2": "caption"
+      }
+    },
+    {
+      "name": "selfcheck",
+      "ms": 2171,
+      "cost_usd": 0.001847,
+      "flagged": [],
+      "issues": {},
+      "fixed": [],
+      "retranslated": [],
+      "still_flagged": []
+    }
+  ],
+  "regions": [
+    {
+      "id": "t1",
+      "source_text": "THREE DAYS LATER",
+      "translation_ar": "بعد تلات أيام",
+      "style": "caption",
+      "font_style": "bold condensed uppercase comic sans",
+      "type": "caption",
+      "action": "translate",
+      "bbox": [
+        64,
+        96,
+        470,
+        202
+      ],
+      "container": [
+        64,
+        97,
+        465,
+        184
+      ],
+      "mask_path": "mask-t1.png",
+      "font_family": "tajawal-bold",
+      "font_size": 58,
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "lines": [
+        "بعد تلات أيام"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t2",
+      "source_text": "MEANWHILE...",
+      "translation_ar": "وفي نفس الوقت",
+      "style": "caption",
+      "font_style": "bold condensed uppercase comic sans",
+      "type": "caption",
+      "action": "translate",
+      "bbox": [
+        881,
+        96,
+        1217,
+        200
+      ],
+      "container": [
+        911,
+        97,
+        1216,
+        184
+      ],
+      "mask_path": "mask-t2.png",
+      "font_family": "tajawal-bold",
+      "font_size": 39,
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "lines": [
+        "وفي نفس الوقت"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t3",
+      "source_text": "KRAAK!",
+      "translation_ar": "كراك!",
+      "style": "title",
+      "font_style": "bold jagged display uppercase comic",
+      "type": "sfx",
+      "action": "optional",
+      "bbox": [
+        74,
+        499,
+        1239,
+        1037
+      ],
+      "container": null,
+      "mask_path": null,
+      "font_family": "kufi",
+      "font_size": 0,
+      "color": [
+        255,
+        221,
+        31
+      ],
+      "lines": [],
+      "strategy": "muse"
+    }
+  ],
+  "warnings": [],
+  "total_cost_usd": 0.025176,
+  "total_ms": 45491
+}
