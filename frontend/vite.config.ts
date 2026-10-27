@@ -2,15 +2,16 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
+const apiTarget = process.env.NAQSH_API ?? "http://127.0.0.1:8010";
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     port: 5173,
-    proxy: {
-      "/api": {
-        target: "http://localhost:8000",
-        changeOrigin: true,
-      },
-    },
+    proxy: { "/api": { target: apiTarget, changeOrigin: true } },
+  },
+  preview: {
+    port: 4174,
+    proxy: { "/api": { target: apiTarget, changeOrigin: true } },
   },
 });

@@ -296,3 +296,26 @@ def get_font(name: str) -> FileResponse:
     if not path.is_file():
         raise HTTPException(status_code=404, detail="font not found")
     return FileResponse(path, media_type="font/ttf", headers={"Cache-Control": "public, max-age=86400"})
+
+
+@app.post("/api/jobs/{job_id}/cover")
+def add_cover(job_id: str, body: dict[str, object]) -> dict[str, object]:
+    folder, doc = _document(job_id)
+    box = body.get("box")
+    if not isinstance(box, list) or len(box) != 4:
+        raise HTTPException(status_code=422, detail="box must be [x1,y1,x2,y2]")
+    fill = body.get("fill")
+    if not isinstance(fill, list) or len(fill) != 3:
+        fill = [246, 240, 226]
+    cover = document_module.Layer(
+        id=f"cover-{len([layer for layer in doc.layers if layer.kind == 'cover']) + 1}",
+        kind="cover",
+        box=[int(v) for v in box],  # type: ignore[arg-type]
+        type="cover",
+        action="keep",
+        fill=[int(v) for v in fill],  # type: ignore[arg-type]
+        z=len(doc.layers),
+    )
+    doc.layers.append(cover)
+    document_module.save_document(folder, doc)
+    return doc.to_dict()
