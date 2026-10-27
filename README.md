@@ -11,15 +11,15 @@ layouts, broken ligatures, Latin fonts forced onto Arabic, no way to nudge a lin
 that overflows a speech bubble. Arabic creators, small publishers, and small
 businesses still localize by hand. Naqsh is built for them first.
 
-> **Status (2026-10-27):** Phase 2 vertical slice — one generated page runs through
-> the whole pipeline: Muse Spark reads three text regions and translates them into
-> natural Arabic, SAM 3.1 returns masks that become the layer boundaries, Muse Image
-> repaints the plate, the plate is registered and composited back through the
-> dilated masks (original pixels survive everywhere else), and the Arabic is
-> typeset right-to-left inside each bubble in the original ink colour. 25–30 s and
-> ≈$0.019 per page. The clean plate is still intermittent — see the Phase 4 gate in
-> [`docs/plan.md`](docs/plan.md) and the evidence in
-> [`docs/evidence/phase-2/`](docs/evidence/phase-2/).
+> **Status (2026-10-27):** end-to-end pipeline, layer editor, layered SVG/PNG export and
+> a labelled demo replay mode are in place. Latest post-change live measurements:
+> **comic median 33.8 s (28.5–37.4), $0.0257–$0.0291, n=3** and **menu median 61.8 s
+> (61.5–78.5), $0.0367–$0.0661, n=5** — per-run receipts in
+> [`docs/evidence/phase-7/`](docs/evidence/phase-7/) and
+> [`docs/evidence/phase-8/`](docs/evidence/phase-8/). The clean plate is still
+> intermittent on photographed surfaces — see the Phase 4 gate in
+> [`docs/plan.md`](docs/plan.md) and the honest-limit run
+> `fixtures/demo/label-fail/`.
 
 ## What's new / built during the hackathon
 

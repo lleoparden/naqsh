@@ -252,7 +252,8 @@ recorded stage milliseconds and cost are never altered. `DEMO_MODE=1` hashes the
 upload and replays a byte-for-byte fixture match; anything else goes live. The UI
 shows an amber **“Demo mode: replaying recorded run”** badge on the result page and
 in the editor, and `?clean=1` hides only dev chrome, never the badge. Stage progress
-is replayed at the recorded pace (comic 48.3 s, menu 95.6 s), and re-translate
+is replayed at the recorded pace (comic 48.3 s, menu 95.6 s — recorded before the
+Phase 8 speed work, which is why live runs are now faster than the replay), and re-translate
 replays the cached Egyptian/MSA line at cost $0. The cache holds two registers: the
 21 MSA lines were paid for once ($0.0270) so the register switch is not a live call.
 
@@ -276,10 +277,12 @@ Six live runs with `DEMO_MODE=0` (2026-10-27), receipts in
 | menu | **181.1 s** (162.1–206.8) | **$0.0502** (0.0442–0.0676) | 16 regions (item+price split), one 40.9 s retry |
 
 Wall time was measured for one run per page (57.6 s comic, 189.0 s menu); the rest are
-receipt totals, not wall-clock estimates. The menu's live behaviour differs from the
-cached demo run: 16 regions instead of 10, 181 s instead of 96 s, and `register_composite`
-alone takes a 75.7 s median — the dense page makes the plate search expensive, and one
-run needed a retry. No run errored, hung, or failed; 6/6 returned 200. The spend also
+receipt totals, not wall-clock estimates. These Phase 7 numbers are **pre-optimisation**:
+the menu's live behaviour then differed from the cached demo run — 16 regions instead of
+10, 181 s instead of 96 s, `register_composite` 75.7 s median — and one run needed a
+retry. After the Phase 8 work the same page is **61.8 s median (61.5–78.5, n=5)** with
+`register_composite` at **1.8 s** (`docs/evidence/phase-8/variance-summary.json`). No run
+errored, hung, or failed; 6/6 returned 200. The spend also
 includes a few extra live runs produced while a background measurement script was
 misbehaving (killed); they are counted, the table uses the six clean receipts.
 
