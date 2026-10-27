@@ -1,10 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { artifactUrl, fetchHealth, localize, type Health, type Job } from "./api";
+import Editor from "./editor/Editor";
 import { useLang } from "./i18n";
 
 const REGISTERS = ["egyptian", "msa"] as const;
 
 export default function App() {
+  const jobParam = new URLSearchParams(window.location.search).get("job");
+  if (jobParam) return <Editor jobId={jobParam} />;
+  return <Home />;
+}
+
+function Home() {
   const { lang, setLang, t, stage } = useLang();
   const [health, setHealth] = useState<Health | null>(null);
   const [register, setRegister] = useState<string>("egyptian");
@@ -206,6 +213,12 @@ export default function App() {
                 className="me-2 mt-4 inline-block rounded-lg bg-nile px-3 py-2 text-sm text-paper"
               >
                 {t("download")}
+              </a>
+              <a
+                href={`/?job=${job.id}`}
+                className="ms-2 mt-4 inline-block rounded-lg bg-lacquer px-3 py-2 text-sm text-paper"
+              >
+                Open editor
               </a>
               <a
                 href={artifactUrl(job, "before_after")}

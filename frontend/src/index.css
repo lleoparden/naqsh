@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Tajawal";
+  src: url("/api/fonts/Tajawal-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("/api/fonts/Tajawal-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  src: url("/api/fonts/NotoNaskhArabic-Variable.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Amiri";
+  src: url("/api/fonts/Amiri-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
 @theme {
   --color-ink: #14110f;
   --color-paper: #f6f1e7;

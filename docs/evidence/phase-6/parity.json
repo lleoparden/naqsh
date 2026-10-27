@@ -3,9 +3,9 @@
     "job": "e13f9585b24f",
     "server_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-e13f9585b24f-server.png",
     "browser_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-e13f9585b24f-browser.png",
-    "mean_abs_diff": 0.48,
-    "pixels_over_40": 0.385,
-    "pixels_over_80": 0.249
+    "mean_abs_diff": 0.55,
+    "pixels_over_40": 0.432,
+    "pixels_over_80": 0.299
   },
   {
     "job": "605213b894ff",
@@ -14,5 +14,13 @@
     "mean_abs_diff": 0.33,
     "pixels_over_40": 0.236,
     "pixels_over_80": 0.183
+  },
+  {
+    "job": "d3dbface16b8",
+    "server_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-d3dbface16b8-server.png",
+    "browser_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-d3dbface16b8-browser.png",
+    "mean_abs_diff": 0.36,
+    "pixels_over_40": 0.293,
+    "pixels_over_80": 0.195
   }
 ]
