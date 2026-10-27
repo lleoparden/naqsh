@@ -146,3 +146,44 @@ cd frontend && npm run build && npm run typecheck
 The approved scope works end to end, the checks were actually run in this session,
 the docs above are current, no secret is staged, and the demo path (upload →
 layers → edit → export) is something a judge can click through without help.
+
+## Standing rules for tasks (added 2026-10-27)
+
+These apply to every work item, without being repeated in the task.
+
+### Self-check before you report
+
+After every work item, before writing the report:
+
+1. List each acceptance criterion from the task as **PASS / FAIL / NOT TESTED** with the
+   evidence that decides it (command + output, file, receipt, screenshot).
+2. Run `cd backend && pytest -q`, and for frontend tasks `npm run typecheck` and
+   `npm run build`; run lint if the task touches linted code.
+3. For pipeline work, run it and look at the output images before claiming anything.
+4. Check the numeric gates against `docs/plan.md`; if a gate fails, stop and propose the
+   documented fallback instead of pushing through.
+5. Run the rules check: no secrets staged (`git diff --cached` scanned), no unlicensed
+   assets, `ASSETS.md` updated for anything new, no code from `L:\vectr`, README
+   "What's new" still accurate.
+6. Update `docs/submission-notes.md`.
+7. Re-read the full diff before committing; post a self-review on the PR.
+
+Report using this exact structure: **What I did / Evidence / Gate status / What I did
+NOT verify / Risks / Cost / Next step.** Do not claim a visual pass; state that the
+owner judges images.
+
+### Merge hygiene
+
+- No direct pushes to `main`. Branch, PR, merge commit.
+- Do not merge while CI is red or **pending**; wait for every required check.
+- Hand-written commit titles; never pass a PR-body file to `git commit -F`.
+
+### Budget
+
+If the mandated work cannot fit under the task's API budget cap, stop and ask before
+overrunning. Do not silently exceed a cap.
+
+### Decisions that belong to the owner
+
+Ask, do not choose silently, on: translation register defaults, scope cuts, anything
+touching the hackathon rules or submission form, and any public-facing claim or number.
