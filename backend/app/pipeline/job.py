@@ -3,6 +3,12 @@
 Each stage reports its own wall time and cost, so the receipt is evidence rather
 than an estimate. Artifacts are written under ``backend/.cache/jobs/<id>/`` and
 served by the API; the repo only keeps the evidence chosen for docs/.
+
+Clean-plate routing (Phase 4):
+    Muse Image plate -> registered + masked composite -> Spark residual check
+    -> one plate retry if any region still shows lettering
+    -> flat interior fill for flat regions / Telea inpaint for textured ones.
+Every region records which strategy produced its final pixels.
 """
 
 from __future__ import annotations
@@ -15,12 +21,15 @@ from pathlib import Path
 
 from PIL import Image
 
+from . import coverage as coverage_stage
 from . import plate as plate_stage
 from . import regions as regions_stage
 from . import render as render_stage
+from . import residual as residual_stage
 from . import segment as segment_stage
 from . import typeset
-from .types import Layout, PageJob
+from .meta import MetaAPIError
+from .types import BBox, Layout, PageJob
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 JOBS_DIR = REPO_ROOT / "backend" / ".cache" / "jobs"
@@ -38,7 +47,7 @@ def family_for(font_style: str) -> str:
     return "kufi"
 
 
-def _container_for(reading_box, mask):
+def _container_for(reading_box: BBox, mask: Image.Image) -> BBox:
     """The area text may fill: the bubble/panel the lettering sits in.
 
     The mask is eroded first so the inscribed area is used rather than the full
@@ -47,8 +56,6 @@ def _container_for(reading_box, mask):
     A mask much smaller than the reading box means SAM found only part of the
     lettering, so the reading box is used instead.
     """
-    from .types import BBox
-
     bounds = mask.getbbox()
     if not bounds:
         return reading_box
@@ -70,6 +77,27 @@ def _container_for(reading_box, mask):
     if x2 - x1 < 24 or y2 - y1 < 24:
         return reading_box
     return BBox(x1, y1, x2, y2)
+
+
+def _compose(
+    source: Image.Image,
+    aligned: Image.Image,
+    coverage: dict[str, Image.Image],
+    masks: dict[str, Image.Image],
+) -> tuple[Image.Image, dict[str, float], int]:
+    composite, stats = plate_stage.composite(source, aligned, list(coverage.values()))
+    cleaned = 0
+    for mask in masks.values():
+        composite, changed = segment_stage.clean_flat_interior(composite, mask)
+        cleaned += int(changed)
+    return composite, stats, cleaned
+
+
+def _check(composite: Image.Image, regions: list) -> tuple[list, float, dict]:
+    """One Spark vision call over every region crop; returns verdicts and cost."""
+    boxes = {region.id: region.bbox for region in regions}
+    verdicts, usage, _raw = residual_stage.detect_residual(composite, boxes)
+    return verdicts, usage.spark_cost(), residual_stage.summarise(verdicts)
 
 
 def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
@@ -94,29 +122,27 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         _finish(job, folder, source, source)
         return job
 
-    # 2. Segment ------------------------------------------------------------------
+    # 2. Segment + ink-derived coverage --------------------------------------------
     started = time.perf_counter()
     masks, sam_usage, warnings = segment_stage.segment_regions(image_bytes, regions, width, height)
     job.warnings.extend(warnings)
-    job.add_stage(
-        "segment",
-        _ms(started),
-        sam_usage.images * 2.50 / 1000,
-        masks=len(masks),
-        concepts="box prompts",
-    )
-    # The SAM mask is the shape boundary (bubble, panel). The reading box is unioned
-    # in only for repainting coverage: it is a rectangle, so it must never define a
-    # container or an ink-erasure area.
-    coverage = {region.id: segment_stage.extend_with_box(masks[region.id], region.bbox) for region in regions if region.id in masks}
+    coverage: dict[str, Image.Image] = {}
     for region in regions:
         mask = masks.get(region.id)
         if mask is None:
             continue
         region.container = _container_for(region.bbox, mask)
+        coverage[region.id], _area = coverage_stage.coverage_for(source, mask, region.bbox)
         name = f"mask-{region.id}.png"
         mask.save(folder / name)
         region.mask_path = name
+    job.add_stage(
+        "segment",
+        _ms(started),
+        sam_usage.images * 2.50 / 1000,
+        masks=len(masks),
+        concepts="box prompts + ink extent",
+    )
     overlay = segment_stage.overlay_preview(source, coverage)
     overlay.save(folder / "masks-overlay.png")
     job.artifacts["mask_overlay"] = "masks-overlay.png"
@@ -126,27 +152,25 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     plate_raw, _plate_usage = plate_stage.clean_plate(image_bytes)
     with Image.open(io.BytesIO(plate_raw)) as opened:
         plate_image = opened.convert("RGB")
-    # Recorded rather than acted on: on this page the score overlaps between clean and
-    # ghosted edits, so a retry threshold needs a mask-aware metric (Phase 4 work).
-    dirty = plate_stage.measure_dirty_plate(plate_image, [r.bbox for r in regions])
+    plate_size = plate_image.size
     (folder / "plate-raw.png").write_bytes(plate_raw)
     job.artifacts["plate_raw"] = "plate-raw.png"
-    job.add_stage("clean_plate", _ms(started), 0.01, images=1, dirty_ratio=round(dirty, 4))
+    job.add_stage(
+        "clean_plate",
+        _ms(started),
+        0.01,
+        images=1,
+        plate_size=list(plate_size),
+    )
 
-    # 4. Register + mask the plate ------------------------------------------------
+    # 4. Register + composite ------------------------------------------------------
     started = time.perf_counter()
     dx, dy = plate_stage.estimate_shift(source, plate_image, [r.bbox for r in regions])
     aligned = plate_stage.apply_shift(plate_image, (width, height), dx, dy)
     aligned.save(folder / "plate.png")
     job.artifacts["plate"] = "plate.png"
-    composite, stats = plate_stage.composite(source, aligned, list(coverage.values()))
-    flattened = 0
-    for region in regions:
-        mask = masks.get(region.id)
-        if mask is None:
-            continue
-        composite, changed = segment_stage.clean_flat_interior(composite, mask)
-        flattened += int(changed)
+    composite, stats, flat_cleaned = _compose(source, aligned, coverage, masks)
+    alignment = plate_stage.alignment_report(source, aligned, list(coverage.values()))
     composite.save(folder / "composite.png")
     job.artifacts["composite"] = "composite.png"
     job.add_stage(
@@ -154,11 +178,91 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         _ms(started),
         0.0,
         shift=[dx, dy],
-        flat_interiors_cleaned=flattened,
-        **stats,
+        vertical_only=dx == 0,
+        scale_ratio=[round(width / plate_size[0], 4), round(height / plate_size[1], 4)],
+        flat_interiors_cleaned=flat_cleaned,
+        # This is a sanity check and tautological by construction: the composite copies
+        # original pixels outside the mask, so it must be 0 unless the code is broken.
+        outside_untouched_mean_diff_is_tautological=stats["outside_untouched_mean_diff"],
+        **alignment,
     )
 
-    # 5. Typeset + render ---------------------------------------------------------
+    # 5. Verify with the model, route what still fails -----------------------------
+    started = time.perf_counter()
+    strategies: dict[str, str] = {region.id: "muse" for region in regions}
+    verify_cost = 0.0
+    try:
+        verdicts, cost, summary = _check(composite, regions)
+        verify_cost += cost
+        remaining = [v.region_id for v in verdicts if v.residual]
+        notes = summary["notes"]
+        job.add_stage("verify", _ms(started), verify_cost, **summary)
+
+        if remaining:
+            retry_started = time.perf_counter()
+            retry_raw, _ = plate_stage.clean_plate(image_bytes, retry=True)
+            with Image.open(io.BytesIO(retry_raw)) as opened:
+                retry_image = opened.convert("RGB")
+            retry_dx, retry_dy = plate_stage.estimate_shift(source, retry_image, [r.bbox for r in regions])
+            retry_aligned = plate_stage.apply_shift(retry_image, (width, height), retry_dx, retry_dy)
+            retry_composite, retry_stats, retry_flat = _compose(source, retry_aligned, coverage, masks)
+            verdicts2, cost2, summary2 = _check(retry_composite, regions)
+            still = [v.region_id for v in verdicts2 if v.residual]
+            # Keep whichever plate leaves fewer regions with residual text.
+            if len(still) <= len(remaining):
+                composite, aligned, stats = retry_composite, retry_aligned, retry_stats
+                remaining = still
+                notes = summary2["notes"]
+                for region_id in strategies:
+                    strategies[region_id] = "muse-retry"
+                retry_aligned.save(folder / "plate.png")
+                composite.save(folder / "composite.png")
+            job.add_stage(
+                "retry",
+                _ms(retry_started),
+                0.01 + cost2,
+                retried=", ".join(sorted(set(v.region_id for v in verdicts if v.residual))) or "none",
+                still_residual=remaining,
+                notes=notes,
+                shift=[retry_dx, retry_dy],
+            )
+
+            if remaining:
+                repair_started = time.perf_counter()
+                for region in regions:
+                    if region.id not in remaining:
+                        continue
+                    mask = masks.get(region.id)
+                    cov = coverage.get(region.id)
+                    if mask is None or cov is None:
+                        continue
+                    if residual_stage.region_is_flat(composite, mask):
+                        composite, changed = residual_stage.flat_fill(composite, mask, cov)
+                        strategies[region.id] = "flat-fill" if changed else "muse"
+                        if not changed:
+                            job.warnings.append(f"{region.id}: flat fill skipped (not flat)")
+                    else:
+                        composite = residual_stage.inpaint_region(composite, cov)
+                        strategies[region.id] = "inpaint"
+                composite.save(folder / "composite.png")
+                job.add_stage(
+                    "repair",
+                    _ms(repair_started),
+                    0.0,
+                    strategies={k: v for k, v in strategies.items() if v in ("flat-fill", "inpaint")},
+                )
+
+        # Final independent check on what the composite actually looks like now.
+        final_started = time.perf_counter()
+        final_verdicts, final_cost, final_summary = _check(composite, regions)
+        job.add_stage("final_check", _ms(final_started), final_cost, **final_summary)
+    except MetaAPIError as exc:
+        job.warnings.append(f"residual check unavailable: {exc}")
+
+    for region in regions:
+        region.strategy = strategies.get(region.id, "muse")
+
+    # 6. Typeset + render ---------------------------------------------------------
     started = time.perf_counter()
     layouts: dict[str, Layout] = {}
     colors: dict[str, tuple[int, int, int]] = {}
@@ -181,7 +285,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     final = render_stage.draw_regions(composite, regions, layouts, color_of=colors)
     final.save(folder / "output.png")
     job.artifacts["output"] = "output.png"
-    job.add_stage("typeset", _ms(started), 0.0, regions=len(layouts))
+    job.add_stage("typeset", _ms(started), 0.0, regions=len(layouts), strategies=strategies)
 
     _finish(job, folder, source, final)
     return job

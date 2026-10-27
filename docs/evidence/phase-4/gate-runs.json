@@ -1,0 +1,614 @@
+[
+  {
+    "page": "01-comic-flat",
+    "run": 1,
+    "job": "37bc675dc660",
+    "cost": 0.022244,
+    "ms": 47921,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          300,
+          328,
+          982,
+          455
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          133,
+          536,
+          435,
+          720
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          776,
+          538,
+          1147,
+          722
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "01-comic-flat",
+    "run": 2,
+    "job": "92c6ecdc3eb1",
+    "cost": 0.022249,
+    "ms": 44291,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          365,
+          386,
+          966,
+          472
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          138,
+          557,
+          444,
+          720
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          790,
+          564,
+          1158,
+          710
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "02-poster-watercolour",
+    "run": 1,
+    "job": "58744fe0ab6c",
+    "cost": 0.034486,
+    "ms": 89329,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse-retry",
+      "t2": "muse-retry",
+      "t3": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          64,
+          106,
+          1212,
+          413
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          192,
+          444,
+          1115,
+          501
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          530,
+          1843,
+          753,
+          1882
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  },
+  {
+    "page": "02-poster-watercolour",
+    "run": 2,
+    "job": "adb21467ccd2",
+    "cost": 0.034082,
+    "ms": 82480,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse-retry",
+      "t2": "muse-retry",
+      "t3": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          77,
+          77,
+          1203,
+          407
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          166,
+          420,
+          1114,
+          474
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          557,
+          1868,
+          742,
+          1903
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "run": 1,
+    "job": "595f4de919b9",
+    "cost": 0.02919,
+    "ms": 98585,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse",
+      "t4": "muse",
+      "t5": "muse",
+      "t6": "muse",
+      "t7": "muse",
+      "t8": "muse",
+      "t9": "muse",
+      "t10": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          237,
+          278,
+          1048,
+          407
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          287,
+          509,
+          993,
+          543
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          113,
+          739,
+          604,
+          797
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          113,
+          824,
+          600,
+          879
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          113,
+          906,
+          604,
+          964
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          664,
+          739,
+          1171,
+          797
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          664,
+          824,
+          1171,
+          879
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          664,
+          906,
+          1171,
+          964
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          371,
+          1670,
+          909,
+          1709
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          84,
+          1824,
+          470,
+          1853
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "run": 2,
+    "job": "20da59b3998e",
+    "cost": 0.041366,
+    "ms": 125635,
+    "final_residual": [
+      "t9"
+    ],
+    "strategies": {
+      "t1": "muse-retry",
+      "t2": "muse-retry",
+      "t3": "muse-retry",
+      "t4": "muse-retry",
+      "t5": "muse-retry",
+      "t6": "muse-retry",
+      "t7": "muse-retry",
+      "t8": "muse-retry",
+      "t9": "inpaint",
+      "t10": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          311,
+          1039,
+          440
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          294,
+          538,
+          998,
+          572
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          120,
+          783,
+          614,
+          847
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          687,
+          783,
+          1174,
+          847
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          120,
+          883,
+          614,
+          947
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          687,
+          883,
+          1174,
+          947
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          120,
+          983,
+          614,
+          1046
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          687,
+          983,
+          1174,
+          1046
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          389,
+          1657,
+          943,
+          1690
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          84,
+          1801,
+          499,
+          1826
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  },
+  {
+    "page": "04-chalkboard",
+    "run": 1,
+    "job": "605213b894ff",
+    "cost": 0.022422,
+    "ms": 56130,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          237,
+          207,
+          1069,
+          363
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          261,
+          682,
+          1065,
+          816
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          314,
+          899,
+          1130,
+          1002
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "04-chalkboard",
+    "run": 2,
+    "job": "3c563654b6f4",
+    "cost": 0.021848,
+    "ms": 49910,
+    "final_residual": [],
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          211,
+          1101,
+          365
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          262,
+          662,
+          1056,
+          778
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          339,
+          845,
+          1094,
+          941
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "05-label-kraft",
+    "run": 1,
+    "job": "9b24ddd04f3a",
+    "cost": 0.034483,
+    "ms": 80569,
+    "final_residual": [
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "strategies": {
+      "t1": "flat-fill",
+      "t2": "muse",
+      "t3": "flat-fill"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          307,
+          1012,
+          1043,
+          1156
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          480,
+          1196,
+          817,
+          1246
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          499,
+          1421,
+          796,
+          1469
+        ],
+        "strategy": "flat-fill"
+      }
+    ]
+  },
+  {
+    "page": "05-label-kraft",
+    "run": 2,
+    "job": "5d6de0e0c1be",
+    "cost": 0.035134,
+    "ms": 73612,
+    "final_residual": [
+      "t1"
+    ],
+    "strategies": {
+      "t1": "flat-fill",
+      "t2": "flat-fill",
+      "t3": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          303,
+          977,
+          995,
+          1164
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          485,
+          1206,
+          817,
+          1261
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          504,
+          1419,
+          790,
+          1465
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  }
+]

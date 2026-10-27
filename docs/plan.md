@@ -133,7 +133,7 @@ zoom, text inside the bubble polygon, ≤2 manual fixes per page. **Fallback ord
 variant with an explicit character budget; (c) ship editor-first: place text with
 visible fit guides and let the user size it, documenting the limit honestly.
 
-## Phase 4 — Clean plate quality *(riskiest #2)*
+## Phase 4 — Clean plate quality *(in progress 2026-10-27)*
 
 **Work:** Plan A composite (edit the page, keep only masked pixels); masking edge
 feather; Plan B classical inpaint (OpenCV Telea/NS) seeded with sampled fill;
@@ -142,6 +142,33 @@ Plan C opaque vector cover; a side-by-side receipt image per page.
 **Gate:** 4/5 text regions show no ghost lettering at 100% zoom, and pixels outside
 masks are unchanged (hash check). **Fallback:** move to Plan B, then Plan C, and
 record which plan each page used in the demo notes.
+
+**Implemented (2026-10-27):**
+
+- **Diagnosis first.** On three saved failing runs, residual lettering was mostly
+  *outside* the repaint coverage (e.g. 6,894 px outside vs 5,444 inside), because
+  the original lettering was taller than both Spark's reading box and the SAM
+  mask. The plate itself was clean. Fix: coverage is grown from the source's real
+  ink extent (`coverage.py`), not from the guessed box.
+- **Registration metrics.** The receipt now reports a ring residual (8–24 px
+  outside each mask) per region, whether the offset is vertical-only, and the
+  source/plate scale ratio. `outside_untouched_mean_diff` is kept but labelled
+  tautological.
+- **Detector.** Muse Spark vision over 100%-zoom region crops (one montage call
+  per check) returns `{id, residual, note}` per region. No pixel threshold.
+- **Routing.** Muse plate → check → one retry → flat-interior fill for flat
+  regions → Telea inpaint for textured ones; every region records its strategy.
+- **Gate assets.** Five rights-clean pages with different backgrounds (flat comic,
+  watercolour poster, printed menu, chalkboard, kraft label), two runs each.
+
+**Gate result (2026-10-27): FAILS the 9/10 bar.** Detector says 7/10 runs are free
+of text residual, but the plate flattens painted texture on the poster (2/2) and
+leaves faint ghosts plus a flat painted patch on the photographed label (2/2).
+Comic, menu and chalkboard are usable (5–6/10 by eye). Cost $0.2975 for ten runs,
+$0.0298/run, 75 s/run. Full analysis and evidence: `docs/evidence/phase-4/`.
+**Fallback taken:** the demo is scoped to stylised pages; textured backgrounds stay
+a documented limit, with thin-stroke inpainting and a manual cover tool as the
+Phase 5/6 follow-ups.
 
 ## Phase 5 — Region strategy
 

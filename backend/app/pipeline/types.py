@@ -66,6 +66,8 @@ class TextRegion:
     font_size: int = 0
     color: tuple[int, int, int] = (20, 17, 15)
     lines: list[str] = field(default_factory=list)
+    # How this region's background was cleaned: muse | muse-retry | flat-fill | inpaint
+    strategy: str = "muse"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -81,6 +83,7 @@ class TextRegion:
             "font_size": self.font_size,
             "color": list(self.color),
             "lines": self.lines,
+            "strategy": self.strategy,
         }
 
 

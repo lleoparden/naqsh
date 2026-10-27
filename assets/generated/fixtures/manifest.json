@@ -1,0 +1,42 @@
+[
+  {
+    "name": "01-comic-flat",
+    "note": "Flat vector comic page — already the Phase 2 test panel; copied here as fixture 1.",
+    "source": "../test-panel.png",
+    "prompt": "(copied from assets/generated/test-panel.png — bakery comic page with three text regions)",
+    "path": "assets\\generated\\fixtures\\01-comic-flat.png",
+    "generated": "copied"
+  },
+  {
+    "name": "02-poster-watercolour",
+    "note": "Textured watercolour poster: text sits on painted texture, not flat fill.",
+    "prompt": "A vintage travel poster of the Alexandria corniche at sunset, painted in loose watercolour with visible paper grain and pigment blooms, warm ochre and teal. Large title lettering 'ALEXANDRIA' across the top, a smaller line 'THE PEARL OF THE MEDITERRANEAN' beneath it, and a small caption 'EST. 331 BC' at the bottom. Original artwork, no signature, portrait orientation.",
+    "size": "1024x1536",
+    "path": "assets\\generated\\fixtures\\02-poster-watercolour.png",
+    "generated": "muse-image-1.0"
+  },
+  {
+    "name": "03-menu-paper",
+    "note": "Dense menu on printed paper: many small text lines, paper texture behind.",
+    "prompt": "A printed restaurant menu on warm cream paper with a subtle fibrous texture and faint coffee stain in one corner. Heading 'KOSHARY HOUSE' in bold lettering, then a list of dishes with prices in two columns: 'KOSHARY 45', 'FALAFEL 20', 'MINT TEA 10', 'BASBOUSA 30', 'LENTIL SOUP 25', 'RICE PUDDING 30'. Simple red and black ink, no photographs, portrait orientation, original design.",
+    "size": "1024x1536",
+    "path": "assets\\generated\\fixtures\\03-menu-paper.png",
+    "generated": "muse-image-1.0"
+  },
+  {
+    "name": "04-chalkboard",
+    "note": "Chalkboard: chalk texture and uneven strokes; text is light on dark.",
+    "prompt": "A cafe chalkboard sign photographed straight on, dark slate surface with chalk dust and smudges, wooden frame at the edges. Chalk lettering reads 'TODAY'S SPECIAL' across the top, then 'MINT TEA 25' and 'BASBOUSA 30' with a small hand-drawn star. Original sign, portrait orientation, no brand names.",
+    "size": "1024x1536",
+    "path": "assets\\generated\\fixtures\\04-chalkboard.png",
+    "generated": "muse-image-1.0"
+  },
+  {
+    "name": "05-label-kraft",
+    "note": "Small print on a kraft-paper label: low contrast, textured stock.",
+    "prompt": "A close-up product photograph of a glass spice jar with a kraft-paper label, visible paper fibres and a soft shadow. The label reads 'CUMIN' in a large serif, 'GROUND' in small caps beneath, and 'NET 100 G' at the bottom. Warm daylight, shallow depth of field, no other branding, portrait orientation.",
+    "size": "1024x1536",
+    "path": "assets\\generated\\fixtures\\05-label-kraft.png",
+    "generated": "muse-image-1.0"
+  }
+]

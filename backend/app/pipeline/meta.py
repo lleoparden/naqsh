@@ -77,13 +77,25 @@ def _headers() -> dict[str, str]:
     }
 
 
-def _post(path: str, payload: dict[str, Any], timeout: float = 240.0, attempts: int = 3) -> dict[str, Any]:
-    """POST a JSON body, retrying transient failures with backoff."""
+def _post(path: str, payload: dict[str, Any], timeout: float = 180.0, attempts: int = 2) -> dict[str, Any]:
+    """POST a JSON body, retrying transient failures with backoff.
+
+    Timeouts are (connect, read) tuples so a stalled response cannot hang a job
+    indefinitely: no single read may take longer than the read timeout.
+    """
     url = f"{settings.base_url}{path}"
+    connect_timeout = 10.0
+    read_timeout = max(30.0, min(timeout, 150.0))
     last_error: MetaAPIError | None = None
     for attempt in range(attempts):
         try:
-            response = requests.post(url, headers=_headers(), json=payload, timeout=timeout)
+            response = requests.post(
+                url, headers=_headers(), json=payload, timeout=(connect_timeout, read_timeout)
+            )
+        except requests.Timeout as exc:
+            last_error = MetaAPIError(0, f"timeout after {read_timeout:.0f}s")
+            time.sleep(1.5 * (attempt + 1))
+            continue
         except requests.RequestException as exc:
             last_error = MetaAPIError(0, f"transport error: {type(exc).__name__}")
             time.sleep(1.5 * (attempt + 1))
@@ -266,6 +278,23 @@ def _decode_sam(events: list[dict[str, Any]], image_size: tuple[int, int]) -> li
             )
         )
     return objects
+
+
+def image_generate(prompt: str, *, size: str = "1024x1536", timeout: float = 300.0) -> tuple[bytes, Usage]:
+    """Text-to-image; returns PNG bytes (used for fixtures and the demo test page)."""
+    payload = {
+        "model": settings.image_model,
+        "prompt": prompt,
+        "n": 1,
+        "size": size,
+        "output_format": "png",
+        "response_format": "b64_json",
+    }
+    body = _post("/images/generations", payload, timeout=timeout)
+    data = body.get("data") or []
+    if not data or not data[0].get("b64_json"):
+        raise MetaAPIError(200, "generation returned no image")
+    return base64.b64decode(data[0]["b64_json"]), Usage(images=1)
 
 
 def image_edit(image_png: bytes, prompt: str, *, timeout: float = 300.0) -> tuple[bytes, Usage]:
