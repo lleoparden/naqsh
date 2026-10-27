@@ -88,7 +88,38 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 | Step 0: 6 repeat runs on comic/menu, 6/6 clean by detector; menu keeps leader dots | `docs/evidence/phase-3/step0.md` |
 | 2026-10-27 | Spark self-check, injected faults: **11/12 caught (91.7%), 8/12 correct class (66.7%), 0/6 false positives**, $0.0108 | `docs/evidence/phase-3/selfcheck.md` |
 | 2026-10-27 | Self-check on real pages: 0 flags, ~$0.002/page extra, no fix pass triggered | receipts from the comic/menu runs |
+| 2026-10-27 | UI language toggle: EN default, AR mirrors; screenshots committed | `docs/evidence/phase-3/ui-toggle.md`, `ui-en.png`, `ui-ar.png` |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
+
+### Typesetting engine and fonts (why)
+
+Pillow does not shape Arabic, so the Phase 2 renderer used presentation-form fonts
+through `arabic-reshaper`. Phase 3 replaces it with **HarfBuzz** (joining, ligatures,
+mark placement) plus FreeType rasterising; Western digits are shaped as separate LTR
+runs placed right-to-left so `شاي 25` stays in order. Fitting measures the **shaped
+ink** (ascenders, descenders, diacritics), not advance widths. Fonts, all SIL OFL with
+licences committed: **Tajawal Regular/Bold** (speech, display, chalk), **Noto Naskh**
+(print/serif), **Amiri** (calligraphic option). Cairo and Reem Kufi were tested and
+rejected for broken substitution in this renderer; Noto Kufi is retired. The style map
+is still keyword-based (Spark's `font_style`), not a real matcher.
+
+### Visual self-check (why, and what it does not do)
+
+One Spark vision call over 100%-zoom crops flags overflow, clipping, unreadable text
+or a wrong translation; the pipeline makes exactly one fix pass (shrink to 80% for fit,
+re-ask the translation for meaning) and re-checks once. On the injected-fault set it
+caught **11/12 faults (91.7%)** with **0/6 false positives**, but the issue *class* was
+right only **8/12 (66.7%)** — clipping is usually called overflow (same fix, wrong
+label) and one clipped case was missed. This is a 12-region injected test from one
+page, not a benchmark; the clean runs (0 flags) say nothing about detection.
+
+### UI language toggle
+
+Chrome is English by default with an Arabic switch (persisted, `?lang=ar` for links).
+Content stays Arabic: translations render `dir="rtl" lang="ar"` in both UI languages,
+and the before/after figures are pinned `dir="ltr"` so the image is never mirrored.
+Arabic UI copy is a first draft marked `TODO(native-review)`; the result screen was not
+screenshot-tested (needs a live backend) — checklist in `docs/evidence/phase-3/ui-toggle.md`.
 
 ### Time-saved measurement (the Impact claim)
 
