@@ -93,7 +93,8 @@ backend/            FastAPI service + API probes
   scripts/          one smoke-test script per Meta model
   tests/            pytest
 frontend/           Vite + React + TypeScript + Tailwind app
-docs/               plan, API findings, submission notes, decisions
+docs/               plan, API findings, submission notes, decisions, evidence/
+fixtures/demo/      cached real runs for DEMO_MODE replay (see ASSETS.md)
 assets/             rights-cleared media (see ASSETS.md)
 .agents/workflows/  agent workflows: issue readiness, feature tracing, planning
 .ecc/issues/        program index and issue bodies as they are filed
