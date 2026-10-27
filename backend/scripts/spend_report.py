@@ -32,7 +32,11 @@ def probe_total() -> tuple[float, int]:
     count = 0
     for path in glob.glob(str(REPO / "backend" / ".cache" / "probes" / "*.json")):
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        total += float(data.get("cost_usd_estimate") or 0)
+        value = data.get("cost_usd")
+        if value is None:
+            # Legacy receipts: cost recomputed from model + usage/image count.
+            value = data.get("cost_usd_estimate")
+        total += float(value or 0)
         count += 1
     return total, count
 

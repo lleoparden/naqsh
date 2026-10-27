@@ -45,3 +45,13 @@ One JSON document per job: source size, plate/composite paths, page settings (`r
 4. Check that the cover patch at the top-left does not sit over anything the demo needs (it was placed deliberately for the gate).
 
 The editor's drag, resize and cover tools are implemented but the automated evidence did not exercise mouse gestures; only API-level edits were driven.
+
+
+## Hardening follow-up (2026-10-27)
+
+- Dedupe on real reads: chalkboard 5 runs (5,3,3,5,3), PD poster 3 runs (8,8,8); no
+  duplicates reproduced, so the synthetic tests are the only proof the rule fires.
+- Text-only parity (union of text boxes, headless Chrome/Blink/HarfBuzz): comic 3.13
+  mean / 2.57% over 40, menu 4.20 / 3.28, chalkboard 2.39 / 1.73.
+- Editor click-through (Playwright, real mouse/keyboard): 10/10 interactions, see
+  e2e.json and e2e-*.png.
