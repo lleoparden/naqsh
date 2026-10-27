@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { artifactUrl, fetchHealth, localize, type Health, type Job } from "./api";
+import { useLang } from "./i18n";
 
-const REGISTERS: { id: string; label: string; hint: string }[] = [
-  { id: "egyptian", label: "عامية مصرية", hint: "Egyptian colloquial" },
-  { id: "msa", label: "الفصحى", hint: "Modern Standard Arabic" },
-];
+const REGISTERS = ["egyptian", "msa"] as const;
 
 export default function App() {
+  const { lang, setLang, t, stage } = useLang();
   const [health, setHealth] = useState<Health | null>(null);
-  const [register, setRegister] = useState("egyptian");
+  const [register, setRegister] = useState<string>("egyptian");
   const [job, setJob] = useState<Job | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,17 +53,35 @@ export default function App() {
     [register],
   );
 
+  const registerLabel = (id: string) => (id === "egyptian" ? t("registerEgyptian") : t("registerMsa"));
+
   return (
-    <main className="mx-auto flex min-h-full max-w-5xl flex-col gap-8 px-6 py-10">
-      <header className="flex flex-wrap items-end justify-between gap-4 border-b border-sand pb-6">
-        <div>
-          <p className="text-xs tracking-[0.35em] text-nile">NAQSH · نقش</p>
-          <h1 className="mt-2 font-arabic text-4xl leading-tight">حوّل أي صورة إلى طبقات عربية قابلة للتعديل</h1>
+    <main className="mx-auto flex min-h-full max-w-5xl flex-col gap-8 px-6 py-10 text-start">
+      <header className="flex flex-wrap items-start justify-between gap-6 border-b border-sand pb-6">
+        <div className="max-w-2xl">
+          <p className="text-xs tracking-[0.35em] text-nile">{t("brand")}</p>
+          <h1 className="mt-2 font-arabic text-4xl leading-tight">{t("headline")}</h1>
+          <p className="mt-3 text-sm text-ink/60">{t("subhead")}</p>
         </div>
-        <p className="max-w-xs text-sm text-ink/60">
-          Arabic-first localization: readers find the lettering, the plate is repainted, and the
-          Arabic is set right-to-left in the original space.
-        </p>
+
+        <div className="flex flex-col items-end gap-2">
+          <span className="text-xs uppercase tracking-widest text-ink/40">{t("language")}</span>
+          <div className="flex overflow-hidden rounded-lg border border-sand" role="group" aria-label={t("language")}>
+            {(["en", "ar"] as const).map((code) => (
+              <button
+                key={code}
+                type="button"
+                onClick={() => setLang(code)}
+                aria-pressed={lang === code}
+                className={`px-3 py-1.5 text-sm transition ${
+                  lang === code ? "bg-nile text-paper" : "bg-white/60 text-ink/70 hover:bg-white"
+                }`}
+              >
+                {code === "en" ? "EN" : "عربي"}
+              </button>
+            ))}
+          </div>
+        </div>
       </header>
 
       <section className="grid gap-4 rounded-2xl border border-sand bg-white/70 p-5 sm:grid-cols-[1fr_auto]">
@@ -76,53 +93,62 @@ export default function App() {
             disabled={busy}
             onChange={(event) => void onFile(event.target.files?.[0])}
           />
-          <span className="font-arabic text-xl">{busy ? "جارٍ العمل…" : "اختر صفحة لتعريبها"}</span>
-          <span className="text-sm text-ink/50">
-            {busy ? `${elapsed}s — reading, segmenting, repainting, typesetting` : "PNG, JPEG or WebP · up to 15 MB"}
+          <span className="font-arabic text-xl">
+            {busy ? t("uploadBusy", { seconds: elapsed }) : t("uploadCta")}
           </span>
+          <span className="text-sm text-ink/50">{t("uploadHint")}</span>
         </label>
 
         <div className="flex flex-col justify-center gap-2">
-          <span className="text-xs uppercase tracking-widest text-ink/40">Register</span>
+          <span className="text-xs uppercase tracking-widest text-ink/40">{t("register")}</span>
           <div className="flex gap-2">
-            {REGISTERS.map((item) => (
+            {REGISTERS.map((id) => (
               <button
-                key={item.id}
+                key={id}
                 type="button"
-                onClick={() => setRegister(item.id)}
+                onClick={() => setRegister(id)}
                 disabled={busy}
+                aria-pressed={register === id}
                 className={`rounded-lg border px-3 py-2 text-sm transition ${
-                  register === item.id
+                  register === id
                     ? "border-lacquer bg-lacquer text-paper"
                     : "border-sand text-ink/70 hover:border-lacquer"
                 }`}
-                title={item.hint}
               >
-                <span className="font-arabic">{item.label}</span>
+                {registerLabel(id)}
               </button>
             ))}
           </div>
           <p className="text-xs text-ink/40">
-            {health ? (health.credential_configured ? "API key configured" : "API key missing in .env") : "backend offline"}
+            {health
+              ? health.credential_configured
+                ? t("apiConfigured")
+                : t("apiMissing")
+              : t("backendOffline")}
           </p>
         </div>
       </section>
 
       {error && (
-        <p className="rounded-xl border border-lacquer/30 bg-lacquer/5 px-4 py-3 text-sm text-lacquer">{error}</p>
+        <p className="rounded-xl border border-lacquer/30 bg-lacquer/5 px-4 py-3 text-sm text-lacquer">
+          {t("error", { message: error })}
+        </p>
       )}
 
       {job && (
         <>
           <section className="grid gap-4 md:grid-cols-2">
-            <figure className="overflow-hidden rounded-2xl border border-sand bg-white">
-              <img src={artifactUrl(job, "source")} alt="Source page" className="w-full" />
-              <figcaption className="px-4 py-2 text-xs text-ink/50">Before · {job.width}×{job.height}</figcaption>
-            </figure>
-            <figure className="overflow-hidden rounded-2xl border border-sand bg-white">
-              <img src={artifactUrl(job, "output")} alt="Localized page" className="w-full" />
+            {/* Pixel content: never mirrored, its own LTR coordinate space. */}
+            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-white">
+              <img src={artifactUrl(job, "source")} alt={t("before", { width: job.width, height: job.height })} className="w-full" />
               <figcaption className="px-4 py-2 text-xs text-ink/50">
-                After · {job.total_ms} ms · ${job.total_cost_usd.toFixed(4)}
+                {t("before", { width: job.width, height: job.height })}
+              </figcaption>
+            </figure>
+            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-white">
+              <img src={artifactUrl(job, "output")} alt={t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })} className="w-full" />
+              <figcaption className="px-4 py-2 text-xs text-ink/50">
+                {t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })}
               </figcaption>
             </figure>
           </section>
@@ -130,7 +156,7 @@ export default function App() {
           <section className="grid gap-4 md:grid-cols-[2fr_1fr]">
             <div className="rounded-2xl border border-sand bg-white/70 p-5">
               <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-ink/50">
-                Regions · {job.regions.length}
+                {t("regions", { count: job.regions.length })}
               </h2>
               <ul className="space-y-2">
                 {job.regions.map((region) => (
@@ -143,27 +169,33 @@ export default function App() {
                         {region.font_family} · {region.font_size}px · {region.style}
                       </span>
                     </div>
-                    <p className="font-arabic text-lg">{region.translation_ar}</p>
+                    {/* Content being localized: always Arabic and RTL, whichever UI language is on. */}
+                    <p dir="rtl" lang="ar" className="font-arabic text-lg">
+                      {region.translation_ar}
+                    </p>
                   </li>
                 ))}
               </ul>
               {job.warnings.length > 0 && (
-                <ul className="mt-3 space-y-1 text-xs text-lacquer">
-                  {job.warnings.map((warning) => (
-                    <li key={warning}>{warning}</li>
-                  ))}
-                </ul>
+                <div className="mt-3">
+                  <p className="text-xs font-semibold text-lacquer">{t("warnings")}</p>
+                  <ul className="mt-1 space-y-1 text-xs text-lacquer">
+                    {job.warnings.map((warning) => (
+                      <li key={warning}>{warning}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
 
             <div className="rounded-2xl border border-sand bg-white/70 p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-ink/50">Receipt</h2>
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-ink/50">{t("receipt")}</h2>
               <dl className="space-y-1 text-xs">
-                {job.stages.map((stage) => (
-                  <div key={stage.name} className="flex justify-between gap-3">
-                    <dt className="text-ink/50">{stage.name}</dt>
+                {job.stages.map((item) => (
+                  <div key={item.name} className="flex justify-between gap-3">
+                    <dt className="text-ink/50">{stage(item.name)}</dt>
                     <dd dir="ltr">
-                      {stage.ms} ms · ${stage.cost_usd.toFixed(4)}
+                      {item.ms} ms · ${item.cost_usd.toFixed(4)}
                     </dd>
                   </div>
                 ))}
@@ -171,9 +203,9 @@ export default function App() {
               <a
                 href={artifactUrl(job, "output")}
                 download={`naqsh-${job.id}.png`}
-                className="mt-4 inline-block rounded-lg bg-nile px-3 py-2 text-sm text-paper"
+                className="me-2 mt-4 inline-block rounded-lg bg-nile px-3 py-2 text-sm text-paper"
               >
-                Download PNG
+                {t("download")}
               </a>
               <a
                 href={artifactUrl(job, "before_after")}
@@ -181,16 +213,14 @@ export default function App() {
                 rel="noreferrer"
                 className="mt-2 block text-xs text-nile underline"
               >
-                Before / after sheet
+                {t("sheet")}
               </a>
             </div>
           </section>
         </>
       )}
 
-      <footer className="mt-auto border-t border-sand pt-4 text-xs text-ink/40">
-        Meta Global AI Developer Hackathon · Build for Your World · Phase 2 vertical slice
-      </footer>
+      <footer className="mt-auto border-t border-sand pt-4 text-xs text-ink/40">{t("footer")}</footer>
     </main>
   );
 }
