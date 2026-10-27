@@ -68,6 +68,7 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 16:20 | The ghost is mostly *ours*, not the model's | Comparing three failing runs, residual lettering sat outside the repaint coverage (e.g. 6,894 px outside vs 5,444 inside): the original lettering was taller than Spark's box and the SAM mask. | Coverage now grows from the source's real ink extent; the plate itself was clean in those runs. |
 | 2026-10-27 16:35 | dirty_ratio cannot be trusted | Clean ≈0.05, ghosted 0.08–0.13, with overlap; a threshold retry doubled cost without reliably fixing the page. | Detection moved to a Muse Spark vision check over 100%-zoom crops. |
 | 2026-10-27 17:00 | The plate flattens painted texture | Watercolour poster: the edit replaced the painted band behind the title with a solid teal strip. No letters left, but it reads as a smear. | Detector only asks about lettering, so it passed this. Textured pages are the open limit. |
+| 2026-10-27 17:55 | فلالفل was my misreading, not the model | Search of every job receipt found no `فلالفل`; the recorded MSA translation is `فلافل 20`. The misspelling came from reading a downscaled contact sheet. | No pipeline bug: `_strip_leaders` only removes dots, shaping never rewrites the string. Added tests and a standard-spelling line in the prompt as a guard. |
 
 ## Notable results and numbers
 
