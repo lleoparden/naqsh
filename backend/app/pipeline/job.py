@@ -27,8 +27,10 @@ from . import regions as regions_stage
 from . import render as render_stage
 from . import residual as residual_stage
 from . import segment as segment_stage
+from . import selfcheck as selfcheck_stage
 from . import typeset
 from .meta import MetaAPIError
+from .meta import spark_translate as retranslate_line
 from .types import BBox, Layout, PageJob
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -286,6 +288,65 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     final.save(folder / "output.png")
     job.artifacts["output"] = "output.png"
     job.add_stage("typeset", _ms(started), 0.0, regions=len(layouts), strategies=strategies)
+
+    # 7. Visual self-check: one look, one fix pass, one re-check -------------------
+    started = time.perf_counter()
+    selfcheck_cost = 0.0
+    try:
+        verdicts, sc_usage, _raw = selfcheck_stage.check_render(final, regions)
+        selfcheck_cost += sc_usage.spark_cost()
+        flagged = [v for v in verdicts if not v.ok]
+        fixed: list[str] = []
+        retranslated: list[str] = []
+        if flagged:
+            for verdict in flagged:
+                if verdict.issue != "bad_translation":
+                    continue
+                region = next((r for r in regions if r.id == verdict.region_id), None)
+                if region is None:
+                    continue
+                new_text, translate_usage = retranslate_line(
+                    region.source_text,
+                    region.translation_ar,
+                    verdict.note or "translation does not match the source",
+                    regions_stage.REGISTERS.get(register, ""),
+                )
+                selfcheck_cost += translate_usage.spark_cost()
+                if new_text and new_text != region.translation_ar:
+                    region.translation_ar = new_text
+                    box = region.container or region.bbox
+                    layout = typeset.fit_text(new_text, box.width, box.height, family=region.font_family)
+                    region.font_size = layout.size
+                    region.lines = layout.lines
+                    layouts[region.id] = layout
+                    retranslated.append(region.id)
+
+            fixed = selfcheck_stage.apply_fix(
+                regions,
+                layouts,
+                [v for v in flagged if v.issue != "bad_translation"],
+                typeset.fit_text,
+            )
+            final = render_stage.draw_regions(composite, regions, layouts, color_of=colors)
+            final.save(folder / "output.png")
+            verdicts_after, after_usage, _ = selfcheck_stage.check_render(final, regions)
+            selfcheck_cost += after_usage.spark_cost()
+            still = [v.region_id for v in verdicts_after if not v.ok]
+        else:
+            still = []
+        job.add_stage(
+            "selfcheck",
+            _ms(started),
+            selfcheck_cost,
+            flagged=[v.region_id for v in flagged],
+            issues={v.region_id: v.issue for v in flagged},
+            fixed=fixed,
+            retranslated=retranslated,
+            still_flagged=still,
+        )
+    except MetaAPIError as exc:
+        job.warnings.append(f"visual self-check unavailable: {exc}")
+        job.add_stage("selfcheck", _ms(started), 0.0, error=str(exc))
 
     _finish(job, folder, source, final)
     return job
