@@ -215,13 +215,17 @@ table has measured numbers. **Fallback:** demo one page type and say it.
 
 ## Phase 9 — Feature freeze, gallery copy and final video
 
-**Work:** freeze on 1 Nov; **write the public-gallery title, tagline and description
-(for a public audience, not the judges' technical rubric) and make a thumbnail**
-(1280×720 or the gallery's required size, no unlicensed art); script per
-`submission-notes.md`; record at 1080p with captions; upload unlisted; verify the link
-in a private window; trim to ≤3:00. Save build-in-public before/after clips as they are
-made (the pipeline already writes `before-after.png` per job; export short clips from
-the editor and keep them with the evidence).
+**Work:** freeze on 1 Nov; **write the public-gallery title, tagline, short
+description and thumbnail for a public audience** — voters see this page, not the
+judges' technical rubric (thumbnail 1280×720 or the gallery's required size, no
+unlicensed art); script per `submission-notes.md`; record at 1080p with captions;
+upload unlisted; verify the link in a private window; trim to ≤3:00.
+
+**Public demo URL (scoped, not built):** a small hosted deployment running in labelled
+demo mode only, with the model key server-side and live mode staying local. Scope and
+cost it now (one small container + static bundle; expects to fit a free/low tier), but
+**do not build or deploy it until the live-URL question is answered** (PENDING,
+Discord #questions 2026-10-27).
 
 **Gate:** video link works logged out, shows only hackathon work, shows the full
 pipeline, the editor, and the layered export. **Fallback:** the Phase 7 backup
@@ -234,8 +238,8 @@ problem statement, description, public repo with clean history and no secrets, t
 video link, Meta-products and why-it-matters answers, feedback, and the optional X
 link. Re-read the repo as a judge (README, history, assets); run the secret scan.
 **Submit early on 3 Nov with everything except the X link, then edit the submission
-before the deadline to add the best X post link** — edits are allowed until the
-deadline (organizer answer, Discord #questions, 2026-10-27). Save the confirmation.
+before the deadline to add the best-performing X post link** — edits are allowed until
+the deadline (organizer answer, Discord #questions, 2026-10-27). Save the confirmation.
 X post: Most Viral is counted through **Nov 8 EOD**, so the post can go live during the
 event; build-in-public posts do not affect eligibility.
 
@@ -243,6 +247,21 @@ event; build-in-public posts do not affect eligibility.
 deadline, and a confirmation screenshot exists in `docs/`.
 **Fallback:** if a field is not ready, submit the strongest honest version on 3 Nov
 and improve it by editing before the deadline — late submissions are not considered.
+
+## Build-in-public clips
+
+Save these as they are made; they are small screen recordings, not repo content.
+
+| Clip | What it shows | Where it is stored |
+|---|---|---|
+| Before/after, comic | source and localized result side by side (the pipeline writes `before-after.png` per job) | `L:\naqsh-media\build-in-public\before-after-comic.mp4` (outside the repo) |
+| Before/after, menu | same for the dense menu page | `L:\naqsh-media\build-in-public\before-after-menu.mp4` |
+| Editor pass | select, edit, register switch, undo, export | `L:\naqsh-media\build-in-public\editor-pass.mp4` |
+| Export proof | SVG opened in Inkscape/Figma with layers visible | `L:\naqsh-media\build-in-public\export-layers.mp4` |
+
+Rules: keep every clip under ~50 MB, no unlicensed music or art, no API keys or tokens
+on screen. The repository stays media-free (it is already 101 MB); only still evidence
+that is needed to prove a claim goes in `docs/evidence/`.
 
 ---
 
