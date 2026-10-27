@@ -26,17 +26,19 @@ Every asset gets a row here *before* it is committed.
 ## Fonts
 
 All fonts are SIL Open Font License 1.1; the license text ships beside each file.
+Chosen for HarfBuzz shaping (Phase 3a): no presentation-form fonts are needed any
+more, so modern faces are usable.
 
 | Font | Used for | Source | License |
 | --- | --- | --- | --- |
-| `assets/fonts/NotoKufiArabic-Variable.ttf` | Default comic lettering (geometric kufi) | [google/fonts · ofl/notokufiarabic](https://github.com/google/fonts/tree/main/ofl/notokufiarabic) | OFL 1.1 (`OFL-NotoKufiArabic.txt`) |
-| `assets/fonts/NotoNaskhArabic-Variable.ttf` | Publishing/naskh style option | [google/fonts · ofl/notonaskharabic](https://github.com/google/fonts/tree/main/ofl/notonaskharabic) | OFL 1.1 (`OFL-NotoNaskhArabic.txt`) |
-| `assets/fonts/Amiri-Regular.ttf` | Calligraphic comparison / fallback | [google/fonts · ofl/amiri](https://github.com/google/fonts/tree/main/ofl/amiri) | OFL 1.1 (`OFL-Amiri.txt`) |
+| `assets/fonts/Tajawal-Regular.ttf` | Default speech/caption lettering (friendly sans) | [google/fonts · ofl/tajawal](https://github.com/google/fonts/tree/main/ofl/tajawal) | OFL 1.1 (`OFL-Tajawal.txt`) |
+| `assets/fonts/Tajawal-Bold.ttf` | Titles, bold display, chalkboard | same | OFL 1.1 (`OFL-Tajawal.txt`) |
+| `assets/fonts/NotoNaskhArabic-Variable.ttf` | Printed/naskh style (menu, serif labels) | [google/fonts · ofl/notonaskharabic](https://github.com/google/fonts/tree/main/ofl/notonaskharabic) | OFL 1.1 (`OFL-NotoNaskhArabic.txt`) |
+| `assets/fonts/Amiri-Regular.ttf` | Calligraphic option / fallback | [google/fonts · ofl/amiri](https://github.com/google/fonts/tree/main/ofl/amiri) | OFL 1.1 (`OFL-Amiri.txt`) |
 
-Why these: the rasteriser used in Phase 2 renders Arabic presentation forms, so a
-font must cover the `FE70–FEFF` block. Cairo (also OFL) was downloaded and
-rejected in a visual test for exactly that reason; Phase 3 moves to HarfBuzz
-shaping, which lifts the constraint.
+Rejected after visual tests: Cairo and Reem Kufi (both OFL) — their glyph
+substitution produced disconnected or colliding Arabic in this renderer. Noto Kufi
+was the Phase 2 default and is no longer used now that HarfBuzz shapes the text.
 
 ## Notes
 

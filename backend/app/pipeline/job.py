@@ -39,31 +39,31 @@ def _ms(started: float) -> int:
     return int(round((time.perf_counter() - started) * 1000))
 
 
-def family_for(font_style: str) -> str:
-    """A crude style map for Phase 2; Phase 3 replaces it with a real matcher."""
-    text = font_style.lower()
-    if any(word in text for word in ("naskh", "serif", "calligraph", "script", "brush")):
-        return "naskh"
-    return "kufi"
+def family_for(font_style: str, style: str = "") -> str:
+    """Map Spark's style words to a bundled OFL family (see typeset.family_for)."""
+    return typeset.family_for(font_style, style)
 
 
 def _container_for(reading_box: BBox, mask: Image.Image) -> BBox:
-    """The area text may fill: the bubble/panel the lettering sits in.
+    """The area text may fill: usually the reading box, or a bubble's interior.
 
-    The mask is eroded first so the inscribed area is used rather than the full
-    bounding box (a bubble's box includes its tail and widest points). The result is
-    intersected with the reading box plus a margin so text cannot drift into a tail.
-    A mask much smaller than the reading box means SAM found only part of the
-    lettering, so the reading box is used instead.
+    Spark's reading box is already tight around the lettering, so it is the safe
+    default. Only when the mask is clearly a container around that box (a bubble or a
+    panel, much larger than the text block) is its eroded interior used, intersected
+    with the reading box plus a margin. That keeps text off the outline without
+    shrinking a menu line to half its width.
     """
     bounds = mask.getbbox()
     if not bounds:
         return reading_box
     candidate = BBox(*bounds)
-    if candidate.width * candidate.height < 0.6 * reading_box.width * reading_box.height:
+    reading_area = max(1, reading_box.width * reading_box.height)
+    if candidate.width * candidate.height < 1.4 * reading_area:
         return reading_box
 
-    interior = segment_stage.inner_box(mask) or candidate
+    interior = segment_stage.inner_box(mask)
+    if interior is None:
+        return reading_box
     slack_x = int(reading_box.width * 0.25)
     slack_y = int(reading_box.height * 0.25)
     allowed = BBox(
@@ -74,7 +74,7 @@ def _container_for(reading_box: BBox, mask: Image.Image) -> BBox:
     )
     x1, y1 = max(interior.x1, allowed.x1), max(interior.y1, allowed.y1)
     x2, y2 = min(interior.x2, allowed.x2), min(interior.y2, allowed.y2)
-    if x2 - x1 < 24 or y2 - y1 < 24:
+    if x2 - x1 < 0.8 * reading_box.width or y2 - y1 < 0.8 * reading_box.height:
         return reading_box
     return BBox(x1, y1, x2, y2)
 
@@ -267,7 +267,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     layouts: dict[str, Layout] = {}
     colors: dict[str, tuple[int, int, int]] = {}
     for region in regions:
-        region.font_family = family_for(region.font_style)
+        region.font_family = family_for(region.font_style, region.style)
         container = region.container or region.bbox
         layout = typeset.fit_text(
             region.translation_ar,

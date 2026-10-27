@@ -1,15 +1,13 @@
-"""Render stage: draw the fitted Arabic layers over the cleaned plate.
-
-Lines are stacked by their measured ink boxes, not by the em size, so a descender
-or a final kaf cannot be clipped by the region's edge.
-"""
+"""Render: draw the fitted, shaped Arabic over the cleaned plate."""
 
 from __future__ import annotations
 
 from PIL import Image, ImageDraw
 
-from .typeset import LINE_GAP_RATIO, _font
+from .shaping import draw_line, shape_line
 from .types import Layout, TextRegion
+
+LINE_GAP_RATIO = 0.20
 
 
 def contrast_color(original: Image.Image, region: TextRegion) -> tuple[int, int, int]:
@@ -36,28 +34,21 @@ def draw_regions(
     color_of: dict[str, tuple[int, int, int]] | None = None,
 ) -> Image.Image:
     canvas = base.convert("RGBA")
-    draw = ImageDraw.Draw(canvas)
-
     for region in regions:
         layout = layouts.get(region.id)
         if layout is None or not layout.lines:
             continue
-        font = _font(region.font_family, layout.size)
+        family = region.font_family
         color = (color_of or {}).get(region.id, region.color)
-        bbox = region.container or region.bbox
-        center_x = (bbox.x1 + bbox.x2) / 2
+        box = region.container or region.bbox
+        center_x = (box.x1 + box.x2) / 2
 
-        measured = [(line, draw.textbbox((0, 0), line, font=font)) for line in layout.lines]
+        shaped = [shape_line(line, family, layout.size) for line in layout.lines]
         gap = int(round(layout.size * LINE_GAP_RATIO))
-        heights = [box[3] - box[1] for _line, box in measured]
-        block_height = sum(heights) + gap * max(0, len(measured) - 1)
-        top = (bbox.y1 + bbox.y2) / 2 - block_height / 2
-
-        for (line, box), line_height in zip(measured, heights, strict=True):
-            line_width = box[2] - box[0]
-            x = center_x - line_width / 2 - box[0]
-            y = top - box[1]
-            draw.text((x, y), line, font=font, fill=(*color, 255))
-            top += line_height + gap
+        block = sum(line.ink_height for line in shaped) + gap * max(0, len(shaped) - 1)
+        top = (box.y1 + box.y2) / 2 - block / 2
+        for line in shaped:
+            draw_line(canvas, line, family, center_x=center_x, top=top, color=color)
+            top += line.ink_height + gap
 
     return canvas.convert("RGB")
