@@ -99,16 +99,19 @@ def estimate_shift(source: Image.Image, plate: Image.Image, exclude: list[BBox])
     coarse_dx = int(np.clip(coarse_dx, -side[0] / 8, side[0] / 8))
     coarse_dy = int(np.clip(coarse_dy, -side[1] / 8, side[1] / 8))
 
-    a_full = _gray(source, 1)
-    b_full = _gray(plate, 1)
-    valid_full = _valid_mask(a_full.shape, exclude, 1, grow=6)
-    refined = (coarse_dx, coarse_dy, float("inf"))
-    for dy in range(coarse_dy - 6, coarse_dy + 7):
-        for dx in range(coarse_dx - 6, coarse_dx + 7):
-            score = _score(a_full, b_full, dx, dy, valid_full)
+    # Refine at half resolution: a quarter of the pixels for the same search, and the
+    # ring-residual report catches it if ±2 px is not good enough.
+    step = 2
+    a_half = _gray(source, step)
+    b_half = _gray(plate, step)
+    valid_half = _valid_mask(a_half.shape, exclude, step, grow=2)
+    refined = (coarse_dx // step, coarse_dy // step, float("inf"))
+    for dy in range(coarse_dy // step - 4, coarse_dy // step + 5):
+        for dx in range(coarse_dx // step - 4, coarse_dx // step + 5):
+            score = _score(a_half, b_half, dx, dy, valid_half)
             if score < refined[2]:
                 refined = (dx, dy, score)
-    return int(refined[0]), int(refined[1])
+    return int(refined[0] * step), int(refined[1] * step)
 
 
 def measure_dirty_plate(plate: Image.Image, boxes: list[BBox], *, tolerance: float = 60.0) -> float:
@@ -142,6 +145,39 @@ def apply_shift(plate: Image.Image, size: tuple[int, int], dx: int, dy: int) -> 
         (1, 0, -dx, 0, 1, -dy),
         resample=Image.BICUBIC,
     )
+
+
+def alignment_report(
+    source: Image.Image,
+    plate: Image.Image,
+    masks: list[Image.Image],
+    *,
+    inner: int = 8,
+    outer: int = 24,
+) -> dict[str, object]:
+    """Mean |difference| in a ring just outside each mask, after registration.
+
+    Text has been erased inside the masks, so the ring is where the two images should
+    agree if the plate is aligned. A large ring residual means the plate is shifted or
+    scaled and the composite will seam, regardless of how clean the edit was.
+    """
+    original = np.asarray(source.convert("RGB"), dtype=np.int16)
+    replacement = np.asarray(plate.convert("RGB"), dtype=np.int16)
+    per_region: list[float] = []
+    for index, mask in enumerate(masks):
+        grown_outer = mask.filter(ImageFilter.MaxFilter(2 * outer + 1))
+        grown_inner = mask.filter(ImageFilter.MaxFilter(2 * inner + 1))
+        ring = (np.asarray(grown_outer, dtype=np.uint8) > 127) & ~(np.asarray(grown_inner, dtype=np.uint8) > 127)
+        if ring.sum() < 50:
+            continue
+        diff = np.abs(original - replacement).max(axis=2)[ring]
+        per_region.append(float(diff.mean()))
+    return {
+        "ring_mean_abs_diff": round(float(np.mean(per_region)), 2) if per_region else None,
+        "ring_max_abs_diff": round(float(np.max(per_region)), 2) if per_region else None,
+        "ring_per_region": [round(v, 2) for v in per_region],
+        "ring_band_px": [inner, outer],
+    }
 
 
 def composite(

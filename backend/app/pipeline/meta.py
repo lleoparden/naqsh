@@ -268,6 +268,23 @@ def _decode_sam(events: list[dict[str, Any]], image_size: tuple[int, int]) -> li
     return objects
 
 
+def image_generate(prompt: str, *, size: str = "1024x1536", timeout: float = 300.0) -> tuple[bytes, Usage]:
+    """Text-to-image; returns PNG bytes (used for fixtures and the demo test page)."""
+    payload = {
+        "model": settings.image_model,
+        "prompt": prompt,
+        "n": 1,
+        "size": size,
+        "output_format": "png",
+        "response_format": "b64_json",
+    }
+    body = _post("/images/generations", payload, timeout=timeout)
+    data = body.get("data") or []
+    if not data or not data[0].get("b64_json"):
+        raise MetaAPIError(200, "generation returned no image")
+    return base64.b64decode(data[0]["b64_json"]), Usage(images=1)
+
+
 def image_edit(image_png: bytes, prompt: str, *, timeout: float = 300.0) -> tuple[bytes, Usage]:
     """Instruction-based edit; returns PNG bytes."""
     payload = {
