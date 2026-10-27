@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #14110f;
+  --color-paper: #f6f1e7;
+  --color-lacquer: #a6342c;
+  --color-nile: #14524f;
+  --color-sand: #e7dcc8;
+  --font-arabic: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
