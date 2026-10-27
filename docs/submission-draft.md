@@ -97,6 +97,31 @@ All observed during this build; details in `docs/api-findings.md`.
 - **Rate/latency variance is high** (menu 61–122 s on the same code), so a recording or
   demo needs a replay mode; ours is labelled on screen.
 
+## Impact
+
+**Who it is for:** Arabic webcomic creators and small publishers who localize pages
+themselves, and small businesses that need menus and posters in Arabic. They are not
+translators first — they are people whose tools handle RTL badly, so they mask,
+translate, re-letter and re-export by hand.
+
+**Where the measured claim goes:** time saved per page and cost per page, each tied to
+a named page so it cannot be read as a generic speed claim.
+
+| Page | Regions | Naqsh median | Cost | Manual baseline | Ratio |
+|---|---|---|---|---|---|
+| comic `01-comic-flat.png` | 3 | 33.8 s | $0.0257–$0.0291 | _empty_ | **PENDING** |
+| menu `03-menu-paper.png` | 16 | 61.8 s | $0.0367–$0.0661 | _empty_ | **PENDING** |
+
+The Naqsh numbers are wall-time medians from `docs/evidence/phase-8/variance-summary.json`.
+The manual baseline is the owner's timed run under `docs/baseline-protocol.md`; until it
+exists, **no time-saved ratio is claimed**.
+
+**Honest limits:** designed for stylised pages (comics, flat posters, printed menus);
+curved or rotated lettering is read but set as a straight line; painted/photographic
+textures can defeat the plate (the kraft-label run smears and is kept as the
+honest-limit example, `fixtures/demo/label-fail/`); about 0.4% of pixels differ between
+the browser and server renders of the same SVG (`docs/evidence/phase-6/parity.json`).
+
 ## Links and status
 
 - Repository: `https://github.com/lleoparden/naqsh` (public; no secrets — audit in
