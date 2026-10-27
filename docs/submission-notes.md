@@ -104,10 +104,10 @@ Recomputed 2026-10-27 19:20 Cairo with `backend/scripts/spend_report.py`:
 
 | Source | Count | Cost |
 | --- | --- | --- |
-| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 67 jobs | **$1.9589** |
+| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 77 jobs | **$2.3932** |
 | Script-call ledger (`docs/evidence/api-spend.jsonl`) — probe/eval/script calls | 61 calls | **$0.3083** |
 | Probe receipts (`backend/.cache/probes/*.json`) | 11 files | **$0.0436** (backfilled, see below) |
-| **Traceable total** | | **$2.3108** |
+| **Traceable total** | | **$2.7451** |
 
 Demo replays are listed separately by `spend_report.py` (13 jobs, $0.3033 of recorded
 cost) and are **not** added to the total: that money was already paid by the original
@@ -314,6 +314,22 @@ coverage masks identical too (`docs/evidence/phase-8/morph-equivalence.json`).
 Because stages now overlap, `total_ms` is wall time and `stage_ms_sum` keeps the sum;
 without that change the receipt would have overstated the elapsed time (it did on the
 first post-change runs: 122 s total against 98.9 s wall).
+
+### Variance after the speed work (Phase 8b)
+
+Every post-change live run, same code, `DEMO_MODE=0`:
+
+| Page | Runs | Wall median (range) | Cost median (range) | Regions |
+|---|---|---|---|---|
+| comic | 3 | **33.8 s** (28.5–37.4) | $0.0262 (0.0257–0.0291) | 3 |
+| menu | 5 | **61.8 s** (61.5–78.5) | $0.0520 (0.0367–0.0661) | 16 |
+
+The menu count includes the two earlier post-change runs; a previous pair on the same
+code took **89–122 s**, which is not in the JSON because it was not saved at the time —
+stated here rather than dropped. `register_composite` is now 1.0–1.8 s median for both
+pages (it was 75.7 s on the menu before the speed work). Evidence:
+`docs/evidence/phase-8/variance.json` and `variance-summary.json`. The manual baseline
+is still empty; no ratio is claimed.
 
 ### Time-saved measurement (the Impact claim)
 
