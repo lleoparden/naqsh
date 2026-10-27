@@ -1,0 +1,18 @@
+[
+  {
+    "job": "e13f9585b24f",
+    "server_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-e13f9585b24f-server.png",
+    "browser_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-e13f9585b24f-browser.png",
+    "mean_abs_diff": 0.48,
+    "pixels_over_40": 0.385,
+    "pixels_over_80": 0.249
+  },
+  {
+    "job": "605213b894ff",
+    "server_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-605213b894ff-server.png",
+    "browser_png": "L:\\naqsh\\docs\\evidence\\phase-6\\parity-605213b894ff-browser.png",
+    "mean_abs_diff": 0.33,
+    "pixels_over_40": 0.236,
+    "pixels_over_80": 0.183
+  }
+]

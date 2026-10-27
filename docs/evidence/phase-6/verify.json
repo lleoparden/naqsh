@@ -1,0 +1,65 @@
+[
+  {
+    "job": "6a8aa7a0829b",
+    "xml_parsed": true,
+    "text_elements": 2,
+    "text_layer_groups": 2,
+    "cover_rects": 1,
+    "zip_files": [
+      "README.md",
+      "export-outlined.svg",
+      "export.svg",
+      "fonts/Amiri-Regular.ttf",
+      "fonts/NotoNaskhArabic-Variable.ttf",
+      "fonts/OFL-Amiri.txt",
+      "fonts/OFL-NotoNaskhArabic.txt",
+      "fonts/OFL-Tajawal.txt",
+      "fonts/Tajawal-Bold.ttf",
+      "fonts/Tajawal-Regular.ttf",
+      "plate.png"
+    ],
+    "fonts_in_zip": 4,
+    "licenses_in_zip": 3,
+    "outlined_has_text": false,
+    "outlined_has_paths": true,
+    "texts": [
+      "بعد تلات أيام جدا",
+      "في هذه الأثناء"
+    ]
+  },
+  {
+    "job": "e13f9585b24f",
+    "xml_parsed": true,
+    "text_elements": 9,
+    "text_layer_groups": 9,
+    "cover_rects": 1,
+    "zip_files": [
+      "README.md",
+      "export-outlined.svg",
+      "export.svg",
+      "fonts/Amiri-Regular.ttf",
+      "fonts/NotoNaskhArabic-Variable.ttf",
+      "fonts/OFL-Amiri.txt",
+      "fonts/OFL-NotoNaskhArabic.txt",
+      "fonts/OFL-Tajawal.txt",
+      "fonts/Tajawal-Bold.ttf",
+      "fonts/Tajawal-Regular.ttf",
+      "plate.png"
+    ],
+    "fonts_in_zip": 4,
+    "licenses_in_zip": 3,
+    "outlined_has_text": false,
+    "outlined_has_paths": true,
+    "texts": [
+      "بيت الكشري جدا",
+      "أطباقنا المفضلة طازجة وصنع منزلي",
+      "شاي بالنعناع 10",
+      "شوربة عدس 25",
+      "طعمية 20",
+      "بسبوسة 30",
+      "رز بلبن 30",
+      "فاتحين كل يوم 11 الصبح 10 بالليل",
+      "كله بيتقدم فريش"
+    ]
+  }
+]
