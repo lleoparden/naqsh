@@ -349,6 +349,12 @@ Protocol — write it once, follow it exactly:
 
 Collect as we go; each entry says what it proves.
 
+**Build-in-public clips:** save a short before/after clip as each feature lands. The
+pipeline already writes `before-after.png` per job, and the editor can export the
+current page; keep clips next to the evidence they belong to. Posting anytime during
+the event is allowed and build-in-public posts do not affect Most Viral eligibility
+(organizer answer, 2026-10-27).
+
 | Date | File | Shows |
 | --- | --- | --- |
 | 2026-10-27 | `assets/generated/test-panel.png` | The generated, rights-clean test page (before) |
@@ -390,3 +396,29 @@ pages; captions for the Arabic; record at 1080p; upload unlisted to YouTube.
 - [ ] Form fields filled, description proofread, X post linked (optional track)
 - [ ] Submitted on 3 Nov (buffer before 4 Nov 21:00 ET)
 - [ ] Submission confirmation screenshot saved in `docs/`
+
+## Organizer answers (verbatim)
+
+Discord **#questions**, answered **2026-10-27** (quoted as received):
+
+1. **Demo video link:** any accessible link that lets judges watch works (unlisted
+   YouTube is fine).
+2. **Editing after submit:** submissions can be edited until the deadline, so the X
+   post link can be added later.
+3. **Most Viral vs Community Vote:** Most Viral is separate from the Community Vote:
+   highest total likes + reposts + comments on the X post linked in the submission,
+   counted through Nov 8 EOD. Posting anytime during the event is allowed, and
+   build-in-public posts don't affect eligibility.
+4. **Community Vote:** on the public gallery, one vote per verified account, winner
+   announced Nov 16.
+
+**PENDING — no answer yet, do not assume:**
+
+- Muse Image assets and model credit (allowed? required in the video?).
+- Outside AI coding tools (permitted or not).
+- Live URL requirement (is a hosted demo URL required at submission?).
+
+Implications recorded in the plan: Phase 10 submits early on 3 Nov and edits in the X
+link before the deadline; Phase 9 writes the public-gallery title, tagline,
+description and thumbnail; build-in-public before/after clips are saved as they are
+made.
