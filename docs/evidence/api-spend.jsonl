@@ -38,3 +38,24 @@
 {"ts": "2026-10-27T16:15:35+00:00", "label": "dedupe-real pd-poster run1", "cost_usd": 0.008743, "kind": "read", "regions": 8}
 {"ts": "2026-10-27T16:15:44+00:00", "label": "dedupe-real pd-poster run2", "cost_usd": 0.009593, "kind": "read", "regions": 8}
 {"ts": "2026-10-27T16:15:52+00:00", "label": "dedupe-real pd-poster run3", "cost_usd": 0.00972, "kind": "read", "regions": 8}
+{"ts": "2026-10-27T16:30:17+00:00", "label": "demo MSA chalkboard/t1", "cost_usd": 0.000701, "kind": "text"}
+{"ts": "2026-10-27T16:30:20+00:00", "label": "demo MSA chalkboard/t2", "cost_usd": 0.001467, "kind": "text"}
+{"ts": "2026-10-27T16:30:23+00:00", "label": "demo MSA chalkboard/t3", "cost_usd": 0.001043, "kind": "text"}
+{"ts": "2026-10-27T16:30:27+00:00", "label": "demo MSA comic/t1", "cost_usd": 0.000585, "kind": "text"}
+{"ts": "2026-10-27T16:30:29+00:00", "label": "demo MSA comic/t2", "cost_usd": 0.000994, "kind": "text"}
+{"ts": "2026-10-27T16:30:32+00:00", "label": "demo MSA comic/t3", "cost_usd": 0.000805, "kind": "text"}
+{"ts": "2026-10-27T16:30:33+00:00", "label": "demo MSA label-fail/t1", "cost_usd": 0.000998, "kind": "text"}
+{"ts": "2026-10-27T16:30:38+00:00", "label": "demo MSA label-fail/t3", "cost_usd": 0.001525, "kind": "text"}
+{"ts": "2026-10-27T16:30:39+00:00", "label": "demo MSA menu/t1", "cost_usd": 0.001253, "kind": "text"}
+{"ts": "2026-10-27T16:30:41+00:00", "label": "demo MSA menu/t2", "cost_usd": 0.001561, "kind": "text"}
+{"ts": "2026-10-27T16:30:43+00:00", "label": "demo MSA menu/t3", "cost_usd": 0.001324, "kind": "text"}
+{"ts": "2026-10-27T16:30:44+00:00", "label": "demo MSA menu/t4", "cost_usd": 0.001578, "kind": "text"}
+{"ts": "2026-10-27T16:30:47+00:00", "label": "demo MSA menu/t5", "cost_usd": 0.002106, "kind": "text"}
+{"ts": "2026-10-27T16:30:48+00:00", "label": "demo MSA menu/t6", "cost_usd": 0.001312, "kind": "text"}
+{"ts": "2026-10-27T16:30:50+00:00", "label": "demo MSA menu/t7", "cost_usd": 0.001214, "kind": "text"}
+{"ts": "2026-10-27T16:30:52+00:00", "label": "demo MSA menu/t8", "cost_usd": 0.001255, "kind": "text"}
+{"ts": "2026-10-27T16:30:55+00:00", "label": "demo MSA menu/t9", "cost_usd": 0.00203, "kind": "text"}
+{"ts": "2026-10-27T16:30:56+00:00", "label": "demo MSA menu/t10", "cost_usd": 0.001599, "kind": "text"}
+{"ts": "2026-10-27T16:30:58+00:00", "label": "demo MSA sfx-comic/t1", "cost_usd": 0.000641, "kind": "text"}
+{"ts": "2026-10-27T16:30:59+00:00", "label": "demo MSA sfx-comic/t2", "cost_usd": 0.001033, "kind": "text"}
+{"ts": "2026-10-27T16:31:02+00:00", "label": "demo MSA sfx-comic/t3", "cost_usd": 0.001934, "kind": "text"}

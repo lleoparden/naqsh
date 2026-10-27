@@ -16,6 +16,7 @@ from PIL import Image, UnidentifiedImageError
 from starlette.concurrency import run_in_threadpool
 
 from .config import settings
+from .pipeline import demo as demo_module
 from .pipeline import document as document_module
 from .pipeline import export as export_module
 from .pipeline import job as job_module
@@ -69,8 +70,6 @@ async def localize(
     register = register_name
     if register not in REGISTERS:
         raise HTTPException(status_code=422, detail=f"register must be one of {sorted(REGISTERS)}")
-    if not settings.has_key:
-        raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
 
     raw = await image.read()
     if not raw:
@@ -87,6 +86,18 @@ async def localize(
         raise HTTPException(status_code=422, detail="file is not a readable image") from exc
     if max(width, height) > MAX_SIDE:
         raise HTTPException(status_code=422, detail=f"image side longer than {MAX_SIDE}px")
+
+    # Demo mode: a byte-for-byte known fixture replays its recorded run, timings and
+    # cost untouched, and needs no API key. Anything else falls through to live.
+    if settings.demo_mode:
+        entry = demo_module.find(raw)
+        if entry is not None:
+            receipt = await run_in_threadpool(demo_module.materialise, entry)
+            if receipt is not None:
+                return receipt
+
+    if not settings.has_key:
+        raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
 
     try:
         job = await run_in_threadpool(job_module.run_page_job, raw, register)
@@ -215,6 +226,28 @@ def retranslate_region(job_id: str, body: dict[str, object]) -> dict[str, object
     register_name = str(body.get("register") or doc.register)
     if register_name not in ("egyptian", "msa"):
         raise HTTPException(status_code=422, detail="register must be egyptian or msa")
+    if settings.demo_mode:
+        cached = demo_module.replay_retranslate(doc, layer.id, register_name)
+        if cached:
+            layer.arabic[register_name] = cached
+            size, lines = document_module.layout_text(
+                cached,
+                layer.box,
+                family=layer.font_family,
+                register=register_name,
+                numerals=doc.numerals,
+                action=layer.action,
+                size_limit=layer.font_size or None,
+            )
+            layer.font_size = size
+            layer.lines = lines
+            document_module.save_document(folder, doc)
+            return {
+                "layer": layer.to_dict(),
+                "cost_usd": 0.0,
+                "demo": True,
+                "note": "replayed from the recorded run; no model call",
+            }
     if not settings.has_key:
         raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
     try:
