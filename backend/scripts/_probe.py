@@ -219,9 +219,15 @@ def parse_sam_line(line: str) -> dict[str, Any]:
     boxes = [dict(pair.split("=", 1) for pair in m.group(1).split(";") if "=" in pair) for m in BOX_RE.finditer(line)]
     masks = []
     for match in MASK_RE.finditer(line):
-        fields = dict(pair.split("=", 1) for pair in match.group(1).split(";") if "=" in pair and pair.split("=", 1)[0] != "data")
-        data = match.group(1).split("data=", 1)[1] if "data=" in match.group(1) else ""
-        height, width, enc, payload = data.split(",", 3) if data.count(",") >= 3 else ("", "", "", "")
+        raw = match.group(1)
+        fields = dict(pair.split("=", 1) for pair in raw.split(";") if "=" in pair and not pair.startswith("data="))
+        # "data=<H>,<W>,<enc><payload>"; the base85 payload may itself contain
+        # commas, so split only twice and keep the remainder intact.
+        data = raw.split("data=", 1)[1] if "data=" in raw else ""
+        parts = data.split(",", 2)
+        height, width, rest = (parts + ["", "", ""])[:3]
+        enc = rest[:1]
+        payload = rest[1:]
         masks.append(
             {
                 "fields": fields,
