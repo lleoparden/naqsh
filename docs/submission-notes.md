@@ -104,10 +104,14 @@ Recomputed 2026-10-27 19:20 Cairo with `backend/scripts/spend_report.py`:
 
 | Source | Count | Cost |
 | --- | --- | --- |
-| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 54 jobs | **$1.5441** |
-| Script-call ledger (`docs/evidence/api-spend.jsonl`) — probe/eval/script calls | 40 calls | **$0.2814** |
+| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 58 jobs | **$1.5986** |
+| Script-call ledger (`docs/evidence/api-spend.jsonl`) — probe/eval/script calls | 61 calls | **$0.3083** |
 | Probe receipts (`backend/.cache/probes/*.json`) | 11 files | **$0.0436** (backfilled, see below) |
-| **Traceable total** | | **$1.8691** |
+| **Traceable total** | | **$1.9506** |
+
+Demo replays are listed separately by `spend_report.py` (13 jobs, $0.3033 of recorded
+cost) and are **not** added to the total: that money was already paid by the original
+runs.
 
 Probe receipts did not carry a cost field: the Phase 1 scripts stored the response
 body/usage but never wrote a cost, so the total used to show $0.00 for them. The
