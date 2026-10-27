@@ -33,7 +33,7 @@ from . import selfcheck as selfcheck_stage
 from . import typeset
 from .meta import MetaAPIError
 from .meta import spark_translate as retranslate_line
-from .types import BBox, Layout, PageJob
+from .types import BBox, Layout, PageJob, TextRegion
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 JOBS_DIR = REPO_ROOT / "backend" / ".cache" / "jobs"
@@ -47,6 +47,22 @@ def _ms(started: float) -> int:
 def family_for(font_style: str, style: str = "") -> str:
     """Map Spark's style words to a bundled OFL family (see typeset.family_for)."""
     return typeset.family_for(font_style, style)
+
+
+def repaint_regions(regions: list[TextRegion]) -> list[TextRegion]:
+    """Regions whose background Naqsh may repaint.
+
+    Skipped (logos, decoration) and optional (SFX, off by default) regions keep the
+    original pixels, so they are left out of segmentation, verification and rendering.
+    """
+    return [region for region in regions if region.action not in ("skip", "optional")]
+
+
+def text_for_region(region: TextRegion) -> str:
+    """What to draw: the Arabic translation, or the original numerals for prices."""
+    if region.action == "keep_numerals":
+        return region.source_text or region.translation_ar
+    return region.translation_ar
 
 
 def _container_for(reading_box: BBox, mask: Image.Image) -> BBox:
@@ -63,7 +79,19 @@ def _container_for(reading_box: BBox, mask: Image.Image) -> BBox:
         return reading_box
     candidate = BBox(*bounds)
     reading_area = max(1, reading_box.width * reading_box.height)
-    if candidate.width * candidate.height < 1.4 * reading_area:
+    mask_area = candidate.width * candidate.height
+    if mask_area < 1.4 * reading_area:
+        # The mask may be the box itself (a caption bar). When it covers a decent
+        # share of the reading box, trust it and inset a little: fitting to the loose
+        # reading box is what lets caption text overflow a short bar.
+        if mask_area >= 0.45 * reading_area:
+            pad = max(3, int(0.06 * min(candidate.width, candidate.height)))
+            return BBox(
+                max(reading_box.x1, candidate.x1 + pad),
+                max(reading_box.y1, candidate.y1 + pad),
+                min(reading_box.x2, candidate.x2 - pad),
+                min(reading_box.y2, candidate.y2 - pad),
+            )
         return reading_box
 
     interior = segment_stage.inner_box(mask)
@@ -126,14 +154,30 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         job.warnings.append("no text regions found")
         _finish(job, folder, source, source)
         return job
+    # Skipped (logo, decoration) and optional (SFX, off by default) regions keep their
+    # original pixels: they never enter segmentation, verification or rendering.
+    repaint = repaint_regions(regions)
+    job.add_stage(
+        "policy",
+        0,
+        0.0,
+        translated=[r.id for r in repaint],
+        skipped=[r.id for r in regions if r.action == "skip"],
+        optional=[r.id for r in regions if r.action == "optional"],
+        keep_numerals=[r.id for r in regions if r.action == "keep_numerals"],
+    )
+    if not repaint:
+        job.warnings.append("every region was skipped by policy")
+        _finish(job, folder, source, source)
+        return job
 
     # 2. Segment + ink-derived coverage --------------------------------------------
     started = time.perf_counter()
-    masks, sam_usage, warnings = segment_stage.segment_regions(image_bytes, regions, width, height)
+    masks, sam_usage, warnings = segment_stage.segment_regions(image_bytes, repaint, width, height)
     job.warnings.extend(warnings)
     coverage: dict[str, Image.Image] = {}
     leader_runs: list[dict] = []
-    for region in regions:
+    for region in repaint:
         mask = masks.get(region.id)
         if mask is None:
             continue
@@ -213,10 +257,10 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
 
     # 5. Verify with the model, route what still fails -----------------------------
     started = time.perf_counter()
-    strategies: dict[str, str] = {region.id: "muse" for region in regions}
+    strategies: dict[str, str] = {region.id: "muse" for region in repaint}
     verify_cost = 0.0
     try:
-        verdicts, cost, summary = _check(composite, regions)
+        verdicts, cost, summary = _check(composite, repaint)
         verify_cost += cost
         remaining = [v.region_id for v in verdicts if v.residual]
         notes = summary["notes"]
@@ -227,10 +271,10 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
             retry_raw, _ = plate_stage.clean_plate(image_bytes, retry=True)
             with Image.open(io.BytesIO(retry_raw)) as opened:
                 retry_image = opened.convert("RGB")
-            retry_dx, retry_dy = plate_stage.estimate_shift(source, retry_image, [r.bbox for r in regions])
+            retry_dx, retry_dy = plate_stage.estimate_shift(source, retry_image, [r.bbox for r in repaint])
             retry_aligned = plate_stage.apply_shift(retry_image, (width, height), retry_dx, retry_dy)
             retry_composite, retry_stats, retry_flat = _compose(source, retry_aligned, coverage, masks)
-            verdicts2, cost2, summary2 = _check(retry_composite, regions)
+            verdicts2, cost2, summary2 = _check(retry_composite, repaint)
             still = [v.region_id for v in verdicts2 if v.residual]
             # Keep whichever plate leaves fewer regions with residual text.
             if len(still) <= len(remaining):
@@ -253,7 +297,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
 
             if remaining:
                 repair_started = time.perf_counter()
-                for region in regions:
+                for region in repaint:
                     if region.id not in remaining:
                         continue
                     mask = masks.get(region.id)
@@ -290,11 +334,11 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     started = time.perf_counter()
     layouts: dict[str, Layout] = {}
     colors: dict[str, tuple[int, int, int]] = {}
-    for region in regions:
+    for region in repaint:
         region.font_family = family_for(region.font_style, region.style)
         container = region.container or region.bbox
         layout = typeset.fit_text(
-            region.translation_ar,
+            text_for_region(region),
             container.width,
             container.height,
             family=region.font_family,
@@ -306,16 +350,23 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         colors[region.id] = render_stage.contrast_color(source, region)
         if layout.overflow:
             job.warnings.append(f"{region.id}: text did not fit and was clamped")
-    final = render_stage.draw_regions(composite, regions, layouts, color_of=colors)
+    final = render_stage.draw_regions(composite, repaint, layouts, color_of=colors)
     final.save(folder / "output.png")
     job.artifacts["output"] = "output.png"
-    job.add_stage("typeset", _ms(started), 0.0, regions=len(layouts), strategies=strategies)
+    job.add_stage(
+        "typeset",
+        _ms(started),
+        0.0,
+        regions=len(layouts),
+        strategies=strategies,
+        types={r.id: r.type for r in repaint},
+    )
 
     # 7. Visual self-check: one look, one fix pass, one re-check -------------------
     started = time.perf_counter()
     selfcheck_cost = 0.0
     try:
-        verdicts, sc_usage, _raw = selfcheck_stage.check_render(final, regions)
+        verdicts, sc_usage, _raw = selfcheck_stage.check_render(final, repaint)
         selfcheck_cost += sc_usage.spark_cost()
         flagged = [v for v in verdicts if not v.ok]
         fixed: list[str] = []
@@ -324,7 +375,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
             for verdict in flagged:
                 if verdict.issue != "bad_translation":
                     continue
-                region = next((r for r in regions if r.id == verdict.region_id), None)
+                region = next((r for r in repaint if r.id == verdict.region_id), None)
                 if region is None:
                     continue
                 new_text, translate_usage = retranslate_line(
@@ -344,14 +395,14 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
                     retranslated.append(region.id)
 
             fixed = selfcheck_stage.apply_fix(
-                regions,
+                repaint,
                 layouts,
                 [v for v in flagged if v.issue != "bad_translation"],
                 typeset.fit_text,
             )
-            final = render_stage.draw_regions(composite, regions, layouts, color_of=colors)
+            final = render_stage.draw_regions(composite, repaint, layouts, color_of=colors)
             final.save(folder / "output.png")
-            verdicts_after, after_usage, _ = selfcheck_stage.check_render(final, regions)
+            verdicts_after, after_usage, _ = selfcheck_stage.check_render(final, repaint)
             selfcheck_cost += after_usage.spark_cost()
             still = [v.region_id for v in verdicts_after if not v.ok]
         else:

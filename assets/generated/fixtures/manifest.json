@@ -38,5 +38,19 @@
     "size": "1024x1536",
     "path": "assets\\generated\\fixtures\\05-label-kraft.png",
     "generated": "muse-image-1.0"
+  },
+  {
+    "name": "07-comic-sfx",
+    "prompt": "An original comic page panel at night on a rooftop: tiny caption boxes in the top left and top right reading 'THREE DAYS LATER' and 'MEANWHILE...' in small caps, a large jagged sound effect 'KRAAK!' across the middle in bold stylised lettering, two silhouetted characters, flat vector colours, thick clean outlines, portrait.",
+    "note": "Small captions plus a stylised sound effect.",
+    "path": "assets\\generated\\fixtures\\07-comic-sfx.png",
+    "generated": "muse-image-1.0"
+  },
+  {
+    "name": "08-curved-poster",
+    "prompt": "An original art deco travel poster with a large headline 'MIDNIGHT EXPRESS' set on a curve along the top, a tiny footer line 'PRINTED IN CAIRO — 2026' at the bottom, a geometric sunburst, warm ochre and deep teal, printed paper texture, portrait.",
+    "note": "Curved headline plus tiny footer text.",
+    "path": "assets\\generated\\fixtures\\08-curved-poster.png",
+    "generated": "muse-image-1.0"
   }
 ]

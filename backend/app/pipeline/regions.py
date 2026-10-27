@@ -34,6 +34,7 @@ For each region return:
 - "bbox_norm": [x0, y0, x1, y1] as fractions of the image width and height (0-1), tight around the lettering block, not the whole bubble or page.
 - "translation_ar": the Arabic a professional letterer would set in that space, same meaning and tone. Keep numbers, prices and proper nouns accurate. It must be short enough to fit the same block. Never include dot leaders, ellipses or decorative dots copied from the layout — translate the words and keep the digits only.
 - "style": one of "speech", "caption", "title", "label".
+- "type": what the text is, one of: "dialogue", "caption", "signage", "sfx", "logo", "decorative", "price", "menu_item". Use "signage" or "title" for a menu/poster heading; "logo" only for a brand wordmark or logo mark, not for a heading. A price or a number that stands alone is "price". Stylised sound effects are "sfx".
 - "font_style": one short phrase about the original lettering (e.g. "bold rounded uppercase sans", "handwritten brush script").
 - "color": approximate hex colour of the original lettering, like "#1b4f52".
 
@@ -46,8 +47,26 @@ Rules:
 - If the page has no lettering, return {{"regions": []}}.
 
 Return strict JSON only, exactly this shape:
-{{"regions": [{{"id": "t1", "source_text": "...", "bbox_norm": [0.1, 0.2, 0.5, 0.3], "translation_ar": "...", "style": "speech", "font_style": "...", "color": "#000000"}}]}}
+{{"regions": [{{"id": "t1", "source_text": "...", "bbox_norm": [0.1, 0.2, 0.5, 0.3], "translation_ar": "...", "style": "speech", "type": "dialogue", "font_style": "...", "color": "#000000"}}]}}
 """
+
+# What to do with each kind of text. The editor exposes this as a per-region toggle.
+TRANSLATE_TYPES = {"dialogue", "caption", "signage", "menu_item", "title"}
+KEEP_TYPES = {"price"}
+SKIP_TYPES = {"logo", "decorative"}
+OPTIONAL_TYPES = {"sfx"}
+
+
+def action_for(region_type: str) -> str:
+    """Default action for a region type: translate | keep_numerals | skip | optional."""
+    kind = (region_type or "dialogue").strip().lower()
+    if kind in KEEP_TYPES:
+        return "keep_numerals"
+    if kind in SKIP_TYPES:
+        return "skip"
+    if kind in OPTIONAL_TYPES:
+        return "optional"
+    return "translate"
 
 
 def read_regions(image_png: bytes, width: int, height: int, register: str) -> tuple[list[TextRegion], Usage]:
@@ -77,6 +96,7 @@ def read_regions(image_png: bytes, width: int, height: int, register: str) -> tu
         translation = _strip_leaders(translation)
         if not translation:
             continue
+        region_type = str(item.get("type") or "dialogue").strip().lower()
         regions.append(
             TextRegion(
                 id=str(item.get("id") or f"t{index + 1}"),
@@ -86,6 +106,8 @@ def read_regions(image_png: bytes, width: int, height: int, register: str) -> tu
                 font_style=str(item.get("font_style") or ""),
                 bbox=bbox,
                 color=_parse_color(item.get("color")),
+                type=region_type,
+                action=action_for(region_type),
             )
         )
     return regions, usage

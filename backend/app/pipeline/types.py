@@ -57,6 +57,9 @@ class TextRegion:
     style: str
     font_style: str
     bbox: BBox
+    # Region policy: Spark's type and the action the editor can later toggle.
+    type: str = "dialogue"
+    action: str = "translate"
     mask_path: str | None = None
     # The area the text may occupy: the mask's bounds (bubble, caption bar) when the
     # mask is a real container, otherwise the reading box.
@@ -76,6 +79,8 @@ class TextRegion:
             "translation_ar": self.translation_ar,
             "style": self.style,
             "font_style": self.font_style,
+            "type": self.type,
+            "action": self.action,
             "bbox": self.bbox.to_list(),
             "container": self.container.to_list() if self.container else None,
             "mask_path": self.mask_path,
