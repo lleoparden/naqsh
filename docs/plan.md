@@ -79,6 +79,13 @@ to `H×W` bits; the Image edit returns a usable image; latency and cost recorded
 call. **Exit evidence:** receipts in `backend/.cache/probes/` + the findings table
 filled in with measured numbers.
 
+**Result (2026-10-27, gate met):** Spark text 2.0 s / $0.00131 with valid Arabic
+JSON; Spark vision 6.8 s / $0.00606 reading 3/3 regions; SAM 3.4 s / $0.0025 for two
+bubble masks at 0.961; SAM box prompt refined a caption to a 93%-fill mask; Muse
+Image generate 12.2 s / $0.01; Muse Image edit 13.6 s / $0.01 with all lettering
+removed and a ≈16 px page shift that must be registered. One page ≈ **$0.022** and
+≈25 s of model time. Details in [`api-findings.md`](api-findings.md).
+
 **Non-goals:** no pipeline code, no editor, no prompt tuning beyond the probe.
 
 ## Phase 2 — Vertical slice on one page

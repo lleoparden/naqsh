@@ -11,10 +11,12 @@ layouts, broken ligatures, Latin fonts forced onto Arabic, no way to nudge a lin
 that overflows a speech bubble. Arabic creators, small publishers, and small
 businesses still localize by hand. Naqsh is built for them first.
 
-> **Status (2026-10-27):** Phase 1 — setup and Meta Model API smoke tests. The
-> pipeline described below is the target; this repo currently contains the
-> scaffold, the API probes, and the evidence they produce. See
-> [`docs/plan.md`](docs/plan.md) for the phase plan and go/no-go gates.
+> **Status (2026-10-27):** Phase 1 complete — the scaffold and the Meta Model API
+> probes work end to end. On a generated test page, Muse Spark read all three text
+> regions and produced natural Arabic, SAM 3.1 returned pixel-accurate bubble masks
+> and precise region masks from box prompts, and Muse Image erased the lettering
+> while keeping the artwork. The pipeline itself lands in Phase 2; see
+> [`docs/plan.md`](docs/plan.md) and [`docs/api-findings.md`](docs/api-findings.md).
 
 ## What's new / built during the hackathon
 

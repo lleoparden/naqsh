@@ -46,7 +46,8 @@ def main() -> None:
                 ],
             }
         ],
-        "max_output_tokens": 1600,
+        "reasoning": {"effort": "minimal"},
+        "max_output_tokens": 2400,
     }
     result = post_json("/responses", payload, timeout=180.0)
     text = response_text(result.body)

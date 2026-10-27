@@ -1,17 +1,17 @@
 """Probe 2 — SAM 3.1 segmentation: exact wire format, decodability, cost.
 
-SAM streams one special-token line per frame. This probe records the raw line, parses
-boxes and mask descriptors, tries every plausible mask decoding, and renders an
-overlay so the result can be inspected rather than trusted.
+SAM streams one special-token line per frame. This probe records the raw line and the
+raw SSE events, parses boxes and mask descriptors, decodes the masks with Meta's own
+``meta-sam-parser`` (the payload is a compressed encoding, not raw bits — a hand
+decoder cannot read it), and renders an overlay so the result can be inspected.
 """
 
 from __future__ import annotations
 
-import base64
+import asyncio
 import json
 import sys
 import time
-import zlib
 from pathlib import Path
 
 from PIL import Image
@@ -19,85 +19,83 @@ from PIL import Image
 from _probe import PRICE, data_url, parse_sam_line, receipt, stream_sse, summarize, SAM_MODEL
 
 
-def try_decode_mask(mask: dict) -> dict:
-    """Attempt the known encodings; report what actually decodes to H*W bits."""
-    height, width = mask["height"], mask["width"]
-    if not height or not width:
-        return {"decoded": False, "reason": "missing H,W"}
-    payload = mask["payload"].encode("ascii", "replace")
-    expected_bits = height * width
-    expected_bytes = (expected_bits + 7) // 8
-    out = {
-        "height": height,
-        "width": width,
-        "encoding": mask["encoding"],
-        "payload_chars": len(mask["payload"]),
-        "expected_bytes_1bpp": expected_bytes,
-        "attempts": {},
+def decode_with_parser(events: list[dict]) -> dict:
+    """Decode masks through meta-sam-parser; returns rasters keyed by object id."""
+    try:
+        from meta_sam_parser import decode_mask_to_raster, image_segmentation_format, parse_responses_stream
+    except ImportError:
+        return {"available": False, "error": "meta-sam-parser is not installed"}
+
+    async def run() -> object:
+        async def gen():
+            for event in events:
+                yield event
+
+        parsed = parse_responses_stream(gen(), image_segmentation_format())
+        return await parsed.final_result()
+
+    try:
+        result = asyncio.run(run())
+    except Exception as exc:  # noqa: BLE001 - the probe records failures
+        return {"available": True, "error": f"{type(exc).__name__}: {exc}"}
+
+    rasters = []
+    for record in result.records:
+        if getattr(record, "kind", None) != "mask":
+            continue
+        raster = decode_mask_to_raster(record.mask)
+        foreground = sum(raster)
+        rasters.append(
+            {
+                "object_id": record.object_id,
+                "height": record.mask.height,
+                "width": record.mask.width,
+                "encoding": record.mask.encoding,
+                "raster_bytes": len(raster),
+                "foreground_pixels": foreground,
+                "foreground_ratio": round(foreground / len(raster), 4) if raster else 0.0,
+                "confidence": record.confidence,
+                "_raster": raster,
+            }
+        )
+    diagnostics = [str(d) for d in list(result.diagnostics)[:5]]
+    return {
+        "available": True,
+        "outcome": str(result.outcome),
+        "diagnostics": diagnostics,
+        "masks": rasters,
     }
 
-    def unpack(bits: bytes) -> bytes:
-        raster = bytearray(expected_bits)
-        for i in range(expected_bits):
-            raster[i] = (bits[i >> 3] >> (7 - (i & 7))) & 1
-        return bytes(raster)
 
-    candidates: dict[str, bytes] = {}
-    for name, fn in {
-        "a85_adobe": lambda p: base64.a85decode(p, adobe=False),
-        "a85_adobe_frame": lambda p: base64.a85decode(b"<~" + p + b"~>", adobe=True),
-        "b85_rfc1924": lambda p: base64.b85decode(p),
-    }.items():
-        try:
-            candidates[name] = fn(payload)
-        except Exception as exc:  # noqa: BLE001 - probe records, never raises
-            out["attempts"][name] = f"error: {type(exc).__name__}: {exc}"
+def render_overlay(image_path: Path, boxes: list[dict], masks: list[dict], out_path: Path) -> None:
+    """Tint each decoded mask over the source image.
 
-    raster = None
-    for name, raw in candidates.items():
-        out["attempts"][name] = {"bytes": len(raw), "head": raw[:8].hex()}
-        if len(raw) >= expected_bytes:
-            raster = unpack(raw[:expected_bytes])
-            out["decoded_with"] = name
-            break
-        try:
-            inflated = zlib.decompress(raw)
-            out["attempts"][name]["zlib_bytes"] = len(inflated)
-            if len(inflated) >= expected_bytes:
-                raster = unpack(inflated[:expected_bytes])
-                out["decoded_with"] = f"{name}+zlib"
-                break
-        except zlib.error:
-            pass
-
-    if raster is None:
-        out["decoded"] = False
-        return out
-
-    out["decoded"] = True
-    out["foreground_pixels"] = sum(raster)
-    out["foreground_ratio"] = round(sum(raster) / expected_bits, 4)
-    out["_raster"] = raster
-    return out
-
-
-def render_overlay(image_path: Path, frame: dict, decodes: list[dict], out_path: Path) -> None:
+    The mask raster is not the whole frame: its height/width match the object's box
+    (within a pixel or two), so the mask is pasted at the box position and scaled to
+    the box size. Pairing is by order, which matches the records on a single still.
+    """
     base = Image.open(image_path).convert("RGBA")
+    tint = Image.new("RGBA", base.size, (214, 61, 67, 120))
     overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
-    tint = Image.new("RGBA", base.size, (229, 72, 77, 110))
-    for decode in decodes:
-        if not decode.get("decoded"):
+    for index, mask in enumerate(masks):
+        raster = mask.get("_raster")
+        if raster is None or index >= len(boxes):
             continue
-        raster = decode.pop("_raster")
-        mask = Image.frombytes("L", (decode["width"], decode["height"]), bytes(255 if b else 0 for b in raster))
-        mask = mask.resize(base.size, Image.NEAREST)
-        overlay.paste(tint, (0, 0), mask)
+        box = boxes[index]
+        x1, y1 = int(box["x1"]), int(box["y1"])
+        x2, y2 = int(box["x2"]), int(box["y2"])
+        binary = Image.frombytes(
+            "L",
+            (mask["width"], mask["height"]),
+            bytes(255 if value else 0 for value in raster),
+        ).resize((max(1, x2 - x1), max(1, y2 - y1)), Image.NEAREST)
+        overlay.paste(tint.crop((x1, y1, x2, y2)), (x1, y1), binary)
     Image.alpha_composite(base, overlay).convert("RGB").save(out_path)
 
 
 def main() -> None:
     image = Path(sys.argv[1] if len(sys.argv) > 1 else "assets/generated/test-panel.png")
-    prompt = sys.argv[2] if len(sys.argv) > 2 else "text"
+    prompt = sys.argv[2] if len(sys.argv) > 2 else "speech bubble"
     if not image.is_file():
         raise SystemExit(f"image not found: {image} (run smoke_image_generate.py first)")
 
@@ -117,31 +115,32 @@ def main() -> None:
     }
 
     started = time.perf_counter()
+    events: list[dict] = []
     deltas: list[str] = []
-    events = 0
     completed = False
     usage: dict = {}
     for event in stream_sse("/responses", request):
-        events += 1
+        events.append(event)
         kind = event.get("type")
         if kind == "response.output_text.delta":
             deltas.append(event.get("delta", ""))
         elif kind == "response.completed":
             completed = True
             usage = (event.get("response") or {}).get("usage") or {}
-        elif kind == "response.failed":
-            usage = event
     latency_ms = int((time.perf_counter() - started) * 1000)
 
     text = "".join(deltas)
-    line = text.strip()
-    frame = parse_sam_line(line) if line else {"frame": None, "boxes": [], "masks": [], "raw_len": 0}
-    decodes = [try_decode_mask(m) for m in frame["masks"]]
+    frame = parse_sam_line(text.strip()) if text.strip() else {"frame": None, "boxes": [], "masks": [], "raw_len": 0}
+    decoded = decode_with_parser(events)
+    masks = decoded.get("masks", []) if decoded.get("available") else []
 
     overlay_path = None
-    if any(d.get("decoded") for d in decodes):
-        overlay = image.parent / f"{image.stem}-{prompt.replace(' ', '-')}-masks.png"
-        render_overlay(image, frame, decodes, overlay)
+    if masks and frame["boxes"]:
+        import re
+
+        slug = re.sub(r"[^a-z0-9]+", "-", prompt.lower())[:40].strip("-") or "prompt"
+        overlay = image.with_name(f"{image.stem}-{slug}-masks.png")
+        render_overlay(image, frame["boxes"], masks, overlay)
         overlay_path = str(overlay)
 
     path = receipt(
@@ -151,27 +150,33 @@ def main() -> None:
             "prompt": prompt,
             "request": {**request, "input": "…image elided…"},
             "latency_ms": latency_ms,
-            "sse_events": events,
+            "sse_event_count": len(events),
             "completed": completed,
             "raw_output_text": text,
             "frame": {k: v for k, v in frame.items() if k != "masks"},
-            "mask_summaries": [{k: v for k, v in d.items() if k != "_raster"} for d in decodes],
+            "mask_descriptors": [{k: v for k, v in m.items() if k != "_raster"} for m in frame["masks"]],
+            "decoded": {k: v for k, v in decoded.items() if k != "masks"},
+            "masks": [{k: v for k, v in m.items() if k != "_raster"} for m in masks],
         },
     )
 
     summarize(
         "sam_segment",
         model=SAM_MODEL,
-        result=type("R", (), {"status": 200 if completed else 0, "latency_ms": latency_ms, "body": {"usage": usage}, "headers": {}})(),
+        result=type(
+            "R",
+            (),
+            {"status": 200 if completed else 0, "latency_ms": latency_ms, "body": {"usage": usage}, "headers": {}},
+        )(),
         extra={
             "prompt": prompt,
             "image": str(image),
-            "sse_events": events,
+            "sse_events": len(events),
             "output_chars": len(text),
-            "frames": 1 if line else 0,
             "objects": len(frame["boxes"]),
             "boxes": frame["boxes"],
-            "masks": [{k: v for k, v in d.items() if k != "_raster"} for d in decodes],
+            "parser": {k: v for k, v in decoded.items() if k != "masks"},
+            "masks": [{k: v for k, v in m.items() if k != "_raster"} for m in masks],
             "overlay_png": overlay_path,
             "cost_usd_estimate": PRICE["sam_per_image"],
             "receipt": str(path),

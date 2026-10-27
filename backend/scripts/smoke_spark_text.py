@@ -35,7 +35,8 @@ def main() -> None:
                 "content": [{"type": "input_text", "text": PROMPT}],
             }
         ],
-        "max_output_tokens": 400,
+        "reasoning": {"effort": "minimal"},
+        "max_output_tokens": 900,
     }
     result = post_json("/responses", payload)
     text = response_text(result.body)

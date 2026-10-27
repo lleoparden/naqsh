@@ -16,6 +16,7 @@ import base64
 import json
 import os
 import re
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -23,6 +24,12 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
+
+# Arabic output on a Windows console: force UTF-8 rather than crashing the summary
+# after a paid call has already returned.
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="replace")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CACHE_DIR = REPO_ROOT / "backend" / ".cache" / "probes"
@@ -76,6 +83,14 @@ class CallResult:
     latency_ms: int
     body: Any
     headers: dict[str, str]
+
+
+def _maybe_json(raw: str) -> Any:
+    """Parse a JSON body, keeping the text when the server answers in plain text."""
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        return raw[:4000]
 
 
 def post_json(path: str, payload: dict[str, Any], timeout: float = 120.0) -> CallResult:

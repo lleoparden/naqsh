@@ -27,18 +27,24 @@ Submission form: Cerebral Valley platform, one per project. Deadline **4 Nov
 
 Fill this in with *observed* behavior, not the pitch.
 
-- **SAM 3.1 — geometry.** Turns "find the lettering" into per-region masks with
-  stable object ids. Why it mattered: the layer boundary is pixel-accurate, so
-  Arabic can be fitted to the real bubble shape instead of a guessed rectangle.
-  *(Observed: pending probe.)*
+- **SAM 3.1 — geometry.** Turns "find the lettering" into pixel-accurate masks with
+  stable object ids. Why it mattered: the layer boundary is the real bubble shape,
+  so Arabic can be fitted to it instead of a guessed rectangle. *(Observed: a
+  two-word concept prompt found both speech bubbles at 0.96 confidence, and a box
+  prompt tightened a caption region to the panel edge. A `text` concept prompt found
+  nothing — the model is prompted with objects, not "text", which is why Spark's
+  boxes drive it.)*
 - **Muse Spark — reading and rewriting.** One call returns the source text, its
   position, a natural Arabic line, and a lettering style. Why it mattered: the
-  translation must fit the space, so text and style must be decided together, and
-  a text-only pipeline would need a separate OCR + translator + classifier.
-  *(Observed: pending probe.)*
+  translation must fit the space, so text and style are decided together; a
+  text-only pipeline would need OCR + translator + classifier. *(Observed: 3/3
+  regions read exactly, valid JSON, and `أشوفك بكرة وهجيب معايا الرسومات` for "See
+  you tomorrow, I'll bring the sketches" — proper Egyptian colloquial.)*
 - **Muse Image — repainting the plate.** Removes the original lettering while
-  keeping the artwork. Why it mattered: without it, Naqsh could only cover
-  lettering with flat boxes. *(Observed: pending probe — this is the riskiest.)*
+  keeping the artwork. Why it mattered: without it Naqsh could only cover lettering
+  with flat boxes. *(Observed: all three text regions erased in 13.6 s for $0.01,
+  bubbles left empty and the character unchanged — but the whole page is re-rendered
+  with a ≈16 px vertical offset, so the plate must be registered before compositing.)*
 
 ## API friction log (write it when it happens)
 
@@ -46,15 +52,24 @@ Fill this in with *observed* behavior, not the pitch.
 | --- | --- | --- | --- |
 | 2026-10-27 15:20 | Reachability | `GET /v1/models` and `POST /v1/chat/completions` return 401 over HTTPS from Cairo; no timeout, no geo-block at the network layer. | Good — no VPN needed. |
 | 2026-10-27 15:40 | Muse Image has no mask parameter | Multipart `mask` returns `400 unsupported_parameter`; edits are instruction-only. Docs also do not promise geometry preservation. | Design change: composite edit output through SAM masks (Plan A), classical inpaint (Plan B), opaque cover (Plan C). |
-| 2026-10-27 15:40 | SAM output is special-token text | Masks are base85 payloads inside `<|mask;...|>` tokens, one `output_text` line per frame, streamed. | Needs a parser + decoder, not a JSON reader. Budget an hour for the first correct decode. |
+| 2026-10-27 15:40 | SAM output is special-token text | Masks are compressed base85 payloads inside `<|mask;...|>` tokens, one `output_text` line per frame, streamed. A hand-built decoder fails; `meta-sam-parser` decodes it. | One dependency, and the mask raster is the size of the object's box, not the page. Budgeted an hour; it took about that. |
+| 2026-10-27 15:36 | Reasoning tokens ate the answer | With `max_output_tokens: 400`, Spark returned `status: incomplete` and **398 of 400 output tokens were reasoning** — an empty answer that looked like a JSON bug. | Two wasted calls; fix is `reasoning.effort: minimal` + a realistic token budget. Worth saying in the Meta feedback. |
+| 2026-10-27 15:37 | SAM concept prompt `text` finds nothing | 0 matches, 200 OK, empty lane, still billed. `speech bubble` found both bubbles. | Region strategy: Spark bboxes → SAM box prompts, concepts only for containers. |
+| 2026-10-27 15:39 | Box prompt syntax is not obvious | `<|box;…|>` alone → `400 invalid prompt: … geometric prompts go after a <Nf> frame header`. | Correct form: `<0f>1<|box;…|>` with caller-chosen ids. Docs describe it; the error message is what made it stick. |
+| 2026-10-27 15:38 | Muse Image edit shifts the page | Phase correlation on before/after: ≈ -16 px vertical; mean abs diff outside text drops 19.96 → 12.36 after shifting. | The clean plate needs registration before masked compositing. |
 
 ## Notable results and numbers
 
 | Date | Number | How it was measured |
 | --- | --- | --- |
 | 2026-10-27 | API reachable from Cairo, first byte < 1 s (401 response) | `Invoke-WebRequest` timing during the reachability check |
-| _pending_ | Cost per page | Sum of probe receipts, not an estimate |
-| _pending_ | Latency per page | Backend timing per stage, recorded per run |
+| 2026-10-27 | Spark vision read: 6.8 s, 3,367 in / 435 out tokens, **$0.00606** | Probe receipt `spark-image-20261027T123659Z.json` |
+| 2026-10-27 | Spark Arabic line: 2.0 s, 137 in / 268 out (204 reasoning), **$0.00131** | Probe receipt `spark-text-20261027T123630Z.json` |
+| 2026-10-27 | SAM bubbles: 3.4 s, 2 masks, conf 0.961, **$0.0025** | Probe receipt `sam-20261027T123816Z.json` + overlay PNG |
+| 2026-10-27 | Muse Image generate: 12.2 s, 1280×1920 out for a 1024×1536 request, **$0.01** | Probe receipt `image-generate-20261027T123645Z.json` |
+| 2026-10-27 | Muse Image edit: 13.6 s, lettering gone, **$0.01**, ≈16 px page shift | `image-edit-…json` + local phase-correlation measurement |
+| 2026-10-27 | **One page end to end ≈ $0.022 and ≈25 s of model time** | Sum of the receipts above |
+| 2026-10-27 | Phase 1 total spend **≈ $0.040** | All receipts in `backend/.cache/probes/` |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
 
 ### Time-saved measurement (the Impact claim)
@@ -77,9 +92,11 @@ Collect as we go; each entry says what it proves.
 
 | Date | File | Shows |
 | --- | --- | --- |
-| _pending_ | test panel | The generated, rights-clean test page (before) |
-| _pending_ | SAM overlay | Mask overlay proving pixel-accurate regions |
-| _pending_ | cleaned plate | Text erased, artwork intact (or the failure, honestly) |
+| 2026-10-27 | `assets/generated/test-panel.png` | The generated, rights-clean test page (before) |
+| 2026-10-27 | `assets/generated/test-panel-speech-bubble-masks.png` | SAM 3.1 masks landing exactly on both speech bubbles |
+| 2026-10-27 | `assets/generated/test-panel-caption-masks.png` | A box prompt turning Spark's bbox into a precise caption mask |
+| 2026-10-27 | `assets/generated/test-panel-cleaned.png` | Lettering erased, artwork intact (the clean plate) |
+| 2026-10-27 | `assets/generated/test-panel-before-after.png` | The before/after pair — strong X-post candidate |
 | _pending_ | Arabic page | Final localized page (after) |
 | _pending_ | editor | A region being fixed in the layer editor |
 | _pending_ | export | SVG layers opened somewhere that proves they are editable |

@@ -1,17 +1,25 @@
 # Meta Model API — findings
 
-Everything here is either (a) confirmed from the official docs at
-<https://dev.meta.ai/docs> on 2026-10-27, (b) confirmed by a probe in
-`backend/scripts/`, or (c) explicitly marked **UNCONFIRMED**. No guessing is
+Every row is one of: **confirmed by a probe in `backend/scripts/`**, **confirmed
+from the official docs** (linked), or explicitly **UNCONFIRMED**. No guesses are
 presented as fact.
 
-**Reachability from Cairo, Egypt:** confirmed. Unauthenticated `GET /v1/models`
-and `POST /v1/chat/completions` return `401` through HTTPS (DNS + TLS + routing
-work); there is no geo-block at the network layer for these endpoints.
+- Docs: <https://dev.meta.ai/docs> (read 2026-10-27)
+- Base URL: `https://api.meta.ai/v1`, Bearer auth, keys start with `LLM_`
+- Reachability from Cairo, Egypt: **works**. Unauthenticated calls return `401`
+  over HTTPS; no timeout, no geo-block at the network layer.
+- Probe receipts: `backend/.cache/probes/*.json` (gitignored). Images:
+  `assets/generated/`.
+- Spend for this whole phase, one page of three text regions: **≈ $0.040**.
 
-**Probe status:** blocked until `L:\naqsh\.env` exists with `MODEL_API_KEY`
-(owner is adding it). Nothing in this file claims a latency or a response shape
-that a probe has not produced; those rows say *pending*.
+## Headline answers
+
+| Question | Answer |
+| --- | --- |
+| Is the API reachable from Egypt? | **Yes.** HTTPS + auth work; 401 without a key, 200 with it. |
+| Does Muse Image support inpainting or editing? | **Editing, yes; mask inpainting, no.** `mask` is rejected as `unsupported_parameter`. Instruction edits erase lettering extremely well on flat art, but re-render the page with a small global offset (≈16 px vertical on 1280×1920). |
+| What does SAM return? | Streamed **special-token text**: one line per frame, `<0f>` then `id<|box;…|><|mask;…|>`. Boxes in source pixels; masks are compressed base85 payloads the size of **the object's box**, not the frame. Use `meta-sam-parser` to decode. |
+| How good is the Arabic? | **Good on the first try.** `muse-spark-1.3` returned `أشوفك بكرة وهجيب معايا الرسومات` for "See you tomorrow, I'll bring the sketches" — natural Egyptian colloquial, no Latin characters, valid JSON. Native-speaker judgement is still the owner's job. |
 
 ---
 
@@ -19,205 +27,199 @@ that a probe has not produced; those rows say *pending*.
 
 | Item | Value | Source |
 | --- | --- | --- |
-| Base URL | `https://api.meta.ai/v1` | docs/overview, docs/quickstart |
-| Auth | `Authorization: Bearer $MODEL_API_KEY`; keys start with `LLM_` | docs/authentication |
-| Protocols | Responses API, Chat Completions, Messages; OpenAI/Anthropic SDKs work when pointed at the base URL | docs/protocols |
-| Error envelope | `{"error": {"message", "type", "code", "param"}}`; `type` is `invalid_request_error` / `authentication_error` / `rate_limit_error` / `server_error` | docs/error-handling |
-| 404 nuance | Unknown paths return an empty body, no JSON envelope | docs/error-handling |
-| Rate-limit headers | `x-ratelimit-limit-tokens`, `-remaining-tokens`, `-limit-requests`, `-remaining-requests`; 429 carries `Retry-After` | docs/pricing-rate-limits |
-| Limits scope | Per team, not per key | docs/pricing-rate-limits |
+| Protocols | Responses, Chat Completions, Messages | docs |
+| Error envelope | `{"error": {"message", "type", "code", "param"}}` | docs/error-handling |
+| 404 nuance | Unknown paths return an empty body (no JSON) | docs/error-handling |
+| Rate-limit headers | observed live: `x-ratelimit-limit-requests`, `-remaining-requests`, `-limit-tokens`, `-remaining-tokens` | probe |
+| Limits scope | per team, not per key | docs |
+| 401 body | `authentication_error` / `invalid_api_key` | probe (unauthenticated call) |
 
 ---
 
 ## 1. Muse Spark (text + vision)
 
-**Model IDs:** `muse-spark-1.3`, `muse-spark-1.2`, `muse-spark-1.1`; Contributor
-variants `muse-spark-1.3-contributor`, `muse-spark-1.2-contributor`. Muse Wonder
-is `muse-wonder-1.0`.
+Models: `muse-spark-1.3` (used), `1.2`, `1.1`; Contributor variants. Price
+$1.25/M input, $4.25/M output.
 
-**What works (docs):** text, image, video, audio, and PDF input; text out. Images
-go in as `input_image` with `image_url` (public URL or base64 `data:` URL) or
-`file_id`. Up to 50 images per request. Chat Completions wraps the image in an
-`image_url` object instead of a plain string.
+### Probe A — text (`smoke_spark_text.py`)
 
-**Probes**
+| Field | Measured |
+| --- | --- |
+| HTTP | 200 |
+| Latency | **2,018 ms** |
+| Usage | 137 in / 268 out, of which **204 reasoning tokens** |
+| Cost | **$0.00131** |
+| JSON | valid on the first try, no prose wrapper |
+| Output | `{"translation_ar": "أشوفك بكرة وهجيب معايا الرسومات", "register": "casual-egyptian", …}` |
 
-| Probe | Question | Result |
-| --- | --- | --- |
-| `smoke_spark_text.py` | Does a plain text call return strict JSON in the requested Arabic-translation shape? | **pending** |
-| `smoke_spark_image.py` | Can it read lettering in place and return per-region JSON (bbox, source text, Arabic, style)? | **pending** |
+**Gotcha, and it cost two calls:** with `max_output_tokens: 400` the response
+came back `status: incomplete`, `incomplete_details.reason: max_output_tokens`,
+`output_tokens: 400` and **398 of them were reasoning** — an empty answer that
+looked like a parsing bug. Muse Spark is a reasoning model and reasoning tokens
+count against the output budget. Fix: `reasoning: {"effort": "minimal"}` plus a
+realistic `max_output_tokens` (900+ here). Even at `minimal`, a short JSON answer
+burned 204 reasoning tokens; budget for it.
 
-**Latency:** pending. **Cost** (published): $1.25/M input, $4.25/M output
-(standard); $0.10/M input, $0.20/M output (Contributor). A vision read of a
-1024×1536 page is *estimated* at a few thousand input tokens — the probe records
-the real number.
+### Probe B — vision (`smoke_spark_image.py`)
 
-**Rate limits (published):** 3,000 RPM, 4,000,000 TPM (standard); 150 RPM,
-3,000,000 TPM (Contributor).
+| Field | Measured |
+| --- | --- |
+| Image | 1280×1920 generated panel, sent as a base64 `data:` URL |
+| HTTP / latency | 200 / **6,768 ms** |
+| Usage | 3,367 in / 435 out (217 reasoning) |
+| Cost | **$0.00606** |
+| Accuracy | **3/3** text regions read exactly (`CHAPTER ONE`, `FRESH BREAD?`, `EVERY MORNING`) |
+| Bbox quality | speech-bubble boxes cover the bubble, not the glyphs — good for fitting, not for pixel masks |
+| Output | strict JSON, 3 regions, each with `bbox_norm`, `source_text`, `translation_ar`, `style`, `font_style` |
 
-**Risks / open questions**
+Observations:
 
-- UNCONFIRMED: whether Arabic output is Egyptian-colloquial-capable by prompting
-  alone, or whether register must be steered with examples.
-- UNCONFIRMED: JSON compliance rate at temperature defaults; the probe records
-  whether the reply parsed cleanly, and the fallback is the structured-output
-  `text.format` schema.
-- Arabic quality is judged by a native speaker (the owner), not by the model.
+- The model answered with the whole page in context — one call returns reading,
+  translation, and a lettering-style description, which is exactly the triple the
+  pipeline needs.
+- `bbox_norm` is usable as a **prompt** for SAM (see below) but is too loose to be
+  the layer boundary itself.
+- UNCONFIRMED: behaviour on dense pages (a 9-panel comic), on Arabic *source*
+  text, and on low-contrast lettering. Phase 5 measures recall on 5 pages.
 
 ---
 
 ## 2. SAM 3.1 (segmentation)
 
-**Model ID:** `sam-3.1`. Endpoint: **Responses API only**, and segmentation
-output is **streamed**.
+Model: `sam-3.1`. Responses API only, streamed. $2.50 / 1,000 images.
 
-**Request shape (confirmed from docs):**
-
-```json
-{
-  "model": "sam-3.1",
-  "input": [{
-    "type": "message",
-    "role": "user",
-    "content": [
-      {"type": "input_text", "text": "speech bubble"},
-      {"type": "input_image", "image_url": "data:image/png;base64,..."}
-    ]
-  }],
-  "metadata": {"mask_encoding": "one_bit", "include_confidence": "true"}
-}
-```
-
-- One concept per request; several concepts = several requests.
-- Box/point prompts exist (`<|box;x1=..;y1=..;x2=..;y2=..;w=..;h=..|>`,
-  `<|point;x=..;y=..;w=..;h=..|>`) and take priority for precision; they always
-  return `one_bit` masks regardless of `mask_encoding`.
-- To segment a region the user picked, box/point prompts are the precision path.
-
-**Response format (confirmed from docs) — this is the surprising part:**
-
-Output is **special-token text**, not JSON images:
+### Wire format (confirmed)
 
 ```
-<0f>0<|box;x1=211;y1=228;x2=270;y2=254;w=320;h=334|><|mask;x=0;y=0;data=27,60,~!!!!M!0c[0o...|>,1<|box;...|><|mask;...|>
+<0f>0<|box;x1=90;y1=479;x2=512;y2=807;w=1280;h=1920;c=0.9609…|><|mask;x=0;y=0;c=0.9609…;data=329,423,!…|>
 ```
 
-- One line per frame; a still is frame `<0f>`; each line is one
-  `response.output_text.delta` event; terminated by `response.completed`.
-- `id` is a stable per-object id across frames, **not dense and not 0-based**.
-- Boxes are **source pixels**; `w`,`h` repeat the source dimensions.
-- Masks have their own raster size (`data=H,W,<enc><payload>`), smaller than the
-  frame, height-first, **base85** (not base64) with an encoding marker `~`
-  (lossless, default) or `!` (one_bit). The payload may itself contain `~`/`!`.
-- Zero matches is a valid outcome: empty `output_text`, no delta events, and the
-  stream still completes. Branch on empty — do not treat as an error.
-- Confirmed by docs: `decodeMaskToRaster` returns a row-major `Uint8Array` of
-  `H*W` 0/1 values. Official parsers exist: `meta-sam-parser` (Python, ≥0.0.6)
-  and `@meta-sam/parser` (JS, ≥0.0.13).
+- One `response.output_text.delta` per frame; a still is `<0f>`; `response.completed`
+  ends it. 9 SSE events for one image.
+- Object ids are stable but **not dense**.
+- Boxes are source pixels; `w`,`h` are source dimensions, repeated on every record.
+- Mask `data=H,W,<enc><payload>`: `H`,`W` are the mask raster, **not the frame**.
+  In both probes the raster matched the object's **box size** (329×423 for a
+  422×328 box; 148×657 for a 656×130 box), so the mask is a crop of the box at
+  roughly 1:1 scale. Placing it needs the box offset.
+- `<enc>` is `!` (one_bit) or `~` (lossless). Box/point prompts always return
+  `one_bit`.
+- Payload is **compressed** base85, not raw bits: 329×423 = 139,167 pixels but the
+  payload is ~294 chars. A hand-rolled Ascii85/RFC1924 + bit-unpack attempt failed
+  on every alphabet. **Use `meta-sam-parser` (Python ≥0.0.6; 0.1.0 used here)** —
+  `parse_responses_stream(events, image_segmentation_format())` then
+  `decode_mask_to_raster(record.mask)` returns `H*W` bytes of 0/1. Feed it the real
+  event objects; synthetic events that lack lane fields raise
+  `ResponsesStreamLaneError`.
 
-**Probes**
+### Probe C — concept prompt (`smoke_sam.py "<prompt>"`)
 
-| Probe | Question | Result |
-| --- | --- | --- |
-| `smoke_sam.py` | Exact line for our test panel; does a mask decode to H×W bits; how long does the stream take? | **pending** |
+| Prompt | Result |
+| --- | --- |
+| `text` | **0 matches**, 3,446 ms, billed 1 image. Empty lane, no error — valid outcome. |
+| `speech bubble` | **2 matches**, 3,429 ms, conf 0.961 on both, masks 329×423 and 391×445, foreground 73%/64% of their boxes |
 
-**Cost (published):** $2.50 per 1,000 images ($0.0025/image); video $0.20/1,000
-frames, billed with a 50-frame minimum. **Rate limit:** 3,000 RPM, no TPM.
+The overlay (`assets/generated/test-panel-speech-bubble-masks.png`) shows both
+bubbles tinted exactly, outline included.
 
-**Risks / open questions**
+**Consequence for the pipeline:** SAM's concept vocabulary is a noun phrase the
+model recognizes ("speech bubble", "caption box", "menu item"), not "text".
+Lettering is not a reliable concept. Phase 5 therefore uses **Spark's bboxes as
+SAM box prompts** for the text itself, and concept prompts only for containers.
 
-- UNCONFIRMED: whether the concept prompt `"text"` reliably finds lettering, or
-  whether it needs `"speech bubble"` / `"word balloon"` and a second pass for
-  text inside them. This decides the region strategy in Phase 4.
-- UNCONFIRMED: mask decode for `lossless` vs `one_bit` without the official
-  parser. The probe tries Ascii85/RFC1924 + bit unpack + zlib and reports what
-  matches. If nothing matches cleanly, we add `meta-sam-parser` rather than
-  reverse-engineering further.
-- The mask raster is smaller than the frame; upscaling with nearest-neighbour
-  will cost edge precision on thin lettering. That is acceptable for a *layer
-  boundary* but must be checked against thin strokes.
+### Probe D — box prompt (the precision path)
+
+Prompt text: `<0f>1<|box;x1=301;y1=321;x2=982;y2=451;w=1280;h=1920|>`
+
+| Field | Measured |
+| --- | --- |
+| Result | 1 object, mask 148×657, foreground 93%, conf 0.949 |
+| Box refinement | input (301,321)–(982,451) → returned (315,315)–(971,462): SAM tightened the box to the caption panel |
+| Latency | ~3.4 s, $0.0025 |
+
+**Syntax gotcha:** the box prompt without a frame header and object id failed with
+`400 invalid prompt: the noun phrase must not contain <|...|> tokens; geometric
+prompts go after a <Nf> frame header`. The working form is `<0f><id><|box;…|>`,
+ids chosen by the caller, up to 16 objects per request.
 
 ---
 
 ## 3. Muse Image (generation + edit)
 
-**Model ID:** `muse-image-1.0`. Two interfaces: conversational Responses API
-(multi-turn refine) and OpenAI-compatible `POST /v1/images/generations` /
-`POST /v1/images/edits`.
+Model: `muse-image-1.0`. $0.01 per returned image, 150 RPM. Two interfaces:
+Responses (conversational) and `/v1/images/generations` + `/v1/images/edits`
+(OpenAI-compatible).
 
-**Confirmed parameters:** `n` (1–10), `size` (`"WxH"`, sets aspect ratio, not
-exact pixels), `response_format` (`b64_json` default, or `url`), `output_format`
-(`webp` default, `png`, `jpeg`). Edits take `images: [{image_url | file_id}]`
-(JSON) or multipart `image` (SDK). Only the `image_generation` tool is accepted;
-a `web_search` tool returns 400. Built-in grounding is included in the price.
+### Probe E — generate (`smoke_image_generate.py`)
 
-**Inpainting — the important finding:**
+| Field | Measured |
+| --- | --- |
+| Request | `1024x1536`, `output_format: png`, `response_format: b64_json` |
+| Latency | **12,200 ms** |
+| Returned | **1280×1920** PNG, 2.19 MB — `size` really is aspect ratio only |
+| Cost | $0.01 |
+| Result | clean, original comic panel with exactly the three text regions requested |
 
-- **There is no mask parameter.** Multipart `mask`, `input_fidelity`, and
-  `partial_images` all return `400 unsupported_parameter`. So we cannot ask for
-  "repaint only these pixels".
-- Edits are **instruction-based**: "changes only what you ask for while keeping
-  the rest intact" is the model's claim, not a guarantee. Nothing in the docs
-  bounds drift.
-- **Plan A for the clean plate:** send the page with an instruction to erase the
-  lettering, receive an edited page, then **composite the edited pixels back
-  through SAM's masks only** — outside the text regions the original artwork is
-  kept byte-for-byte. This turns an unbounded edit into a bounded one.
-- **Plan B:** classical inpainting (OpenCV Telea/NS) seeded from the SAM mask and
-  the bubble's sampled fill colour, used when the edit drifts or returns
-  non-matching geometry.
-- **Plan C (always available):** draw the bubble interior as an opaque vector
-  shape above the original art, so ghost lettering is hidden even if repair is
-  imperfect. This is what a human letterer does when a cover-up is cheaper than a
-  repaint.
+### Probe F — edit / "inpaint" (`smoke_image_edit.py`)
 
-**Probes**
+| Field | Measured |
+| --- | --- |
+| Request | JSON body, `images: [{image_url: data:…}]`, instruction prompt |
+| Latency | **13,643 ms** |
+| Cost | $0.01 |
+| Lettering | **removed cleanly** from all three regions; bubbles and caption left empty and readable |
+| Artwork | character, lamps, bread, city, line weights all preserved to the eye |
+| Geometry | **not pixel-identical**: a global offset of ≈ **-16 px vertically** (phase correlation), mean abs diff outside text 19.96 → 12.36 after shifting |
 
-| Probe | Question | Result |
-| --- | --- | --- |
-| `smoke_image_generate.py` | Does generation work end to end, what comes back, how long, what does $0.01 buy? | **pending** |
-| `smoke_image_edit.py` | Does instruction-based text removal preserve the rest of the panel, and at what latency? | **pending** |
+**What this means for the pipeline:**
 
-**Cost (published):** $0.01 per returned image, flat, regardless of prompt or
-search use; failures and safety-filtered images are not billed.
-**Rate limit:** 150 RPM, no TPM.
-
-**Risks / open questions**
-
-- UNCONFIRMED: output resolution for a `1024x1536` request — the docs say `size`
-  sets aspect ratio and the returned pixels differ. If the returned page is
-  smaller than the source, upscaling will blur line art; Phase 5 must decide
-  whether to request a larger size or re-composite at source resolution.
-- UNCONFIRMED: whether the edit preserves *exact* geometry (same character
-  positions, same line weights). If it drifts, only the masked composite saves
-  us, and thin-stroke areas may still show seams.
-- UNCONFIRMED: safety filtering on comic lettering (text inside images may trip
-  content filters); the probe records the refusal shape if it happens.
+- Plan A is viable, but the edited image must be **registered** (phase
+  correlation / ECC) before it is composited through SAM masks. Without that,
+  masked compositing leaves a 16 px seam.
+- Alternative that needs no registration: accept the edit as the new base plate
+  (the art is faithful) and draw Arabic layers on top. Cheaper and visually
+  indistinguishable at page scale, but the demo must not claim "original pixels
+  preserved".
+- No mask parameter: multipart `mask` → `400 unsupported_parameter`; edits are
+  instruction-only. Composite or accept the re-render.
+- UNCONFIRMED: behaviour on photographic or gradient-heavy art (flat vector art
+  is the easy case), and whether repeated edits accumulate drift.
 
 ---
 
-## Cost model for one page (estimate, to be replaced by measured numbers)
+## Cost model (measured, not estimated)
 
-| Call | Price | Per page |
+One page, three text regions, this probe set:
+
+| Call | Measured cost |
+| --- | --- |
+| Spark vision read | $0.00606 |
+| Spark text/translation | $0.00131 |
+| SAM concept (per concept) | $0.00250 |
+| SAM box prompts (1 region) | $0.00250 |
+| Muse Image generate | $0.01000 |
+| Muse Image edit | $0.01000 |
+| **One production page (vision + 1 SAM pass + 1 edit)** | **≈ $0.022** |
+| **This phase's total spend** | **≈ $0.040** |
+
+At ~$0.02–0.03/page the $150 credit covers thousands of pages; wall-clock, not
+money, is the constraint. A page currently costs **~20–30 s** of model time
+(6.8 vision + 3.4 SAM + 13.6 edit), before any local work.
+
+## Errors seen
+
+| Where | Status | Body / note |
 | --- | --- | --- |
-| SAM, 2 concepts (bubbles, text) | $0.0025 each | $0.0050 |
-| Muse Spark vision read | ~2–6k in, ~0.5–1k out | $0.005–0.012 |
-| Muse Spark translation batch | ~1–2k in, ~0.5k out | $0.003–0.005 |
-| Muse Image clean plate | $0.01 | $0.0100 |
-| **Total** | | **≈ $0.023–0.032 / page** |
+| Unauthenticated `GET /v1/models` | 401 | `authentication_error`, `invalid_api_key` |
+| Spark with `max_output_tokens: 400` | 200 | `status: incomplete`, reason `max_output_tokens` — silent empty answer |
+| SAM concept `text` | 200 | zero matches, empty lane — not an error, must be handled |
+| SAM box prompt without `<0f>id` | 400 | `invalid prompt: … geometric prompts go after a <Nf> frame header` |
+| Muse Image multipart `mask` | 400 | `unsupported_parameter` (from docs; not re-tested) |
 
-At ~$0.03/page, the $150 credit covers ~5,000 pages — far beyond what the demo
-needs. The real constraint is wall-clock time per page, not money. Measured
-numbers land in `docs/submission-notes.md`.
+## Still UNCONFIRMED
 
----
-
-## Errors seen so far
-
-| Where | Status | Body | Notes |
-| --- | --- | --- | --- |
-| `GET /v1/models`, unauthenticated | 401 | (not printed) | Expected; proves reachability. |
-| `POST /v1/chat/completions`, unauthenticated | 401 | (not printed) | Same. |
-
-Friction log with timestamps lives in `docs/submission-notes.md`; this table is
-the technical summary.
+- Arabic quality judgement by a native speaker across registers and short bubbles.
+- Recall on dense pages / photographic posters / menus (Phase 5 gate).
+- Whether SAM "lossless" (`~`) masks differ in practice from `one_bit` for our use.
+- Content-policy behaviour when an image contains text the filter dislikes.
+- Behaviour at large page sizes (payload limits, 413).
