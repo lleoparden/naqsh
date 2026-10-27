@@ -17,14 +17,26 @@ REPO = Path(__file__).resolve().parents[2]
 LEDGER = REPO / "docs" / "evidence" / "api-spend.jsonl"
 
 
-def job_total() -> tuple[float, int]:
+def job_totals() -> tuple[float, int, float, int]:
+    """(real spend, real count, demo replay cost, demo count).
+
+    Demo jobs copy the recorded receipt, so their total_cost_usd was already paid by
+    the original run and must never be added again.
+    """
     total = 0.0
     count = 0
+    demo_total = 0.0
+    demo_count = 0
     for path in glob.glob(str(REPO / "backend" / ".cache" / "jobs" / "*" / "job.json")):
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        total += float(data.get("total_cost_usd") or 0)
+        cost = float(data.get("total_cost_usd") or 0)
+        if data.get("demo"):
+            demo_total += cost
+            demo_count += 1
+            continue
+        total += cost
         count += 1
-    return total, count
+    return total, count, demo_total, demo_count
 
 
 def probe_total() -> tuple[float, int]:
@@ -56,10 +68,11 @@ def ledger_total() -> tuple[float, int]:
 
 
 def main() -> None:
-    jobs, job_count = job_total()
+    jobs, job_count, demo_cost, demo_count = job_totals()
     probes, probe_count = probe_total()
     ledger, ledger_count = ledger_total()
     print(f"pipeline jobs   {job_count:3d}  ${jobs:.4f}")
+    print(f"demo replays    {demo_count:3d}  ${demo_cost:.4f}  (recorded cost, not new spend)")
     print(f"probes          {probe_count:3d}  ${probes:.4f}")
     print(f"script ledger   {ledger_count:3d}  ${ledger:.4f}")
     print(f"TOTAL                  ${jobs + probes + ledger:.4f}")
