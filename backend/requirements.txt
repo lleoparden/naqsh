@@ -10,4 +10,5 @@ httpx==0.28.1
 meta-sam-parser==0.1.0
 uharfbuzz==0.57.0
 freetype-py==2.5.1
+fonttools==4.66.1
 pytest==8.3.4
