@@ -104,10 +104,10 @@ Recomputed 2026-10-27 19:20 Cairo with `backend/scripts/spend_report.py`:
 
 | Source | Count | Cost |
 | --- | --- | --- |
-| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 58 jobs | **$1.5986** |
+| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 67 jobs | **$1.9589** |
 | Script-call ledger (`docs/evidence/api-spend.jsonl`) — probe/eval/script calls | 61 calls | **$0.3083** |
 | Probe receipts (`backend/.cache/probes/*.json`) | 11 files | **$0.0436** (backfilled, see below) |
-| **Traceable total** | | **$1.9506** |
+| **Traceable total** | | **$2.3108** |
 
 Demo replays are listed separately by `spend_report.py` (13 jobs, $0.3033 of recorded
 cost) and are **not** added to the total: that money was already paid by the original
@@ -264,6 +264,34 @@ bytes take the live path (stubbed in the test, so CI spends nothing); the Playwr
 demo run is 6/6 (badge, clean, replay visible, receipt, editor badge) and the menu
 click-through is 6/6 (select, edit, drag, undo, reload). Playwright is evidence, not
 a CI check — it needs a local Chrome.
+
+### Phase 7 — live measurement and audit
+
+Six live runs with `DEMO_MODE=0` (2026-10-27), receipts in
+`docs/evidence/phase-7/live-runs.json`:
+
+| Page | Total median (range) | Cost median (range) | Notes |
+|---|---|---|---|
+| comic | **54.5 s** (53.1–57.2) | **$0.0263** (0.0254–0.0286) | 3 regions, stable |
+| menu | **181.1 s** (162.1–206.8) | **$0.0502** (0.0442–0.0676) | 16 regions (item+price split), one 40.9 s retry |
+
+Wall time was measured for one run per page (57.6 s comic, 189.0 s menu); the rest are
+receipt totals, not wall-clock estimates. The menu's live behaviour differs from the
+cached demo run: 16 regions instead of 10, 181 s instead of 96 s, and `register_composite`
+alone takes a 75.7 s median — the dense page makes the plate search expensive, and one
+run needed a retry. No run errored, hung, or failed; 6/6 returned 200. The spend also
+includes a few extra live runs produced while a background measurement script was
+misbehaving (killed); they are counted, the table uses the six clean receipts.
+
+The human baseline is **still empty**: `docs/time-saved.md` carries the Naqsh numbers,
+an empty manual column, and a ratio cell that says "not computed — baseline empty" until
+the owner times a run. No estimated ratio appears anywhere.
+
+**Audit** (`docs/audit.md`): no key material in the tree or history (`.env` never
+committed; the only `LLM_` strings are documentation and a test asserting the key never
+leaves the server); Vectr appears only in policy docs; `ASSETS.md` was missing the five
+demo-cache directories (25 files) and now reports 0 uncovered of 49 tracked asset files;
+README layout gained `docs/evidence/` and `fixtures/demo/`; repo weight is 101.1 MB.
 
 ### Time-saved measurement (the Impact claim)
 
