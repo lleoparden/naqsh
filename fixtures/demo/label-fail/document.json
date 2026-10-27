@@ -1,0 +1,135 @@
+{
+  "id": "5d6de0e0c1be",
+  "width": 1280,
+  "height": 1920,
+  "register": "egyptian",
+  "numerals": "latin",
+  "images": {
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "source": "source.png"
+  },
+  "layers": [
+    {
+      "id": "t1",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "CUMIN",
+      "arabic": {
+        "egyptian": "كمون",
+        "msa": "كمون"
+      },
+      "box": [
+        303,
+        977,
+        995,
+        1164
+      ],
+      "font_family": "naskh",
+      "font_size": 94,
+      "lines": [
+        {
+          "text": "كمون",
+          "size": 94,
+          "x": 649.0,
+          "baseline": 1089.0,
+          "width": 170,
+          "height": 87
+        }
+      ],
+      "align": "center",
+      "color": [
+        43,
+        26,
+        18
+      ],
+      "z": 0,
+      "visible": true,
+      "locked": false,
+      "strategy": "flat-fill",
+      "fill": []
+    },
+    {
+      "id": "t2",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "GROUND",
+      "arabic": {
+        "egyptian": "مطحون",
+        "msa": "مطحون"
+      },
+      "box": [
+        485,
+        1206,
+        817,
+        1261
+      ],
+      "font_family": "naskh",
+      "font_size": 24,
+      "lines": [
+        {
+          "text": "مطحون",
+          "size": 24,
+          "x": 651.0,
+          "baseline": 1238.5,
+          "width": 65,
+          "height": 24
+        }
+      ],
+      "align": "center",
+      "color": [
+        43,
+        26,
+        18
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "flat-fill",
+      "fill": []
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "NET 100 G",
+      "arabic": {
+        "egyptian": "صافي 100 جم",
+        "msa": "صافي 100 جم"
+      },
+      "box": [
+        504,
+        1419,
+        790,
+        1465
+      ],
+      "font_family": "naskh",
+      "font_size": 20,
+      "lines": [
+        {
+          "text": "صافي 100 جم",
+          "size": 20,
+          "x": 647.0,
+          "baseline": 1444.5,
+          "width": 107,
+          "height": 25
+        }
+      ],
+      "align": "center",
+      "color": [
+        43,
+        26,
+        18
+      ],
+      "z": 2,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": []
+    }
+  ]
+}

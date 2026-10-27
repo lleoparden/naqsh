@@ -1,0 +1,449 @@
+{
+  "id": "e13f9585b24f",
+  "register": "egyptian",
+  "width": 1280,
+  "height": 1920,
+  "artifacts": {
+    "source": "source.png",
+    "mask_overlay": "masks-overlay.png",
+    "plate_raw": "plate-raw.png",
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "before_after": "before-after.png"
+  },
+  "stages": [
+    {
+      "name": "read",
+      "ms": 6783,
+      "cost_usd": 0.009998,
+      "input_tokens": 3636,
+      "output_tokens": 1283,
+      "reasoning_tokens": 408,
+      "images": 0,
+      "regions": 10
+    },
+    {
+      "name": "segment",
+      "ms": 13488,
+      "cost_usd": 0.0025,
+      "masks": 10,
+      "concepts": "box prompts + ink extent"
+    },
+    {
+      "name": "clean_plate",
+      "ms": 22196,
+      "cost_usd": 0.01,
+      "images": 1,
+      "plate_size": [
+        1280,
+        1920
+      ]
+    },
+    {
+      "name": "register_composite",
+      "ms": 45766,
+      "cost_usd": 0.0,
+      "shift": [
+        0,
+        0
+      ],
+      "vertical_only": true,
+      "scale_ratio": [
+        1.0,
+        1.0
+      ],
+      "flat_interiors_cleaned": 7,
+      "outside_untouched_mean_diff_is_tautological": 0.0,
+      "ring_mean_abs_diff": 16.99,
+      "ring_max_abs_diff": 52.71,
+      "ring_per_region": [
+        2.91,
+        27.58,
+        23.44,
+        23.75,
+        7.11,
+        6.34,
+        19.55,
+        52.71,
+        3.59,
+        2.92
+      ],
+      "ring_band_px": [
+        8,
+        24
+      ]
+    },
+    {
+      "name": "verify",
+      "ms": 3388,
+      "cost_usd": 0.003617,
+      "checked": 10,
+      "residual": [],
+      "notes": {
+        "t1": "clean paper texture only",
+        "t2": "clean paper texture only",
+        "t3": "clean paper texture only",
+        "t4": "clean paper texture only",
+        "t5": "clean paper texture only",
+        "t6": "clean paper texture only",
+        "t7": "clean paper texture only",
+        "t8": "clean paper texture only",
+        "t9": "clean paper with staining, no text",
+        "t10": "clean paper texture only"
+      }
+    },
+    {
+      "name": "final_check",
+      "ms": 3634,
+      "cost_usd": 0.003553,
+      "checked": 10,
+      "residual": [],
+      "notes": {
+        "t1": "clean paper texture only",
+        "t2": "clean paper texture only",
+        "t3": "clean paper texture only",
+        "t4": "clean paper texture only",
+        "t5": "clean paper texture only",
+        "t6": "clean paper texture only",
+        "t7": "clean paper texture only",
+        "t8": "clean paper texture only",
+        "t9": "clean, only paper staining",
+        "t10": "clean paper texture only"
+      }
+    },
+    {
+      "name": "typeset",
+      "ms": 332,
+      "cost_usd": 0.0,
+      "regions": 10,
+      "strategies": {
+        "t1": "muse",
+        "t2": "muse",
+        "t3": "muse",
+        "t4": "muse",
+        "t5": "muse",
+        "t6": "muse",
+        "t7": "muse",
+        "t8": "muse",
+        "t9": "muse",
+        "t10": "muse"
+      }
+    }
+  ],
+  "regions": [
+    {
+      "id": "t1",
+      "source_text": "KOSHARY HOUSE",
+      "translation_ar": "بيت الكشري",
+      "style": "title",
+      "font_style": "bold distressed vintage serif uppercase",
+      "bbox": [
+        244,
+        311,
+        1047,
+        442
+      ],
+      "container": [
+        260,
+        279,
+        1028,
+        394
+      ],
+      "mask_path": "mask-t1.png",
+      "font_family": "naskh",
+      "font_size": 87,
+      "color": [
+        166,
+        31,
+        34
+      ],
+      "lines": [
+        "بيت الكشري"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t2",
+      "source_text": "HOUSE FAVORITES — FRESH & HOMEMADE",
+      "translation_ar": "المشهور عندنا فريش وبيتي",
+      "style": "caption",
+      "font_style": "clean condensed uppercase sans",
+      "bbox": [
+        296,
+        536,
+        997,
+        570
+      ],
+      "container": [
+        296,
+        536,
+        997,
+        570
+      ],
+      "mask_path": "mask-t2.png",
+      "font_family": "tajawal",
+      "font_size": 18,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "المشهور عندنا فريش وبيتي"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t3",
+      "source_text": "KOSHARY ................ 45",
+      "translation_ar": "كشري 45",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        122,
+        772,
+        608,
+        826
+      ],
+      "container": [
+        122,
+        772,
+        608,
+        826
+      ],
+      "mask_path": "mask-t3.png",
+      "font_family": "tajawal-bold",
+      "font_size": 31,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "كشري 45"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t4",
+      "source_text": "MINT TEA ................ 10",
+      "translation_ar": "شاي بالنعناع 10",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        122,
+        851,
+        608,
+        904
+      ],
+      "container": [
+        122,
+        851,
+        608,
+        904
+      ],
+      "mask_path": "mask-t4.png",
+      "font_family": "tajawal-bold",
+      "font_size": 31,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "شاي بالنعناع 10"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t5",
+      "source_text": "LENTIL SOUP ........... 25",
+      "translation_ar": "شوربة عدس 25",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        122,
+        929,
+        608,
+        985
+      ],
+      "container": [
+        122,
+        929,
+        608,
+        985
+      ],
+      "mask_path": "mask-t5.png",
+      "font_family": "tajawal-bold",
+      "font_size": 40,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "شوربة عدس 25"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t6",
+      "source_text": "FALAFEL ................ 20",
+      "translation_ar": "طعمية 20",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        659,
+        772,
+        1171,
+        826
+      ],
+      "container": [
+        659,
+        772,
+        1171,
+        826
+      ],
+      "mask_path": "mask-t6.png",
+      "font_family": "tajawal-bold",
+      "font_size": 39,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "طعمية 20"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t7",
+      "source_text": "BASBOUSA ................ 30",
+      "translation_ar": "بسبوسة 30",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        659,
+        851,
+        1171,
+        904
+      ],
+      "container": [
+        659,
+        851,
+        1171,
+        904
+      ],
+      "mask_path": "mask-t7.png",
+      "font_family": "tajawal-bold",
+      "font_size": 38,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "بسبوسة 30"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t8",
+      "source_text": "RICE PUDDING .......... 30",
+      "translation_ar": "رز بلبن 30",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "bbox": [
+        659,
+        929,
+        1171,
+        985
+      ],
+      "container": [
+        659,
+        929,
+        1171,
+        985
+      ],
+      "mask_path": "mask-t8.png",
+      "font_family": "tajawal-bold",
+      "font_size": 41,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "رز بلبن 30"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t9",
+      "source_text": "OPEN DAILY • 11AM - 10PM",
+      "translation_ar": "فاتحين كل يوم 11 الصبح 10 بالليل",
+      "style": "label",
+      "font_style": "bold spaced uppercase serif",
+      "bbox": [
+        387,
+        1716,
+        916,
+        1749
+      ],
+      "container": [
+        387,
+        1716,
+        916,
+        1749
+      ],
+      "mask_path": "mask-t9.png",
+      "font_family": "naskh",
+      "font_size": 17,
+      "color": [
+        166,
+        31,
+        34
+      ],
+      "lines": [
+        "فاتحين كل يوم 11 الصبح 10 بالليل"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t10",
+      "source_text": "• ALL DISHES SERVED FRESH •",
+      "translation_ar": "كله بيتقدم فريش",
+      "style": "label",
+      "font_style": "clean spaced uppercase sans",
+      "bbox": [
+        86,
+        1830,
+        495,
+        1857
+      ],
+      "container": [
+        86,
+        1830,
+        495,
+        1857
+      ],
+      "mask_path": "mask-t10.png",
+      "font_family": "tajawal",
+      "font_size": 12,
+      "color": [
+        26,
+        26,
+        26
+      ],
+      "lines": [
+        "كله بيتقدم فريش"
+      ],
+      "strategy": "muse"
+    }
+  ],
+  "warnings": [],
+  "total_cost_usd": 0.029668,
+  "total_ms": 95587
+}
