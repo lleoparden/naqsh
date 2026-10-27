@@ -41,6 +41,7 @@ Translation register: {register_instruction}
 
 Rules:
 - translation_ar must contain Arabic script only (digits and punctuation allowed); no Latin letters, no transliteration.
+- Use standard Arabic spelling and word forms: فلافل (not فلالفل), طعمية, كشري. When unsure of a loanword, use the common Arabic form rather than a phonetic transliteration.
 - Never merge two regions into one, never invent lettering that is not there.
 - If the page has no lettering, return {{"regions": []}}.
 
