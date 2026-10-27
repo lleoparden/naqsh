@@ -1,0 +1,125 @@
+[
+  {
+    "job": "6a8aa7a0829b",
+    "renderer": "headless Chrome (Blink + HarfBuzz), @font-face bundled fonts",
+    "text_pixels": 82790,
+    "mean_abs_diff": 3.13,
+    "pixels_over_40": 2.572,
+    "per_region": [
+      {
+        "id": "t1",
+        "action": "translate",
+        "mean": 1.68,
+        "over_40": 1.763
+      },
+      {
+        "id": "t2",
+        "action": "translate",
+        "mean": 4.99,
+        "over_40": 3.633
+      },
+      {
+        "id": "t3",
+        "action": "skip",
+        "mean": 0.0,
+        "over_40": 0.0
+      }
+    ]
+  },
+  {
+    "job": "e13f9585b24f",
+    "renderer": "headless Chrome (Blink + HarfBuzz), @font-face bundled fonts",
+    "text_pixels": 321417,
+    "mean_abs_diff": 4.2,
+    "pixels_over_40": 3.278,
+    "per_region": [
+      {
+        "id": "t1",
+        "action": "translate",
+        "mean": 2.83,
+        "over_40": 2.412
+      },
+      {
+        "id": "t2",
+        "action": "translate",
+        "mean": 5.39,
+        "over_40": 4.11
+      },
+      {
+        "id": "t3",
+        "action": "skip",
+        "mean": 0.0,
+        "over_40": 0.0
+      },
+      {
+        "id": "t4",
+        "action": "translate",
+        "mean": 6.78,
+        "over_40": 4.851
+      },
+      {
+        "id": "t5",
+        "action": "translate",
+        "mean": 7.38,
+        "over_40": 5.306
+      },
+      {
+        "id": "t6",
+        "action": "translate",
+        "mean": 4.65,
+        "over_40": 3.278
+      },
+      {
+        "id": "t7",
+        "action": "translate",
+        "mean": 4.9,
+        "over_40": 3.767
+      },
+      {
+        "id": "t8",
+        "action": "translate",
+        "mean": 4.35,
+        "over_40": 3.314
+      },
+      {
+        "id": "t9",
+        "action": "translate",
+        "mean": 2.68,
+        "over_40": 2.794
+      },
+      {
+        "id": "t10",
+        "action": "translate",
+        "mean": 1.64,
+        "over_40": 1.765
+      }
+    ]
+  },
+  {
+    "job": "605213b894ff",
+    "renderer": "headless Chrome (Blink + HarfBuzz), @font-face bundled fonts",
+    "text_pixels": 335876,
+    "mean_abs_diff": 2.39,
+    "pixels_over_40": 1.728,
+    "per_region": [
+      {
+        "id": "t1",
+        "action": "translate",
+        "mean": 4.69,
+        "over_40": 3.329
+      },
+      {
+        "id": "t2",
+        "action": "translate",
+        "mean": 0.42,
+        "over_40": 0.359
+      },
+      {
+        "id": "t3",
+        "action": "translate",
+        "mean": 1.45,
+        "over_40": 1.084
+      }
+    ]
+  }
+]

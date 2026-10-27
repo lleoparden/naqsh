@@ -4,8 +4,8 @@ import { useEditor } from "./useEditor";
 
 type DragState =
   | { mode: "pan"; startX: number; startY: number; originX: number; originY: number }
-  | { mode: "move"; layerId: string; startX: number; startY: number; box: [number, number, number, number] }
-  | { mode: "resize"; layerId: string; startX: number; startY: number; box: [number, number, number, number] }
+  | { mode: "move"; layerId: string; startX: number; startY: number; box: [number, number, number, number]; snapshot: Document }
+  | { mode: "resize"; layerId: string; startX: number; startY: number; box: [number, number, number, number]; snapshot: Document }
   | { mode: "cover"; startX: number; startY: number; currentX: number; currentY: number }
   | null;
 
@@ -125,7 +125,7 @@ export default function Editor({ jobId }: { jobId: string }) {
         draft.mode === "move"
           ? [x1 + dx, y1 + dy, x2 + dx, y2 + dy]
           : [x1, y1, Math.max(x1 + 30, x2 + dx), Math.max(y1 + 20, y2 + dy)];
-      editor.commit((draftDoc) => {
+      editor.preview((draftDoc) => {
         const target = draftDoc.layers.find((item) => item.id === draft.layerId);
         if (target) target.box = box.map((value) => Math.round(value)) as [number, number, number, number];
       }, [draft.layerId]);
@@ -136,7 +136,10 @@ export default function Editor({ jobId }: { jobId: string }) {
 
   const onPointerUp = async () => {
     if (!draft) return;
-    if (draft.mode === "move" || draft.mode === "resize") await editor.layout(draft.layerId);
+    if (draft.mode === "move" || draft.mode === "resize") {
+      editor.finish(draft.snapshot);
+      await editor.layout(draft.layerId);
+    }
     if (draft.mode === "cover" && doc) {
       const box = [
         Math.round(Math.min(draft.startX, draft.currentX)),
@@ -321,7 +324,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   event.stopPropagation();
                   const point = toPage(event);
                   setSelected(layer.id);
-                  setDraft({ mode: "move", layerId: layer.id, startX: point.x, startY: point.y, box: layer.box });
+                  setDraft({ mode: "move", layerId: layer.id, startX: point.x, startY: point.y, box: layer.box, snapshot: editor.document as Document });
                 }}>
                   <rect
                     x={layer.box[0]}
@@ -331,6 +334,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     fill="none"
                     stroke="#a6342c"
                     strokeDasharray="6 4"
+                    pointerEvents="all"
                   />
                   <rect
                     x={layer.box[2] - 10}
@@ -342,7 +346,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     onPointerDown={(event) => {
                       event.stopPropagation();
                       const point = toPage(event);
-                      setDraft({ mode: "resize", layerId: layer.id, startX: point.x, startY: point.y, box: layer.box });
+                      setDraft({ mode: "resize", layerId: layer.id, startX: point.x, startY: point.y, box: layer.box, snapshot: editor.document as Document });
                     }}
                   />
                 </g>

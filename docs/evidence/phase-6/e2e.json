@@ -1,0 +1,56 @@
+{
+  "job": "6a8aa7a0829b",
+  "results": [
+    {
+      "name": "select from list",
+      "ok": true,
+      "detail": "panel shows t1"
+    },
+    {
+      "name": "type in textarea",
+      "ok": true,
+      "detail": "document has the new Arabic"
+    },
+    {
+      "name": "reload persistence",
+      "ok": true,
+      "detail": "textarea after reload: اختبار التحرير"
+    },
+    {
+      "name": "drag box",
+      "ok": true,
+      "detail": "64,96,470,202 -> 158,143,564,249"
+    },
+    {
+      "name": "resize box",
+      "ok": true,
+      "detail": "158,143,564,249 -> 158,143,635,320"
+    },
+    {
+      "name": "undo",
+      "ok": true,
+      "detail": "width back to 564"
+    },
+    {
+      "name": "redo",
+      "ok": true,
+      "detail": "width 635"
+    },
+    {
+      "name": "cover drag",
+      "ok": true,
+      "detail": "layers 3 -> 4, covers 1, POST 200"
+    },
+    {
+      "name": "cover persists after reload",
+      "ok": true,
+      "detail": "covers 1"
+    },
+    {
+      "name": "no console errors",
+      "ok": true,
+      "detail": "none"
+    }
+  ],
+  "consoleErrors": []
+}

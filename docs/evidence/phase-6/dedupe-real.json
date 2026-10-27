@@ -1,0 +1,555 @@
+[
+  {
+    "fixture": "chalkboard",
+    "run": 1,
+    "before": 5,
+    "after": 5,
+    "dropped": [],
+    "cost_usd": 0.007554,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "TODAY'S SPECIAL",
+        "bbox": [
+          243,
+          211,
+          1117,
+          365
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "text": "MINT TEA",
+        "bbox": [
+          256,
+          643,
+          826,
+          793
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "price",
+        "text": "25",
+        "bbox": [
+          864,
+          641,
+          1036,
+          768
+        ]
+      },
+      {
+        "id": "t4",
+        "type": "menu_item",
+        "text": "BASBOUSA",
+        "bbox": [
+          329,
+          837,
+          870,
+          958
+        ]
+      },
+      {
+        "id": "t5",
+        "type": "price",
+        "text": "30",
+        "bbox": [
+          902,
+          835,
+          1102,
+          954
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "chalkboard",
+    "run": 2,
+    "before": 3,
+    "after": 3,
+    "dropped": [],
+    "cost_usd": 0.007945,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "menu_item",
+        "text": "TODAY'S SPECIAL",
+        "bbox": [
+          210,
+          205,
+          1078,
+          353
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "text": "MINT TEA 25",
+        "bbox": [
+          260,
+          676,
+          1097,
+          801
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "menu_item",
+        "text": "BASBOUSA 30",
+        "bbox": [
+          321,
+          870,
+          1132,
+          983
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "chalkboard",
+    "run": 3,
+    "before": 3,
+    "after": 3,
+    "dropped": [],
+    "cost_usd": 0.007423,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "TODAY'S SPECIAL",
+        "bbox": [
+          211,
+          205,
+          1088,
+          357
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "text": "MINT TEA 25",
+        "bbox": [
+          253,
+          659,
+          1060,
+          810
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "menu_item",
+        "text": "BASBOUSA 30",
+        "bbox": [
+          314,
+          862,
+          1042,
+          973
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "chalkboard",
+    "run": 4,
+    "before": 5,
+    "after": 5,
+    "dropped": [],
+    "cost_usd": 0.007899,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "Today's Special",
+        "bbox": [
+          243,
+          205,
+          1108,
+          357
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "text": "MINT TEA",
+        "bbox": [
+          262,
+          666,
+          822,
+          776
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "price",
+        "text": "25",
+        "bbox": [
+          872,
+          670,
+          1066,
+          772
+        ]
+      },
+      {
+        "id": "t4",
+        "type": "menu_item",
+        "text": "BASBOUSA",
+        "bbox": [
+          311,
+          828,
+          867,
+          941
+        ]
+      },
+      {
+        "id": "t5",
+        "type": "price",
+        "text": "30",
+        "bbox": [
+          913,
+          829,
+          1116,
+          935
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "chalkboard",
+    "run": 5,
+    "before": 3,
+    "after": 3,
+    "dropped": [],
+    "cost_usd": 0.006564,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "TODAY'S SPECIAL",
+        "bbox": [
+          225,
+          223,
+          1097,
+          365
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "text": "MINT TEA 25",
+        "bbox": [
+          260,
+          659,
+          1050,
+          797
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "menu_item",
+        "text": "BASBOUSA 30",
+        "bbox": [
+          315,
+          845,
+          1110,
+          948
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "pd-poster",
+    "run": 1,
+    "before": 8,
+    "after": 8,
+    "dropped": [],
+    "cost_usd": 0.008743,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "LONDON, BRIGHTON & SOUTH COAST",
+        "bbox": [
+          60,
+          3,
+          935,
+          53
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "text": "RAILWAY.",
+        "bbox": [
+          333,
+          54,
+          655,
+          75
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "signage",
+        "text": "COOK'S",
+        "bbox": [
+          82,
+          117,
+          677,
+          262
+        ]
+      },
+      {
+        "id": "t4",
+        "type": "signage",
+        "text": "NILE & PALESTINE",
+        "bbox": [
+          88,
+          278,
+          908,
+          395
+        ]
+      },
+      {
+        "id": "t5",
+        "type": "signage",
+        "text": "TOURS",
+        "bbox": [
+          539,
+          405,
+          912,
+          518
+        ]
+      },
+      {
+        "id": "t6",
+        "type": "signage",
+        "text": "Cataract Hotel, Assouan.",
+        "bbox": [
+          93,
+          518,
+          522,
+          557
+        ]
+      },
+      {
+        "id": "t7",
+        "type": "caption",
+        "text": "P. 790/1903.",
+        "bbox": [
+          44,
+          1573,
+          151,
+          1587
+        ]
+      },
+      {
+        "id": "t8",
+        "type": "caption",
+        "text": "JOHNSON, RIDDLE, COUCHMAN & CO LTD LONDON, S.E.",
+        "bbox": [
+          660,
+          1573,
+          949,
+          1589
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "pd-poster",
+    "run": 2,
+    "before": 8,
+    "after": 8,
+    "dropped": [],
+    "cost_usd": 0.009593,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "LONDON, BRIGHTON & SOUTH COAST",
+        "bbox": [
+          60,
+          3,
+          909,
+          61
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "text": "RAILWAY.",
+        "bbox": [
+          332,
+          62,
+          649,
+          88
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "signage",
+        "text": "COOK'S",
+        "bbox": [
+          85,
+          99,
+          640,
+          237
+        ]
+      },
+      {
+        "id": "t4",
+        "type": "signage",
+        "text": "NILE & PALESTINE",
+        "bbox": [
+          85,
+          259,
+          903,
+          378
+        ]
+      },
+      {
+        "id": "t5",
+        "type": "signage",
+        "text": "TOURS",
+        "bbox": [
+          505,
+          392,
+          902,
+          496
+        ]
+      },
+      {
+        "id": "t6",
+        "type": "signage",
+        "text": "Cataract Hotel, Assouan.",
+        "bbox": [
+          114,
+          501,
+          544,
+          536
+        ]
+      },
+      {
+        "id": "t7",
+        "type": "signage",
+        "text": "P. 790/1903.",
+        "bbox": [
+          42,
+          1574,
+          138,
+          1587
+        ]
+      },
+      {
+        "id": "t8",
+        "type": "signage",
+        "text": "JOHNSON, RIDDLE, COUCHMAN & Co LTD LONDON.S.E.",
+        "bbox": [
+          633,
+          1574,
+          950,
+          1589
+        ]
+      }
+    ]
+  },
+  {
+    "fixture": "pd-poster",
+    "run": 3,
+    "before": 8,
+    "after": 8,
+    "dropped": [],
+    "cost_usd": 0.00972,
+    "regions": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "text": "LONDON, BRIGHTON & SOUTH COAST",
+        "bbox": [
+          61,
+          3,
+          937,
+          56
+        ]
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "text": "RAILWAY.",
+        "bbox": [
+          353,
+          61,
+          657,
+          88
+        ]
+      },
+      {
+        "id": "t3",
+        "type": "logo",
+        "text": "COOK'S",
+        "bbox": [
+          80,
+          128,
+          627,
+          269
+        ]
+      },
+      {
+        "id": "t4",
+        "type": "signage",
+        "text": "NILE & PALESTINE",
+        "bbox": [
+          83,
+          278,
+          929,
+          403
+        ]
+      },
+      {
+        "id": "t5",
+        "type": "signage",
+        "text": "TOURS",
+        "bbox": [
+          535,
+          413,
+          910,
+          520
+        ]
+      },
+      {
+        "id": "t6",
+        "type": "signage",
+        "text": "Cataract Hotel, Assouan.",
+        "bbox": [
+          89,
+          525,
+          524,
+          557
+        ]
+      },
+      {
+        "id": "t7",
+        "type": "caption",
+        "text": "P. 790/1903.",
+        "bbox": [
+          44,
+          1550,
+          144,
+          1570
+        ]
+      },
+      {
+        "id": "t8",
+        "type": "caption",
+        "text": "JOHNSON, RIDDLE, COUCHMAN & Co Ld LONDON, S.E.",
+        "bbox": [
+          682,
+          1552,
+          953,
+          1570
+        ]
+      }
+    ]
+  }
+]

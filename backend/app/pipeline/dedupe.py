@@ -34,10 +34,10 @@ def _normalise(text: str) -> str:
     return " ".join(text.casefold().split())
 
 
-def dedupe_regions(regions: list[TextRegion], *, threshold: float = 0.5) -> list[TextRegion]:
-    """Drop exact duplicates; fold a price into its line only when it is inside it."""
+def dedupe_report(regions: list[TextRegion], *, threshold: float = 0.5) -> tuple[list[TextRegion], list[dict]]:
+    """Same rules as dedupe_regions, plus the reason each region was dropped."""
     kept: list[TextRegion] = []
-    dropped = 0
+    dropped: list[dict] = []
     for region in regions:
         duplicate = next(
             (
@@ -49,10 +49,8 @@ def dedupe_regions(regions: list[TextRegion], *, threshold: float = 0.5) -> list
             None,
         )
         if duplicate is not None:
-            dropped += 1
+            dropped.append({"id": region.id, "reason": "duplicate", "kept": duplicate.id})
             continue
-        # Price region inside an item region that already ends with that number: same
-        # line, so the item region owns the pixels.
         if NUMERIC.match(region.source_text or ""):
             host = next(
                 (
@@ -65,9 +63,15 @@ def dedupe_regions(regions: list[TextRegion], *, threshold: float = 0.5) -> list
                 None,
             )
             if host is not None:
-                dropped += 1
+                dropped.append({"id": region.id, "reason": "price_inside_line", "kept": host.id})
                 continue
         kept.append(region)
     if dropped:
         kept.sort(key=lambda r: (r.bbox.y1, r.bbox.x1))
+    return kept, dropped
+
+
+def dedupe_regions(regions: list[TextRegion], *, threshold: float = 0.5) -> list[TextRegion]:
+    """Drop exact duplicates; fold a price into its line only when it is inside it."""
+    kept, _dropped = dedupe_report(regions, threshold=threshold)
     return kept
