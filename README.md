@@ -115,6 +115,30 @@ npm install
 npm run dev
 ```
 
+## Demo mode (recorded replays)
+
+Recording the video on the live API means waiting on model latency and rolling the
+dice on every take. `DEMO_MODE=1` replays **real cached runs** for five known
+fixtures — comic, menu, chalkboard, SFX comic, and the failing kraft label — with the
+original receipt untouched: same per-stage milliseconds, same cost. Nothing is
+pre-generated or shortened.
+
+```bash
+# backend with replay on (the cached runs need no API key)
+DEMO_MODE=1 uvicorn app.main:app --port 8010
+```
+
+- A byte-for-byte match for a cached fixture is replayed; **anything else goes live**.
+- The UI always shows a **“Demo mode: replaying recorded run”** badge; it cannot be
+  hidden by `?clean=1`.
+- Re-translate replays the cached Egyptian/MSA line, with cost $0 and no model call.
+- Turn it off by unsetting `DEMO_MODE` (or `DEMO_MODE=0`) and restarting the backend.
+- The cache lives in `fixtures/demo/` (receipt, document, plate, source, masks);
+  rebuild it from the recorded jobs with `python backend/scripts/build_demo_cache.py`.
+- **Honest-use rule:** the final video must include at least one live run.
+
+Recording checklist: [`docs/recording-guide.md`](docs/recording-guide.md).
+
 ## API probes
 
 Each probe is standalone, prints a compact JSON receipt, and writes raw output
