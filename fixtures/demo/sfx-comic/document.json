@@ -19,7 +19,7 @@
       "source_text": "THREE DAYS LATER",
       "arabic": {
         "egyptian": "بعد تلات أيام",
-        "msa": "بعد تلات أيام"
+        "msa": "بعد ثلاثة أيام"
       },
       "box": [
         64,
@@ -59,7 +59,7 @@
       "source_text": "MEANWHILE...",
       "arabic": {
         "egyptian": "وفي نفس الوقت",
-        "msa": "وفي نفس الوقت"
+        "msa": "وفي الأثناء"
       },
       "box": [
         881,
@@ -99,7 +99,7 @@
       "source_text": "KRAAK!",
       "arabic": {
         "egyptian": "كراك!",
-        "msa": "كراك!"
+        "msa": "طق!"
       },
       "box": [
         74,

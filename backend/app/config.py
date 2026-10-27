@@ -40,6 +40,10 @@ class Settings:
     )
     sam_model: str = field(default_factory=lambda: os.getenv("SAM_MODEL", "sam-3.1"))
     env: str = field(default_factory=lambda: os.getenv("NAQSH_ENV", "development"))
+    # Replay recorded runs for known demo fixtures instead of calling the model API.
+    demo_mode: bool = field(
+        default_factory=lambda: os.getenv("DEMO_MODE", "").strip().lower() not in ("", "0", "false", "no")
+    )
     cors_origins: list[str] = field(
         default_factory=lambda: [
             o.strip()

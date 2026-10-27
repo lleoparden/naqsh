@@ -19,7 +19,7 @@
       "source_text": "Today's Special",
       "arabic": {
         "egyptian": "عرض النهاردة",
-        "msa": "عرض النهاردة"
+        "msa": "عرض اليوم"
       },
       "box": [
         237,
@@ -59,7 +59,7 @@
       "source_text": "MINT TEA 25",
       "arabic": {
         "egyptian": "شاي نعناع 25",
-        "msa": "شاي نعناع 25"
+        "msa": "شاي النعناع ٢٥"
       },
       "box": [
         261,
@@ -99,7 +99,7 @@
       "source_text": "BASBOUSA 30",
       "arabic": {
         "egyptian": "بسبوسة 30",
-        "msa": "بسبوسة 30"
+        "msa": "بسبوسة ٣٠"
       },
       "box": [
         314,
