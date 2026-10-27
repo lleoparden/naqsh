@@ -161,6 +161,15 @@ record which plan each page used in the demo notes.
 - **Gate assets.** Five rights-clean pages with different backgrounds (flat comic,
   watercolour poster, printed menu, chalkboard, kraft label), two runs each.
 
+**Gate result (2026-10-27): FAILS the 9/10 bar.** Detector says 7/10 runs are free
+of text residual, but the plate flattens painted texture on the poster (2/2) and
+leaves faint ghosts plus a flat painted patch on the photographed label (2/2).
+Comic, menu and chalkboard are usable (5–6/10 by eye). Cost $0.2975 for ten runs,
+$0.0298/run, 75 s/run. Full analysis and evidence: `docs/evidence/phase-4/`.
+**Fallback taken:** the demo is scoped to stylised pages; textured backgrounds stay
+a documented limit, with thin-stroke inpainting and a manual cover tool as the
+Phase 5/6 follow-ups.
+
 ## Phase 5 — Region strategy
 
 **Work:** decide how text regions are found per page type: SAM concept prompts

@@ -77,13 +77,25 @@ def _headers() -> dict[str, str]:
     }
 
 
-def _post(path: str, payload: dict[str, Any], timeout: float = 240.0, attempts: int = 3) -> dict[str, Any]:
-    """POST a JSON body, retrying transient failures with backoff."""
+def _post(path: str, payload: dict[str, Any], timeout: float = 180.0, attempts: int = 2) -> dict[str, Any]:
+    """POST a JSON body, retrying transient failures with backoff.
+
+    Timeouts are (connect, read) tuples so a stalled response cannot hang a job
+    indefinitely: no single read may take longer than the read timeout.
+    """
     url = f"{settings.base_url}{path}"
+    connect_timeout = 10.0
+    read_timeout = max(30.0, min(timeout, 150.0))
     last_error: MetaAPIError | None = None
     for attempt in range(attempts):
         try:
-            response = requests.post(url, headers=_headers(), json=payload, timeout=timeout)
+            response = requests.post(
+                url, headers=_headers(), json=payload, timeout=(connect_timeout, read_timeout)
+            )
+        except requests.Timeout as exc:
+            last_error = MetaAPIError(0, f"timeout after {read_timeout:.0f}s")
+            time.sleep(1.5 * (attempt + 1))
+            continue
         except requests.RequestException as exc:
             last_error = MetaAPIError(0, f"transport error: {type(exc).__name__}")
             time.sleep(1.5 * (attempt + 1))

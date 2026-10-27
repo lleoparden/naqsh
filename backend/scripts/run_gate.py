@@ -27,7 +27,7 @@ FIXTURES = sorted((REPO / "assets" / "generated" / "fixtures").glob("*.png"))
 EVIDENCE = REPO / "docs" / "evidence" / "phase-4"
 
 
-def crop_cell(image: Image.Image, bbox: list[int], pad: int = 26, max_w: int = 260, max_h: int = 160) -> Image.Image:
+def crop_cell(image: Image.Image, bbox: list[int], pad: int = 30, max_w: int = 400, max_h: int = 240) -> Image.Image:
     x1, y1, x2, y2 = bbox
     crop = image.crop(
         (
@@ -44,7 +44,7 @@ def crop_cell(image: Image.Image, bbox: list[int], pad: int = 26, max_w: int = 2
 
 
 def build_sheet(runs: list[dict]) -> Path:
-    cell_w, cell_h, label_h, gap = 272, 190, 18, 8
+    cell_w, cell_h, label_h, gap = 412, 272, 20, 10
     columns = max(len(run["regions"]) for run in runs)
     width = columns * (cell_w + gap) + gap
     height = len(runs) * (cell_h + label_h + gap) + gap + 34
@@ -76,11 +76,21 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--runs", type=int, default=2)
     parser.add_argument("--pages", type=int, default=5)
+    parser.add_argument("--sheet-only", action="store_true", help="rebuild the sheet from gate-runs.json")
     args = parser.parse_args()
+
+    EVIDENCE.mkdir(parents=True, exist_ok=True)
+    if args.sheet_only:
+        runs = json.loads((EVIDENCE / "gate-runs.json").read_text(encoding="utf-8"))
+        print("rebuilt", build_sheet(runs))
+        return
 
     pages = FIXTURES[: args.pages]
     runs: list[dict] = []
     started = time.perf_counter()
+    EVIDENCE.mkdir(parents=True, exist_ok=True)
+    progress = EVIDENCE / "gate-progress.log"
+    progress.write_text("", encoding="utf-8")
     for page in pages:
         data = page.read_bytes()
         for run_index in range(1, args.runs + 1):
@@ -101,11 +111,14 @@ def main() -> None:
                     ],
                 }
             )
-            print(
+            line = (
                 f"{page.stem} run{run_index}: {job.id} cost=${receipt['total_cost_usd']:.4f} "
-                f"ms={receipt['total_ms']} residual={final.get('residual')}",
-                flush=True,
+                f"ms={receipt['total_ms']} residual={final.get('residual')}"
             )
+            print(line, flush=True)
+            with progress.open("a", encoding="utf-8") as handle:
+                handle.write(line + "\n")
+            (EVIDENCE / "gate-runs.partial.json").write_text(json.dumps(runs, indent=2), encoding="utf-8")
 
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     (EVIDENCE / "gate-runs.json").write_text(json.dumps(runs, indent=2), encoding="utf-8")

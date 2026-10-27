@@ -44,7 +44,14 @@ Fill this in with *observed* behavior, not the pitch.
   keeping the artwork. Why it mattered: without it Naqsh could only cover lettering
   with flat boxes. *(Observed: all three text regions erased in 13.6 s for $0.01,
   bubbles left empty and the character unchanged — but the whole page is re-rendered
-  with a ≈16 px vertical offset, so the plate must be registered before compositing.)*
+  with a vertical offset that varies per run (-16, -30, -40 px measured), so the
+  plate must be registered before compositing.)*
+- **Muse Spark as the QA loop.** The same vision model that reads the page also
+  checks the cleaned plate at 100% zoom and reports which regions still show
+  lettering. Why it mattered: a pixel threshold could not separate clean from
+  ghosted plates, but the model can look. *(Observed: it caught residual text in
+  7/10 regions on the dense menu page that the threshold missed; one retry then
+  cleared them.)*
 
 ## API friction log (write it when it happens)
 
@@ -58,6 +65,9 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 15:39 | Box prompt syntax is not obvious | `<|box;…|>` alone → `400 invalid prompt: … geometric prompts go after a <Nf> frame header`. | Correct form: `<0f>1<|box;…|>` with caller-chosen ids. Docs describe it; the error message is what made it stick. |
 | 2026-10-27 15:38 | Muse Image edit shifts the page | Phase correlation on before/after: ≈ -16 px vertical on the first pair, later runs -30 and -40 px. | Registration is required and is per-run, not a constant. |
 | 2026-10-27 16:00 | Plate edits are intermittent | 7 runs: 4 clean, 2 with a faint ghost, 1 with a smeared caption panel. | Phase 4 gate owns this. The composite is correct; the ghost is in the plate. |
+| 2026-10-27 16:20 | The ghost is mostly *ours*, not the model's | Comparing three failing runs, residual lettering sat outside the repaint coverage (e.g. 6,894 px outside vs 5,444 inside): the original lettering was taller than Spark's box and the SAM mask. | Coverage now grows from the source's real ink extent; the plate itself was clean in those runs. |
+| 2026-10-27 16:35 | dirty_ratio cannot be trusted | Clean ≈0.05, ghosted 0.08–0.13, with overlap; a threshold retry doubled cost without reliably fixing the page. | Detection moved to a Muse Spark vision check over 100%-zoom crops. |
+| 2026-10-27 17:00 | The plate flattens painted texture | Watercolour poster: the edit replaced the painted band behind the title with a solid teal strip. No letters left, but it reads as a smear. | Detector only asks about lettering, so it passed this. Textured pages are the open limit. |
 
 ## Notable results and numbers
 
@@ -72,6 +82,8 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 | **Phase 2 pipeline, generated page: 25–30 s, $0.0184–$0.0194 per page** | Per-stage receipts in `docs/evidence/phase-2/receipt-egyptian.json` |
 | 2026-10-27 | Register comparison, same page | Egyptian `عيش طازة؟` / `كل يوم الصبح` vs MSA `خبز طازج؟` / `كل صباح` — same layout, same cost |
 | 2026-10-27 | Clean-plate reliability: 4/7 runs clean, 2 ghosted, 1 smeared | Visual review of `docs/evidence/phase-2/failure-ghost-lettering.png` |
+| 2026-10-27 | **Phase 4 gate: 10 runs / 5 pages, $0.2975 total, $0.0298 per run, 75 s per run** | `docs/evidence/phase-4/gate-runs.json` |
+| 2026-10-27 | **Gate fails 9/10:** detector 7/10 clean; poster 2/2 flat-band smear, label 2/2 ghost+patch, menu 1/2 leader dots | `docs/evidence/phase-4/README.md` + contact sheet |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
 
 ### Time-saved measurement (the Impact claim)
