@@ -1,0 +1,554 @@
+[
+  {
+    "page": "01-comic-flat",
+    "run": 1,
+    "job": "85416ed3f93e",
+    "cost": 0.024715,
+    "ms": 51804,
+    "residual": [],
+    "notes": {
+      "t1": "clean empty caption box, no text marks",
+      "t2": "clean empty thought bubble",
+      "t3": "clean empty thought bubble"
+    },
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          314,
+          326,
+          986,
+          438
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          134,
+          538,
+          467,
+          722
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          806,
+          540,
+          1158,
+          739
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "01-comic-flat",
+    "run": 2,
+    "job": "2c9ea4c3a467",
+    "cost": 0.02309,
+    "ms": 47558,
+    "residual": [],
+    "notes": {
+      "t1": "empty caption box, no marks",
+      "t2": "empty thought bubble, no marks",
+      "t3": "empty thought bubble, no marks"
+    },
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          302,
+          355,
+          979,
+          467
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          134,
+          526,
+          444,
+          741
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          790,
+          526,
+          1161,
+          745
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "01-comic-flat",
+    "run": 3,
+    "job": "6684baed33ab",
+    "cost": 0.025144,
+    "ms": 50570,
+    "residual": [],
+    "notes": {
+      "t1": "clean empty caption box",
+      "t2": "clean empty thought bubble",
+      "t3": "clean empty thought bubble"
+    },
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          305,
+          298,
+          1005,
+          424
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          134,
+          488,
+          454,
+          674
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          796,
+          490,
+          1170,
+          676
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "run": 1,
+    "job": "e27d12e81056",
+    "cost": 0.029233,
+    "ms": 94391,
+    "residual": [],
+    "notes": {
+      "t1": "clean paper texture only",
+      "t2": "clean paper texture only",
+      "t3": "clean paper texture only",
+      "t4": "clean paper texture only",
+      "t5": "clean paper texture only",
+      "t6": "clean paper texture only",
+      "t7": "clean paper texture only",
+      "t8": "clean paper texture only",
+      "t9": "clean paper texture only",
+      "t10": "clean paper texture only"
+    },
+    "strategies": {
+      "t1": "muse",
+      "t2": "muse",
+      "t3": "muse",
+      "t4": "muse",
+      "t5": "muse",
+      "t6": "muse",
+      "t7": "muse",
+      "t8": "muse",
+      "t9": "muse",
+      "t10": "muse"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          311,
+          1050,
+          445
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          296,
+          538,
+          996,
+          572
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          119,
+          791,
+          608,
+          858
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          663,
+          791,
+          1175,
+          858
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          119,
+          891,
+          605,
+          954
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          663,
+          891,
+          1174,
+          954
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          116,
+          987,
+          605,
+          1052
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          663,
+          989,
+          1175,
+          1054
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          388,
+          1693,
+          922,
+          1728
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          87,
+          1822,
+          474,
+          1853
+        ],
+        "strategy": "muse"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "run": 2,
+    "job": "092e1f203a07",
+    "cost": 0.044611,
+    "ms": 115331,
+    "residual": [],
+    "notes": {
+      "t1": "only red rule line and paper texture, no letters",
+      "t2": "clean paper texture only",
+      "t3": "clean paper texture only",
+      "t4": "clean paper texture only",
+      "t5": "clean paper texture only",
+      "t6": "clean paper texture only",
+      "t7": "clean paper texture only",
+      "t8": "clean paper texture only",
+      "t9": "clean paper with stain, no letters",
+      "t10": "clean paper texture only"
+    },
+    "strategies": {
+      "t1": "muse-retry",
+      "t2": "muse-retry",
+      "t3": "muse-retry",
+      "t4": "muse-retry",
+      "t5": "muse-retry",
+      "t6": "muse-retry",
+      "t7": "muse-retry",
+      "t8": "muse-retry",
+      "t9": "muse-retry",
+      "t10": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          282,
+          1043,
+          445
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          296,
+          564,
+          996,
+          603
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          119,
+          804,
+          604,
+          876
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          686,
+          804,
+          1148,
+          874
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          119,
+          908,
+          603,
+          977
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          687,
+          908,
+          1148,
+          977
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          119,
+          1010,
+          602,
+          1079
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          687,
+          1010,
+          1148,
+          1079
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          388,
+          1707,
+          918,
+          1741
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          88,
+          1801,
+          471,
+          1826
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "run": 3,
+    "job": "31b4e49fb57d",
+    "cost": 0.046005,
+    "ms": 149826,
+    "residual": [],
+    "notes": {
+      "t1": "paper texture with red rule line only, no letters",
+      "t2": "paper texture only, clean",
+      "t3": "paper texture only, clean",
+      "t4": "paper texture only, clean",
+      "t5": "paper texture only, clean",
+      "t6": "paper texture only, clean",
+      "t7": "paper texture only, clean",
+      "t8": "paper texture only, clean",
+      "t9": "paper texture only, clean",
+      "t10": "paper texture only, clean"
+    },
+    "strategies": {
+      "t1": "muse-retry",
+      "t2": "muse-retry",
+      "t3": "muse-retry",
+      "t4": "muse-retry",
+      "t5": "muse-retry",
+      "t6": "muse-retry",
+      "t7": "muse-retry",
+      "t8": "muse-retry",
+      "t9": "muse-retry",
+      "t10": "muse-retry"
+    },
+    "regions": [
+      {
+        "id": "t1",
+        "bbox": [
+          243,
+          288,
+          1043,
+          444
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "bbox": [
+          296,
+          547,
+          996,
+          586
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "bbox": [
+          120,
+          826,
+          632,
+          895
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t4",
+        "bbox": [
+          660,
+          826,
+          1171,
+          895
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t5",
+        "bbox": [
+          120,
+          929,
+          628,
+          998
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t6",
+        "bbox": [
+          662,
+          929,
+          1172,
+          998
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t7",
+        "bbox": [
+          120,
+          1031,
+          631,
+          1100
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t8",
+        "bbox": [
+          660,
+          1031,
+          1172,
+          1100
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t9",
+        "bbox": [
+          388,
+          1692,
+          943,
+          1732
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t10",
+        "bbox": [
+          84,
+          1826,
+          499,
+          1855
+        ],
+        "strategy": "muse-retry"
+      }
+    ]
+  }
+]
