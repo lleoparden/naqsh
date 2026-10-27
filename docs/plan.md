@@ -88,7 +88,7 @@ removed and a ≈16 px page shift that must be registered. One page ≈ **$0.022
 
 **Non-goals:** no pipeline code, no editor, no prompt tuning beyond the probe.
 
-## Phase 2 — Vertical slice on one page
+## Phase 2 — Vertical slice on one page *(done 2026-10-27)*
 
 **Goal:** the ugliest possible end-to-end run that a judge could still watch:
 upload the generated test panel → regions → Arabic → repainted plate → re-typeset →
@@ -101,6 +101,20 @@ screen that shows stages as they complete; a `docs/evidence/` before/after pair.
 **Gate:** one page completes; total cost ≤ $0.10 and wall time recorded; before and
 after images are visually checked by the owner. **Fallback:** replace the clean
 plate with the opaque-cover technique so the Arabic is readable, and continue.
+
+**Result (2026-10-27, gate met):** `POST /api/localize` runs read → segment →
+clean plate → register/composite → typeset → render on the generated panel in
+**25–30 s**, **$0.0184–$0.0194** per page, with a per-stage receipt. Arabic is set
+right-to-left inside the bubble/panel the region came from, in the original ink
+colour. Register switch (Egyptian / MSA) changes the translations and nothing else.
+Evidence: `docs/evidence/phase-2/`.
+
+**Open issue carried into Phase 4 (the reason that gate exists):** the Muse Image
+edit is intermittent. In 7 runs, 2 left a visible ghost ("MORNING" in the right
+bubble) and 1 smeared the caption panel. The masked composite is correct — the
+ghost is *in the plate*. `dirty_ratio` correlates (clean ≈0.05, ghosted ≈0.08–0.13)
+but overlaps, so it is recorded, not acted on. Phase 4's gate must make this
+deterministic.
 
 ## Phase 3 — RTL typesetting and fitting *(riskiest)*
 

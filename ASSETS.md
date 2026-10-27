@@ -20,12 +20,18 @@ Every asset gets a row here *before* it is committed.
 
 ## Fonts
 
+All fonts are SIL Open Font License 1.1; the license text ships beside each file.
+
 | Font | Used for | Source | License |
 | --- | --- | --- | --- |
-| _none yet_ | Arabic typesetting candidates are evaluated in Phase 3 | — | — |
+| `assets/fonts/NotoKufiArabic-Variable.ttf` | Default comic lettering (geometric kufi) | [google/fonts · ofl/notokufiarabic](https://github.com/google/fonts/tree/main/ofl/notokufiarabic) | OFL 1.1 (`OFL-NotoKufiArabic.txt`) |
+| `assets/fonts/NotoNaskhArabic-Variable.ttf` | Publishing/naskh style option | [google/fonts · ofl/notonaskharabic](https://github.com/google/fonts/tree/main/ofl/notonaskharabic) | OFL 1.1 (`OFL-NotoNaskhArabic.txt`) |
+| `assets/fonts/Amiri-Regular.ttf` | Calligraphic comparison / fallback | [google/fonts · ofl/amiri](https://github.com/google/fonts/tree/main/ofl/amiri) | OFL 1.1 (`OFL-Amiri.txt`) |
 
-Candidate Arabic faces are all open-licensed (SIL OFL / Apache); each one is
-added here with its license file before it ships.
+Why these: the rasteriser used in Phase 2 renders Arabic presentation forms, so a
+font must cover the `FE70–FEFF` block. Cairo (also OFL) was downloaded and
+rejected in a visual test for exactly that reason; Phase 3 moves to HarfBuzz
+shaping, which lifts the constraint.
 
 ## Notes
 

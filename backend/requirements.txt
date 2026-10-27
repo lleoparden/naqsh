@@ -1,8 +1,12 @@
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 python-dotenv==1.0.1
+python-multipart==0.0.20
 requests==2.32.3
 Pillow==11.0.0
+numpy==2.2.1
 httpx==0.28.1
 meta-sam-parser==0.1.0
+arabic-reshaper==3.0.0
+python-bidi==0.6.3
 pytest==8.3.4

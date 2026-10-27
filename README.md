@@ -11,12 +11,15 @@ layouts, broken ligatures, Latin fonts forced onto Arabic, no way to nudge a lin
 that overflows a speech bubble. Arabic creators, small publishers, and small
 businesses still localize by hand. Naqsh is built for them first.
 
-> **Status (2026-10-27):** Phase 1 complete — the scaffold and the Meta Model API
-> probes work end to end. On a generated test page, Muse Spark read all three text
-> regions and produced natural Arabic, SAM 3.1 returned pixel-accurate bubble masks
-> and precise region masks from box prompts, and Muse Image erased the lettering
-> while keeping the artwork. The pipeline itself lands in Phase 2; see
-> [`docs/plan.md`](docs/plan.md) and [`docs/api-findings.md`](docs/api-findings.md).
+> **Status (2026-10-27):** Phase 2 vertical slice — one generated page runs through
+> the whole pipeline: Muse Spark reads three text regions and translates them into
+> natural Arabic, SAM 3.1 returns masks that become the layer boundaries, Muse Image
+> repaints the plate, the plate is registered and composited back through the
+> dilated masks (original pixels survive everywhere else), and the Arabic is
+> typeset right-to-left inside each bubble in the original ink colour. 25–30 s and
+> ≈$0.019 per page. The clean plate is still intermittent — see the Phase 4 gate in
+> [`docs/plan.md`](docs/plan.md) and the evidence in
+> [`docs/evidence/phase-2/`](docs/evidence/phase-2/).
 
 ## What's new / built during the hackathon
 
@@ -48,6 +51,24 @@ older project. In particular:
 6. **Edit** — a layer editor (the centerpiece of the UI) lets the user fix text,
    position, font, and size per region.
 7. **Export** — layered, editable SVG and PNG.
+
+### What runs today
+
+`POST /api/localize` (multipart `image`, form `register=egyptian|msa`) executes:
+
+| Stage | Module | Call |
+| --- | --- | --- |
+| read | `app/pipeline/regions.py` | Muse Spark vision → regions JSON |
+| segment | `app/pipeline/segment.py` | SAM 3.1 box prompts → per-region masks |
+| clean_plate | `app/pipeline/plate.py` | Muse Image edit → plate |
+| register_composite | `app/pipeline/plate.py` | phase correlation + masked composite |
+| typeset | `app/pipeline/typeset.py` | arabic-reshaper + bidi, ink-aware fitting |
+| render | `app/pipeline/render.py` | draw Arabic over the plate |
+
+Every stage reports its own wall time and cost in the job receipt
+(`backend/.cache/jobs/<id>/job.json`). Artifacts are served at
+`/api/jobs/<id>/files/<name>`; `docs/evidence/phase-2/` holds the committed
+before/after pair.
 
 ## Why Meta's models
 

@@ -185,6 +185,19 @@ Responses (conversational) and `/v1/images/generations` + `/v1/images/edits`
 - UNCONFIRMED: behaviour on photographic or gradient-heavy art (flat vector art
   is the easy case), and whether repeated edits accumulate drift.
 
+### Observed variability (7 runs, 2026-10-27)
+
+| Outcome | Runs | Notes |
+| --- | --- | --- |
+| Clean plate, clean output | 4 | no ghost; text fits |
+| Faint ghost in one bubble | 2 | "MORNING" remained at ~60% opacity |
+| Smear on the caption panel | 1 | edit re-rendered the panel edge |
+
+The offset also varies: **-16 px**, **-30 px**, and **-40 px** vertical were all
+measured on the same input. Registration handles that part; the ghost does not.
+A mask-aware cleanliness score is Phase 4 work — the bbox-based `dirty_ratio`
+correlates (clean ≈0.05, ghosted ≈0.08–0.13) but overlaps, so it is not a gate.
+
 ---
 
 ## Cost model (measured, not estimated)

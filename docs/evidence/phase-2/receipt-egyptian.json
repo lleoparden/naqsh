@@ -1,0 +1,157 @@
+{
+  "id": "3d1b95856a01",
+  "register": "egyptian",
+  "width": 1280,
+  "height": 1920,
+  "artifacts": {
+    "source": "source.png",
+    "mask_overlay": "masks-overlay.png",
+    "plate_raw": "plate-raw.png",
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "before_after": "before-after.png"
+  },
+  "stages": [
+    {
+      "name": "read",
+      "ms": 6598,
+      "cost_usd": 0.006321,
+      "input_tokens": 3612,
+      "output_tokens": 425,
+      "reasoning_tokens": 184,
+      "images": 0,
+      "regions": 3
+    },
+    {
+      "name": "segment",
+      "ms": 5756,
+      "cost_usd": 0.0025,
+      "masks": 3,
+      "concepts": "box prompts"
+    },
+    {
+      "name": "clean_plate",
+      "ms": 11353,
+      "cost_usd": 0.01,
+      "images": 1,
+      "dirty_ratio": 0.0465
+    },
+    {
+      "name": "register_composite",
+      "ms": 4996,
+      "cost_usd": 0.0,
+      "shift": [
+        2,
+        -18
+      ],
+      "ink_pixels_removed": 3,
+      "coverage_ratio": 0.1203,
+      "mean_abs_diff_inside": 52.78,
+      "outside_untouched_mean_diff": 0.0
+    },
+    {
+      "name": "typeset",
+      "ms": 271,
+      "cost_usd": 0.0,
+      "regions": 3
+    }
+  ],
+  "regions": [
+    {
+      "id": "t1",
+      "source_text": "CHAPTER ONE",
+      "translation_ar": "الفصل الأول",
+      "style": "title",
+      "font_style": "bold rounded uppercase sans",
+      "bbox": [
+        310,
+        326,
+        987,
+        449
+      ],
+      "container": [
+        325,
+        327,
+        962,
+        453
+      ],
+      "mask_path": "mask-t1.png",
+      "font_family": "kufi",
+      "font_size": 81,
+      "color": [
+        20,
+        78,
+        91
+      ],
+      "lines": [
+        "ﻝﻭﻷﺍ ﻞﺼﻔﻟﺍ"
+      ]
+    },
+    {
+      "id": "t2",
+      "source_text": "FRESH BREAD?",
+      "translation_ar": "عيش طازة؟",
+      "style": "speech",
+      "font_style": "bold rounded uppercase sans",
+      "bbox": [
+        134,
+        518,
+        466,
+        714
+      ],
+      "container": [
+        151,
+        499,
+        459,
+        703
+      ],
+      "mask_path": "mask-t2.png",
+      "font_family": "kufi",
+      "font_size": 71,
+      "color": [
+        20,
+        78,
+        91
+      ],
+      "lines": [
+        "ﺶﻴﻋ",
+        "؟ﺓﺯﺎﻃ"
+      ]
+    },
+    {
+      "id": "t3",
+      "source_text": "EVERY MORNING",
+      "translation_ar": "كل يوم الصبح",
+      "style": "speech",
+      "font_style": "handwritten rounded uppercase",
+      "bbox": [
+        806,
+        526,
+        1166,
+        720
+      ],
+      "container": [
+        808,
+        517,
+        1168,
+        725
+      ],
+      "mask_path": "mask-t3.png",
+      "font_family": "kufi",
+      "font_size": 65,
+      "color": [
+        178,
+        90,
+        59
+      ],
+      "lines": [
+        "ﻡﻮﻳ ﻞﻛ",
+        "ﺢﺒﺼﻟﺍ"
+      ]
+    }
+  ],
+  "warnings": [],
+  "total_cost_usd": 0.018821,
+  "total_ms": 28974
+}
