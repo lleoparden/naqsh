@@ -1,0 +1,330 @@
+{
+  "runs": [
+    {
+      "page": "comic",
+      "run": 1,
+      "job": "b6b56527d625",
+      "demo": false,
+      "wall_ms": 33825,
+      "total_ms": 33760,
+      "stage_ms_sum": 48801,
+      "cost_usd": 0.0262,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 6990
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 15291
+        },
+        {
+          "name": "clean_plate",
+          "ms": 15405
+        },
+        {
+          "name": "register_composite",
+          "ms": 1108
+        },
+        {
+          "name": "verify",
+          "ms": 3230
+        },
+        {
+          "name": "final_check",
+          "ms": 2747
+        },
+        {
+          "name": "typeset",
+          "ms": 273
+        },
+        {
+          "name": "selfcheck",
+          "ms": 3757
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "page": "comic",
+      "run": 2,
+      "job": "7c05293b789e",
+      "demo": false,
+      "wall_ms": 28465,
+      "total_ms": 28427,
+      "stage_ms_sum": 41189,
+      "cost_usd": 0.0257,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 5392
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 13017
+        },
+        {
+          "name": "clean_plate",
+          "ms": 13140
+        },
+        {
+          "name": "register_composite",
+          "ms": 991
+        },
+        {
+          "name": "verify",
+          "ms": 2277
+        },
+        {
+          "name": "final_check",
+          "ms": 2673
+        },
+        {
+          "name": "typeset",
+          "ms": 225
+        },
+        {
+          "name": "selfcheck",
+          "ms": 3474
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "page": "comic",
+      "run": 3,
+      "job": "40187cbc825b",
+      "demo": false,
+      "wall_ms": 37370,
+      "total_ms": 37335,
+      "stage_ms_sum": 54029,
+      "cost_usd": 0.0291,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 6391
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 16957
+        },
+        {
+          "name": "clean_plate",
+          "ms": 17058
+        },
+        {
+          "name": "register_composite",
+          "ms": 992
+        },
+        {
+          "name": "verify",
+          "ms": 1745
+        },
+        {
+          "name": "final_check",
+          "ms": 2893
+        },
+        {
+          "name": "typeset",
+          "ms": 234
+        },
+        {
+          "name": "selfcheck",
+          "ms": 7759
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "page": "menu",
+      "run": 1,
+      "job": "5cd4110e2a83",
+      "demo": false,
+      "wall_ms": 73070,
+      "total_ms": 73012,
+      "stage_ms_sum": 89634,
+      "cost_usd": 0.0661,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 12365
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 17090
+        },
+        {
+          "name": "clean_plate",
+          "ms": 17251
+        },
+        {
+          "name": "register_composite",
+          "ms": 1938
+        },
+        {
+          "name": "verify",
+          "ms": 5132
+        },
+        {
+          "name": "retry",
+          "ms": 17039
+        },
+        {
+          "name": "repair",
+          "ms": 556
+        },
+        {
+          "name": "final_check",
+          "ms": 3890
+        },
+        {
+          "name": "typeset",
+          "ms": 338
+        },
+        {
+          "name": "selfcheck",
+          "ms": 14035
+        }
+      ],
+      "warnings": [
+        "t2: text did not fit and was clamped",
+        "t15: text did not fit and was clamped"
+      ]
+    },
+    {
+      "page": "menu",
+      "run": 2,
+      "job": "dd00e9d8e577",
+      "demo": false,
+      "wall_ms": 78516,
+      "total_ms": 78447,
+      "stage_ms_sum": 103432,
+      "cost_usd": 0.0528,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 11698
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 25424
+        },
+        {
+          "name": "clean_plate",
+          "ms": 25586
+        },
+        {
+          "name": "register_composite",
+          "ms": 1734
+        },
+        {
+          "name": "verify",
+          "ms": 4445
+        },
+        {
+          "name": "retry",
+          "ms": 18699
+        },
+        {
+          "name": "repair",
+          "ms": 543
+        },
+        {
+          "name": "final_check",
+          "ms": 5109
+        },
+        {
+          "name": "typeset",
+          "ms": 329
+        },
+        {
+          "name": "selfcheck",
+          "ms": 9865
+        }
+      ],
+      "warnings": [
+        "t16: text did not fit and was clamped",
+        "visual self-check unavailable: Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+      ]
+    },
+    {
+      "page": "menu",
+      "run": 3,
+      "job": "604abcb680ea",
+      "demo": false,
+      "wall_ms": 61622,
+      "total_ms": 61570,
+      "stage_ms_sum": 87403,
+      "cost_usd": 0.0367,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 13817
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 26318
+        },
+        {
+          "name": "clean_plate",
+          "ms": 26447
+        },
+        {
+          "name": "register_composite",
+          "ms": 1726
+        },
+        {
+          "name": "verify",
+          "ms": 5707
+        },
+        {
+          "name": "final_check",
+          "ms": 5659
+        },
+        {
+          "name": "typeset",
+          "ms": 325
+        },
+        {
+          "name": "selfcheck",
+          "ms": 7404
+        }
+      ],
+      "warnings": [
+        "t15: text did not fit and was clamped",
+        "t16: text did not fit and was clamped",
+        "visual self-check unavailable: Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+      ]
+    }
+  ]
+}

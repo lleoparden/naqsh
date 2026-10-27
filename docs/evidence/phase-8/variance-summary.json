@@ -1,0 +1,637 @@
+{
+  "comic": {
+    "runs": 3,
+    "walls_ms": [
+      33825,
+      28465,
+      37370
+    ],
+    "median_wall_ms": 33825,
+    "wall_range_ms": [
+      28465,
+      37370
+    ],
+    "median_total_ms": 33760,
+    "total_range_ms": [
+      28427,
+      37335
+    ],
+    "median_cost_usd": 0.0262,
+    "cost_range_usd": [
+      0.0257,
+      0.0291
+    ],
+    "regions": [
+      3
+    ],
+    "stages": {
+      "clean_plate": {
+        "median_ms": 15405,
+        "min_ms": 13140,
+        "max_ms": 17058,
+        "runs": 3
+      },
+      "final_check": {
+        "median_ms": 2747,
+        "min_ms": 2673,
+        "max_ms": 2893,
+        "runs": 3
+      },
+      "policy": {
+        "median_ms": 0,
+        "min_ms": 0,
+        "max_ms": 0,
+        "runs": 3
+      },
+      "read": {
+        "median_ms": 6391,
+        "min_ms": 5392,
+        "max_ms": 6990,
+        "runs": 3
+      },
+      "register_composite": {
+        "median_ms": 992,
+        "min_ms": 991,
+        "max_ms": 1108,
+        "runs": 3
+      },
+      "segment": {
+        "median_ms": 15291,
+        "min_ms": 13017,
+        "max_ms": 16957,
+        "runs": 3
+      },
+      "selfcheck": {
+        "median_ms": 3757,
+        "min_ms": 3474,
+        "max_ms": 7759,
+        "runs": 3
+      },
+      "typeset": {
+        "median_ms": 234,
+        "min_ms": 225,
+        "max_ms": 273,
+        "runs": 3
+      },
+      "verify": {
+        "median_ms": 2277,
+        "min_ms": 1745,
+        "max_ms": 3230,
+        "runs": 3
+      }
+    }
+  },
+  "menu": {
+    "runs": 5,
+    "walls_ms": [
+      73070,
+      78516,
+      61622,
+      61603,
+      61834
+    ],
+    "median_wall_ms": 61834,
+    "wall_range_ms": [
+      61603,
+      78516
+    ],
+    "median_total_ms": 61779,
+    "total_range_ms": [
+      61521,
+      78447
+    ],
+    "median_cost_usd": 0.052,
+    "cost_range_usd": [
+      0.0367,
+      0.0661
+    ],
+    "regions": [
+      16
+    ],
+    "stages": {
+      "clean_plate": {
+        "median_ms": 24200,
+        "min_ms": 17251,
+        "max_ms": 26447,
+        "runs": 5
+      },
+      "final_check": {
+        "median_ms": 4805,
+        "min_ms": 3700,
+        "max_ms": 5659,
+        "runs": 5
+      },
+      "policy": {
+        "median_ms": 0,
+        "min_ms": 0,
+        "max_ms": 0,
+        "runs": 5
+      },
+      "read": {
+        "median_ms": 11698,
+        "min_ms": 10600,
+        "max_ms": 13817,
+        "runs": 5
+      },
+      "register_composite": {
+        "median_ms": 1819,
+        "min_ms": 1726,
+        "max_ms": 2015,
+        "runs": 5
+      },
+      "repair": {
+        "median_ms": 549,
+        "min_ms": 543,
+        "max_ms": 556,
+        "runs": 2
+      },
+      "retry": {
+        "median_ms": 17869,
+        "min_ms": 17039,
+        "max_ms": 18699,
+        "runs": 2
+      },
+      "segment": {
+        "median_ms": 24063,
+        "min_ms": 17090,
+        "max_ms": 26318,
+        "runs": 5
+      },
+      "selfcheck": {
+        "median_ms": 14035,
+        "min_ms": 7404,
+        "max_ms": 15593,
+        "runs": 5
+      },
+      "typeset": {
+        "median_ms": 329,
+        "min_ms": 324,
+        "max_ms": 338,
+        "runs": 5
+      },
+      "verify": {
+        "median_ms": 5132,
+        "min_ms": 4445,
+        "max_ms": 5707,
+        "runs": 5
+      }
+    }
+  },
+  "runs": [
+    {
+      "page": "comic",
+      "run": 1,
+      "job": "b6b56527d625",
+      "demo": false,
+      "wall_ms": 33825,
+      "total_ms": 33760,
+      "stage_ms_sum": 48801,
+      "cost_usd": 0.0262,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 6990
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 15291
+        },
+        {
+          "name": "clean_plate",
+          "ms": 15405
+        },
+        {
+          "name": "register_composite",
+          "ms": 1108
+        },
+        {
+          "name": "verify",
+          "ms": 3230
+        },
+        {
+          "name": "final_check",
+          "ms": 2747
+        },
+        {
+          "name": "typeset",
+          "ms": 273
+        },
+        {
+          "name": "selfcheck",
+          "ms": 3757
+        }
+      ],
+      "warnings": [],
+      "source": "variance.json"
+    },
+    {
+      "page": "comic",
+      "run": 2,
+      "job": "7c05293b789e",
+      "demo": false,
+      "wall_ms": 28465,
+      "total_ms": 28427,
+      "stage_ms_sum": 41189,
+      "cost_usd": 0.0257,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 5392
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 13017
+        },
+        {
+          "name": "clean_plate",
+          "ms": 13140
+        },
+        {
+          "name": "register_composite",
+          "ms": 991
+        },
+        {
+          "name": "verify",
+          "ms": 2277
+        },
+        {
+          "name": "final_check",
+          "ms": 2673
+        },
+        {
+          "name": "typeset",
+          "ms": 225
+        },
+        {
+          "name": "selfcheck",
+          "ms": 3474
+        }
+      ],
+      "warnings": [],
+      "source": "variance.json"
+    },
+    {
+      "page": "comic",
+      "run": 3,
+      "job": "40187cbc825b",
+      "demo": false,
+      "wall_ms": 37370,
+      "total_ms": 37335,
+      "stage_ms_sum": 54029,
+      "cost_usd": 0.0291,
+      "regions": 3,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 6391
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 16957
+        },
+        {
+          "name": "clean_plate",
+          "ms": 17058
+        },
+        {
+          "name": "register_composite",
+          "ms": 992
+        },
+        {
+          "name": "verify",
+          "ms": 1745
+        },
+        {
+          "name": "final_check",
+          "ms": 2893
+        },
+        {
+          "name": "typeset",
+          "ms": 234
+        },
+        {
+          "name": "selfcheck",
+          "ms": 7759
+        }
+      ],
+      "warnings": [],
+      "source": "variance.json"
+    },
+    {
+      "page": "menu",
+      "run": 1,
+      "job": "5cd4110e2a83",
+      "demo": false,
+      "wall_ms": 73070,
+      "total_ms": 73012,
+      "stage_ms_sum": 89634,
+      "cost_usd": 0.0661,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 12365
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 17090
+        },
+        {
+          "name": "clean_plate",
+          "ms": 17251
+        },
+        {
+          "name": "register_composite",
+          "ms": 1938
+        },
+        {
+          "name": "verify",
+          "ms": 5132
+        },
+        {
+          "name": "retry",
+          "ms": 17039
+        },
+        {
+          "name": "repair",
+          "ms": 556
+        },
+        {
+          "name": "final_check",
+          "ms": 3890
+        },
+        {
+          "name": "typeset",
+          "ms": 338
+        },
+        {
+          "name": "selfcheck",
+          "ms": 14035
+        }
+      ],
+      "warnings": [
+        "t2: text did not fit and was clamped",
+        "t15: text did not fit and was clamped"
+      ],
+      "source": "variance.json"
+    },
+    {
+      "page": "menu",
+      "run": 2,
+      "job": "dd00e9d8e577",
+      "demo": false,
+      "wall_ms": 78516,
+      "total_ms": 78447,
+      "stage_ms_sum": 103432,
+      "cost_usd": 0.0528,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 11698
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 25424
+        },
+        {
+          "name": "clean_plate",
+          "ms": 25586
+        },
+        {
+          "name": "register_composite",
+          "ms": 1734
+        },
+        {
+          "name": "verify",
+          "ms": 4445
+        },
+        {
+          "name": "retry",
+          "ms": 18699
+        },
+        {
+          "name": "repair",
+          "ms": 543
+        },
+        {
+          "name": "final_check",
+          "ms": 5109
+        },
+        {
+          "name": "typeset",
+          "ms": 329
+        },
+        {
+          "name": "selfcheck",
+          "ms": 9865
+        }
+      ],
+      "warnings": [
+        "t16: text did not fit and was clamped",
+        "visual self-check unavailable: Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+      ],
+      "source": "variance.json"
+    },
+    {
+      "page": "menu",
+      "run": 3,
+      "job": "604abcb680ea",
+      "demo": false,
+      "wall_ms": 61622,
+      "total_ms": 61570,
+      "stage_ms_sum": 87403,
+      "cost_usd": 0.0367,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 13817
+        },
+        {
+          "name": "policy",
+          "ms": 0
+        },
+        {
+          "name": "segment",
+          "ms": 26318
+        },
+        {
+          "name": "clean_plate",
+          "ms": 26447
+        },
+        {
+          "name": "register_composite",
+          "ms": 1726
+        },
+        {
+          "name": "verify",
+          "ms": 5707
+        },
+        {
+          "name": "final_check",
+          "ms": 5659
+        },
+        {
+          "name": "typeset",
+          "ms": 325
+        },
+        {
+          "name": "selfcheck",
+          "ms": 7404
+        }
+      ],
+      "warnings": [
+        "t15: text did not fit and was clamped",
+        "t16: text did not fit and was clamped",
+        "visual self-check unavailable: Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+      ],
+      "source": "variance.json"
+    },
+    {
+      "run": 1,
+      "job": "b4b4df601607",
+      "wall_ms": 61603,
+      "total_ms": 61521,
+      "cost_usd": 0.0499,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 10804,
+          "cost_usd": 0.012242
+        },
+        {
+          "name": "policy",
+          "ms": 0,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "segment",
+          "ms": 24063,
+          "cost_usd": 0.0025
+        },
+        {
+          "name": "clean_plate",
+          "ms": 24200,
+          "cost_usd": 0.01
+        },
+        {
+          "name": "register_composite",
+          "ms": 2015,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "verify",
+          "ms": 4591,
+          "cost_usd": 0.005839
+        },
+        {
+          "name": "final_check",
+          "ms": 3700,
+          "cost_usd": 0.005945
+        },
+        {
+          "name": "typeset",
+          "ms": 333,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "selfcheck",
+          "ms": 15404,
+          "cost_usd": 0.013391
+        }
+      ],
+      "warnings": [
+        "t11: text did not fit and was clamped",
+        "t15: text did not fit and was clamped"
+      ],
+      "page": "menu",
+      "source": "menu-after.json"
+    },
+    {
+      "run": 2,
+      "job": "ccb8c8ffe272",
+      "wall_ms": 61834,
+      "total_ms": 61779,
+      "cost_usd": 0.052,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 10600,
+          "cost_usd": 0.012841
+        },
+        {
+          "name": "policy",
+          "ms": 0,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "segment",
+          "ms": 22351,
+          "cost_usd": 0.0025
+        },
+        {
+          "name": "clean_plate",
+          "ms": 22486,
+          "cost_usd": 0.01
+        },
+        {
+          "name": "register_composite",
+          "ms": 1819,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "verify",
+          "ms": 5668,
+          "cost_usd": 0.006265
+        },
+        {
+          "name": "final_check",
+          "ms": 4805,
+          "cost_usd": 0.006141
+        },
+        {
+          "name": "typeset",
+          "ms": 324,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "selfcheck",
+          "ms": 15593,
+          "cost_usd": 0.014298
+        }
+      ],
+      "warnings": [
+        "t3: text did not fit and was clamped",
+        "t15: text did not fit and was clamped",
+        "t16: text did not fit and was clamped"
+      ],
+      "page": "menu",
+      "source": "menu-after.json"
+    }
+  ]
+}
