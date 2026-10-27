@@ -1,0 +1,36 @@
+{
+  "job": "e13f9585b24f",
+  "results": [
+    {
+      "name": "menu select",
+      "ok": true,
+      "detail": "panel shows t1"
+    },
+    {
+      "name": "menu edit text",
+      "ok": true,
+      "detail": "document has the new Arabic"
+    },
+    {
+      "name": "menu drag",
+      "ok": true,
+      "detail": "244,311,1047,442 -> 338,358,1141,489"
+    },
+    {
+      "name": "menu undo",
+      "ok": true,
+      "detail": "x 338 -> 244"
+    },
+    {
+      "name": "menu reload persistence",
+      "ok": true,
+      "detail": "textarea after reload: قائمة الاختبار"
+    },
+    {
+      "name": "menu no console errors",
+      "ok": true,
+      "detail": "none"
+    }
+  ],
+  "consoleErrors": []
+}

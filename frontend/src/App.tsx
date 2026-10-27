@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { artifactUrl, fetchHealth, localize, type Health, type Job } from "./api";
+import DemoBadge from "./DemoBadge";
 import Editor from "./editor/Editor";
 import { useLang } from "./i18n";
 
@@ -13,6 +14,8 @@ export default function App() {
 
 function Home() {
   const { lang, setLang, t, stage } = useLang();
+  const clean = new URLSearchParams(window.location.search).get("clean") === "1";
+  const [replay, setReplay] = useState<{ index: number; done: boolean }>({ index: 0, done: true });
   const [health, setHealth] = useState<Health | null>(null);
   const [register, setRegister] = useState<string>("egyptian");
   const [job, setJob] = useState<Job | null>(null);
@@ -59,6 +62,33 @@ function Home() {
     },
     [register],
   );
+
+  useEffect(() => {
+    if (!job) {
+      setReplay({ index: 0, done: true });
+      return;
+    }
+    if (!job.demo) {
+      setReplay({ index: 0, done: true });
+      return;
+    }
+    // Replay the recorded stage progress at the real recorded pace: no compression,
+    // and the receipt below still shows the original total time and cost.
+    const timers: number[] = [];
+    let accumulated = 0;
+    job.stages.forEach((item, index) => {
+      accumulated += item.ms || 0;
+      timers.push(
+        window.setTimeout(() => {
+          setReplay({ index: index + 1, done: index === job.stages.length - 1 });
+        }, accumulated),
+      );
+    });
+    setReplay({ index: 0, done: job.stages.length === 0 });
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id));
+    };
+  }, [job]);
 
   const registerLabel = (id: string) => (id === "egyptian" ? t("registerEgyptian") : t("registerMsa"));
 
@@ -126,13 +156,15 @@ function Home() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-ink/40">
-            {health
-              ? health.credential_configured
-                ? t("apiConfigured")
-                : t("apiMissing")
-              : t("backendOffline")}
-          </p>
+          {!clean && (
+            <p className="text-xs text-ink/40">
+              {health
+                ? health.credential_configured
+                  ? t("apiConfigured")
+                  : t("apiMissing")
+                : t("backendOffline")}
+            </p>
+          )}
         </div>
       </section>
 
@@ -142,7 +174,26 @@ function Home() {
         </p>
       )}
 
-      {job && (
+      {job?.demo && <DemoBadge source={job.demo_source} />}
+
+      {job?.demo && !replay.done && (
+        <section className="rounded-2xl border border-sand bg-white/70 p-5">
+          <p className="mb-2 text-xs uppercase tracking-widest text-ink/50">
+            Replaying recorded stages at their real pace
+          </p>
+          <ul className="space-y-1 text-sm">
+            {job.stages.map((item, index) => (
+              <li key={item.name} className={index < replay.index ? "text-nile" : "text-ink/30"}>
+                {index < replay.index ? "✓ " : "· "}
+                {item.name}
+                <span className="ms-2 text-xs text-ink/40">{Math.round(item.ms)} ms</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {job && (!job.demo || replay.done) && (
         <>
           <section className="grid gap-4 md:grid-cols-2">
             {/* Pixel content: never mirrored, its own LTR coordinate space. */}

@@ -42,6 +42,10 @@ export type Job = {
   warnings: string[];
   total_cost_usd: number;
   total_ms: number;
+  demo?: boolean;
+  demo_source?: string;
+  demo_note?: string;
+  demo_recorded_job?: string;
 };
 
 export async function fetchHealth(signal?: AbortSignal): Promise<Health> {

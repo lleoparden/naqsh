@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import DemoBadge from "../DemoBadge";
 import { layerById, FONTS, FONT_LABELS, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
 
@@ -20,10 +21,21 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [split, setSplit] = useState(100);
   const [draft, setDraft] = useState<DragState>(null);
   const [retranslateCost, setRetranslateCost] = useState<number | null>(null);
+  const [demoSource, setDemoSource] = useState<string | undefined>(undefined);
   const container = useRef<HTMLDivElement | null>(null);
   const plateCanvas = useRef<HTMLCanvasElement | null>(null);
 
   const layer = layerById(doc, selected);
+
+  useEffect(() => {
+    if (!jobId) return;
+    fetch(`/api/jobs/${jobId}`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((meta) => {
+        if (meta?.demo) setDemoSource(meta.demo_source || "recorded run");
+      })
+      .catch(() => undefined);
+  }, [jobId]);
 
   const toPage = useCallback(
     (event: { clientX: number; clientY: number }) => {
@@ -186,6 +198,7 @@ export default function Editor({ jobId }: { jobId: string }) {
 
   return (
     <div className="flex h-screen flex-col bg-paper text-ink">
+      {demoSource && <DemoBadge source={demoSource} />}
       <header className="flex flex-wrap items-center gap-3 border-b border-sand px-4 py-2 text-sm">
         <a href="/" className="font-semibold">
           Naqsh
