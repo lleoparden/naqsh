@@ -1,0 +1,137 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "job": "b4b4df601607",
+      "wall_ms": 61603,
+      "total_ms": 61521,
+      "cost_usd": 0.0499,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 10804,
+          "cost_usd": 0.012242
+        },
+        {
+          "name": "policy",
+          "ms": 0,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "segment",
+          "ms": 24063,
+          "cost_usd": 0.0025
+        },
+        {
+          "name": "clean_plate",
+          "ms": 24200,
+          "cost_usd": 0.01
+        },
+        {
+          "name": "register_composite",
+          "ms": 2015,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "verify",
+          "ms": 4591,
+          "cost_usd": 0.005839
+        },
+        {
+          "name": "final_check",
+          "ms": 3700,
+          "cost_usd": 0.005945
+        },
+        {
+          "name": "typeset",
+          "ms": 333,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "selfcheck",
+          "ms": 15404,
+          "cost_usd": 0.013391
+        }
+      ],
+      "warnings": [
+        "t11: text did not fit and was clamped",
+        "t15: text did not fit and was clamped"
+      ]
+    },
+    {
+      "run": 2,
+      "job": "ccb8c8ffe272",
+      "wall_ms": 61834,
+      "total_ms": 61779,
+      "cost_usd": 0.052,
+      "regions": 16,
+      "stages": [
+        {
+          "name": "read",
+          "ms": 10600,
+          "cost_usd": 0.012841
+        },
+        {
+          "name": "policy",
+          "ms": 0,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "segment",
+          "ms": 22351,
+          "cost_usd": 0.0025
+        },
+        {
+          "name": "clean_plate",
+          "ms": 22486,
+          "cost_usd": 0.01
+        },
+        {
+          "name": "register_composite",
+          "ms": 1819,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "verify",
+          "ms": 5668,
+          "cost_usd": 0.006265
+        },
+        {
+          "name": "final_check",
+          "ms": 4805,
+          "cost_usd": 0.006141
+        },
+        {
+          "name": "typeset",
+          "ms": 324,
+          "cost_usd": 0.0
+        },
+        {
+          "name": "selfcheck",
+          "ms": 15593,
+          "cost_usd": 0.014298
+        }
+      ],
+      "warnings": [
+        "t3: text did not fit and was clamped",
+        "t15: text did not fit and was clamped",
+        "t16: text did not fit and was clamped"
+      ]
+    }
+  ],
+  "median_total_ms": 61650,
+  "median_wall_ms": 61718,
+  "range_total_ms": [
+    61521,
+    61779
+  ],
+  "regions": [
+    16,
+    16
+  ],
+  "cost_usd": [
+    0.0499,
+    0.052
+  ]
+}

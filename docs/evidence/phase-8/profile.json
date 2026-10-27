@@ -1,0 +1,37 @@
+{
+  "job": "e13f9585b24f",
+  "note": "menu job, offline, same machine. 'before' = Pillow MaxFilter/MinFilter and per-mask loops; 'after' = cv2 morphology, single union dilation, no per-mask plate work.",
+  "before": {
+    "coverage_for_all_regions_ms": 8697.1,
+    "alignment_report_ms": 39179.9,
+    "composite_ms": 5043.1,
+    "clean_flat_interior_ms": 2527.6,
+    "estimate_shift_ms": 358.2,
+    "apply_shift_ms": 76.4,
+    "measure_dirty_plate_ms": 20.6,
+    "sum_register_plus_coverage_ms": 56260.9
+  },
+  "after": {
+    "coverage_for_all_regions_ms": 1879.6,
+    "alignment_report_ms": 417.4,
+    "composite_ms": 129.8,
+    "clean_flat_interior_ms": 446.6,
+    "estimate_shift_ms": 357.6,
+    "apply_shift_ms": 77.4,
+    "measure_dirty_plate_ms": 17.9,
+    "sum_register_plus_coverage_ms": 3683.8
+  },
+  "speedups": {
+    "alignment_report": 93.9,
+    "composite": 38.8,
+    "clean_flat_interior": 5.7,
+    "coverage_for": 4.6,
+    "register_plus_coverage_total": 15.3
+  },
+  "equivalence": {
+    "jobs": ["e13f9585b24f", "d3dbface16b8", "605213b894ff"],
+    "composite_max_abs_diff": 0,
+    "composite_differing_pixels": 0,
+    "coverage_max_abs_diff": 0
+  }
+}

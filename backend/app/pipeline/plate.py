@@ -12,6 +12,8 @@ from __future__ import annotations
 import numpy as np
 from PIL import Image, ImageFilter
 
+from . import morph
+
 from .meta import Usage, image_edit
 from .types import BBox
 
@@ -165,8 +167,8 @@ def alignment_report(
     replacement = np.asarray(plate.convert("RGB"), dtype=np.int16)
     per_region: list[float] = []
     for index, mask in enumerate(masks):
-        grown_outer = mask.filter(ImageFilter.MaxFilter(2 * outer + 1))
-        grown_inner = mask.filter(ImageFilter.MaxFilter(2 * inner + 1))
+        grown_outer = morph.dilate(mask, outer)
+        grown_inner = morph.dilate(mask, inner)
         ring = (np.asarray(grown_outer, dtype=np.uint8) > 127) & ~(np.asarray(grown_inner, dtype=np.uint8) > 127)
         if ring.sum() < 50:
             continue
@@ -191,11 +193,9 @@ def composite(
     if not masks:
         raise ValueError("compositing needs at least one mask")
 
-    coverage = np.zeros((source.height, source.width), dtype=np.uint8)
-    for mask in masks:
-        # MaxFilter(1) divides by zero inside Pillow, so a zero dilation means "as is".
-        grown = mask.filter(ImageFilter.MaxFilter(2 * dilation + 1)) if dilation > 0 else mask
-        coverage = np.maximum(coverage, np.asarray(grown, dtype=np.uint8))
+    # One dilation of the union instead of one per mask: dilation distributes over
+    # union, so the result is identical and the menu page stops spending seconds here.
+    coverage = morph.union_dilated(masks, dilation)
 
     inside = coverage > 127
     original = np.asarray(source.convert("RGB"), dtype=np.uint8)

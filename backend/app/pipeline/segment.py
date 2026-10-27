@@ -14,6 +14,8 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
+from . import morph
+
 from .meta import SamObject, Usage, sam_segment
 from .types import BBox, TextRegion
 
@@ -116,7 +118,7 @@ def clean_flat_interior(
     so the outline is never touched, and the operation is skipped when the interior is
     not dominated by one colour — a photograph must keep its texture.
     """
-    interior = mask.filter(ImageFilter.MinFilter(2 * erode + 1)) if erode > 0 else mask
+    interior = morph.erode(mask, erode)
     selected = np.asarray(interior, dtype=np.uint8) > 127
     if selected.sum() < 500:
         return image, False
@@ -137,7 +139,7 @@ def dilate(mask: Image.Image, px: int) -> Image.Image:
     """Grow a mask so antialiased edges and the old lettering halo are covered."""
     if px <= 0:
         return mask
-    return mask.filter(ImageFilter.MaxFilter(2 * px + 1))
+    return morph.dilate(mask, px)
 
 
 def extend_with_box(mask: Image.Image, box: BBox, *, pad: int = 8) -> Image.Image:

@@ -126,6 +126,9 @@ class PageJob:
     regions: list[TextRegion] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     total_cost_usd: float = 0.0
+    # Wall time for the whole job. Stage ms are real durations too, but some stages now
+    # overlap (segment with clean_plate), so their sum is not the elapsed time.
+    elapsed_ms: int = 0
 
     def add_stage(self, name: str, ms: int, cost_usd: float, **detail: Any) -> StageReport:
         stage = StageReport(name=name, ms=ms, cost_usd=cost_usd, detail=detail)
@@ -144,5 +147,6 @@ class PageJob:
             "regions": [r.to_dict() for r in self.regions],
             "warnings": self.warnings,
             "total_cost_usd": round(self.total_cost_usd, 6),
-            "total_ms": sum(s.ms for s in self.stages),
+            "total_ms": self.elapsed_ms or sum(s.ms for s in self.stages),
+            "stage_ms_sum": sum(s.ms for s in self.stages),
         }

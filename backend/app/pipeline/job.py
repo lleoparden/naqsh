@@ -14,6 +14,7 @@ Every region records which strategy produced its final pixels.
 from __future__ import annotations
 
 import io
+from concurrent.futures import ThreadPoolExecutor
 import json
 import re
 import time
@@ -144,6 +145,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         source = opened.convert("RGB")
     width, height = source.size
     job = PageJob(id=job_id, register=register, width=width, height=height)
+    job._started = time.perf_counter()
     job.artifacts["source"] = "source.png"
 
     # 1. Read + translate ---------------------------------------------------------
@@ -182,10 +184,16 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         _finish(job, folder, source, source)
         return job
 
-    # 2. Segment + ink-derived coverage --------------------------------------------
+    # 2. Segment + ink-derived coverage, concurrently with the clean plate ----------
+    # SAM (segment) and Muse Image (clean plate) are independent HTTP calls on the same
+    # bytes with no shared state, so the page waits for the slower one, not the sum.
     started = time.perf_counter()
-    masks, sam_usage, warnings = segment_stage.segment_regions(image_bytes, repaint, width, height)
-    job.warnings.extend(warnings)
+    plate_started = time.perf_counter()
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        segment_future = pool.submit(segment_stage.segment_regions, image_bytes, repaint, width, height)
+        plate_future = pool.submit(plate_stage.clean_plate, image_bytes)
+        masks, sam_usage, warnings = segment_future.result()
+        job.warnings.extend(warnings)
     coverage: dict[str, Image.Image] = {}
     leader_runs: list[dict] = []
     for region in repaint:
@@ -226,9 +234,9 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     overlay.save(folder / "masks-overlay.png")
     job.artifacts["mask_overlay"] = "masks-overlay.png"
 
-    # 3. Clean plate --------------------------------------------------------------
-    started = time.perf_counter()
-    plate_raw, _plate_usage = plate_stage.clean_plate(image_bytes)
+        # 3. Clean plate (the pool waited for the Muse Image call on exit) ------------
+    plate_raw, _plate_usage = plate_future.result()
+    plate_ms = _ms(plate_started)
     with Image.open(io.BytesIO(plate_raw)) as opened:
         plate_image = opened.convert("RGB")
     plate_size = plate_image.size
@@ -236,10 +244,11 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     job.artifacts["plate_raw"] = "plate-raw.png"
     job.add_stage(
         "clean_plate",
-        _ms(started),
+        plate_ms,
         0.01,
         images=1,
         plate_size=list(plate_size),
+        concurrent_with=["segment"],
     )
 
     # 4. Register + composite ------------------------------------------------------
@@ -443,6 +452,9 @@ def _finish(job: PageJob, folder: Path, source: Image.Image, final: Image.Image)
     combo.paste(final, (source.width + 24, 0))
     combo.save(folder / "before-after.png")
     job.artifacts["before_after"] = "before-after.png"
+    started = getattr(job, "_started", None)
+    if started is not None:
+        job.elapsed_ms = int(round((time.perf_counter() - started) * 1000))
     (folder / "job.json").write_text(json.dumps(job.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8")
 
 
