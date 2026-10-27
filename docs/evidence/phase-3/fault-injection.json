@@ -1,0 +1,141 @@
+{
+  "job": "d3dbface16b8",
+  "injected_regions": 12,
+  "clean_regions": 6,
+  "caught": 11,
+  "catch_rate": 0.917,
+  "correct_class": 8,
+  "class_accuracy": 0.667,
+  "false_positives": 0,
+  "false_positive_rate": 0.0,
+  "cost_usd": 0.010753,
+  "rows": [
+    {
+      "id": "f1",
+      "truth": "overflow",
+      "source": "CHAPTER ONE",
+      "arabic": "الفصل الأول",
+      "predicted": "overflow"
+    },
+    {
+      "id": "f2",
+      "truth": "clipping",
+      "source": "CHAPTER ONE",
+      "arabic": "الفصل الأول",
+      "predicted": "none"
+    },
+    {
+      "id": "f3",
+      "truth": "unreadable",
+      "source": "CHAPTER ONE",
+      "arabic": "الفصل الأول",
+      "predicted": "unreadable"
+    },
+    {
+      "id": "f4",
+      "truth": "bad_translation",
+      "source": "CHAPTER ONE",
+      "arabic": "شكراً جزيلاً",
+      "predicted": "clipping"
+    },
+    {
+      "id": "f5",
+      "truth": "overflow",
+      "source": "FRESH BREAD?",
+      "arabic": "عيش طازة؟",
+      "predicted": "overflow"
+    },
+    {
+      "id": "f6",
+      "truth": "clipping",
+      "source": "FRESH BREAD?",
+      "arabic": "عيش طازة؟",
+      "predicted": "overflow"
+    },
+    {
+      "id": "f7",
+      "truth": "unreadable",
+      "source": "FRESH BREAD?",
+      "arabic": "عيش طازة؟",
+      "predicted": "unreadable"
+    },
+    {
+      "id": "f8",
+      "truth": "bad_translation",
+      "source": "FRESH BREAD?",
+      "arabic": "الطقس جميل",
+      "predicted": "bad_translation"
+    },
+    {
+      "id": "f9",
+      "truth": "overflow",
+      "source": "EVERY MORNING",
+      "arabic": "كل يوم الصبح",
+      "predicted": "overflow"
+    },
+    {
+      "id": "f10",
+      "truth": "clipping",
+      "source": "EVERY MORNING",
+      "arabic": "كل يوم الصبح",
+      "predicted": "overflow"
+    },
+    {
+      "id": "f11",
+      "truth": "unreadable",
+      "source": "EVERY MORNING",
+      "arabic": "كل يوم الصبح",
+      "predicted": "unreadable"
+    },
+    {
+      "id": "f12",
+      "truth": "bad_translation",
+      "source": "EVERY MORNING",
+      "arabic": "نص آخر تماماً",
+      "predicted": "bad_translation"
+    },
+    {
+      "id": "c1",
+      "truth": "none",
+      "source": "CHAPTER ONE",
+      "arabic": "الفصل الأول",
+      "predicted": "none"
+    },
+    {
+      "id": "c2",
+      "truth": "none",
+      "source": "FRESH BREAD?",
+      "arabic": "عيش طازة؟",
+      "predicted": "none"
+    },
+    {
+      "id": "c3",
+      "truth": "none",
+      "source": "EVERY MORNING",
+      "arabic": "كل يوم الصبح",
+      "predicted": "none"
+    },
+    {
+      "id": "c4",
+      "truth": "none",
+      "source": "TODAY'S SPECIAL",
+      "arabic": "عرض النهاردة",
+      "predicted": "none"
+    },
+    {
+      "id": "c5",
+      "truth": "none",
+      "source": "MINT TEA 25",
+      "arabic": "شاي بالنعناع 25",
+      "predicted": "none"
+    },
+    {
+      "id": "c6",
+      "truth": "none",
+      "source": "BASBOUSA 30",
+      "arabic": "بسبوسة 30",
+      "predicted": "none"
+    }
+  ],
+  "raw": "{\"regions\": [{\"id\": \"f1\", \"ok\": false, \"issue\": \"overflow\", \"note\": \"correct translation but huge text runs past box edges\"}, {\"id\": \"f2\", \"ok\": true, \"issue\": \"none\", \"note\": \"correct translation fits inside box\"}, {\"id\": \"f3\", \"ok\": false, \"issue\": \"unreadable\", \"note\": \"correct but far too small for box\"}, {\"id\": \"f4\", \"ok\": false, \"issue\": \"clipping\", \"note\": \"correct but letters cut off below box\"}, {\"id\": \"f5\", \"ok\": false, \"issue\": \"overflow\", \"note\": \"correct but huge text cut at sides\"}, {\"id\": \"f6\", \"ok\": false, \"issue\": \"overflow\", \"note\": \"correct but touches/overruns left edge\"}, {\"id\": \"f7\", \"ok\": false, \"issue\": \"unreadable\", \"note\": \"correct but too small\"}, {\"id\": \"f8\", \"ok\": false, \"issue\": \"bad_translation\", \"note\": \"says beautiful weather not fresh bread\"}, {\"id\": \"f9\", \"ok\": false, \"issue\": \"overflow\", \"note\": \"correct but runs past balloon edge\"}, {\"id\": \"f10\", \"ok\": false, \"issue\": \"overflow\", \"note\": \"correct but touches overruns edges\"}, {\"id\": \"f11\", \"ok\": false, \"issue\": \"unreadable\", \"note\": \"correct but too small\"}, {\"id\": \"f12\", \"ok\": false, \"issue\": \"bad_translation\", \"note\": \"says totally different text not every morning\"}, {\"id\": \"c1\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful and fits\"}, {\"id\": \"c2\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful and fits\"}, {\"id\": \"c3\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful and fits\"}, {\"id\": \"c4\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful and fits\"}, {\"id\": \"c5\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful keeps 25 and fits\"}, {\"id\": \"c6\", \"ok\": true, \"issue\": \"none\", \"note\": \"faithful keeps 30 and fits\"}]}"
+}

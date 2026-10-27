@@ -86,6 +86,8 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 | **Gate fails 9/10:** detector 7/10 clean; poster 2/2 flat-band smear, label 2/2 ghost+patch, menu 1/2 leader dots | `docs/evidence/phase-4/README.md` + contact sheet |
 | 2026-10-27 | HarfBuzz typesetting gate: 6 runs (comic, menu, chalkboard × Egyptian/MSA), **0 overflow**, $0.1823 | `docs/evidence/phase-3/typeset-gate.md` |
 | 2026-10-27 | Step 0: 6 repeat runs on comic/menu, 6/6 clean by detector; menu keeps leader dots | `docs/evidence/phase-3/step0.md` |
+| 2026-10-27 | Spark self-check, injected faults: **11/12 caught (91.7%), 8/12 correct class (66.7%), 0/6 false positives**, $0.0108 | `docs/evidence/phase-3/selfcheck.md` |
+| 2026-10-27 | Self-check on real pages: 0 flags, ~$0.002/page extra, no fix pass triggered | receipts from the comic/menu runs |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
 
 ### Time-saved measurement (the Impact claim)

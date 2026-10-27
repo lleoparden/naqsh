@@ -280,6 +280,28 @@ def _decode_sam(events: list[dict[str, Any]], image_size: tuple[int, int]) -> li
     return objects
 
 
+def spark_translate(source_text: str, current: str, note: str, register_instruction: str) -> tuple[str, Usage]:
+    """Ask Spark for one corrected Arabic line after a reviewer note."""
+    prompt = (
+        "You are localizing a page into Arabic. One line was flagged by a reviewer.\n"
+        f"Source text: {source_text}\n"
+        f"Current Arabic: {current}\n"
+        f"Reviewer note: {note}\n"
+        f"Register: {register_instruction}\n"
+        'Return strict JSON only: {"translation_ar": "..."} — one natural line, Arabic script only, '
+        "short enough for the same space, no dot leaders, no explanation."
+    )
+    payload = {
+        "model": settings.spark_model,
+        "input": [{"type": "message", "role": "user", "content": [{"type": "input_text", "text": prompt}]}],
+        "reasoning": {"effort": "minimal"},
+        "max_output_tokens": 600,
+    }
+    body = _post("/responses", payload)
+    data = _parse_json_object(_response_text(body))
+    return str(data.get("translation_ar") or current).strip(), Usage.from_response(body)
+
+
 def image_generate(prompt: str, *, size: str = "1024x1536", timeout: float = 300.0) -> tuple[bytes, Usage]:
     """Text-to-image; returns PNG bytes (used for fixtures and the demo test page)."""
     payload = {
