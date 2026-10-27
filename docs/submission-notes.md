@@ -91,6 +91,28 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 | UI language toggle: EN default, AR mirrors; screenshots committed | `docs/evidence/phase-3/ui-toggle.md`, `ui-en.png`, `ui-ar.png` |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
 
+### Running API spend (receipt-based)
+
+Recomputed 2026-10-27 17:50 Cairo with `backend/scripts/spend_report.py`:
+
+| Source | Count | Cost |
+| --- | --- | --- |
+| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 45 jobs | **$1.2224** |
+| Script-call ledger (`docs/evidence/api-spend.jsonl`) — fault-injection vision calls | 4 calls | **$0.0377** |
+| Probe receipts (`backend/.cache/probes/*.json`) | 11 files | **$0.0000 recorded** — 6 receipt types never carried a cost field |
+| **Traceable total** | | **$1.2601** |
+
+Phase 1 probe spend was reported at the time as ≈$0.040, but those receipts do not
+carry a cost field, so it is **not** in the total above; it is mentioned only as an
+estimate, not folded into a receipt-based number.
+
+**The earlier discrepancy, resolved:** the Phase 3 report showed $0.5033 while a
+receipt-only scan said $0.4657. Both were real: $0.4657 was pipeline jobs only
+(6 step-0 + 6 typesetting-gate + 2 live runs), and $0.5033 added the four
+fault-injection script calls ($0.0377) that are not jobs. The **correct task total is
+$0.5034**; the report should have labelled which side of the line each number sat on.
+New script calls now append to the ledger so this cannot drift again.
+
 ### Typesetting engine and fonts (why)
 
 Pillow does not shape Arabic, so the Phase 2 renderer used presentation-form fonts
