@@ -49,3 +49,12 @@ The pipeline is assembled end to end on one page as early as possible (Phase 2),
 then each risky stage is hardened behind a gate. Rationale: the demo video is 25%
 of the score and must show the full pipeline; a beautiful stage that never meets
 the others is worthless.
+
+## 2026-10-27 — Demo mode replays real runs, never fakes one
+
+Recording aid for the 25%-weighted video: five real, already-paid jobs are cached under
+`fixtures/demo/` with their original receipts (stage ms and cost untouched). A hash
+match replays the job; anything else runs live. The UI badge is not optional, the stage
+replay keeps the recorded pace, and the final video must include one live run. Rejected
+alternatives: faster-than-real replays (dishonest), recorded video clips (not the
+product), and a separate mock backend (would drift from the real API).
