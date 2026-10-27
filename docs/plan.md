@@ -211,10 +211,15 @@ copy, honest empty states.
 **Gate:** menu page completes; each failure path shows a useful message; the cost
 table has measured numbers. **Fallback:** demo one page type and say it.
 
-## Phase 9 — Feature freeze and final video
+## Phase 9 — Feature freeze, gallery copy and final video
 
-**Work:** freeze on 1 Nov; script per `submission-notes.md`; record at 1080p with
-captions; upload unlisted; verify the link in a private window; trim to ≤3:00.
+**Work:** freeze on 1 Nov; **write the public-gallery title, tagline and description
+(for a public audience, not the judges' technical rubric) and make a thumbnail**
+(1280×720 or the gallery's required size, no unlicensed art); script per
+`submission-notes.md`; record at 1080p with captions; upload unlisted; verify the link
+in a private window; trim to ≤3:00. Save build-in-public before/after clips as they are
+made (the pipeline already writes `before-after.png` per job; export short clips from
+the editor and keep them with the evidence).
 
 **Gate:** video link works logged out, shows only hackathon work, shows the full
 pipeline, the editor, and the layered export. **Fallback:** the Phase 7 backup
@@ -225,12 +230,17 @@ recording, re-narrated.
 **Work:** produce and check every item in section 7 of the brief: team, track,
 problem statement, description, public repo with clean history and no secrets, the
 video link, Meta-products and why-it-matters answers, feedback, and the optional X
-link. Re-read the repo as a judge (README, history, assets); run the secret scan;
-submit on 3 Nov; save the confirmation.
+link. Re-read the repo as a judge (README, history, assets); run the secret scan.
+**Submit early on 3 Nov with everything except the X link, then edit the submission
+before the deadline to add the best X post link** — edits are allowed until the
+deadline (organizer answer, Discord #questions, 2026-10-27). Save the confirmation.
+X post: Most Viral is counted through **Nov 8 EOD**, so the post can go live during the
+event; build-in-public posts do not affect eligibility.
 
-**Gate:** the form is submitted and a confirmation screenshot exists in `docs/`.
+**Gate:** the form is submitted early on 3 Nov, edited with the X link before the
+deadline, and a confirmation screenshot exists in `docs/`.
 **Fallback:** if a field is not ready, submit the strongest honest version on 3 Nov
-and improve nothing after the deadline — late submissions are not considered.
+and improve it by editing before the deadline — late submissions are not considered.
 
 ---
 
