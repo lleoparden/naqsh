@@ -212,10 +212,11 @@ One page, three text regions, this probe set:
 | SAM box prompts (1 region) | $0.00250 |
 | Muse Image generate | $0.01000 |
 | Muse Image edit | $0.01000 |
-| **One production page (vision + 1 SAM pass + 1 edit)** | **≈ $0.022** |
+| **One production page, comic (3 regions)** | **$0.0257–$0.0291** (live median $0.0262) |
+| **One production page, menu (16 regions)** | **$0.0367–$0.0661** (live median $0.0520) |
 | **This phase's total spend** | **≈ $0.040** |
 
-At ~$0.02–0.03/page the $150 credit covers thousands of pages; wall-clock, not
+At these per-page costs the $150 credit covers thousands of pages; wall-clock, not
 money, is the constraint. A page currently costs **~20–30 s** of model time
 (6.8 vision + 3.4 SAM + 13.6 edit), before any local work.
 

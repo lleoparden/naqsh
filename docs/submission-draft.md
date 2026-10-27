@@ -74,8 +74,10 @@ Model roles and the API shapes are recorded in `docs/api-findings.md`.
 - **Muse Image is the only component that can invent clean background pixels.** Prompt-only
   editing is imperfect, which is why Naqsh registers and composites instead of trusting
   the whole re-render.
-- **Cost is low enough to iterate.** A page costs $0.026–$0.052 in the live receipts, so a
-  user can run the first pass without thinking about it.
+- **Cost is low enough to iterate.** The comic page (3 regions) costs
+  **$0.0257–$0.0291** and the menu page (16 regions) **$0.0367–$0.0661** in the live
+  receipts (`docs/evidence/phase-8/variance-summary.json`), so a user can run the first
+  pass without thinking about it.
 
 ## Optional feedback on Meta products
 
