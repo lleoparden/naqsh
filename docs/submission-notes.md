@@ -333,17 +333,18 @@ is still empty; no ratio is claimed.
 
 ### Time-saved measurement (the Impact claim)
 
-Protocol — write it once, follow it exactly:
+Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both
+pages by hand, screen-recorded, per step, and stops when the output is comparable in
+quality to Naqsh's. Ratios are reported per page, never pooled, and every ratio is
+**PENDING** until that run exists. No estimated ratio appears anywhere.
 
-1. Pick three pages from the test set (one comic page, one poster, one menu).
-2. **Hand baseline:** the owner localizes one page with their normal tools, timed
-   with a stopwatch, from opening the file to exporting. Record the number and
-   what "done" meant (text replaced, fitted, exported). Do this on camera if
-   possible — it becomes B-roll for the video.
-3. **Naqsh:** same page, same definition of done, timed from upload to export.
-   Count manual corrections (each region edit).
-4. Report: minutes hand vs. minutes with Naqsh, corrections per page, and the
-   ratio. State the sample size honestly (n=3, one operator).
+| Page | Regions | Naqsh median (live receipt) | Manual total (owner) | Ratio |
+|---|---|---|---|---|
+| comic `01-comic-flat.png` | 3 | 33.8 s (0.56 min) | _empty_ | **PENDING** |
+| menu `03-menu-paper.png` | 16 | 61.8 s (1.03 min) | _empty_ | **PENDING** |
+
+The Naqsh side comes from `docs/evidence/phase-8/variance-summary.json` (wall-time
+medians). The manual side stays empty until the protocol is run.
 
 ## Media worth using (screenshots / clips)
 
