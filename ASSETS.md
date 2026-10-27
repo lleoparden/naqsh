@@ -22,6 +22,9 @@ Every asset gets a row here *before* it is committed.
 | `assets/generated/fixtures/03-menu-paper.png` | Gate: dense menu text on printed paper | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
 | `assets/generated/fixtures/04-chalkboard.png` | Gate: light chalk text on a dark board | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
 | `assets/generated/fixtures/05-label-kraft.png` | Gate: small print on a photographed label | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
+| `assets/generated/fixtures/06-real-pd-poster.png` | Phase 5: real-world page with arched headline and tiny footer | [Wikimedia Commons — Cook's Nile and Palestine Tours poster, c.1902](https://commons.wikimedia.org/wiki/File:Cook%27s_Nile_and_Palestine_Tours_poster_-_circa_1902.jpg) | **Public domain** (Commons `LicenseShortName`: "Public domain"; anonymous, published c.1902). Metadata snapshot in `fixtures/06-real-pd-poster.json`; accessed 2026-10-27 | 2026-10-27 |
+| `assets/generated/fixtures/07-comic-sfx.png` | Phase 5: small captions + stylised SFX | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
+| `assets/generated/fixtures/08-curved-poster.png` | Phase 5: curved headline + tiny footer | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
 
 ## Fonts
 

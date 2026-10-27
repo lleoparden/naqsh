@@ -1,0 +1,62 @@
+{
+  "01-comic-flat": {
+    "source": "Muse Image prompt (fixtures manifest)",
+    "expected": ["CHAPTER ONE", "FRESH BREAD?", "EVERY MORNING"]
+  },
+  "02-poster-watercolour": {
+    "source": "Muse Image prompt",
+    "expected": [
+      "ALEXANDRIA",
+      "THE PEARL OF THE MEDITERRANEAN",
+      "EST. 331 BC"
+    ]
+  },
+  "03-menu-paper": {
+    "source": "Muse Image prompt",
+    "expected": [
+      "KOSHARY HOUSE",
+      "HOUSE FAVORITES — FRESH & HOMEMADE",
+      "KOSHARY",
+      "FALAFEL",
+      "MINT TEA",
+      "BASBOUSA",
+      "LENTIL SOUP",
+      "RICE PUDDING",
+      "OPEN DAILY • 11AM - 10PM",
+      "ALL DISHES SERVED FRESH"
+    ]
+  },
+  "04-chalkboard": {
+    "source": "Muse Image prompt",
+    "expected": ["TODAY'S SPECIAL", "MINT TEA 25", "BASBOUSA 30"]
+  },
+  "05-label-kraft": {
+    "source": "Muse Image prompt",
+    "expected": ["CUMIN", "GROUND", "NET 100 G"]
+  },
+  "06-real-pd-poster": {
+    "source": "Wikimedia Commons, public domain (Cook's Nile and Palestine Tours, c.1902)",
+    "expected": [
+      "LONDON, BRIGHTON & SOUTH COAST RAILWAY.",
+      "COOK'S",
+      "NILE & PALESTINE",
+      "TOURS",
+      "Cataract Hotel, Assouan.",
+      "P. 790/1903.",
+      "JOHNSON, RIDDLE, COUCHMAN & CO. LONDON, S.E."
+    ]
+  },
+  "07-comic-sfx": {
+    "source": "Muse Image prompt",
+    "expected": ["THREE DAYS LATER", "MEANWHILE...", "KRAAK!"]
+  },
+  "08-curved-poster": {
+    "source": "Muse Image prompt",
+    "expected": [
+      "MIDNIGHT EXPRESS",
+      "PRINTED IN CAIRO — 2026",
+      "CAIRO · LUXOR · OVERNIGHT SERVICE",
+      "DAILY · LUXURY · NOCTURNE"
+    ]
+  }
+}

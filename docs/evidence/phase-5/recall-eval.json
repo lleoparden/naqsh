@@ -1,0 +1,347 @@
+[
+  {
+    "page": "01-comic-flat",
+    "expected": 3,
+    "found": 3,
+    "matched": 3,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 0,
+    "types": [
+      {
+        "id": "t1",
+        "type": "caption",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "dialogue",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "dialogue",
+        "action": "translate"
+      }
+    ]
+  },
+  {
+    "page": "02-poster-watercolour",
+    "expected": 3,
+    "found": 3,
+    "matched": 3,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 0,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "caption",
+        "action": "translate"
+      }
+    ]
+  },
+  {
+    "page": "03-menu-paper",
+    "expected": 10,
+    "found": 16,
+    "matched": 10,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 6,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 3,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t4",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t5",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t6",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t7",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t8",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t9",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t10",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t11",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t12",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t13",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t14",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t15",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t16",
+        "type": "signage",
+        "action": "translate"
+      }
+    ]
+  },
+  {
+    "page": "04-chalkboard",
+    "expected": 3,
+    "found": 5,
+    "matched": 3,
+    "recall": 1.0,
+    "precision": 0.6,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 2,
+    "merged": 2,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "price",
+        "action": "keep_numerals"
+      },
+      {
+        "id": "t4",
+        "type": "menu_item",
+        "action": "translate"
+      },
+      {
+        "id": "t5",
+        "type": "price",
+        "action": "keep_numerals"
+      }
+    ]
+  },
+  {
+    "page": "05-label-kraft",
+    "expected": 3,
+    "found": 3,
+    "matched": 3,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 0,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "price",
+        "action": "keep_numerals"
+      }
+    ]
+  },
+  {
+    "page": "06-real-pd-poster",
+    "expected": 7,
+    "found": 8,
+    "matched": 7,
+    "recall": 1.0,
+    "precision": 0.875,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 1,
+    "merged": 1,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "logo",
+        "action": "skip"
+      },
+      {
+        "id": "t4",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t5",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t6",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t7",
+        "type": "caption",
+        "action": "translate"
+      },
+      {
+        "id": "t8",
+        "type": "caption",
+        "action": "translate"
+      }
+    ]
+  },
+  {
+    "page": "07-comic-sfx",
+    "expected": 3,
+    "found": 3,
+    "matched": 3,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 0,
+    "types": [
+      {
+        "id": "t1",
+        "type": "caption",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "caption",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "sfx",
+        "action": "optional"
+      }
+    ]
+  },
+  {
+    "page": "08-curved-poster",
+    "expected": 4,
+    "found": 4,
+    "matched": 4,
+    "recall": 1.0,
+    "precision": 1.0,
+    "prices": 0,
+    "missing": [],
+    "hallucinated": [],
+    "split": 0,
+    "merged": 0,
+    "types": [
+      {
+        "id": "t1",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t2",
+        "type": "caption",
+        "action": "translate"
+      },
+      {
+        "id": "t3",
+        "type": "signage",
+        "action": "translate"
+      },
+      {
+        "id": "t4",
+        "type": "decorative",
+        "action": "skip"
+      }
+    ]
+  }
+]

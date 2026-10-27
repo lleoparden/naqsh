@@ -90,18 +90,22 @@ Fill this in with *observed* behavior, not the pitch.
 | 2026-10-27 | Spark self-check, injected faults: **11/12 caught (91.7%), 8/12 correct class (66.7%), 0/6 false positives**, $0.0108 | `docs/evidence/phase-3/selfcheck.md` |
 | 2026-10-27 | Self-check on real pages: 0 flags, ~$0.002/page extra, no fix pass triggered | receipts from the comic/menu runs |
 | 2026-10-27 | UI language toggle: EN default, AR mirrors; screenshots committed | `docs/evidence/phase-3/ui-toggle.md`, `ui-en.png`, `ui-ar.png` |
+| 2026-10-27 | **Phase 5 recall: 1.00 on all 8 fixtures**; precision 1.00 on 6, 0.88 (split line) and 0.60 (duplicated chalkboard run) on 2 | `docs/evidence/phase-5/recall-eval.json` |
+| 2026-10-27 | Leader dots: removed in 3/3 menu runs, 12 before/after crops | `docs/evidence/phase-5/leader-dots-before-after.png` |
+| 2026-10-27 | Region policy: prices keep Latin numerals, logos/decoration skipped, SFX optional-off | `docs/evidence/phase-5/README.md` |
+| 2026-10-27 | Curved/rotated headline: read and translated, set as a straight line — **unsupported**, scoped out | `docs/evidence/phase-5/curved-headline.png` |
 | _pending_ | **Time to localize one page by hand vs. with Naqsh** | Stopwatch protocol below |
 
 ### Running API spend (receipt-based)
 
-Recomputed 2026-10-27 17:50 Cairo with `backend/scripts/spend_report.py`:
+Recomputed 2026-10-27 19:20 Cairo with `backend/scripts/spend_report.py`:
 
 | Source | Count | Cost |
 | --- | --- | --- |
-| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 45 jobs | **$1.2224** |
-| Script-call ledger (`docs/evidence/api-spend.jsonl`) — fault-injection vision calls | 4 calls | **$0.0377** |
+| Pipeline job receipts (`backend/.cache/jobs/*/job.json`) | 54 jobs | **$1.5441** |
+| Script-call ledger (`docs/evidence/api-spend.jsonl`) — probe/eval/script calls | 24 calls | **$0.2046** |
 | Probe receipts (`backend/.cache/probes/*.json`) | 11 files | **$0.0000 recorded** — 6 receipt types never carried a cost field |
-| **Traceable total** | | **$1.2601** |
+| **Traceable total** | | **$1.7488** |
 
 Phase 1 probe spend was reported at the time as ≈$0.040, but those receipts do not
 carry a cost field, so it is **not** in the total above; it is mentioned only as an
@@ -143,6 +147,28 @@ Content stays Arabic: translations render `dir="rtl" lang="ar"` in both UI langu
 and the before/after figures are pinned `dir="ltr"` so the image is never mirrored.
 Arabic UI copy is a first draft marked `TODO(native-review)`; the result screen was not
 screenshot-tested (needs a live backend) — checklist in `docs/evidence/phase-3/ui-toggle.md`.
+
+### Region strategy and recall (Phase 5)
+
+Ground truth is the generation prompt (or the visible strings of the public-domain
+poster). Eight fixtures, one read each: **recall 1.00 on every page**, precision 1.00
+on six. The two exceptions are explained, not hidden: the menu returns its six prices
+as separate `price` regions (correct behaviour, counted apart from precision), the
+public-domain poster's top line is split into two regions, and one chalkboard run
+duplicated two item regions (a second run returned three clean regions).
+
+Policy, returned by Spark and logged per region in the receipt: dialogue/caption/
+signage/menu_item/title → translate; price → keep Latin numerals; logo/decorative →
+skip (original pixels untouched); SFX → optional, off by default. Skipped and
+optional regions never enter segmentation or repainting.
+
+Curved/rotated headlines are **unsupported**: the text is read and translated but set
+as a straight line in its bounding box, so an arched headline does not follow the arc.
+That is scoped out of the hackathon rather than faked.
+
+Leader dots from printed menus are now detected (evenly spaced small ink blobs, gated
+on the OCR text containing a dot run) and repainted away: 3 live runs, 12 before/after
+crops, no dots left.
 
 ### Time-saved measurement (the Impact claim)
 

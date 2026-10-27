@@ -38,6 +38,11 @@ def draw_regions(
         layout = layouts.get(region.id)
         if layout is None or not layout.lines:
             continue
+        # Policy: skipped regions keep the original artwork; optional regions (SFX)
+        # stay off by default until the editor turns them on. Prices keep their
+        # original Latin numerals and are drawn from source_text by the caller.
+        if region.action in ("skip", "optional"):
+            continue
         family = region.font_family
         color = (color_of or {}).get(region.id, region.color)
         box = region.container or region.bbox

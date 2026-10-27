@@ -2,3 +2,23 @@
 {"ts": "2026-10-27T14:49:36+00:00", "label": "fault-injection run 2 (first working set)", "cost_usd": 0.008561, "backfilled": true, "source": "session console output"}
 {"ts": "2026-10-27T14:49:36+00:00", "label": "fault-injection run 3 (isolated classes)", "cost_usd": 0.009338, "backfilled": true, "source": "session console output"}
 {"ts": "2026-10-27T14:49:36+00:00", "label": "fault-injection run 4 (final prompt)", "cost_usd": 0.010753, "backfilled": true, "source": "session console output"}
+{"ts": "2026-10-27T15:11:10+00:00", "label": "fixture generation 07-comic-sfx", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-27T15:11:24+00:00", "label": "fixture generation 08-curved-poster", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-27T15:12:10+00:00", "label": "recall eval 01-comic-flat", "cost_usd": 0.006681, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:12:22+00:00", "label": "recall eval 02-poster-watercolour", "cost_usd": 0.007399, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:12:30+00:00", "label": "recall eval 03-menu-paper", "cost_usd": 0.012678, "kind": "read", "regions": 16}
+{"ts": "2026-10-27T15:12:36+00:00", "label": "recall eval 04-chalkboard", "cost_usd": 0.006898, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:12:41+00:00", "label": "recall eval 05-label-kraft", "cost_usd": 0.006694, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:12:49+00:00", "label": "recall eval 06-real-pd-poster", "cost_usd": 0.008783, "kind": "read", "regions": 8}
+{"ts": "2026-10-27T15:12:55+00:00", "label": "recall eval 07-comic-sfx", "cost_usd": 0.007191, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:13:04+00:00", "label": "recall eval 08-curved-poster", "cost_usd": 0.008058, "kind": "read", "regions": 4}
+{"ts": "2026-10-27T15:13:30+00:00", "label": "recall eval 01-comic-flat", "cost_usd": 0.007618, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:13:37+00:00", "label": "recall eval 02-poster-watercolour", "cost_usd": 0.007015, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:13:44+00:00", "label": "recall eval 03-menu-paper", "cost_usd": 0.012144, "kind": "read", "regions": 16}
+{"ts": "2026-10-27T15:14:03+00:00", "label": "recall eval 04-chalkboard", "cost_usd": 0.008026, "kind": "read", "regions": 5}
+{"ts": "2026-10-27T15:14:10+00:00", "label": "recall eval 05-label-kraft", "cost_usd": 0.007601, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:14:17+00:00", "label": "recall eval 06-real-pd-poster", "cost_usd": 0.008785, "kind": "read", "regions": 8}
+{"ts": "2026-10-27T15:14:21+00:00", "label": "recall eval 07-comic-sfx", "cost_usd": 0.00659, "kind": "read", "regions": 3}
+{"ts": "2026-10-27T15:14:28+00:00", "label": "recall eval 08-curved-poster", "cost_usd": 0.008965, "kind": "read", "regions": 4}
+{"ts": "2026-10-27T15:14:50+00:00", "label": "inspect 04-chalkboard", "cost_usd": 0.006942, "kind": "read"}
+{"ts": "2026-10-27T15:14:57+00:00", "label": "inspect 06-real-pd-poster", "cost_usd": 0.008875, "kind": "read"}
