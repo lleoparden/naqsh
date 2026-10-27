@@ -15,13 +15,15 @@ from __future__ import annotations
 
 import io
 import json
+import re
 import time
 import uuid
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from . import coverage as coverage_stage
+from . import leaders as leaders_stage
 from . import plate as plate_stage
 from . import regions as regions_stage
 from . import render as render_stage
@@ -35,6 +37,7 @@ from .types import BBox, Layout, PageJob
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 JOBS_DIR = REPO_ROOT / "backend" / ".cache" / "jobs"
+LEADER_HINT = re.compile(r"[.·•…]{3,}")
 
 
 def _ms(started: float) -> int:
@@ -129,12 +132,30 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     masks, sam_usage, warnings = segment_stage.segment_regions(image_bytes, regions, width, height)
     job.warnings.extend(warnings)
     coverage: dict[str, Image.Image] = {}
+    leader_runs: list[dict] = []
     for region in regions:
         mask = masks.get(region.id)
         if mask is None:
             continue
         region.container = _container_for(region.bbox, mask)
         coverage[region.id], _area = coverage_stage.coverage_for(source, mask, region.bbox)
+        leader = None
+        if LEADER_HINT.search(region.source_text or ""):
+            # Only lines whose OCR text shows a dot run can have leaders; this keeps a
+            # decorative rule elsewhere on the page from being erased by mistake.
+            leader = leaders_stage.find_leaders(source, region.bbox, mask)
+        if leader is not None:
+            # Dotted menu leaders are punctuation, so the text mask misses them; add
+            # their bbox to the repaint area or they survive localization.
+            ImageDraw.Draw(coverage[region.id]).rectangle(leader.bbox.to_list(), fill=255)
+            leader_runs.append(
+                {
+                    "region": region.id,
+                    "bbox": leader.bbox.to_list(),
+                    "dots": leader.dots,
+                    "spacing": leader.spacing,
+                }
+            )
         name = f"mask-{region.id}.png"
         mask.save(folder / name)
         region.mask_path = name
@@ -144,6 +165,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         sam_usage.images * 2.50 / 1000,
         masks=len(masks),
         concepts="box prompts + ink extent",
+        leaders=leader_runs,
     )
     overlay = segment_stage.overlay_preview(source, coverage)
     overlay.save(folder / "masks-overlay.png")
