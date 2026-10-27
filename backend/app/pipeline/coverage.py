@@ -11,6 +11,8 @@ from __future__ import annotations
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
+from . import morph
+
 from .types import BBox
 
 MIN_INK_LUMINANCE = 55.0
@@ -79,5 +81,5 @@ def coverage_for(
     coverage = mask.copy()
     ImageDraw.Draw(coverage).rectangle(area.to_list(), fill=255)
     if dilate_px > 0:
-        coverage = coverage.filter(ImageFilter.MaxFilter(2 * dilate_px + 1))
+        coverage = morph.dilate(coverage, dilate_px)
     return coverage, area

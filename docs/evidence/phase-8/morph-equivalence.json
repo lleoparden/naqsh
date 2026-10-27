@@ -1,0 +1,38 @@
+[
+  {
+    "job": "e13f9585b24f",
+    "regions": 10,
+    "shift": [
+      0,
+      0
+    ],
+    "composite_max_abs_diff": 0,
+    "composite_differing_pixels": 0,
+    "coverage_max_abs_diff": 0,
+    "coverage_differing_pixels": 0
+  },
+  {
+    "job": "d3dbface16b8",
+    "regions": 3,
+    "shift": [
+      0,
+      -18
+    ],
+    "composite_max_abs_diff": 0,
+    "composite_differing_pixels": 0,
+    "coverage_max_abs_diff": 0,
+    "coverage_differing_pixels": 0
+  },
+  {
+    "job": "605213b894ff",
+    "regions": 3,
+    "shift": [
+      0,
+      0
+    ],
+    "composite_max_abs_diff": 0,
+    "composite_differing_pixels": 0,
+    "coverage_max_abs_diff": 0,
+    "coverage_differing_pixels": 0
+  }
+]

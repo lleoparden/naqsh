@@ -293,6 +293,25 @@ leaves the server); Vectr appears only in policy docs; `ASSETS.md` was missing t
 demo-cache directories (25 files) and now reports 0 uncovered of 49 tracked asset files;
 README layout gained `docs/evidence/` and `fixtures/demo/`; repo weight is 101.1 MB.
 
+### Menu speed (Phase 8a)
+
+The menu's 181 s median was dominated by Pillow rank filters, not by the models.
+Profile on the stored menu job (`docs/evidence/phase-8/profile.json`): alignment ring
+39.2 s, per-region coverage 8.7 s, per-mask composite 5.0 s, flat fill 2.5 s; phase
+correlation itself was 0.36 s.
+
+Replacing Pillow `MaxFilter`/`MinFilter` with `cv2.dilate`/`erode`, unioning the masks
+before one dilation instead of one per mask, and running **segment and clean_plate
+concurrently** (independent HTTP calls on the same bytes) cut the register+coverage
+work from **56.3 s to 3.7 s** and the menu end-to-end median from **181.1 s to 61.6 s**
+(two live runs: 61.5 s and 61.8 s; 16 regions both, cost $0.0499/$0.0520, unchanged).
+Equivalence on three stored jobs: **composite max pixel diff 0, 0 differing pixels**;
+coverage masks identical too (`docs/evidence/phase-8/morph-equivalence.json`).
+
+Because stages now overlap, `total_ms` is wall time and `stage_ms_sum` keeps the sum;
+without that change the receipt would have overstated the elapsed time (it did on the
+first post-change runs: 122 s total against 98.9 s wall).
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol — write it once, follow it exactly:
