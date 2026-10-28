@@ -111,6 +111,26 @@ const digitLine = lines.find((text) => /[٠-٩]/.test(text)) || "";
 record("digits switch on the page", /[٠-٩]/.test(digitLine), `line: ${digitLine || lines[0] || "none"}`);
 await page.screenshot({ path: `${OUT}/06-digits.png` });
 
+// 7. zoom controls live in the top bar and the slider is separate
+const zoomBefore = Number((await page.getByTestId("zoom-level").textContent())?.replace("%", ""));
+await page.getByRole("button", { name: "Zoom in" }).click();
+await page.waitForTimeout(200);
+const zoomAfter = Number((await page.getByTestId("zoom-level").textContent())?.replace("%", ""));
+record("zoom in control", zoomAfter > zoomBefore, `${zoomBefore}% -> ${zoomAfter}%`);
+await page.getByRole("button", { name: "Fit to screen" }).click();
+await page.waitForTimeout(200);
+const fitted = Number((await page.getByTestId("zoom-level").textContent())?.replace("%", ""));
+record("fit to screen control", fitted > 0 && fitted !== zoomAfter, `fitted to ${fitted}%`);
+record(
+  "slider is its own control",
+  (await page.getByTestId("before-after-control").count()) === 1,
+  "labeled before/after control present",
+);
+
+// 8. font option isolates the Arabic sample so it is not reordered (D)
+const option = await page.locator('[data-testid="font-select"] option').first().textContent();
+record("font sample bidi isolated", Boolean(option && option.includes("\u2067") && option.includes("\u2069")), option || "missing");
+
 record("no console errors", errors.length === 0, errors.slice(0, 2).join(" | ") || "none");
 fs.writeFileSync(`${OUT}/group1.json`, JSON.stringify({ results, consoleErrors: errors }, null, 2));
 await browser.close();
