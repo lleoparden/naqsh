@@ -24,6 +24,7 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [exportOpen, setExportOpen] = useState(false);
   const [exporting, setExporting] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [sampleFrom, setSampleFrom] = useState<"plate" | "original">("plate");
   const [renaming, setRenaming] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState("");
   const [dragLayer, setDragLayer] = useState<string | null>(null);
@@ -38,6 +39,7 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [demoSource, setDemoSource] = useState<string | undefined>(undefined);
   const container = useRef<HTMLDivElement | null>(null);
   const plateCanvas = useRef<HTMLCanvasElement | null>(null);
+  const sourceCanvas = useRef<HTMLCanvasElement | null>(null);
   const splitDrag = useRef(false);
 
   const layer = layerById(doc, selected);
@@ -133,7 +135,7 @@ export default function Editor({ jobId }: { jobId: string }) {
     if (!doc) return;
     const point = toPage(event);
     if (tool === "eyedropper") {
-      const canvas = plateCanvas.current;
+      const canvas = sampleFrom === "original" ? sourceCanvas.current : plateCanvas.current;
       const context = canvas?.getContext("2d");
       if (canvas && context) {
         const x = Math.max(0, Math.min(canvas.width - 1, Math.round(point.x)));
@@ -431,6 +433,28 @@ export default function Editor({ jobId }: { jobId: string }) {
           >
             <Pipette size={17} />
           </button>
+          {tool === "eyedropper" && (
+            <div className="mt-1 flex flex-col gap-1 border-t border-border pt-1">
+              <button
+                aria-label="Sample clean plate"
+                title="Sample from the clean plate"
+                aria-pressed={sampleFrom === "plate"}
+                className="h-7 w-9 text-[10px]"
+                onClick={() => setSampleFrom("plate")}
+              >
+                Plate
+              </button>
+              <button
+                aria-label="Sample original"
+                title="Sample from the original page"
+                aria-pressed={sampleFrom === "original"}
+                className="h-7 w-9 text-[10px]"
+                onClick={() => setSampleFrom("original")}
+              >
+                Orig
+              </button>
+            </div>
+          )}
           {tool === "cover" && (
             <div className="mt-1 flex flex-col gap-1 border-t border-border pt-1">
               <button
@@ -627,6 +651,7 @@ export default function Editor({ jobId }: { jobId: string }) {
             <span className="w-9 text-end text-ink/70">{showOriginal ? 100 : split}%</span>
           </div>
           <canvas ref={plateCanvas} className="hidden" />
+          <canvas ref={sourceCanvas} className="hidden" />
           <img
             src={`/api/jobs/${jobId}/files/composite.png`}
             alt=""
@@ -634,6 +659,20 @@ export default function Editor({ jobId }: { jobId: string }) {
             onLoad={(event) => {
               const image = event.currentTarget;
               const canvas = plateCanvas.current;
+              if (canvas && image.naturalWidth) {
+                canvas.width = image.naturalWidth;
+                canvas.height = image.naturalHeight;
+                canvas.getContext("2d")?.drawImage(image, 0, 0);
+              }
+            }}
+          />
+          <img
+            src={`/api/jobs/${jobId}/files/source.png`}
+            alt=""
+            className="hidden"
+            onLoad={(event) => {
+              const image = event.currentTarget;
+              const canvas = sourceCanvas.current;
               if (canvas && image.naturalWidth) {
                 canvas.width = image.naturalWidth;
                 canvas.height = image.naturalHeight;
