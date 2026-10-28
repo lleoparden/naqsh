@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Circle, Eye, EyeOff, Lock, Maximize2, Minus, MousePointer2, Pencil, Pipette, Plus, Redo2, Square, Type, Undo2, Unlock } from "lucide-react";
 import ColorField from "./ColorField";
+import StateIllustration from "../StateIllustration";
 import DemoBadge from "../DemoBadge";
 import { layerById, FONTS, FONT_LABELS, FONT_SAMPLES, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
@@ -268,7 +269,11 @@ export default function Editor({ jobId }: { jobId: string }) {
   );
 
   if (!doc) {
-    return <div className="p-10 text-sm text-ink/75">Loading job {jobId}…</div>;
+    return (
+      <div className="p-10">
+        <StateIllustration kind="loading" title="Loading the job" detail={jobId} />
+      </div>
+    );
   }
 
   const coverDraft = draft?.mode === "cover" ? draft : null;
@@ -276,7 +281,7 @@ export default function Editor({ jobId }: { jobId: string }) {
   return (
     <div className="flex h-screen flex-col bg-paper text-ink">
       {demoSource && <DemoBadge source={demoSource} />}
-      <header className="flex flex-wrap items-center gap-3 border-b border-border bg-panel px-4 py-2 text-sm">
+      <header className="flex h-12 flex-wrap items-center gap-3 border-b border-border bg-panel px-4 text-sm">
         <a href="/" className="font-semibold">
           Naqsh
         </a>
@@ -682,9 +687,9 @@ export default function Editor({ jobId }: { jobId: string }) {
           />
         </div>
 
-        <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-s border-border bg-panel p-3 text-sm">
+        <aside className="flex w-80 shrink-0 flex-col gap-1 overflow-y-auto border-s border-border bg-panel p-4 text-sm">
           <h2 className="mb-2 text-xs tracking-wide text-ink/70">Region</h2>
-          {!layer && <p className="text-ink/70">Select a region on the canvas or in the list.</p>}
+          {!layer && <StateIllustration compact kind="empty" title="No region selected" detail="Pick a region on the canvas or in the list." />}
           {layer && layer.kind === "text" && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
