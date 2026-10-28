@@ -73,7 +73,8 @@
     "background": {
       "bubbles": 3,
       "sam": 2,
-      "box_fallback": 1
+      "box_fallback": 1,
+      "fallback_suppressed": false
     },
     "exported": "2026-10-28"
   },
@@ -82,17 +83,17 @@
     "note": "dense menu with prices and leaders",
     "fixture": "03-menu-paper.png",
     "sha256": "4393a5a9a192f70afe6588bc77870d981f9154a4fc2161b3f83428fe64e84630",
-    "job_id": "2c34e573a187",
+    "job_id": "9b6f89fbc2b3",
     "width": 1280,
     "height": 1920,
     "regions": 16,
-    "total_ms": 75949,
-    "total_cost_usd": 0.051303,
+    "total_ms": 90311,
+    "total_cost_usd": 0.039074,
     "recorded_stages": [
       {
         "name": "read",
-        "ms": 9922,
-        "cost_usd": 0.012004
+        "ms": 9517,
+        "cost_usd": 0.011979
       },
       {
         "name": "policy",
@@ -101,43 +102,43 @@
       },
       {
         "name": "segment",
-        "ms": 38172,
+        "ms": 36753,
         "cost_usd": 0.0025
       },
       {
         "name": "clean_plate",
-        "ms": 38307,
+        "ms": 36889,
         "cost_usd": 0.01
       },
       {
         "name": "register_composite",
-        "ms": 1877,
+        "ms": 1821,
         "cost_usd": 0.0
       },
       {
         "name": "verify",
-        "ms": 4249,
-        "cost_usd": 0.005876
+        "ms": 6261,
+        "cost_usd": 0.006222
       },
       {
         "name": "final_check",
-        "ms": 3365,
-        "cost_usd": 0.005745
+        "ms": 21453,
+        "cost_usd": 0.005873
       },
       {
         "name": "background",
-        "ms": 5093,
+        "ms": 6730,
         "cost_usd": 0.0025
       },
       {
         "name": "typeset",
-        "ms": 329,
+        "ms": 346,
         "cost_usd": 0.0
       },
       {
         "name": "selfcheck",
-        "ms": 12285,
-        "cost_usd": 0.012678
+        "ms": 6814,
+        "cost_usd": 0.0
       }
     ],
     "files": {
@@ -149,9 +150,10 @@
       "background": "background.zip"
     },
     "background": {
-      "bubbles": 2,
+      "bubbles": 0,
       "sam": 0,
-      "box_fallback": 2
+      "box_fallback": 0,
+      "fallback_suppressed": true
     },
     "exported": "2026-10-28"
   },
@@ -160,74 +162,17 @@
     "note": "chalk text on a dark board",
     "fixture": "04-chalkboard.png",
     "sha256": "984b4c40db5eb00654d291fac1c8d19816ea33b2ee473c3bab0ba8c6232ed64e",
-    "job_id": "605213b894ff",
+    "job_id": "231bfa7361a0",
     "width": 1280,
     "height": 1920,
-    "regions": 3,
-    "total_ms": 56130,
-    "total_cost_usd": 0.022422,
+    "regions": 5,
+    "total_ms": 69815,
+    "total_cost_usd": 0.044477,
     "recorded_stages": [
       {
         "name": "read",
-        "ms": 6612,
-        "cost_usd": 0.006555
-      },
-      {
-        "name": "segment",
-        "ms": 14725,
-        "cost_usd": 0.0025
-      },
-      {
-        "name": "clean_plate",
-        "ms": 15901,
-        "cost_usd": 0.01
-      },
-      {
-        "name": "register_composite",
-        "ms": 14057,
-        "cost_usd": 0.0
-      },
-      {
-        "name": "verify",
-        "ms": 2515,
-        "cost_usd": 0.001762
-      },
-      {
-        "name": "final_check",
-        "ms": 2111,
-        "cost_usd": 0.001605
-      },
-      {
-        "name": "typeset",
-        "ms": 209,
-        "cost_usd": 0.0
-      }
-    ],
-    "files": {
-      "receipt": "receipt.json",
-      "document": "document.json",
-      "plate": "plate.webp",
-      "source": "source.jpg",
-      "masks": "masks.zip"
-    },
-    "exported": "2026-10-27"
-  },
-  {
-    "name": "sfx-comic",
-    "note": "captions plus a kept sound effect",
-    "fixture": "07-comic-sfx.png",
-    "sha256": "213a084ec418c3f946cf885d5050b3eb8ebdc6409d6056694764494e8f17da6b",
-    "job_id": "6a8aa7a0829b",
-    "width": 1280,
-    "height": 1920,
-    "regions": 3,
-    "total_ms": 45491,
-    "total_cost_usd": 0.025176,
-    "recorded_stages": [
-      {
-        "name": "read",
-        "ms": 5280,
-        "cost_usd": 0.007112
+        "ms": 8922,
+        "cost_usd": 0.009191
       },
       {
         "name": "policy",
@@ -236,38 +181,48 @@
       },
       {
         "name": "segment",
-        "ms": 5114,
+        "ms": 24285,
         "cost_usd": 0.0025
       },
       {
         "name": "clean_plate",
-        "ms": 16538,
+        "ms": 24375,
         "cost_usd": 0.01
       },
       {
         "name": "register_composite",
-        "ms": 9796,
+        "ms": 1225,
         "cost_usd": 0.0
       },
       {
         "name": "verify",
-        "ms": 2645,
-        "cost_usd": 0.001227
+        "ms": 4219,
+        "cost_usd": 0.002893
+      },
+      {
+        "name": "retry",
+        "ms": 22589,
+        "cost_usd": 0.013302
       },
       {
         "name": "final_check",
-        "ms": 3747,
-        "cost_usd": 0.002489
+        "ms": 4832,
+        "cost_usd": 0.003939
+      },
+      {
+        "name": "background",
+        "ms": 277,
+        "cost_usd": 0.0
       },
       {
         "name": "typeset",
-        "ms": 200,
+        "ms": 231,
         "cost_usd": 0.0
       },
       {
         "name": "selfcheck",
-        "ms": 2171,
-        "cost_usd": 0.001847
+        "ms": 2813,
+        "cost_usd": 0.002652
       }
     ],
     "files": {
@@ -275,66 +230,167 @@
       "document": "document.json",
       "plate": "plate.webp",
       "source": "source.jpg",
-      "masks": "masks.zip"
+      "masks": "masks.zip",
+      "background": "background.zip"
     },
-    "exported": "2026-10-27"
+    "background": {
+      "bubbles": 0,
+      "sam": 0,
+      "box_fallback": 0,
+      "fallback_suppressed": false
+    },
+    "exported": "2026-10-28"
+  },
+  {
+    "name": "sfx-comic",
+    "note": "captions plus a kept sound effect",
+    "fixture": "07-comic-sfx.png",
+    "sha256": "213a084ec418c3f946cf885d5050b3eb8ebdc6409d6056694764494e8f17da6b",
+    "job_id": "8e07fe0a4a4d",
+    "width": 1280,
+    "height": 1920,
+    "regions": 3,
+    "total_ms": 32321,
+    "total_cost_usd": 0.027563,
+    "recorded_stages": [
+      {
+        "name": "read",
+        "ms": 5415,
+        "cost_usd": 0.007087
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "segment",
+        "ms": 13345,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "clean_plate",
+        "ms": 13494,
+        "cost_usd": 0.01
+      },
+      {
+        "name": "register_composite",
+        "ms": 926,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "verify",
+        "ms": 2208,
+        "cost_usd": 0.001342
+      },
+      {
+        "name": "final_check",
+        "ms": 3821,
+        "cost_usd": 0.002737
+      },
+      {
+        "name": "background",
+        "ms": 3387,
+        "cost_usd": 0.0025
+      },
+      {
+        "name": "typeset",
+        "ms": 189,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "selfcheck",
+        "ms": 2647,
+        "cost_usd": 0.001398
+      }
+    ],
+    "files": {
+      "receipt": "receipt.json",
+      "document": "document.json",
+      "plate": "plate.webp",
+      "source": "source.jpg",
+      "masks": "masks.zip",
+      "background": "background.zip"
+    },
+    "background": {
+      "bubbles": 0,
+      "sam": 0,
+      "box_fallback": 0,
+      "fallback_suppressed": true
+    },
+    "exported": "2026-10-28"
   },
   {
     "name": "label-fail",
     "note": "photo label, plate failure (honest limit)",
     "fixture": "05-label-kraft.png",
     "sha256": "d00a0bc1b03c56a34ffd53c8a9e639182b09b109e474ab630620c0ecadbcd5ee",
-    "job_id": "5d6de0e0c1be",
+    "job_id": "76bb774d72f1",
     "width": 1280,
     "height": 1920,
     "regions": 3,
-    "total_ms": 73612,
-    "total_cost_usd": 0.035134,
+    "total_ms": 71019,
+    "total_cost_usd": 0.042152,
     "recorded_stages": [
       {
         "name": "read",
-        "ms": 5237,
-        "cost_usd": 0.00633
+        "ms": 6823,
+        "cost_usd": 0.007168
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0
       },
       {
         "name": "segment",
-        "ms": 8001,
+        "ms": 17156,
         "cost_usd": 0.0025
       },
       {
         "name": "clean_plate",
-        "ms": 14010,
+        "ms": 17268,
         "cost_usd": 0.01
       },
       {
         "name": "register_composite",
-        "ms": 14680,
+        "ms": 1163,
         "cost_usd": 0.0
       },
       {
         "name": "verify",
-        "ms": 3613,
-        "cost_usd": 0.001924
+        "ms": 3533,
+        "cost_usd": 0.002254
       },
       {
         "name": "retry",
-        "ms": 17936,
-        "cost_usd": 0.012137
+        "ms": 19399,
+        "cost_usd": 0.011901
       },
       {
         "name": "repair",
-        "ms": 6670,
+        "ms": 9741,
         "cost_usd": 0.0
       },
       {
         "name": "final_check",
-        "ms": 3298,
-        "cost_usd": 0.002243
+        "ms": 3372,
+        "cost_usd": 0.002245
+      },
+      {
+        "name": "background",
+        "ms": 217,
+        "cost_usd": 0.0
       },
       {
         "name": "typeset",
-        "ms": 167,
+        "ms": 165,
         "cost_usd": 0.0
+      },
+      {
+        "name": "selfcheck",
+        "ms": 9056,
+        "cost_usd": 0.006084
       }
     ],
     "files": {
@@ -342,8 +398,15 @@
       "document": "document.json",
       "plate": "plate.webp",
       "source": "source.jpg",
-      "masks": "masks.zip"
+      "masks": "masks.zip",
+      "background": "background.zip"
     },
-    "exported": "2026-10-27"
+    "background": {
+      "bubbles": 0,
+      "sam": 0,
+      "box_fallback": 0,
+      "fallback_suppressed": false
+    },
+    "exported": "2026-10-28"
   }
 ]

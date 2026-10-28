@@ -1,29 +1,20 @@
 {
-  "feature": "background build inside run_page_job + rebuilt demo comic/menu",
-  "verified_via": "POST /api/localize on a live-mode server (DEMO_MODE=0), then GET /api/jobs/{id}/document; demo entries replayed on a demo-mode server (DEMO_MODE=1)",
+  "feature": "suppress box_fallback when SAM finds no bubbles; rebuild all demo entries",
+  "verified_via": "POST /api/localize on live (DEMO_MODE=0) and demo (DEMO_MODE=1) servers; GET /api/jobs/{id}/document",
   "live_jobs": {
-    "comic": {
-      "id": "4e251c89edaa",
-      "total_ms": 39505,
-      "total_cost_usd": 0.027963,
-      "background_stage": {"bubbles": 3, "sam": 2, "box_fallback": 1, "cost_usd": 0.0025},
-      "layers": ["scene", "bubble-t1", "bubble-t2", "bubble-t3", "t1", "t2", "t3"]
-    },
-    "menu": {
-      "id": "2c34e573a187",
-      "total_ms": 75949,
-      "total_cost_usd": 0.051303,
-      "background_stage": {"bubbles": 2, "sam": 0, "box_fallback": 2, "cost_usd": 0.0025},
-      "layers": ["scene", "bubble-t2", "bubble-t16", "t1..t16"]
-    }
+    "comic": {"id": "4e251c89edaa", "ms": 39505, "cost_usd": 0.027963, "bubbles": 3, "sam": 2, "box_fallback": 1, "fallback_suppressed": false, "layers": ["scene", "bubble-t1", "bubble-t2", "bubble-t3", "t1", "t2", "t3"], "note": "run before the suppression flag existed; flag not recorded"},
+    "menu": {"id": "9b6f89fbc2b3", "ms": 90311, "cost_usd": 0.0391, "bubbles": 0, "sam": 0, "box_fallback": 0, "fallback_suppressed": true, "layers": ["scene", "t1..t16"]},
+    "chalkboard": {"id": "231bfa7361a0", "ms": 69815, "cost_usd": 0.0445, "bubbles": 0, "sam": 0, "box_fallback": 0, "fallback_suppressed": false, "layers": ["scene", "t1..t5"], "note": "no dialogue/caption regions, SAM not called"},
+    "sfx": {"id": "8e07fe0a4a4d", "ms": 32321, "cost_usd": 0.0276, "bubbles": 0, "sam": 0, "box_fallback": 0, "fallback_suppressed": true, "layers": ["scene", "t1..t3"]},
+    "label": {"id": "76bb774d72f1", "ms": 71019, "cost_usd": 0.0422, "bubbles": 0, "sam": 0, "box_fallback": 0, "fallback_suppressed": false, "layers": ["scene", "t1..t3"], "note": "no dialogue/caption regions, SAM not called"}
   },
   "demo_replays": {
-    "comic": {"id": "demo-17aa5108", "demo": true, "layers": ["scene", "bubble-t1", "bubble-t2", "bubble-t3", "t1", "t2", "t3"]},
-    "menu": {"id": "demo-fec9b4a6", "demo": true, "layers": ["scene", "bubble-t2", "bubble-t16", "t1..t16"]}
+    "comic": {"id": "demo-43b7735b", "demo": true, "layers": ["scene", "bubble", "bubble", "bubble", "text", "text", "text"]},
+    "menu": {"id": "demo-461e0b0d", "demo": true, "layers": ["scene", "16 text"]},
+    "chalkboard": {"id": "demo-2f3e16bc", "demo": true, "layers": ["scene", "5 text"]},
+    "sfx": {"id": "demo-4473dd6b", "demo": true, "layers": ["scene", "3 text"]},
+    "label": {"id": "demo-0562014a", "demo": true, "layers": ["scene", "3 text"]}
   },
-  "failure_fallback": {
-    "note": "Two live runs failed inside background with 'BBox' object is not iterable (pre-fix); each job still finished and returned a receipt with a background stage error.",
-    "jobs": ["f8e2de050b56", "9a59f900132e"]
-  },
-  "demo_cache": {"comic": "1.9 MB", "menu": "2.6 MB", "total_cache": "14.21 MB", "entries_rebuilt": ["comic", "menu"], "entries_not_rebuilt": ["chalkboard", "sfx-comic", "label-fail"]}
+  "demo_cache": {"entries_rebuilt": ["comic", "menu", "chalkboard", "sfx-comic", "label-fail"], "total_mb": 20.02},
+  "checks": {"pytest": 78, "typecheck": "pass", "build": "pass"}
 }

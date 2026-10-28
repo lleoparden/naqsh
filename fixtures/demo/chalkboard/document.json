@@ -1,5 +1,5 @@
 {
-  "id": "605213b894ff",
+  "id": "231bfa7361a0",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -14,29 +14,29 @@
     {
       "id": "t1",
       "kind": "text",
-      "type": "dialogue",
+      "type": "signage",
       "action": "translate",
-      "source_text": "Today's Special",
+      "source_text": "TODAY'S SPECIAL",
       "arabic": {
         "egyptian": "عرض النهاردة",
-        "msa": "عرض اليوم"
+        "msa": "عرض النهاردة"
       },
       "box": [
-        237,
-        207,
-        1069,
-        363
+        243,
+        221,
+        1110,
+        365
       ],
       "font_family": "tajawal-bold",
-      "font_size": 123,
+      "font_size": 119,
       "lines": [
         {
           "text": "عرض النهاردة",
-          "size": 123,
-          "x": 653.0,
-          "baseline": 316.0,
-          "width": 726,
-          "height": 110
+          "size": 119,
+          "x": 676.5,
+          "baseline": 323.0,
+          "width": 703,
+          "height": 106
         }
       ],
       "align": "center",
@@ -48,88 +48,188 @@
       "z": 0,
       "visible": true,
       "locked": false,
-      "strategy": "muse",
-      "fill": []
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t2",
       "kind": "text",
-      "type": "dialogue",
+      "type": "menu_item",
       "action": "translate",
-      "source_text": "MINT TEA 25",
+      "source_text": "MINT TEA",
       "arabic": {
-        "egyptian": "شاي نعناع 25",
-        "msa": "شاي النعناع ٢٥"
+        "egyptian": "شاي بالنعناع",
+        "msa": "شاي بالنعناع"
       },
       "box": [
-        261,
-        682,
-        1065,
+        262,
+        643,
+        838,
         816
       ],
       "font_family": "tajawal-bold",
-      "font_size": 16,
+      "font_size": 83,
       "lines": [
         {
-          "text": "شاي نعناع 25",
-          "size": 16,
-          "x": 663.0,
-          "baseline": 752.0,
-          "width": 95,
-          "height": 20
+          "text": "شاي بالنعناع",
+          "size": 83,
+          "x": 550.0,
+          "baseline": 745.5,
+          "width": 470,
+          "height": 102
         }
       ],
       "align": "center",
       "color": [
-        237,
-        237,
-        237
+        238,
+        238,
+        238
       ],
       "z": 1,
       "visible": true,
       "locked": false,
-      "strategy": "muse",
-      "fill": []
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t3",
       "kind": "text",
-      "type": "dialogue",
-      "action": "translate",
-      "source_text": "BASBOUSA 30",
+      "type": "price",
+      "action": "keep_numerals",
+      "source_text": "25",
       "arabic": {
-        "egyptian": "بسبوسة 30",
-        "msa": "بسبوسة ٣٠"
+        "egyptian": "25",
+        "msa": "25"
       },
       "box": [
-        314,
-        899,
-        1130,
-        1002
+        870,
+        643,
+        1043,
+        787
       ],
       "font_family": "tajawal-bold",
-      "font_size": 36,
+      "font_size": 79,
       "lines": [
         {
-          "text": "بسبوسة 30",
-          "size": 36,
-          "x": 722.0,
-          "baseline": 959.0,
-          "width": 185,
-          "height": 35
+          "text": "25",
+          "size": 79,
+          "x": 956.5,
+          "baseline": 740.5,
+          "width": 72,
+          "height": 53
         }
       ],
       "align": "center",
       "color": [
-        237,
-        237,
-        237
+        238,
+        238,
+        238
       ],
       "z": 2,
       "visible": true,
       "locked": false,
-      "strategy": "muse",
-      "fill": []
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t4",
+      "kind": "text",
+      "type": "menu_item",
+      "action": "translate",
+      "source_text": "BASBOUSA",
+      "arabic": {
+        "egyptian": "بسبوسة",
+        "msa": "بسبوسة"
+      },
+      "box": [
+        333,
+        883,
+        877,
+        979
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 76,
+      "lines": [
+        {
+          "text": "بسبوسة",
+          "size": 76,
+          "x": 605.0,
+          "baseline": 949.0,
+          "width": 290,
+          "height": 70
+        }
+      ],
+      "align": "center",
+      "color": [
+        238,
+        238,
+        238
+      ],
+      "z": 3,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t5",
+      "kind": "text",
+      "type": "price",
+      "action": "keep_numerals",
+      "source_text": "30",
+      "arabic": {
+        "egyptian": "30",
+        "msa": "30"
+      },
+      "box": [
+        915,
+        883,
+        1088,
+        970
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 47,
+      "lines": [
+        {
+          "text": "30",
+          "size": 47,
+          "x": 1001.5,
+          "baseline": 941.5,
+          "width": 47,
+          "height": 32
+        }
+      ],
+      "align": "center",
+      "color": [
+        238,
+        238,
+        238
+      ],
+      "z": 4,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     }
   ]
 }

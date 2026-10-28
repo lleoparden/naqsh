@@ -355,46 +355,7 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
         region.strategy = strategies.get(region.id, "muse")
 
     # 6. Background layers (scenery + speech bubbles) -----------------------------
-    background_started = time.perf_counter()
-    try:
-        summary = build_assets(
-            folder,
-            image_bytes,
-            composite,
-            [
-                {
-                    "id": region.id,
-                    "bbox": [region.bbox.x1, region.bbox.y1, region.bbox.x2, region.bbox.y2],
-                    "type": region.type,
-                    "name": getattr(region, "name", "") or region.id,
-                }
-                for region in repaint
-            ],
-            source.width,
-            source.height,
-        )
-        usage = summary.get("usage")
-        background_cost = (usage.images * 2.50 / 1000) if usage else 0.0
-        counts = summary["counts"]
-        job.add_stage(
-            "background",
-            _ms(background_started),
-            background_cost,
-            bubbles=counts["bubbles"],
-            sam=counts["sam"],
-            box_fallback=counts["box_fallback"],
-        )
-        logging.getLogger("uvicorn.error").info(
-            "%s: background bubbles=%s sam=%s box_fallback=%s",
-            job.id,
-            counts["bubbles"],
-            counts["sam"],
-            counts["box_fallback"],
-        )
-    except Exception as exc:  # never fail the job for a background split
-        job.warnings.append(f"background layers unavailable: {exc}")
-        job.add_stage("background", _ms(background_started), 0.0, error=str(exc)[:300])
-        log.warning("%s: background layers failed: %s", job.id, exc)
+    _background_stage(job, folder, image_bytes, composite, repaint, source.width, source.height)
 
     # 7. Typeset + render ---------------------------------------------------------
     started = time.perf_counter()
@@ -489,6 +450,61 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
 
     _finish(job, folder, source, final)
     return job
+
+
+
+def _background_stage(
+    job: PageJob,
+    folder: Path,
+    image_bytes: bytes,
+    composite: Image.Image,
+    regions: list[TextRegion],
+    width: int,
+    height: int,
+) -> None:
+    """Build scene/bubble layers; never let a background failure fail the job."""
+    started = time.perf_counter()
+    try:
+        summary = build_assets(
+            folder,
+            image_bytes,
+            composite,
+            [
+                {
+                    "id": region.id,
+                    "bbox": [region.bbox.x1, region.bbox.y1, region.bbox.x2, region.bbox.y2],
+                    "type": region.type,
+                    "name": getattr(region, "name", "") or region.id,
+                }
+                for region in regions
+            ],
+            width,
+            height,
+        )
+        usage = summary.get("usage")
+        cost = (usage.images * 2.50 / 1000) if usage else 0.0
+        counts = summary["counts"]
+        job.add_stage(
+            "background",
+            _ms(started),
+            cost,
+            bubbles=counts["bubbles"],
+            sam=counts["sam"],
+            box_fallback=counts["box_fallback"],
+            fallback_suppressed=counts.get("fallback_suppressed", False),
+        )
+        logging.getLogger("uvicorn.error").info(
+            "%s: background bubbles=%s sam=%s box_fallback=%s fallback_suppressed=%s",
+            job.id,
+            counts["bubbles"],
+            counts["sam"],
+            counts["box_fallback"],
+            counts.get("fallback_suppressed", False),
+        )
+    except Exception as exc:  # single-plate fallback, recorded and logged
+        job.warnings.append(f"background layers unavailable: {exc}")
+        job.add_stage("background", _ms(started), 0.0, error=str(exc)[:300])
+        logging.getLogger("uvicorn.error").warning("%s: background layers failed: %s", job.id, exc)
 
 
 def _finish(job: PageJob, folder: Path, source: Image.Image, final: Image.Image) -> None:

@@ -1,5 +1,5 @@
 {
-  "id": "5d6de0e0c1be",
+  "id": "76bb774d72f1",
   "register": "egyptian",
   "width": 1280,
   "height": 1920,
@@ -15,34 +15,55 @@
   "stages": [
     {
       "name": "read",
-      "ms": 5237,
-      "cost_usd": 0.00633,
-      "input_tokens": 3612,
-      "output_tokens": 427,
-      "reasoning_tokens": 190,
+      "ms": 6823,
+      "cost_usd": 0.007168,
+      "input_tokens": 3786,
+      "output_tokens": 573,
+      "reasoning_tokens": 313,
       "images": 0,
-      "regions": 3
+      "regions": 3,
+      "regions_before_dedupe": 3,
+      "duplicates_dropped": 0
+    },
+    {
+      "name": "policy",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "translated": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "skipped": [],
+      "optional": [],
+      "keep_numerals": [
+        "t3"
+      ]
     },
     {
       "name": "segment",
-      "ms": 8001,
+      "ms": 17156,
       "cost_usd": 0.0025,
       "masks": 3,
-      "concepts": "box prompts + ink extent"
+      "concepts": "box prompts + ink extent",
+      "leaders": []
     },
     {
       "name": "clean_plate",
-      "ms": 14010,
+      "ms": 17268,
       "cost_usd": 0.01,
       "images": 1,
       "plate_size": [
         1280,
         1920
+      ],
+      "concurrent_with": [
+        "segment"
       ]
     },
     {
       "name": "register_composite",
-      "ms": 14680,
+      "ms": 1163,
       "cost_usd": 0.0,
       "shift": [
         0,
@@ -53,14 +74,14 @@
         1.0,
         1.0
       ],
-      "flat_interiors_cleaned": 2,
+      "flat_interiors_cleaned": 3,
       "outside_untouched_mean_diff_is_tautological": 0.0,
-      "ring_mean_abs_diff": 6.97,
-      "ring_max_abs_diff": 7.73,
+      "ring_mean_abs_diff": 7.84,
+      "ring_max_abs_diff": 8.98,
       "ring_per_region": [
-        5.67,
-        7.51,
-        7.73
+        6.54,
+        8.98,
+        8.01
       ],
       "ring_band_px": [
         8,
@@ -69,32 +90,34 @@
     },
     {
       "name": "verify",
-      "ms": 3613,
-      "cost_usd": 0.001924,
+      "ms": 3533,
+      "cost_usd": 0.002254,
       "checked": 3,
       "residual": [
         "t1",
-        "t2"
+        "t2",
+        "t3"
       ],
       "notes": {
-        "t1": "faint ghost letters UMIN visible",
-        "t2": "row of smeared blurred blobs where text was",
-        "t3": "clean paper texture only"
+        "t1": "faint CUMIN lettering across center",
+        "t2": "faint blurred dotted word fragments mid-band",
+        "t3": "faint blurred dots bottom edge"
       }
     },
     {
       "name": "retry",
-      "ms": 17936,
-      "cost_usd": 0.012137,
-      "retried": "t1, t2",
+      "ms": 19399,
+      "cost_usd": 0.011901,
+      "retried": "t1, t2, t3",
       "still_residual": [
         "t1",
-        "t2"
+        "t2",
+        "t3"
       ],
       "notes": {
-        "t1": "faint large letters U V I N visible across texture",
-        "t2": "row of 6 blurred round letter blobs",
-        "t3": "clean texture only"
+        "t1": "faint CUMIN lettering across center",
+        "t2": "faint dotted residual marks mid-left",
+        "t3": "very faint smudged marks at bottom"
       },
       "shift": [
         0,
@@ -103,37 +126,71 @@
     },
     {
       "name": "repair",
-      "ms": 6670,
+      "ms": 9741,
       "cost_usd": 0.0,
       "strategies": {
         "t1": "flat-fill",
-        "t2": "flat-fill"
+        "t2": "flat-fill",
+        "t3": "flat-fill"
       }
     },
     {
       "name": "final_check",
-      "ms": 3298,
-      "cost_usd": 0.002243,
+      "ms": 3372,
+      "cost_usd": 0.002245,
       "checked": 3,
       "residual": [
-        "t1"
+        "t1",
+        "t2"
       ],
       "notes": {
-        "t1": "faint ghost letterforms across center",
-        "t2": "only solid cover dots, no letter forms",
-        "t3": "only paper texture, clean"
+        "t1": "faint large letters C L A M I ghost across texture",
+        "t2": "row of faint small blot letter fragments",
+        "t3": "only paper texture, no text"
       }
     },
     {
+      "name": "background",
+      "ms": 217,
+      "cost_usd": 0.0,
+      "bubbles": 0,
+      "sam": 0,
+      "box_fallback": 0,
+      "fallback_suppressed": false
+    },
+    {
       "name": "typeset",
-      "ms": 167,
+      "ms": 165,
       "cost_usd": 0.0,
       "regions": 3,
       "strategies": {
         "t1": "flat-fill",
         "t2": "flat-fill",
-        "t3": "muse-retry"
+        "t3": "flat-fill"
+      },
+      "types": {
+        "t1": "menu_item",
+        "t2": "menu_item",
+        "t3": "price"
       }
+    },
+    {
+      "name": "selfcheck",
+      "ms": 9056,
+      "cost_usd": 0.006084,
+      "flagged": [
+        "t3"
+      ],
+      "issues": {
+        "t3": "bad_translation"
+      },
+      "fixed": [],
+      "retranslated": [
+        "t3"
+      ],
+      "still_flagged": [
+        "t3"
+      ]
     }
   ],
   "regions": [
@@ -141,30 +198,32 @@
       "id": "t1",
       "source_text": "CUMIN",
       "translation_ar": "كمون",
-      "style": "title",
+      "style": "label",
       "font_style": "classic serif uppercase",
+      "type": "menu_item",
+      "action": "translate",
       "bbox": [
-        303,
+        307,
         977,
-        995,
-        1164
+        979,
+        1150
       ],
       "container": [
-        325,
-        1023,
-        954,
-        1153
+        324,
+        1003,
+        967,
+        1150
       ],
       "mask_path": "mask-t1.png",
       "font_family": "naskh",
-      "font_size": 94,
+      "font_size": 127,
       "color": [
         43,
         26,
-        18
+        14
       ],
       "lines": [
-        "ﻥﻮﻤﻛ"
+        "كمون"
       ],
       "strategy": "flat-fill"
     },
@@ -173,65 +232,72 @@
       "source_text": "GROUND",
       "translation_ar": "مطحون",
       "style": "label",
-      "font_style": "classic serif uppercase spaced",
+      "font_style": "spaced serif uppercase",
+      "type": "menu_item",
+      "action": "translate",
       "bbox": [
-        485,
-        1206,
+        484,
+        1200,
         817,
-        1261
+        1256
       ],
       "container": [
-        494,
-        1221,
+        495,
+        1222,
         801,
-        1265
+        1256
       ],
       "mask_path": "mask-t2.png",
       "font_family": "naskh",
-      "font_size": 24,
+      "font_size": 20,
       "color": [
         43,
         26,
-        18
+        14
       ],
       "lines": [
-        "ﻥﻮﺤﻄﻣ"
+        "مطحون"
       ],
       "strategy": "flat-fill"
     },
     {
       "id": "t3",
       "source_text": "NET 100 G",
-      "translation_ar": "صافي 100 جم",
+      "translation_ar": "صافي ١٠٠ جم",
       "style": "label",
-      "font_style": "classic serif uppercase spaced",
+      "font_style": "spaced serif uppercase",
+      "type": "price",
+      "action": "keep_numerals",
       "bbox": [
-        504,
-        1419,
-        790,
-        1465
+        499,
+        1423,
+        800,
+        1476
       ],
       "container": [
-        504,
-        1419,
-        790,
-        1465
+        511,
+        1457,
+        780,
+        1476
       ],
       "mask_path": "mask-t3.png",
       "font_family": "naskh",
-      "font_size": 20,
+      "font_size": 11,
       "color": [
         43,
         26,
-        18
+        14
       ],
       "lines": [
-        "ﻢﺟ 100 ﻲﻓﺎﺻ"
+        "صافي ١٠٠ جم"
       ],
-      "strategy": "muse-retry"
+      "strategy": "flat-fill"
     }
   ],
-  "warnings": [],
-  "total_cost_usd": 0.035134,
-  "total_ms": 73612
+  "warnings": [
+    "t3: text did not fit and was clamped"
+  ],
+  "total_cost_usd": 0.042152,
+  "total_ms": 71019,
+  "stage_ms_sum": 87893
 }

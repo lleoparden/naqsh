@@ -48,6 +48,7 @@ def build_assets(
     bubbles: list[dict[str, Any]] = []
     usage = None
 
+    suppressed = False
     if candidates:
         objects, usage = sam_segment(source_bytes, "speech bubble", image_size=(width, height))
         masks: list[tuple[Image.Image, dict[str, Any]]] = []
@@ -55,6 +56,11 @@ def build_assets(
             mask = _paste(obj, (width, height))
             if mask.getbbox() is not None:
                 masks.append((mask, obj))
+        if not masks:
+            # No bubble detected on this page: no bubble layers at all, even if some
+            # regions are typed as dialogue/caption. Scenery only.
+            candidates = []
+            suppressed = True
 
         matched: dict[str, Image.Image] = {}
         used: set[int] = set()
@@ -104,6 +110,7 @@ def build_assets(
         "bubbles": len(bubbles),
         "sam": sum(1 for bubble in bubbles if bubble["source"] == "sam"),
         "box_fallback": sum(1 for bubble in bubbles if bubble["source"] == "box_fallback"),
+        "fallback_suppressed": suppressed,
     }
     manifest = {
         "scene": "scene.png",

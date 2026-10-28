@@ -1,5 +1,5 @@
 {
-  "id": "2c34e573a187",
+  "id": "9b6f89fbc2b3",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -22,21 +22,21 @@
         "msa": "بيت الكشري"
       },
       "box": [
-        250,
+        244,
         311,
-        1033,
-        444
+        1034,
+        442
       ],
       "font_family": "naskh",
-      "font_size": 74,
+      "font_size": 100,
       "lines": [
         {
           "text": "بيت الكشري",
-          "size": 74,
-          "x": 641.5,
-          "baseline": 386.0,
-          "width": 307,
-          "height": 83
+          "size": 100,
+          "x": 639.0,
+          "baseline": 388.5,
+          "width": 416,
+          "height": 112
         }
       ],
       "align": "center",
@@ -58,28 +58,28 @@
     {
       "id": "t2",
       "kind": "text",
-      "type": "caption",
+      "type": "signage",
       "action": "translate",
       "source_text": "HOUSE FAVORITES — FRESH & HOMEMADE",
       "arabic": {
-        "egyptian": "أشهر أكلاتنا طازة وبيتي",
-        "msa": "أشهر أكلاتنا طازة وبيتي"
+        "egyptian": "المشهور عندنا فريش وبيتي",
+        "msa": "المشهور عندنا فريش وبيتي"
       },
       "box": [
-        292,
-        561,
-        992,
-        593
+        289,
+        536,
+        991,
+        568
       ],
       "font_family": "tajawal",
-      "font_size": 15,
+      "font_size": 16,
       "lines": [
         {
-          "text": "أشهر أكلاتنا طازة وبيتي",
-          "size": 15,
-          "x": 642.0,
-          "baseline": 580.0,
-          "width": 139,
+          "text": "المشهور عندنا فريش وبيتي",
+          "size": 16,
+          "x": 640.0,
+          "baseline": 555.0,
+          "width": 177,
           "height": 18
         }
       ],
@@ -110,21 +110,21 @@
         "msa": "كشري"
       },
       "box": [
-        120,
-        797,
-        287,
-        864
+        110,
+        770,
+        282,
+        828
       ],
       "font_family": "tajawal-bold",
-      "font_size": 38,
+      "font_size": 10,
       "lines": [
         {
           "text": "كشري",
-          "size": 38,
-          "x": 203.5,
-          "baseline": 838.0,
-          "width": 104,
-          "height": 47
+          "size": 10,
+          "x": 196.0,
+          "baseline": 800.5,
+          "width": 28,
+          "height": 13
         }
       ],
       "align": "center",
@@ -154,21 +154,21 @@
         "msa": "45"
       },
       "box": [
-        561,
-        795,
+        554,
+        770,
         616,
-        864
+        828
       ],
       "font_family": "tajawal-bold",
-      "font_size": 39,
+      "font_size": 16,
       "lines": [
         {
           "text": "45",
-          "size": 39,
-          "x": 588.5,
-          "baseline": 841.5,
-          "width": 39,
-          "height": 26
+          "size": 16,
+          "x": 585.0,
+          "baseline": 804.0,
+          "width": 17,
+          "height": 12
         }
       ],
       "align": "center",
@@ -198,21 +198,21 @@
         "msa": "طعمية"
       },
       "box": [
-        676,
-        797,
-        856,
-        864
+        675,
+        770,
+        854,
+        828
       ],
       "font_family": "tajawal-bold",
-      "font_size": 18,
+      "font_size": 13,
       "lines": [
         {
           "text": "طعمية",
-          "size": 18,
-          "x": 766.0,
-          "baseline": 834.5,
-          "width": 55,
-          "height": 18
+          "size": 13,
+          "x": 764.5,
+          "baseline": 802.5,
+          "width": 41,
+          "height": 13
         }
       ],
       "align": "center",
@@ -242,21 +242,21 @@
         "msa": "20"
       },
       "box": [
-        1114,
-        795,
-        1169,
-        862
+        1111,
+        770,
+        1167,
+        828
       ],
       "font_family": "tajawal-bold",
-      "font_size": 37,
+      "font_size": 17,
       "lines": [
         {
           "text": "20",
-          "size": 37,
-          "x": 1141.5,
-          "baseline": 840.0,
-          "width": 36,
-          "height": 25
+          "size": 17,
+          "x": 1139.0,
+          "baseline": 804.0,
+          "width": 17,
+          "height": 12
         }
       ],
       "align": "center",
@@ -286,21 +286,21 @@
         "msa": "شاي بالنعناع"
       },
       "box": [
-        120,
-        906,
-        310,
-        970
+        111,
+        858,
+        307,
+        916
       ],
       "font_family": "tajawal-bold",
-      "font_size": 30,
+      "font_size": 23,
       "lines": [
         {
           "text": "شاي بالنعناع",
-          "size": 30,
-          "x": 215.0,
-          "baseline": 943.5,
-          "width": 170,
-          "height": 37
+          "size": 23,
+          "x": 209.0,
+          "baseline": 891.5,
+          "width": 131,
+          "height": 29
         }
       ],
       "align": "center",
@@ -330,21 +330,21 @@
         "msa": "10"
       },
       "box": [
-        564,
-        904,
-        616,
-        970
+        553,
+        858,
+        613,
+        916
       ],
       "font_family": "tajawal-bold",
-      "font_size": 30,
+      "font_size": 28,
       "lines": [
         {
           "text": "10",
-          "size": 30,
-          "x": 590.0,
-          "baseline": 946.5,
-          "width": 27,
-          "height": 21
+          "size": 28,
+          "x": 583.0,
+          "baseline": 896.0,
+          "width": 25,
+          "height": 20
         }
       ],
       "align": "center",
@@ -375,20 +375,20 @@
       },
       "box": [
         677,
-        906,
-        893,
-        970
+        858,
+        892,
+        916
       ],
       "font_family": "tajawal-bold",
-      "font_size": 48,
+      "font_size": 29,
       "lines": [
         {
           "text": "بسبوسة",
-          "size": 48,
-          "x": 785.0,
-          "baseline": 949.5,
-          "width": 184,
-          "height": 45
+          "size": 29,
+          "x": 784.5,
+          "baseline": 894.0,
+          "width": 112,
+          "height": 28
         }
       ],
       "align": "center",
@@ -418,10 +418,10 @@
         "msa": "30"
       },
       "box": [
-        1114,
-        904,
+        1111,
+        858,
         1167,
-        970
+        916
       ],
       "font_family": "tajawal-bold",
       "font_size": 26,
@@ -429,8 +429,8 @@
         {
           "text": "30",
           "size": 26,
-          "x": 1140.5,
-          "baseline": 945.0,
+          "x": 1139.0,
+          "baseline": 895.0,
           "width": 26,
           "height": 18
         }
@@ -462,21 +462,21 @@
         "msa": "شوربة عدس"
       },
       "box": [
-        120,
-        1012,
-        379,
-        1075
+        110,
+        947,
+        380,
+        1004
       ],
       "font_family": "tajawal-bold",
-      "font_size": 36,
+      "font_size": 40,
       "lines": [
         {
           "text": "شوربة عدس",
-          "size": 36,
-          "x": 249.5,
-          "baseline": 1053.5,
-          "width": 196,
-          "height": 38
+          "size": 40,
+          "x": 245.0,
+          "baseline": 987.0,
+          "width": 219,
+          "height": 41
         }
       ],
       "align": "center",
@@ -506,21 +506,21 @@
         "msa": "25"
       },
       "box": [
-        559,
-        1010,
-        617,
-        1075
+        552,
+        947,
+        616,
+        1004
       ],
       "font_family": "tajawal-bold",
-      "font_size": 31,
+      "font_size": 40,
       "lines": [
         {
           "text": "25",
-          "size": 31,
-          "x": 588.0,
-          "baseline": 1052.5,
-          "width": 28,
-          "height": 22
+          "size": 40,
+          "x": 584.0,
+          "baseline": 988.0,
+          "width": 37,
+          "height": 27
         }
       ],
       "align": "center",
@@ -550,21 +550,21 @@
         "msa": "رز بلبن"
       },
       "box": [
-        676,
-        1012,
-        968,
-        1075
+        677,
+        947,
+        956,
+        1004
       ],
       "font_family": "tajawal-bold",
-      "font_size": 37,
+      "font_size": 42,
       "lines": [
         {
           "text": "رز بلبن",
-          "size": 37,
-          "x": 822.0,
-          "baseline": 1052.0,
-          "width": 101,
-          "height": 35
+          "size": 42,
+          "x": 816.5,
+          "baseline": 985.0,
+          "width": 115,
+          "height": 39
         }
       ],
       "align": "center",
@@ -595,20 +595,20 @@
       },
       "box": [
         1114,
-        1010,
+        947,
         1169,
-        1075
+        1004
       ],
       "font_family": "tajawal-bold",
-      "font_size": 28,
+      "font_size": 38,
       "lines": [
         {
           "text": "30",
-          "size": 28,
+          "size": 38,
           "x": 1141.5,
-          "baseline": 1051.5,
-          "width": 28,
-          "height": 20
+          "baseline": 987.5,
+          "width": 38,
+          "height": 26
         }
       ],
       "align": "center",
@@ -634,25 +634,25 @@
       "action": "translate",
       "source_text": "OPEN DAILY • 11AM - 10PM",
       "arabic": {
-        "egyptian": "فاتحين كل يوم من 11 الصبح ل 10 بالليل",
-        "msa": "فاتحين كل يوم من 11 الصبح ل 10 بالليل"
+        "egyptian": "فاتحين كل يوم من 11 الصبح ل 10 بليل",
+        "msa": "فاتحين كل يوم من 11 الصبح ل 10 بليل"
       },
       "box": [
-        366,
-        1672,
-        918,
-        1707
+        376,
+        1644,
+        922,
+        1678
       ],
       "font_family": "naskh",
-      "font_size": 10,
+      "font_size": 19,
       "lines": [
         {
-          "text": "فاتحين كل يوم من 11 الصبح ل 10 بالليل",
-          "size": 10,
-          "x": 642.0,
-          "baseline": 1691.5,
-          "width": 147,
-          "height": 12
+          "text": "فاتحين كل يوم من 11 الصبح ل 10 بليل",
+          "size": 19,
+          "x": 649.0,
+          "baseline": 1665.0,
+          "width": 269,
+          "height": 20
         }
       ],
       "align": "center",
@@ -678,32 +678,32 @@
       "action": "translate",
       "source_text": "• ALL DISHES SERVED FRESH •",
       "arabic": {
-        "egyptian": "كل الأكل طازة",
-        "msa": "كل الأكل طازة"
+        "egyptian": "كله بيتقدم طازة",
+        "msa": "كله بيتقدم طازة"
       },
       "box": [
-        86,
-        1830,
-        485,
-        1857
+        83,
+        1795,
+        481,
+        1824
       ],
       "font_family": "tajawal",
       "font_size": 10,
       "lines": [
         {
-          "text": "كل الأكل طازة",
+          "text": "كله بيتقدم طازة",
           "size": 10,
-          "x": 285.5,
-          "baseline": 1846.5,
-          "width": 57,
-          "height": 10
+          "x": 282.0,
+          "baseline": 1811.0,
+          "width": 64,
+          "height": 11
         }
       ],
       "align": "center",
       "color": [
-        26,
-        26,
-        26
+        34,
+        34,
+        34
       ],
       "z": 15,
       "visible": true,
