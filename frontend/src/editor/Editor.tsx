@@ -271,12 +271,6 @@ export default function Editor({ jobId }: { jobId: string }) {
         >
           <Redo2 size={16} />
         </button>
-        <button
-          className={`rounded border px-2 py-1 ${tool === "cover" ? "border-lacquer bg-lacquer text-white" : "border-sand"}`}
-          onClick={() => setTool(tool === "cover" ? "select" : "cover")}
-        >
-          Cover patch
-        </button>
         <label className="flex items-center gap-1" title="How numbers are drawn in price layers only. The sample next to the select is live.">
           Digits
           <select
