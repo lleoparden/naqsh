@@ -206,7 +206,7 @@ export default function Editor({ jobId }: { jobId: string }) {
   );
 
   if (!doc) {
-    return <div className="p-10 text-sm text-ink/60">Loading job {jobId}…</div>;
+    return <div className="p-10 text-sm text-ink/75">Loading job {jobId}…</div>;
   }
 
   const coverDraft = draft?.mode === "cover" ? draft : null;
@@ -218,7 +218,7 @@ export default function Editor({ jobId }: { jobId: string }) {
         <a href="/" className="font-semibold">
           Naqsh
         </a>
-        <span className="text-ink/40">job {doc.id}</span>
+        <span className="text-ink/70">job {doc.id}</span>
         <button
           aria-label="Undo"
           title="Undo (Ctrl+Z)"
@@ -259,7 +259,7 @@ export default function Editor({ jobId }: { jobId: string }) {
             <option value="latin">0123</option>
             <option value="arabic-indic">٠١٢٣</option>
           </select>
-          <span dir="ltr" className="text-xs text-ink/60">
+          <span dir="ltr" className="text-xs text-ink/75">
             {doc.numerals === "latin" ? "0123" : "٠١٢٣"}
           </span>
         </label>
@@ -456,15 +456,15 @@ export default function Editor({ jobId }: { jobId: string }) {
         </div>
 
         <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-s border-border bg-panel p-3 text-sm">
-          <h2 className="mb-2 text-xs tracking-wide text-ink/50">Region</h2>
-          {!layer && <p className="text-ink/50">Select a region on the canvas or in the list.</p>}
+          <h2 className="mb-2 text-xs tracking-wide text-ink/70">Region</h2>
+          {!layer && <p className="text-ink/70">Select a region on the canvas or in the list.</p>}
           {layer && layer.kind === "text" && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs">{layer.id}</span>
                 <span className="rounded bg-raised px-1 text-xs">{layer.type}</span>
               </div>
-              <label className="block text-xs text-ink/50">Arabic</label>
+              <label className="block text-xs text-ink/70">Arabic</label>
               <textarea
                 dir="rtl"
                 lang="ar"
@@ -501,7 +501,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   {retranslateBusy ? "Translating…" : "Re-translate"}
                 </button>
                 {retranslateCost !== null && !retranslateBusy && (
-                  <span className="text-xs text-ink/50">${retranslateCost.toFixed(4)}</span>
+                  <span className="text-xs text-ink/70">${retranslateCost.toFixed(4)}</span>
                 )}
                 <button
                   className="ms-auto rounded border border-sand px-2 py-1 text-xs disabled:opacity-50"
@@ -563,7 +563,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     <option value="egyptian">Egyptian colloquial</option>
                     <option value="msa">Modern Standard Arabic</option>
                   </select>
-                  <span className="mt-1 block text-[10px] leading-tight text-ink/50">
+                  <span className="mt-1 block text-[10px] leading-tight text-ink/70">
                     Switching only shows that register. Re-translate writes it (about $0.001).
                   </span>
                 </label>
@@ -598,7 +598,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     Fit to box
                   </button>
                 </div>
-                <p className="mt-1 text-[10px] leading-tight text-ink/50">
+                <p className="mt-1 text-[10px] leading-tight text-ink/70">
                   Size is capped so the text stays inside the box; Fit to box sets the largest size that fits.
                 </p>
                 <input
@@ -646,7 +646,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   Localize region
                 </label>
               </div>
-              <p className="text-[10px] leading-tight text-ink/50">
+              <p className="text-[10px] leading-tight text-ink/70">
                 Localize off keeps the original artwork for this region (useful for logos and SFX).
               </p>
             </div>
@@ -654,11 +654,11 @@ export default function Editor({ jobId }: { jobId: string }) {
           {layer && layer.kind === "cover" && (
             <div className="space-y-2 text-xs">
               <p>Cover patch {layer.id}</p>
-              <p className="text-ink/50">Fill {layer.fill.join(", ")}</p>
+              <p className="text-ink/70">Fill {layer.fill.join(", ")}</p>
             </div>
           )}
 
-          <h2 className="mb-2 mt-4 text-xs tracking-wide text-ink/50">Layers</h2>
+          <h2 className="mb-2 mt-4 text-xs tracking-wide text-ink/70">Layers</h2>
           <ul className="space-y-1 text-xs">
             {textLayers.map((item) => (
               <li
