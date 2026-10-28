@@ -1,3 +1,4 @@
+// No model calls: this script only uses document/layout/reset/cover/export endpoints.
 // Menu-job click-through: select, edit text, drag, undo, reload persistence.
 // Usage: node e2e/menu-check.mjs
 import { chromium } from "playwright-core";

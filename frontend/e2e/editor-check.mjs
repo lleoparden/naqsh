@@ -1,3 +1,4 @@
+// No model calls: this script only uses document/layout/reset/cover/export endpoints.
 // Real click-through of the editor with Playwright (chromium-core + installed Chrome).
 // Usage: node e2e/editor-check.mjs
 import { chromium } from "playwright-core";
