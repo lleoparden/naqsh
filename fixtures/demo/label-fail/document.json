@@ -1,5 +1,5 @@
 {
-  "id": "5d6de0e0c1be",
+  "id": "76bb774d72f1",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -14,7 +14,7 @@
     {
       "id": "t1",
       "kind": "text",
-      "type": "dialogue",
+      "type": "menu_item",
       "action": "translate",
       "source_text": "CUMIN",
       "arabic": {
@@ -22,39 +22,43 @@
         "msa": "كمون"
       },
       "box": [
-        303,
+        307,
         977,
-        995,
-        1164
+        979,
+        1150
       ],
       "font_family": "naskh",
-      "font_size": 94,
+      "font_size": 127,
       "lines": [
         {
           "text": "كمون",
-          "size": 94,
-          "x": 649.0,
-          "baseline": 1089.0,
-          "width": 170,
-          "height": 87
+          "size": 127,
+          "x": 643.0,
+          "baseline": 1088.5,
+          "width": 229,
+          "height": 118
         }
       ],
       "align": "center",
       "color": [
         43,
         26,
-        18
+        14
       ],
       "z": 0,
       "visible": true,
       "locked": false,
       "strategy": "flat-fill",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t2",
       "kind": "text",
-      "type": "dialogue",
+      "type": "menu_item",
       "action": "translate",
       "source_text": "GROUND",
       "arabic": {
@@ -62,74 +66,82 @@
         "msa": "مطحون"
       },
       "box": [
-        485,
-        1206,
+        484,
+        1200,
         817,
-        1261
-      ],
-      "font_family": "naskh",
-      "font_size": 24,
-      "lines": [
-        {
-          "text": "مطحون",
-          "size": 24,
-          "x": 651.0,
-          "baseline": 1238.5,
-          "width": 65,
-          "height": 24
-        }
-      ],
-      "align": "center",
-      "color": [
-        43,
-        26,
-        18
-      ],
-      "z": 1,
-      "visible": true,
-      "locked": false,
-      "strategy": "flat-fill",
-      "fill": []
-    },
-    {
-      "id": "t3",
-      "kind": "text",
-      "type": "dialogue",
-      "action": "translate",
-      "source_text": "NET 100 G",
-      "arabic": {
-        "egyptian": "صافي 100 جم",
-        "msa": "صافي ١٠٠ جم"
-      },
-      "box": [
-        504,
-        1419,
-        790,
-        1465
+        1256
       ],
       "font_family": "naskh",
       "font_size": 20,
       "lines": [
         {
-          "text": "صافي 100 جم",
+          "text": "مطحون",
           "size": 20,
-          "x": 647.0,
-          "baseline": 1444.5,
-          "width": 107,
-          "height": 25
+          "x": 650.5,
+          "baseline": 1232.0,
+          "width": 55,
+          "height": 20
         }
       ],
       "align": "center",
       "color": [
         43,
         26,
-        18
+        14
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "flat-fill",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "price",
+      "action": "keep_numerals",
+      "source_text": "NET 100 G",
+      "arabic": {
+        "egyptian": "صافي ١٠٠ جم",
+        "msa": "صافي ١٠٠ جم"
+      },
+      "box": [
+        499,
+        1423,
+        800,
+        1476
+      ],
+      "font_family": "naskh",
+      "font_size": 11,
+      "lines": [
+        {
+          "text": "صافي ١٠٠ جم",
+          "size": 11,
+          "x": 649.5,
+          "baseline": 1451.0,
+          "width": 55,
+          "height": 13
+        }
+      ],
+      "align": "center",
+      "color": [
+        43,
+        26,
+        14
       ],
       "z": 2,
       "visible": true,
       "locked": false,
-      "strategy": "muse-retry",
-      "fill": []
+      "strategy": "flat-fill",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     }
   ]
 }

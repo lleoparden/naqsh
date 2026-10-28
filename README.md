@@ -37,6 +37,7 @@ older project. In particular:
 - Only assets with clear rights are used: CC0/public-domain media, or images
   generated with Muse Image. Every asset and its license is recorded in
   [`ASSETS.md`](ASSETS.md).
+- **Layered background:** the cleaned plate is split into a Scenery layer and one layer per speech bubble (SAM 3.1), each toggleable in the editor and in the SVG/PNG exports.
 
 ## The pipeline
 

@@ -417,6 +417,16 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - Limits to eyeball: the menu's two bubbles are both **box_fallback** (SAM found no bubble), so they may be false positives around dialogue-typed regions; the comic's title banner is also a box fallback. Only comic/menu demo entries were rebuilt.
 - Evidence: `docs/evidence/ui/pipeline-background.json`; screenshots not regenerated in this step.
 
+### Background suppression + all five demo entries rebuilt
+
+- `build_assets` now suppresses **all** bubble layers when SAM returns zero bubble objects, even if regions are typed dialogue/caption. The background stage records `fallback_suppressed: true`; per-region `box_fallback` still applies when SAM returns at least one object.
+- Menu live run (`9b6f89fbc2b3`, 90.3 s, $0.0391): **0 bubbles, 0 sam, 0 fallback, suppressed true** — scenery only, no more holes around non-bubble text.
+- SFX page (`8e07fe0a4a4d`, 32.3 s, $0.0276): 0 bubbles, suppressed true. Chalkboard (`231bfa7361a0`, 69.8 s, $0.0445) and label (`76bb774d72f1`, 71.0 s, $0.0422): 0 bubbles, suppression false (no dialogue/caption candidates, SAM not called).
+- Comic (`4e251c89edaa`) stays 3 bubbles: **2 sam, 1 box_fallback**; it predates the suppression flag, so its stage has no `fallback_suppressed` field.
+- All five demo entries rebuilt from these real receipts: **comic, menu, chalkboard, sfx-comic, label-fail**; cache is now **20.02 MB**. Demo replay of each returns the same layer lists (comic: scene + 3 bubbles + 3 text; the other four: scene + text only).
+- README "What's new" gained one line about the layered background.
+- Limits: the suppression change is one rule (zero SAM objects); quality of box_fallback on pages with >=1 detected bubble is still unverified visually; comic's flag is absent because it was not re-run.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both

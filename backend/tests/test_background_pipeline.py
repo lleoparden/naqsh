@@ -1,4 +1,4 @@
-"""Pipeline background wiring: manifest sources and no-bubble pages."""
+"""Pipeline background wiring: suppression, fallback and the failure fallback."""
 
 from pathlib import Path
 from types import SimpleNamespace
@@ -6,8 +6,10 @@ from types import SimpleNamespace
 import numpy as np
 from PIL import Image
 
-from app.pipeline import background
+from app.pipeline import background, job as job_module
 from app.pipeline.document import Document, _attach_background
+from app.pipeline.meta import SamObject
+from app.pipeline.types import PageJob
 
 
 def _page(tmp_path: Path) -> tuple[Path, Image.Image]:
@@ -16,22 +18,19 @@ def _page(tmp_path: Path) -> tuple[Path, Image.Image]:
     return tmp_path, composite
 
 
-def test_no_candidates_writes_scenery_only(tmp_path: Path, monkeypatch) -> None:
-    folder, composite = _page(tmp_path)
-
-    def boom(*_args, **_kwargs):
-        raise AssertionError("SAM must not be called when there are no dialogue/caption regions")
-
-    monkeypatch.setattr(background, "sam_segment", boom)
-    summary = background.build_assets(
-        folder, b"x", composite, [{"id": "t1", "bbox": [10, 10, 60, 30], "type": "menu_item"}], 120, 90
+def _sam(width: int, height: int, x: int, y: int) -> SamObject:
+    mask_w, mask_h = 20, 20
+    return SamObject(
+        object_id="1",
+        box=(x, y, x + mask_w, y + mask_h, width, height),
+        confidence=0.9,
+        width=mask_w,
+        height=mask_h,
+        raster=b"\x01" * (mask_w * mask_h),
     )
-    assert summary["counts"] == {"bubbles": 0, "sam": 0, "box_fallback": 0}
-    assert (folder / "scene.png").is_file()
-    assert background.json.loads((folder / "background.json").read_text(encoding="utf-8"))["bubbles"] == []
 
 
-def test_missing_sam_mask_is_recorded_as_box_fallback(tmp_path: Path, monkeypatch) -> None:
+def test_sam_zero_objects_suppresses_all_bubbles(tmp_path: Path, monkeypatch) -> None:
     folder, composite = _page(tmp_path)
     monkeypatch.setattr(
         background,
@@ -39,21 +38,71 @@ def test_missing_sam_mask_is_recorded_as_box_fallback(tmp_path: Path, monkeypatc
         lambda *_args, **_kwargs: ([], SimpleNamespace(images=1)),
     )
     summary = background.build_assets(
-        folder, b"x", composite, [{"id": "t1", "bbox": [10, 10, 50, 40], "type": "dialogue"}], 120, 90
+        folder,
+        b"x",
+        composite,
+        [{"id": "t1", "bbox": [10, 10, 50, 40], "type": "dialogue"}],
+        120,
+        90,
     )
-    assert summary["counts"] == {"bubbles": 1, "sam": 0, "box_fallback": 1}
+    assert summary["counts"] == {
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": True,
+    }
     manifest = background.json.loads((folder / "background.json").read_text(encoding="utf-8"))
-    assert manifest["bubbles"][0]["source"] == "box_fallback"
-    assert manifest["counts"]["box_fallback"] == 1
-    scene = np.asarray(Image.open(folder / "scene.png").convert("RGBA"))
-    assert scene[20, 20, 3] == 0  # hole cut for the bubble
+    assert manifest["bubbles"] == []
+    assert manifest["counts"]["fallback_suppressed"] is True
+
+
+def test_one_sam_object_keeps_box_fallback_for_unmatched_region(tmp_path: Path, monkeypatch) -> None:
+    folder, composite = _page(tmp_path)
+    monkeypatch.setattr(
+        background,
+        "sam_segment",
+        lambda *_args, **_kwargs: ([_sam(120, 90, 5, 5)], SimpleNamespace(images=1)),
+    )
+    summary = background.build_assets(
+        folder,
+        b"x",
+        composite,
+        [
+            {"id": "t1", "bbox": [5, 5, 25, 25], "type": "dialogue"},
+            {"id": "t2", "bbox": [70, 50, 110, 80], "type": "dialogue"},
+        ],
+        120,
+        90,
+    )
+    assert summary["counts"] == {
+        "bubbles": 2,
+        "sam": 1,
+        "box_fallback": 1,
+        "fallback_suppressed": False,
+    }
+    sources = [bubble["source"] for bubble in background.json.loads((folder / "background.json").read_text(encoding="utf-8"))["bubbles"]]
+    assert sorted(sources) == ["box_fallback", "sam"]
+
+
+def test_background_failure_is_recorded_and_does_not_raise(tmp_path: Path, monkeypatch) -> None:
+    job = PageJob(id="bg-fail", register="egyptian", width=120, height=90)
+    composite = Image.new("RGB", (120, 90), "white")
+
+    def boom(*_args, **_kwargs):
+        raise RuntimeError("injected background failure")
+
+    monkeypatch.setattr(job_module, "build_assets", boom)
+    job_module._background_stage(job, tmp_path, b"x", composite, [], 120, 90)
+
+    stage = job.stages[-1]
+    assert stage.name == "background"
+    assert "injected background failure" in stage.detail["error"]
+    assert any("background layers unavailable" in warning for warning in job.warnings)
 
 
 def test_manifest_attaches_layers(tmp_path: Path) -> None:
     folder, composite = _page(tmp_path)
-    background.build_assets(
-        folder, b"x", composite, [], 120, 90
-    )
+    background.build_assets(folder, b"x", composite, [], 120, 90)
     manifest = background.json.loads((folder / "background.json").read_text(encoding="utf-8"))
     manifest["bubbles"] = [
         {"id": "bubble-t1", "box": [10, 10, 50, 40], "asset": "bubble-t1.png", "name": "Bubble", "source": "sam"}

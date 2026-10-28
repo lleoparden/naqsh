@@ -1,5 +1,5 @@
 {
-  "id": "6a8aa7a0829b",
+  "id": "8e07fe0a4a4d",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -19,24 +19,24 @@
       "source_text": "THREE DAYS LATER",
       "arabic": {
         "egyptian": "بعد تلات أيام",
-        "msa": "بعد ثلاثة أيام"
+        "msa": "بعد تلات أيام"
       },
       "box": [
-        64,
+        58,
         96,
-        470,
+        506,
         202
       ],
       "font_family": "tajawal-bold",
-      "font_size": 58,
+      "font_size": 59,
       "lines": [
         {
           "text": "بعد تلات أيام",
-          "size": 58,
-          "x": 267.0,
-          "baseline": 165.0,
-          "width": 323,
-          "height": 70
+          "size": 59,
+          "x": 282.0,
+          "baseline": 165.5,
+          "width": 329,
+          "height": 71
         }
       ],
       "align": "center",
@@ -49,7 +49,11 @@
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t2",
@@ -59,13 +63,13 @@
       "source_text": "MEANWHILE...",
       "arabic": {
         "egyptian": "وفي نفس الوقت",
-        "msa": "وفي الأثناء"
+        "msa": "وفي نفس الوقت"
       },
       "box": [
-        881,
+        902,
         96,
-        1217,
-        200
+        1220,
+        198
       ],
       "font_family": "tajawal-bold",
       "font_size": 39,
@@ -73,8 +77,8 @@
         {
           "text": "وفي نفس الوقت",
           "size": 39,
-          "x": 1049.0,
-          "baseline": 153.0,
+          "x": 1061.0,
+          "baseline": 152.0,
           "width": 277,
           "height": 44
         }
@@ -89,7 +93,11 @@
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t3",
@@ -99,13 +107,13 @@
       "source_text": "KRAAK!",
       "arabic": {
         "egyptian": "كراك!",
-        "msa": "طق!"
+        "msa": "كراك!"
       },
       "box": [
-        74,
-        499,
-        1239,
-        1037
+        77,
+        509,
+        1257,
+        995
       ],
       "font_family": "tajawal-bold",
       "font_size": 220,
@@ -113,8 +121,8 @@
         {
           "text": "كراك!",
           "size": 220,
-          "x": 656.5,
-          "baseline": 817.5,
+          "x": 667.0,
+          "baseline": 801.5,
           "width": 512,
           "height": 185
         }
@@ -122,14 +130,18 @@
       "align": "center",
       "color": [
         255,
-        221,
-        31
+        217,
+        26
       ],
       "z": 2,
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     }
   ]
 }

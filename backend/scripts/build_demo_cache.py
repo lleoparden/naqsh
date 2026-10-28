@@ -39,10 +39,10 @@ OUT = REPO / "fixtures" / "demo"
 # name -> (real job id, fixture file, what it is for)
 CURATED = {
     "comic": ("4e251c89edaa", "01-comic-flat.png", "flat comic page, three regions"),
-    "menu": ("2c34e573a187", "03-menu-paper.png", "dense menu with prices and leaders"),
-    "chalkboard": ("605213b894ff", "04-chalkboard.png", "chalk text on a dark board"),
-    "sfx-comic": ("6a8aa7a0829b", "07-comic-sfx.png", "captions plus a kept sound effect"),
-    "label-fail": ("5d6de0e0c1be", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
+    "menu": ("9b6f89fbc2b3", "03-menu-paper.png", "dense menu with prices and leaders"),
+    "chalkboard": ("231bfa7361a0", "04-chalkboard.png", "chalk text on a dark board"),
+    "sfx-comic": ("8e07fe0a4a4d", "07-comic-sfx.png", "captions plus a kept sound effect"),
+    "label-fail": ("76bb774d72f1", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
 }
 
 
@@ -102,6 +102,7 @@ def build(name: str, job_id: str, fixture: str, note: str) -> dict:
                 "bubbles": background.get("bubbles") and len(background["bubbles"]) or 0,
                 "sam": sum(1 for bubble in background.get("bubbles") or [] if bubble.get("source") == "sam"),
                 "box_fallback": sum(1 for bubble in background.get("bubbles") or [] if bubble.get("source") == "box_fallback"),
+                "fallback_suppressed": bool((background.get("counts") or {}).get("fallback_suppressed")),
             }
 
     fixture_path = FIXTURES / fixture
