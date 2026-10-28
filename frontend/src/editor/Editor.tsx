@@ -22,6 +22,7 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [coverShape, setCoverShape] = useState<"rect" | "ellipse">("rect");
   const [coverFill, setCoverFill] = useState<number[]>([230, 226, 216]);
   const [exportOpen, setExportOpen] = useState(false);
+  const [exporting, setExporting] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [renaming, setRenaming] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState("");
@@ -234,6 +235,31 @@ export default function Editor({ jobId }: { jobId: string }) {
     }, [selected]);
   };
 
+  const runExport = async (name: string, href: string) => {
+    setExportOpen(false);
+    setExporting(name);
+    try {
+      const response = await fetch(href);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const blob = await response.blob();
+      const extension = blob.type.includes("svg") ? "svg" : blob.type.includes("zip") ? "zip" : "png";
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `naqsh-${jobId}-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.${extension}`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+      setToast(`${name} exported · ${(blob.size / 1024).toFixed(0)} KB`);
+    } catch {
+      setToast(`${name} failed — try again`);
+    } finally {
+      setExporting(null);
+      window.setTimeout(() => setToast(null), 3200);
+    }
+  };
+
   const textLayers = useMemo(
     () => (doc ? [...doc.layers].sort((a, b) => a.z - b.z) : []),
     [doc],
@@ -353,15 +379,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   key={name}
                   role="menuitem"
                   className="block w-full rounded px-2 py-2 text-start"
-                  onClick={() => {
-                    setExportOpen(false);
-                    setToast(`Preparing ${name}…`);
-                    window.setTimeout(() => {
-                      window.location.href = href;
-                      setToast(`${name} exported`);
-                      window.setTimeout(() => setToast(null), 2200);
-                    }, 250);
-                  }}
+                  onClick={() => void runExport(name, href)}
                 >
                   <span className="block text-sm">{name}</span>
                   <span className="block text-[11px] leading-tight text-ink/70">{description}</span>
@@ -950,7 +968,20 @@ export default function Editor({ jobId }: { jobId: string }) {
           </ul>
         </aside>
       </div>
-      {toast && (
+      {exporting && (
+        <>
+          <div className="fixed bottom-0 left-0 z-40 h-0.5 w-full bg-raised">
+            <div className="export-progress h-full bg-accent" />
+          </div>
+          <div
+            role="status"
+            className="fixed bottom-6 end-6 z-40 rounded border border-border bg-panel px-4 py-2 text-sm text-fg shadow-xl"
+          >
+            Generating {exporting}…
+          </div>
+        </>
+      )}
+      {toast && !exporting && (
         <div
           role="status"
           className="fixed bottom-6 end-6 z-40 rounded border border-border bg-panel px-4 py-2 text-sm text-fg shadow-xl"
