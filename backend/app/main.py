@@ -182,6 +182,10 @@ def patch_document(job_id: str, body: dict[str, object]) -> dict[str, object]:
                     layer.arabic[register_name] = str(value)
         if isinstance(update.get("fill"), list):
             layer.fill = [int(v) for v in update["fill"]]  # type: ignore[arg-type]
+        if "name" in update:
+            layer.name = str(update["name"])[:80]
+        if "shape" in update and str(update["shape"]) in ("rect", "ellipse"):
+            layer.shape = str(update["shape"])
         touched.add(layer.id)
     document_module.layout_document(doc, only_layer=None)
     document_module.save_document(folder, doc)
@@ -399,6 +403,7 @@ def add_cover(job_id: str, body: dict[str, object]) -> dict[str, object]:
         type="cover",
         action="keep",
         fill=[int(v) for v in fill],  # type: ignore[arg-type]
+        shape=str(body.get("shape") or "rect") if str(body.get("shape") or "rect") in ("rect", "ellipse") else "rect",
         z=len(doc.layers),
     )
     doc.layers.append(cover)

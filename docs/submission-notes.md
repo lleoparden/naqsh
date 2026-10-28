@@ -377,6 +377,16 @@ Checks: `pytest -q` 70 passed; `typecheck` clean; Group 1 Playwright 8/8
 comic 10/10 and menu 6/6 still green. Screenshots outside the repo at
 `L:\naqsh-review\group1\`.
 
+### UI Group 2 — layers, tools, export
+
+- Layers panel lists every layer: original reference and clean plate (locked rows) plus covers and text regions, sorted by z; inline rename, eye/lock, up/down and drag reorder, selection sync with the canvas.
+- Cover tool in the left toolbar (Select, Text, Cover, Eyedropper) with rectangle or ellipse patches; fill via the shared colour control; move/resize through the normal selection box; eyedropper samples the composite and applies to the selected layer.
+- Shared colour control: native picker, typed hex, recent colours, eyedropper (used by text colour and patch fill).
+- One Export dropdown with Layered SVG, Outlined SVG, PNG and Bundle (ZIP), each with a one-line description; a preparing/exported toast replaces the four link buttons.
+- Cover shape is persisted (shape) and honoured by the canvas, the layered SVG (ellipse element) and the PNG render.
+
+Checks: pytest 72 passed; Group 2 Playwright 7/7; comic 10/10; menu 6/6; Group 1 12/12; axe contrast 0. Screenshots at \L:\\naqsh-review\\group2\\\.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both

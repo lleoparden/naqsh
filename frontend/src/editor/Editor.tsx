@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Eye, EyeOff, Maximize2, Minus, Plus, Redo2, Undo2 } from "lucide-react";
+import { Circle, Eye, EyeOff, Lock, Maximize2, Minus, MousePointer2, Pencil, Pipette, Plus, Redo2, Square, Type, Undo2, Unlock } from "lucide-react";
+import ColorField from "./ColorField";
 import DemoBadge from "../DemoBadge";
 import { layerById, FONTS, FONT_LABELS, FONT_SAMPLES, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
@@ -17,7 +18,14 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [zoom, setZoom] = useState(0.55);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [tool, setTool] = useState<"select" | "cover">("select");
+  const [tool, setTool] = useState<"select" | "cover" | "eyedropper">("select");
+  const [coverShape, setCoverShape] = useState<"rect" | "ellipse">("rect");
+  const [coverFill, setCoverFill] = useState<number[]>([230, 226, 216]);
+  const [exportOpen, setExportOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const [renaming, setRenaming] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
+  const [dragLayer, setDragLayer] = useState<string | null>(null);
   const [showOriginal, setShowOriginal] = useState(false);
   const [split, setSplit] = useState(100);
   const [draft, setDraft] = useState<DragState>(null);
@@ -45,6 +53,19 @@ export default function Editor({ jobId }: { jobId: string }) {
   const zoomBy = useCallback((factor: number) => {
     setZoom((value) => Math.min(3, Math.max(0.1, value * factor)));
   }, []);
+
+  // Fit the page once it loads and select the first editable region, so the panel is
+  // never empty on open or after a reload.
+  useEffect(() => {
+    if (!doc) return;
+    fitView();
+    if (!selected) {
+      const first = doc.layers.find((item) => item.kind === "text" && item.action !== "skip");
+      if (first) setSelected(first.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doc?.id]);
+
 
 
   useEffect(() => {
@@ -107,43 +128,33 @@ export default function Editor({ jobId }: { jobId: string }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [editor, selected, fitView, zoomBy]);
 
-  const sampleColor = useCallback(
-    (x: number, y: number): number[] => {
-      const canvas = plateCanvas.current;
-      if (!canvas || !doc) return [246, 240, 226];
-      const context = canvas.getContext("2d");
-      if (!context) return [246, 240, 226];
-      const data = context.getImageData(Math.max(0, Math.min(canvas.width - 5, Math.round(x))), Math.max(0, Math.min(canvas.height - 5, Math.round(y))), 5, 5).data;
-      let r = 0, g = 0, b = 0, n = 0;
-      for (let i = 0; i < data.length; i += 4) {
-        r += data[i];
-        g += data[i + 1];
-        b += data[i + 2];
-        n += 1;
-      }
-      return [Math.round(r / n), Math.round(g / n), Math.round(b / n)];
-    },
-    [doc],
-  );
-
-  useEffect(() => {
-    if (!doc || !container.current) return;
-    const rect = container.current.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    const fit = Math.min((rect.width - 60) / doc.width, (rect.height - 90) / doc.height);
-    setZoom(fit);
-    setOffset({ x: (rect.width - doc.width * fit) / 2, y: (rect.height - doc.height * fit) / 2 });
-    if (!selected) {
-      const first = doc.layers.find((item) => item.kind === "text" && item.action !== "skip");
-      if (first) setSelected(first.id);
-    }
-    // Fit once per document load; later zooms stay the user's.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [doc?.id]);
-
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (!doc) return;
     const point = toPage(event);
+    if (tool === "eyedropper") {
+      const canvas = plateCanvas.current;
+      const context = canvas?.getContext("2d");
+      if (canvas && context) {
+        const x = Math.max(0, Math.min(canvas.width - 1, Math.round(point.x)));
+        const y = Math.max(0, Math.min(canvas.height - 1, Math.round(point.y)));
+        const pixel = context.getImageData(x, y, 1, 1).data;
+        const rgb: [number, number, number] = [pixel[0], pixel[1], pixel[2]];
+        if (layer && layer.kind === "text") {
+          updateLayer((target) => {
+            target.color = rgb;
+          });
+        } else if (layer && layer.kind === "cover") {
+          updateLayer((target) => {
+            target.fill = rgb;
+          });
+        } else {
+          setCoverFill(rgb);
+        }
+        setToast("Colour picked from the page");
+        window.setTimeout(() => setToast(null), 1800);
+      }
+      return;
+    }
     if (tool === "cover") {
       setDraft({ mode: "cover", startX: point.x, startY: point.y, currentX: point.x, currentY: point.y });
       return;
@@ -198,11 +209,11 @@ export default function Editor({ jobId }: { jobId: string }) {
         Math.round(Math.max(draft.startY, draft.currentY)),
       ];
       if (box[2] - box[0] > 8 && box[3] - box[1] > 8) {
-        const fill = sampleColor(box[0] - 4, box[1] - 4);
+        const fill = coverFill;
         const response = await fetch(`/api/jobs/${jobId}/cover`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ box, fill }),
+          body: JSON.stringify({ box, fill, shape: coverShape }),
         });
         if (response.ok) {
           const next = (await response.json()) as Document;
@@ -326,23 +337,111 @@ export default function Editor({ jobId }: { jobId: string }) {
             <Maximize2 size={16} />
           </button>
         </div>
-        <div className="ms-auto flex gap-2">
-          <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export.svg`} target="_blank" rel="noreferrer">
-            SVG
-          </a>
-          <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export-outlined.svg`} target="_blank" rel="noreferrer">
-            SVG outlined
-          </a>
-          <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export.png`}>
-            PNG
-          </a>
-          <a className="rounded bg-nile px-2 py-1 text-white" href={`/api/jobs/${jobId}/export.zip`}>
-            Bundle
-          </a>
+        <div className="relative ms-auto">
+          <button
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded={exportOpen}
+            className="h-8 rounded bg-accent-strong px-3 text-white"
+            onClick={() => setExportOpen((value) => !value)}
+          >
+            Export
+          </button>
+          {exportOpen && (
+            <div role="menu" className="absolute end-0 top-10 z-30 w-72 rounded border border-border bg-panel p-1 shadow-xl">
+              {[
+                ["Layered SVG", "Editable text layers, opens in Figma/Inkscape", `/api/jobs/${jobId}/export.svg`],
+                ["Outlined SVG", "Text as paths; looks right without fonts", `/api/jobs/${jobId}/export-outlined.svg`],
+                ["PNG", "Flat image at source size", `/api/jobs/${jobId}/export.png`],
+                ["Bundle (ZIP)", "SVGs, plate, fonts and licences", `/api/jobs/${jobId}/export.zip`],
+              ].map(([name, description, href]) => (
+                <button
+                  key={name}
+                  role="menuitem"
+                  className="block w-full rounded px-2 py-2 text-start"
+                  onClick={() => {
+                    setExportOpen(false);
+                    setToast(`Preparing ${name}…`);
+                    window.setTimeout(() => {
+                      window.location.href = href;
+                      setToast(`${name} exported`);
+                      window.setTimeout(() => setToast(null), 2200);
+                    }, 250);
+                  }}
+                >
+                  <span className="block text-sm">{name}</span>
+                  <span className="block text-[11px] leading-tight text-ink/70">{description}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
       <div className="flex min-h-0 flex-1">
+        <nav aria-label="Tools" className="flex w-12 shrink-0 flex-col items-center gap-1 border-e border-border bg-panel py-2">
+          <button
+            aria-label="Select and move"
+            title="Select / move (V)"
+            aria-pressed={tool === "select"}
+            className="flex h-9 w-9 items-center justify-center"
+            onClick={() => setTool("select")}
+          >
+            <MousePointer2 size={17} />
+          </button>
+          <button
+            aria-label="Text"
+            title="Text: click a text region to edit it (T)"
+            className="flex h-9 w-9 items-center justify-center"
+            onClick={() => {
+              setTool("select");
+              setToast("Text tool: click a text region to edit it");
+              window.setTimeout(() => setToast(null), 2000);
+            }}
+          >
+            <Type size={17} />
+          </button>
+          <button
+            aria-label="Cover patch"
+            title="Cover patch (C): drag to cover an area"
+            aria-pressed={tool === "cover"}
+            className="flex h-9 w-9 items-center justify-center"
+            onClick={() => setTool("cover")}
+          >
+            <Square size={17} />
+          </button>
+          <button
+            aria-label="Eyedropper"
+            title="Eyedropper (I): pick a colour from the page"
+            aria-pressed={tool === "eyedropper"}
+            className="flex h-9 w-9 items-center justify-center"
+            onClick={() => setTool("eyedropper")}
+          >
+            <Pipette size={17} />
+          </button>
+          {tool === "cover" && (
+            <div className="mt-1 flex flex-col gap-1 border-t border-border pt-1">
+              <button
+                aria-label="Rectangle patch"
+                title="Rectangle patch"
+                aria-pressed={coverShape === "rect"}
+                className="flex h-8 w-9 items-center justify-center"
+                onClick={() => setCoverShape("rect")}
+              >
+                <Square size={15} />
+              </button>
+              <button
+                aria-label="Ellipse patch"
+                title="Ellipse patch"
+                aria-pressed={coverShape === "ellipse"}
+                className="flex h-8 w-9 items-center justify-center"
+                onClick={() => setCoverShape("ellipse")}
+              >
+                <Circle size={15} />
+              </button>
+            </div>
+          )}
+        </nav>
         <div
           ref={container}
           className={`relative flex-1 overflow-hidden bg-[#0b0c0f] ${tool === "cover" ? "cursor-crosshair" : "cursor-grab"}`}
@@ -363,16 +462,27 @@ export default function Editor({ jobId }: { jobId: string }) {
               {!showOriginal &&
                 textLayers
                   .filter((item) => item.kind === "cover" && item.visible && item.fill.length === 3)
-                  .map((item) => (
-                    <rect
-                      key={item.id}
-                      x={item.box[0]}
-                      y={item.box[1]}
-                      width={item.box[2] - item.box[0]}
-                      height={item.box[3] - item.box[1]}
-                      fill={`rgb(${item.fill[0]},${item.fill[1]},${item.fill[2]})`}
-                    />
-                  ))}
+                  .map((item) =>
+                    item.shape === "ellipse" ? (
+                      <ellipse
+                        key={item.id}
+                        cx={(item.box[0] + item.box[2]) / 2}
+                        cy={(item.box[1] + item.box[3]) / 2}
+                        rx={(item.box[2] - item.box[0]) / 2}
+                        ry={(item.box[3] - item.box[1]) / 2}
+                        fill={`rgb(${item.fill[0]},${item.fill[1]},${item.fill[2]})`}
+                      />
+                    ) : (
+                      <rect
+                        key={item.id}
+                        x={item.box[0]}
+                        y={item.box[1]}
+                        width={item.box[2] - item.box[0]}
+                        height={item.box[3] - item.box[1]}
+                        fill={`rgb(${item.fill[0]},${item.fill[1]},${item.fill[2]})`}
+                      />
+                    ),
+                  )}
               {!showOriginal &&
                 textLayers
                   .filter((item) => item.kind === "text" && item.visible && item.action !== "skip")
@@ -428,7 +538,16 @@ export default function Editor({ jobId }: { jobId: string }) {
                   />
                 </g>
               )}
-              {coverDraft && (
+              {coverDraft && coverShape === "ellipse" ? (
+                <ellipse
+                  cx={(coverDraft.startX + coverDraft.currentX) / 2}
+                  cy={(coverDraft.startY + coverDraft.currentY) / 2}
+                  rx={Math.abs(coverDraft.currentX - coverDraft.startX) / 2}
+                  ry={Math.abs(coverDraft.currentY - coverDraft.startY) / 2}
+                  fill="rgba(91,108,255,0.22)"
+                  stroke="#5B6CFF"
+                />
+              ) : coverDraft ? (
                 <rect
                   x={Math.min(coverDraft.startX, coverDraft.currentX)}
                   y={Math.min(coverDraft.startY, coverDraft.currentY)}
@@ -437,7 +556,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   fill="rgba(91,108,255,0.22)"
                   stroke="#5B6CFF"
                 />
-              )}
+              ) : null}
               {showOriginal ? (
                 <image
                   data-background="true"
@@ -678,17 +797,14 @@ export default function Editor({ jobId }: { jobId: string }) {
               </div>
 
               <div className="flex items-center gap-2">
-                <label className="text-xs">Colour</label>
-                <input
-                  type="color"
-                  aria-label="Text colour"
-                  value={`#${layer.color.map((value) => value.toString(16).padStart(2, "0")).join("")}`}
-                  onChange={(event) => {
-                    const value = event.target.value;
+                <ColorField
+                  value={layer.color}
+                  onChange={(rgb) =>
                     updateLayer((target) => {
-                      target.color = [parseInt(value.slice(1, 3), 16), parseInt(value.slice(3, 5), 16), parseInt(value.slice(5, 7), 16)];
-                    });
-                  }}
+                      target.color = [rgb[0], rgb[1], rgb[2]];
+                    })
+                  }
+                  onEyedropper={() => setTool("eyedropper")}
                 />
                 <label className="ms-auto flex items-center gap-2 text-xs">
                   <input
@@ -709,38 +825,145 @@ export default function Editor({ jobId }: { jobId: string }) {
             </div>
           )}
           {layer && layer.kind === "cover" && (
-            <div className="space-y-2 text-xs">
-              <p>Cover patch {layer.id}</p>
-              <p className="text-ink/70">Fill {layer.fill.join(", ")}</p>
+            <div className="space-y-3 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs">{layer.id}</span>
+                <span className="rounded bg-raised px-1 text-xs">{layer.shape}</span>
+              </div>
+              <ColorField
+                label="Fill"
+                value={layer.fill.length === 3 ? layer.fill : [230, 226, 216]}
+                onChange={(rgb) =>
+                  updateLayer((target) => {
+                    target.fill = rgb;
+                  })
+                }
+                onEyedropper={() => setTool("eyedropper")}
+              />
+              <label className="block">
+                Shape
+                <select
+                  className="mt-1 w-full px-1 py-1"
+                  value={layer.shape}
+                  onChange={(event) =>
+                    updateLayer((target) => {
+                      target.shape = event.target.value === "ellipse" ? "ellipse" : "rect";
+                    })
+                  }
+                >
+                  <option value="rect">Rectangle</option>
+                  <option value="ellipse">Ellipse</option>
+                </select>
+              </label>
+              <p className="text-[10px] leading-tight text-ink/70">
+                Drag to move, use the corner handle to resize. The eyedropper picks a colour from the page.
+              </p>
             </div>
           )}
 
           <h2 className="mb-2 mt-4 text-xs tracking-wide text-ink/70">Layers</h2>
-          <ul className="space-y-1 text-xs">
-            {textLayers.map((item) => (
+          <ul className="space-y-1 text-xs" data-testid="layers-list">
+            <li className="flex items-center gap-2 rounded border border-border bg-panel px-2 py-1 text-ink/70">
+              <EyeOff size={13} />
+              <Lock size={13} />
+              <span className="flex-1">Original</span>
+              <span className="text-[10px]">reference</span>
+            </li>
+            <li className="flex items-center gap-2 rounded border border-border bg-panel px-2 py-1 text-ink/70">
+              <Eye size={13} />
+              <Lock size={13} />
+              <span className="flex-1">Clean plate</span>
+              <span className="text-[10px]">background</span>
+            </li>
+            {[...textLayers].sort((a, b) => b.z - a.z).map((item) => (
               <li
                 key={item.id}
-                className={`flex items-center gap-2 rounded border px-2 py-1 ${selected === item.id ? "border-lacquer" : "border-sand/60"}`}
+                draggable
+                onDragStart={() => setDragLayer(item.id)}
+                onDragOver={(event) => event.preventDefault()}
+                onDrop={() => {
+                  if (dragLayer && dragLayer !== item.id) swapZ(dragLayer, item.id);
+                  setDragLayer(null);
+                }}
+                className={`flex items-center gap-1.5 rounded border px-2 py-1 ${selected === item.id ? "border-accent" : "border-border"}`}
               >
                 <button
-                  title="visible"
+                  aria-label={`Toggle ${item.id} visibility`}
+                  title="Show/hide"
                   onClick={() => updateLayerFor(item.id, (target) => (target.visible = !target.visible))}
                 >
-                  {item.visible ? "👁" : "–"}
+                  {item.visible ? <Eye size={13} /> : <EyeOff size={13} />}
                 </button>
-                <button title="lock" onClick={() => updateLayerFor(item.id, (target) => (target.locked = !target.locked))}>
-                  {item.locked ? "🔒" : "🔓"}
+                <button
+                  aria-label={`Toggle ${item.id} lock`}
+                  title="Lock"
+                  onClick={() => updateLayerFor(item.id, (target) => (target.locked = !target.locked))}
+                >
+                  {item.locked ? <Lock size={13} /> : <Unlock size={13} />}
                 </button>
-                <button className="flex-1 text-start" onClick={() => setSelected(item.id)}>
-                  {item.id} · {item.kind === "cover" ? "cover" : item.type}
+                {renaming === item.id ? (
+                  <input
+                    autoFocus
+                    className="min-w-0 flex-1 px-1 py-0.5 text-xs"
+                    value={renameValue}
+                    onChange={(event) => setRenameValue(event.target.value)}
+                    onBlur={() => {
+                      updateLayerFor(item.id, (target) => {
+                        target.name = renameValue.slice(0, 80);
+                      });
+                      setRenaming(null);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") (event.target as HTMLInputElement).blur();
+                      if (event.key === "Escape") setRenaming(null);
+                    }}
+                  />
+                ) : (
+                  <button
+                    data-testid={`layer-name-${item.id}`}
+                    className="min-w-0 flex-1 truncate text-start"
+                    title="Click to select, double-click to rename, drag to reorder"
+                    onClick={() => setSelected(item.id)}
+                    onDoubleClick={() => {
+                      setRenaming(item.id);
+                      setRenameValue(item.name || item.id);
+                    }}
+                  >
+                    {item.name || item.id}
+                    <span className="ms-1 text-[10px] text-ink/70">
+                      {item.kind === "cover" ? item.shape : item.type}
+                    </span>
+                  </button>
+                )}
+                <button
+                  aria-label={`Rename ${item.id}`}
+                  title="Rename layer"
+                  onClick={() => {
+                    setRenaming(item.id);
+                    setRenameValue(item.name || item.id);
+                  }}
+                >
+                  <Pencil size={12} />
                 </button>
-                <button onClick={() => nudgeZ(item.id, 1)}>↑</button>
-                <button onClick={() => nudgeZ(item.id, -1)}>↓</button>
+                <button aria-label="Move layer up" title="Move up (towards front)" onClick={() => nudgeZ(item.id, 1)}>
+                  ↑
+                </button>
+                <button aria-label="Move layer down" title="Move down" onClick={() => nudgeZ(item.id, -1)}>
+                  ↓
+                </button>
               </li>
             ))}
           </ul>
         </aside>
       </div>
+      {toast && (
+        <div
+          role="status"
+          className="fixed bottom-6 end-6 z-40 rounded border border-border bg-panel px-4 py-2 text-sm text-fg shadow-xl"
+        >
+          {toast}
+        </div>
+      )}
     </div>
   );
 
@@ -749,6 +972,18 @@ export default function Editor({ jobId }: { jobId: string }) {
       const target = draftDoc.layers.find((item) => item.id === id);
       if (target) mutate(target);
     }, [id]);
+  }
+
+  function swapZ(a: string, b: string) {
+    editor.commit((draftDoc) => {
+      const first = draftDoc.layers.find((item) => item.id === a);
+      const second = draftDoc.layers.find((item) => item.id === b);
+      if (first && second) {
+        const z = first.z;
+        first.z = second.z;
+        second.z = z;
+      }
+    }, [a, b]);
   }
 
   function nudgeZ(id: string, delta: number) {
