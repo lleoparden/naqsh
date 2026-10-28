@@ -1,29 +1,20 @@
 {
-  "total_cost_usd": 0.004973,
+  "total_cost_usd": 0.004208,
   "pages": [
     {
-      "job": "d3dbface16b8",
-      "cost_usd": 0.001895,
-      "names": {
-        "t1": "Chapter title header",
-        "t2": "Fresh bread speech bubble",
-        "t3": "Every morning thought bubble"
-      }
-    },
-    {
       "job": "e13f9585b24f",
-      "cost_usd": 0.003078,
+      "cost_usd": 0.004208,
       "names": {
-        "t1": "Kushary House title banner",
-        "t2": "Empty menu strip",
-        "t3": "Kushari dish price line",
-        "t4": "Mint tea price label",
-        "t5": "Mint tea dotted price line",
-        "t6": "Falafel dish price line",
-        "t7": "Basbousa dessert price label",
-        "t8": "Dessert dotted price line",
-        "t9": "Daily opening hours footer",
-        "t10": "Fresh dishes notice banner"
+        "t1": "Kushary House title",
+        "t2": "Empty menu divider",
+        "t3": "Kushari dish price",
+        "t4": "Mint tea price",
+        "t5": "Mint tea dotted price",
+        "t6": "Falafel dish price",
+        "t7": "Basbousa dessert price",
+        "t8": "Obscured menu price line",
+        "t9": "Daily opening hours",
+        "t10": "Fresh dishes notice"
       }
     }
   ]

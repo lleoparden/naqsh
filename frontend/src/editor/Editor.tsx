@@ -320,9 +320,6 @@ export default function Editor({ jobId }: { jobId: string }) {
             <option value="latin">0123</option>
             <option value="arabic-indic">٠١٢٣</option>
           </select>
-          <span dir="ltr" className="text-xs text-ink/75">
-            {doc.numerals === "latin" ? "0123" : "٠١٢٣"}
-          </span>
         </label>
         <button
           aria-label="Original"

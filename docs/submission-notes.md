@@ -387,6 +387,16 @@ comic 10/10 and menu 6/6 still green. Screenshots outside the repo at
 
 Checks: pytest 72 passed; Group 2 Playwright 7/7; comic 10/10; menu 6/6; Group 1 12/12; axe contrast 0. Screenshots at \L:\\naqsh-review\\group2\\\.
 
+### Group 3 polish follow-up
+
+- Home now uses the same wording as the editor: **Arabic style** with full option labels and a one-line helper.
+- Removed the duplicated digits sample in the top bar; the select itself shows 0123 / ٠١٢٣.
+- Review screenshots are now clean: home with ?clean=1, editor on the menu job (no leftover test covers).
+- Region naming run again on the menu (its document had been reset by tests): .0042; naming ledger total across all runs .0092 for three calls.
+- Known risk: the Group 2 click-through deletes a job document to reset state, which also deletes cached region names; comic names were wiped by that test after the naming run.
+
+Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe contrast 0.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both
