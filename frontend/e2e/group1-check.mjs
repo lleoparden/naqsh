@@ -64,12 +64,12 @@ record("reset to AI result", resetLayer.arabic.egyptian === aiText, "original te
 await page.screenshot({ path: `${OUT}/03-reset.png` });
 
 // 4. original hides overlays
-await page.getByLabel("Original").check();
+await page.getByRole("button", { name: "Original" }).click();
 await page.waitForTimeout(400);
 const textCount = await page.locator("svg text").count();
 record("original hides overlays", textCount === 0, `text elements on canvas: ${textCount}`);
 await page.screenshot({ path: `${OUT}/04-original.png` });
-await page.getByLabel("Original").uncheck();
+await page.getByRole("button", { name: "Original" }).click();
 await page.waitForTimeout(300);
 
 // 5. before/after slider keyboard + pointer

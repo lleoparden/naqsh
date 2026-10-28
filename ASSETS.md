@@ -31,6 +31,11 @@ Every asset gets a row here *before* it is committed.
 | `fixtures/demo/sfx-comic/` | Demo-mode cache of the SFX comic run | Derived from `07-comic-sfx.png`, job `6a8aa7a0829b` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
 | `fixtures/demo/label-fail/` | Demo-mode cache of the failing photo-label run (honest limit) | Derived from `05-label-kraft.png`, job `5d6de0e0c1be` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
 
+
+| `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
+| `assets/fonts/IBMPlexSansArabic-Regular.ttf` | UI Arabic (chrome, samples) | [google/fonts · ofl/ibmplexsansarabic](https://github.com/google/fonts/tree/main/ofl/ibmplexsansarabic) | OFL 1.1 (`OFL-IBMPlexSansArabic.txt`) | 2026-10-28 |
+| `assets/fonts/IBMPlexSansArabic-SemiBold.ttf` | UI Arabic emphasis | same | OFL 1.1 | 2026-10-28 |
+
 ## Fonts
 
 All fonts are SIL Open Font License 1.1; the license text ships beside each file.
