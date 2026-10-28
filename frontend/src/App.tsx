@@ -3,6 +3,7 @@ import { artifactUrl, fetchHealth, localize, type Health, type Job } from "./api
 import DemoBadge from "./DemoBadge";
 import Editor from "./editor/Editor";
 import { useLang } from "./i18n";
+import StateIllustration from "./StateIllustration";
 
 const REGISTERS = ["egyptian", "msa"] as const;
 
@@ -169,9 +170,15 @@ function Home() {
       </section>
 
       {error && (
-        <p className="rounded-xl border border-lacquer/30 bg-lacquer/5 px-4 py-3 text-sm text-lacquer">
-          {t("error", { message: error })}
-        </p>
+        <StateIllustration kind="error" title="Something went wrong" detail={error} />
+      )}
+
+      {busy && !job && (
+        <StateIllustration
+          kind="loading"
+          title="Localizing your page"
+          detail="Reading the lettering, cleaning the plate and setting the Arabic. This usually takes under a minute."
+        />
       )}
 
       {job?.demo && <DemoBadge source={job.demo_source} />}
@@ -191,6 +198,15 @@ function Home() {
             ))}
           </ul>
         </section>
+      )}
+
+      {job && !busy && (
+        <StateIllustration
+          compact
+          kind="success"
+          title="Page localized"
+          detail={`${job.regions.length} regions · ${(job.total_ms / 1000).toFixed(1)} s`}
+        />
       )}
 
       {job && (!job.demo || replay.done) && (
