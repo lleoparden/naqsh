@@ -76,8 +76,10 @@ def test_zip_bundle_contains_svg_fonts_and_readme(tmp_path: Path) -> None:
     assert any("OFL" in name for name in names)
 
 
-def test_numerals_convert_for_prices_only() -> None:
-    size, lines = layout_text("20", [0, 0, 120, 60], action="keep", numerals="arabic-indic")
+def test_numerals_follow_the_page_switch() -> None:
+    _size, lines = layout_text("20", [0, 0, 120, 60], action="keep", numerals="arabic-indic")
     assert lines and lines[0].text == "٢٠"
-    _size, latin = layout_text("20", [0, 0, 120, 60], action="translate", numerals="arabic-indic")
-    assert latin[0].text == "20"
+    _size, arabic = layout_text("كشري 45", [0, 0, 200, 60], action="translate", numerals="arabic-indic")
+    assert arabic[0].text == "كشري ٤٥"
+    _size, latin = layout_text("كشري 45", [0, 0, 200, 60], action="translate", numerals="latin")
+    assert latin[0].text == "كشري 45"

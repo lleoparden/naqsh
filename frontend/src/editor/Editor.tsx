@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DemoBadge from "../DemoBadge";
-import { layerById, FONTS, FONT_LABELS, type Document, type Layer } from "./types";
+import { layerById, FONTS, FONT_LABELS, FONT_SAMPLES, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
 
 type DragState =
@@ -21,9 +21,14 @@ export default function Editor({ jobId }: { jobId: string }) {
   const [split, setSplit] = useState(100);
   const [draft, setDraft] = useState<DragState>(null);
   const [retranslateCost, setRetranslateCost] = useState<number | null>(null);
+  const [retranslateBusy, setRetranslateBusy] = useState(false);
+  const [retranslateError, setRetranslateError] = useState<string | null>(null);
+  const [resetError, setResetError] = useState<string | null>(null);
+  const sizeTimer = useRef<number | null>(null);
   const [demoSource, setDemoSource] = useState<string | undefined>(undefined);
   const container = useRef<HTMLDivElement | null>(null);
   const plateCanvas = useRef<HTMLCanvasElement | null>(null);
+  const splitDrag = useRef(false);
 
   const layer = layerById(doc, selected);
 
@@ -125,6 +130,11 @@ export default function Editor({ jobId }: { jobId: string }) {
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (splitDrag.current && doc) {
+      const point = toPage(event);
+      setSplit(Math.min(100, Math.max(0, Math.round((point.x / doc.width) * 100))));
+      return;
+    }
     if (!draft || !doc) return;
     const point = toPage(event);
     if (draft.mode === "pan") {
@@ -147,6 +157,10 @@ export default function Editor({ jobId }: { jobId: string }) {
   };
 
   const onPointerUp = async () => {
+    if (splitDrag.current) {
+      splitDrag.current = false;
+      return;
+    }
     if (!draft) return;
     if (draft.mode === "move" || draft.mode === "resize") {
       editor.finish(draft.snapshot);
@@ -216,35 +230,25 @@ export default function Editor({ jobId }: { jobId: string }) {
         >
           Cover patch
         </button>
-        <label className="flex items-center gap-1">
-          Numerals
+        <label className="flex items-center gap-1" title="How numbers are drawn in price layers only. The sample next to the select is live.">
+          Digits
           <select
+            data-testid="numerals-select"
             className="rounded border border-sand bg-white px-1 py-0.5"
             value={doc.numerals}
-            onChange={(event) =>
+            onChange={(event) => {
               editor.commit((draftDoc) => {
                 draftDoc.numerals = event.target.value as Document["numerals"];
-              })
-            }
+              });
+              window.setTimeout(() => void editor.reload(), 250);
+            }}
           >
-            <option value="latin">Latin</option>
-            <option value="arabic-indic">Arabic-Indic</option>
+            <option value="latin">0123</option>
+            <option value="arabic-indic">٠١٢٣</option>
           </select>
-        </label>
-        <label className="flex items-center gap-1">
-          Register
-          <select
-            className="rounded border border-sand bg-white px-1 py-0.5"
-            value={doc.register}
-            onChange={(event) =>
-              editor.commit((draftDoc) => {
-                draftDoc.register = event.target.value as Document["register"];
-              })
-            }
-          >
-            <option value="egyptian">Egyptian</option>
-            <option value="msa">MSA</option>
-          </select>
+          <span dir="ltr" className="text-xs text-ink/60">
+            {doc.numerals === "latin" ? "0123" : "٠١٢٣"}
+          </span>
         </label>
         <label className="flex items-center gap-1">
           <input type="checkbox" checked={showOriginal} onChange={(event) => setShowOriginal(event.target.checked)} />
@@ -283,55 +287,42 @@ export default function Editor({ jobId }: { jobId: string }) {
               style={{ background: "white", boxShadow: "0 4px 24px rgba(0,0,0,0.12)" }}
             >
               <image data-background="true" href={`/api/jobs/${jobId}/files/composite.png`} width={doc.width} height={doc.height} />
-              {(showOriginal || split < 100) && (
-                <>
-                  <clipPath id="split-clip">
-                    <rect x="0" y="0" width={showOriginal ? doc.width : (doc.width * split) / 100} height={doc.height} />
-                  </clipPath>
-                  <image
-                    data-background="true"
-                    href={`/api/jobs/${jobId}/files/source.png`}
-                    width={doc.width}
-                    height={doc.height}
-                    clipPath="url(#split-clip)"
-                    opacity={showOriginal ? 0.9 : 1}
-                  />
-                </>
-              )}
-              {textLayers
-                .filter((item) => item.kind === "cover" && item.visible && item.fill.length === 3)
-                .map((item) => (
-                  <rect
-                    key={item.id}
-                    x={item.box[0]}
-                    y={item.box[1]}
-                    width={item.box[2] - item.box[0]}
-                    height={item.box[3] - item.box[1]}
-                    fill={`rgb(${item.fill[0]},${item.fill[1]},${item.fill[2]})`}
-                  />
-                ))}
-              {textLayers
-                .filter((item) => item.kind === "text" && item.visible && item.action !== "skip")
-                .map((item) => (
-                  <g key={item.id} onClick={() => setSelected(item.id)} style={{ cursor: "pointer" }}>
-                    {item.lines.map((line, index) => (
-                      <text
-                        key={`${item.id}-${index}`}
-                        x={line.x}
-                        y={line.baseline}
-                        fontFamily={FONT_LABELS[item.font_family] ?? item.font_family}
-                        fontSize={line.size}
-                        fill={`rgb(${item.color[0]},${item.color[1]},${item.color[2]})`}
-                        textAnchor="middle"
-                        direction="rtl"
-                        unicodeBidi="embed"
-                      >
-                        {line.text}
-                      </text>
-                    ))}
-                  </g>
-                ))}
-              {layer && (
+              {!showOriginal &&
+                textLayers
+                  .filter((item) => item.kind === "cover" && item.visible && item.fill.length === 3)
+                  .map((item) => (
+                    <rect
+                      key={item.id}
+                      x={item.box[0]}
+                      y={item.box[1]}
+                      width={item.box[2] - item.box[0]}
+                      height={item.box[3] - item.box[1]}
+                      fill={`rgb(${item.fill[0]},${item.fill[1]},${item.fill[2]})`}
+                    />
+                  ))}
+              {!showOriginal &&
+                textLayers
+                  .filter((item) => item.kind === "text" && item.visible && item.action !== "skip")
+                  .map((item) => (
+                    <g key={item.id} onClick={() => setSelected(item.id)} style={{ cursor: "pointer" }}>
+                      {item.lines.map((line, index) => (
+                        <text
+                          key={`${item.id}-${index}`}
+                          x={line.x}
+                          y={line.baseline}
+                          fontFamily={FONT_LABELS[item.font_family] ?? item.font_family}
+                          fontSize={line.size}
+                          fill={`rgb(${item.color[0]},${item.color[1]},${item.color[2]})`}
+                          textAnchor="middle"
+                          direction="rtl"
+                          unicodeBidi="embed"
+                        >
+                          {line.text}
+                        </text>
+                      ))}
+                    </g>
+                  ))}
+              {!showOriginal && layer && (
                 <g onPointerDown={(event) => {
                   if (layer.locked) return;
                   event.stopPropagation();
@@ -374,12 +365,58 @@ export default function Editor({ jobId }: { jobId: string }) {
                   stroke="#a6342c"
                 />
               )}
+              {showOriginal ? (
+                <image
+                  data-background="true"
+                  href={`/api/jobs/${jobId}/files/source.png`}
+                  width={doc.width}
+                  height={doc.height}
+                />
+              ) : (
+                split < 100 && (
+                  <>
+                    <clipPath id="split-clip">
+                      <rect x="0" y="0" width={(doc.width * split) / 100} height={doc.height} />
+                    </clipPath>
+                    <image
+                      data-background="true"
+                      href={`/api/jobs/${jobId}/files/source.png`}
+                      width={doc.width}
+                      height={doc.height}
+                      clipPath="url(#split-clip)"
+                    />
+                    <line
+                      x1={(doc.width * split) / 100}
+                      y1={0}
+                      x2={(doc.width * split) / 100}
+                      y2={doc.height}
+                      stroke="#5B6CFF"
+                      strokeWidth={2}
+                      pointerEvents="all"
+                      style={{ cursor: "ew-resize" }}
+                      onPointerDown={(event) => {
+                        event.stopPropagation();
+                        splitDrag.current = true;
+                      }}
+                    />
+                  </>
+                )
+              )}
             </svg>
           </div>
-          <div className="absolute bottom-4 start-4 flex items-center gap-2 rounded bg-white/80 px-2 py-1 text-xs">
+          <div dir="ltr" className="absolute bottom-4 start-4 flex items-center gap-2 rounded bg-[#16181D]/90 px-2 py-1 text-xs text-[#E6E8EE]">
             <span>{Math.round(zoom * 100)}%</span>
-            <input type="range" min={30} max={100} value={split} onChange={(event) => setSplit(Number(event.target.value))} />
-            <span>before/after</span>
+            <input
+              aria-label="Before and after reveal"
+              type="range"
+              min={0}
+              max={100}
+              value={showOriginal ? 100 : split}
+              disabled={showOriginal}
+              onChange={(event) => setSplit(Number(event.target.value))}
+              className="w-40"
+            />
+            <span>Before / after</span>
           </div>
           <canvas ref={plateCanvas} className="hidden" />
           <img
@@ -402,7 +439,7 @@ export default function Editor({ jobId }: { jobId: string }) {
           <h2 className="mb-2 text-xs uppercase tracking-widest text-ink/50">Region</h2>
           {!layer && <p className="text-ink/50">Select a region on the canvas or in the list.</p>}
           {layer && layer.kind === "text" && (
-            <div className="space-y-2">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs">{layer.id}</span>
                 <span className="rounded bg-sand px-1 text-xs">{layer.type}</span>
@@ -411,6 +448,7 @@ export default function Editor({ jobId }: { jobId: string }) {
               <textarea
                 dir="rtl"
                 lang="ar"
+                aria-label="Arabic text"
                 className="h-20 w-full rounded border border-sand p-2 font-arabic text-lg"
                 value={layer.arabic[doc.register] ?? ""}
                 onChange={(event) => {
@@ -419,24 +457,56 @@ export default function Editor({ jobId }: { jobId: string }) {
                     target.arabic[doc.register] = value;
                   });
                 }}
-                onBlur={() => void editor.layout(layer.id)}
+                onBlur={(event) => void editor.layout(layer.id, { text: event.target.value })}
               />
-              <div className="flex items-center gap-2">
+
+              <div className="flex flex-wrap items-center gap-2">
                 <button
-                  className="rounded border border-sand px-2 py-1"
+                  className="rounded border border-sand px-2 py-1 disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={retranslateBusy}
+                  title="Ask Spark for a new Arabic line for this region. Costs about $0.001 and is blocked while one call is in flight."
                   onClick={async () => {
-                    const cost = await editor.retranslate(layer.id, doc.register);
-                    setRetranslateCost(cost);
+                    setRetranslateBusy(true);
+                    setRetranslateError(null);
+                    try {
+                      const cost = await editor.retranslate(layer.id, doc.register);
+                      setRetranslateCost(cost);
+                    } catch (error) {
+                      setRetranslateError(error instanceof Error ? error.message : "Re-translate failed");
+                    } finally {
+                      setRetranslateBusy(false);
+                    }
                   }}
                 >
-                  Re-translate
+                  {retranslateBusy ? "Translating…" : "Re-translate"}
                 </button>
-                {retranslateCost !== null && <span className="text-xs text-ink/50">${retranslateCost.toFixed(4)}</span>}
+                {retranslateCost !== null && !retranslateBusy && (
+                  <span className="text-xs text-ink/50">${retranslateCost.toFixed(4)}</span>
+                )}
+                <button
+                  className="ms-auto rounded border border-sand px-2 py-1 text-xs disabled:opacity-50"
+                  disabled={retranslateBusy}
+                  title="Restore this region to its first AI result (text, font, size, colour, position). Undoable."
+                  onClick={async () => {
+                    setResetError(null);
+                    try {
+                      await editor.reset(layer.id);
+                    } catch (error) {
+                      setResetError(error instanceof Error ? error.message : "Reset failed");
+                    }
+                  }}
+                >
+                  Reset to AI result
+                </button>
               </div>
+              {retranslateError && <p className="text-xs text-lacquer">{retranslateError}</p>}
+              {resetError && <p className="text-xs text-lacquer">{resetError}</p>}
+
               <div className="grid grid-cols-2 gap-2">
                 <label className="text-xs">
                   Font
                   <select
+                    data-testid="font-select"
                     className="mt-1 w-full rounded border border-sand bg-white px-1 py-1"
                     value={layer.font_family}
                     onChange={(event) => {
@@ -444,36 +514,97 @@ export default function Editor({ jobId }: { jobId: string }) {
                       updateLayer((target) => {
                         target.font_family = value;
                       });
-                      void editor.layout(layer.id);
+                      void editor.layout(layer.id, { font_family: value });
                     }}
                   >
                     {FONTS.map((font) => (
-                      <option key={font} value={font}>
-                        {FONT_LABELS[font]}
+                      <option key={font} value={font} style={{ fontFamily: FONT_LABELS[font] }}>
+                        {FONT_LABELS[font]} — {FONT_SAMPLES[font]}
                       </option>
                     ))}
                   </select>
+                  <span dir="rtl" lang="ar" className="mt-1 block font-arabic text-lg text-ink/70">
+                    {FONT_SAMPLES[layer.font_family] ?? "أبجد هوز"}
+                  </span>
                 </label>
                 <label className="text-xs">
-                  Size
+                  Arabic style
+                  <select
+                    className="mt-1 w-full rounded border border-sand bg-white px-1 py-1"
+                    value={doc.register}
+                    title="Switching shows that register's saved text. It does not re-translate; use Re-translate for that (about $0.001 per region)."
+                    onChange={(event) => {
+                      editor.commit((draftDoc) => {
+                        draftDoc.register = event.target.value as Document["register"];
+                      });
+                      window.setTimeout(() => void editor.reload(), 250);
+                    }}
+                  >
+                    <option value="egyptian">Egyptian colloquial</option>
+                    <option value="msa">Modern Standard Arabic</option>
+                  </select>
+                  <span className="mt-1 block text-[10px] leading-tight text-ink/50">
+                    Switching only shows that register. Re-translate writes it (about $0.001).
+                  </span>
+                </label>
+              </div>
+
+              <div className="text-xs">
+                <div className="flex items-center gap-2">
+                  <label htmlFor="size-number">Size</label>
                   <input
+                    id="size-number"
+                    data-testid="size-number"
                     type="number"
-                    className="mt-1 w-full rounded border border-sand px-1 py-1"
+                    min={1}
+                    max={1000}
+                    className="w-16 rounded border border-sand px-1 py-1"
                     value={layer.font_size}
                     onChange={(event) => {
-                      const value = Number(event.target.value);
+                      const value = Math.min(1000, Math.max(1, Number(event.target.value) || 1));
                       updateLayer((target) => {
                         target.font_size = value;
                       });
+                      if (sizeTimer.current) window.clearTimeout(sizeTimer.current);
+                      sizeTimer.current = window.setTimeout(() => void editor.layout(layer.id, { font_size: value }), 180);
                     }}
                     onBlur={() => void editor.layout(layer.id)}
                   />
-                </label>
+                  <button
+                    className="rounded border border-sand px-2 py-1 text-[11px]"
+                    title="Fit the text to this region's box at the largest size that fits."
+                    onClick={() => void editor.layout(layer.id, { font_size: 0 })}
+                  >
+                    Fit to box
+                  </button>
+                </div>
+                <p className="mt-1 text-[10px] leading-tight text-ink/50">
+                  Size is capped so the text stays inside the box; Fit to box sets the largest size that fits.
+                </p>
+                <input
+                  data-testid="size-slider"
+                  aria-label="Font size"
+                  type="range"
+                  min={1}
+                  max={1000}
+                  value={Math.min(1000, Math.max(1, layer.font_size))}
+                  className="mt-2 w-full"
+                  onChange={(event) => {
+                    const value = Number(event.target.value);
+                    updateLayer((target) => {
+                      target.font_size = value;
+                    });
+                    if (sizeTimer.current) window.clearTimeout(sizeTimer.current);
+                    sizeTimer.current = window.setTimeout(() => void editor.layout(layer.id, { font_size: value }), 120);
+                  }}
+                />
               </div>
+
               <div className="flex items-center gap-2">
                 <label className="text-xs">Colour</label>
                 <input
                   type="color"
+                  aria-label="Text colour"
                   value={`#${layer.color.map((value) => value.toString(16).padStart(2, "0")).join("")}`}
                   onChange={(event) => {
                     const value = event.target.value;
@@ -482,23 +613,22 @@ export default function Editor({ jobId }: { jobId: string }) {
                     });
                   }}
                 />
-                <button
-                  className={`ms-auto rounded border px-2 py-1 text-xs ${layer.action === "skip" ? "border-lacquer text-lacquer" : "border-sand"}`}
-                  onClick={() =>
-                    updateLayer((target) => {
-                      target.action = target.action === "skip" ? "translate" : "skip";
-                    })
-                  }
-                >
-                  {layer.action === "skip" ? "Skipped" : "Translate"}
-                </button>
+                <label className="ms-auto flex items-center gap-2 text-xs">
+                  <input
+                    type="checkbox"
+                    checked={layer.action !== "skip"}
+                    onChange={(event) =>
+                      updateLayer((target) => {
+                        target.action = event.target.checked ? "translate" : "skip";
+                      })
+                    }
+                  />
+                  Localize region
+                </label>
               </div>
-              <button
-                className="rounded border border-sand px-2 py-1 text-xs"
-                onClick={() => void editor.reload()}
-              >
-                Reset region (reload document)
-              </button>
+              <p className="text-[10px] leading-tight text-ink/50">
+                Localize off keeps the original artwork for this region (useful for logos and SFX).
+              </p>
             </div>
           )}
           {layer && layer.kind === "cover" && (

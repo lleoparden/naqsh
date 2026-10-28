@@ -34,7 +34,7 @@ phases are measurement, video, and the submission package itself (Phases 9–10)
 - **Hard constraints:** new work only, public repo, no secrets, rights-cleared
   assets only, clear commit history.
 - **Deadline:** submit 3 Nov (hard deadline 4 Nov 21:00 ET = 5 Nov 04:00 Cairo).
-  Backup demo video 30 Oct. Feature freeze 1 Nov.
+  Backup demo video **30 Oct, recorded from the redesigned UI after UI Group 2**. Feature freeze 1 Nov.
 
 ## Patterns to mirror
 
@@ -198,7 +198,7 @@ embedding proves unreliable.
 
 **Work:** run the stopwatch protocol in `submission-notes.md` (hand baseline vs.
 Naqsh, same page, same definition of done); record the numbers; record a rough
-screen capture of the whole flow as the backup demo.
+screen capture of the whole flow as the backup demo. **Recorded after UI Group 2** (the redesign), not before; the tag v0-pre-redesign is the rollback point for the old UI.
 
 **Gate:** numbers recorded with method and sample size; a backup video file exists
 by 30 Oct. **Fallback:** reduce to n=1 and say so; the point is a defensible

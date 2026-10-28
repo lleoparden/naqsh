@@ -5,7 +5,7 @@ import fs from "node:fs";
 
 const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const BASE = "http://localhost:4174";
-const API = "http://127.0.0.1:8010";
+const API = "http://127.0.0.1:8000";
 const JOB = "e13f9585b24f";
 const OUT = "../docs/evidence/demo";
 

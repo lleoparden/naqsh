@@ -38,6 +38,14 @@ export const FONT_LABELS: Record<string, string> = {
   amiri: "Amiri",
 };
 
+/** Arabic sample shown beside each font option and under the picker. */
+export const FONT_SAMPLES: Record<string, string> = {
+  tajawal: "أهلاً بالعالم",
+  "tajawal-bold": "أهلاً بالعالم",
+  naskh: "أهلاً بالعالم",
+  amiri: "أهلاً بالعالم",
+};
+
 export function cloneDocument(document: Document): Document {
   return JSON.parse(JSON.stringify(document)) as Document;
 }

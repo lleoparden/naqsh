@@ -331,6 +331,31 @@ pages (it was 75.7 s on the menu before the speed work). Evidence:
 `docs/evidence/phase-8/variance.json` and `variance-summary.json`. The manual baseline
 is still empty; no ratio is claimed.
 
+### UI Group 1 — functional fixes from the owner click-through
+
+- Font dropdown now re-typesets through the HarfBuzz fitter (the old handler called the
+  layout before the font change reached the document). Options carry Arabic samples.
+- Size is live: slider + number (1–1000), capped so text stays in its box, plus **Fit to
+  box**. Changing digits re-lays out the page and reloads the canvas.
+- Re-translate has a busy state, error, cost, and is undoable. The server locks per
+  region and allows 6 calls per job per minute (`throttle.py`), so double-clicks cannot
+  bill twice.
+- **Reset to AI result** restores the first generation snapshotted at document creation
+  (text, font, size, colour, box, action), not a document reload; undoable.
+- **Original** hides every overlay and layer while on.
+- Before/after slider rebuilt: container is LTR, reveal is clip-path based, the original
+  sits above all overlays, divider is draggable, and the range input is keyboard
+  operable.
+- "Register" renamed **Arabic style** with help text; the old "Translate" toggle is now
+  **Localize region** (off keeps the original artwork). Re-translate is the only action
+  that costs money.
+- **Digits** labelled `0123 / ٠١٢٣` with helper text and a live sample.
+
+Checks: `pytest -q` 70 passed; `typecheck` clean; Group 1 Playwright 8/8
+(font, live size, reset, original, slider keyboard + pointer, digits, console), existing
+comic 10/10 and menu 6/6 still green. Screenshots outside the repo at
+`L:\naqsh-review\group1\`.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both
