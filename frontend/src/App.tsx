@@ -96,13 +96,13 @@ function Home() {
     <main className="mx-auto flex min-h-full max-w-5xl flex-col gap-8 px-6 py-10 text-start">
       <header className="flex flex-wrap items-start justify-between gap-6 border-b border-sand pb-6">
         <div className="max-w-2xl">
-          <p className="text-xs tracking-[0.35em] text-nile">{t("brand")}</p>
+          <p className="text-xs tracking-[0.35em] text-accent">{t("brand")}</p>
           <h1 className="mt-2 font-arabic text-4xl leading-tight">{t("headline")}</h1>
-          <p className="mt-3 text-sm text-ink/60">{t("subhead")}</p>
+          <p className="mt-3 text-sm text-ink/75">{t("subhead")}</p>
         </div>
 
         <div className="flex flex-col items-end gap-2">
-          <span className="text-xs tracking-wide text-ink/40">{t("language")}</span>
+          <span className="text-xs tracking-wide text-ink/70">{t("language")}</span>
           <div className="flex overflow-hidden rounded-lg border border-sand" role="group" aria-label={t("language")}>
             {(["en", "ar"] as const).map((code) => (
               <button
@@ -133,11 +133,11 @@ function Home() {
           <span className="font-arabic text-xl">
             {busy ? t("uploadBusy", { seconds: elapsed }) : t("uploadCta")}
           </span>
-          <span className="text-sm text-ink/50">{t("uploadHint")}</span>
+          <span className="text-sm text-ink/70">{t("uploadHint")}</span>
         </label>
 
         <div className="flex flex-col justify-center gap-2">
-          <span className="text-xs tracking-wide text-ink/40">{t("register")}</span>
+          <span className="text-xs tracking-wide text-ink/70">{t("register")}</span>
           <div className="flex gap-2">
             {REGISTERS.map((id) => (
               <button
@@ -157,7 +157,7 @@ function Home() {
             ))}
           </div>
           {!clean && (
-            <p className="text-xs text-ink/40">
+            <p className="text-xs text-ink/70">
               {health
                 ? health.credential_configured
                   ? t("apiConfigured")
@@ -178,7 +178,7 @@ function Home() {
 
       {job?.demo && !replay.done && (
         <section className="rounded-2xl border border-sand bg-panel/90 p-5">
-          <p className="mb-2 text-xs tracking-wide text-ink/50">
+          <p className="mb-2 text-xs tracking-wide text-ink/70">
             Replaying recorded stages at their real pace
           </p>
           <ul className="space-y-1 text-sm">
@@ -186,7 +186,7 @@ function Home() {
               <li key={item.name} className={index < replay.index ? "text-nile" : "text-ink/30"}>
                 {index < replay.index ? "✓ " : "· "}
                 {item.name}
-                <span className="ms-2 text-xs text-ink/40">{Math.round(item.ms)} ms</span>
+                <span className="ms-2 text-xs text-ink/70">{Math.round(item.ms)} ms</span>
               </li>
             ))}
           </ul>
@@ -199,13 +199,13 @@ function Home() {
             {/* Pixel content: never mirrored, its own LTR coordinate space. */}
             <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-panel">
               <img src={artifactUrl(job, "source")} alt={t("before", { width: job.width, height: job.height })} className="w-full" />
-              <figcaption className="px-4 py-2 text-xs text-ink/50">
+              <figcaption className="px-4 py-2 text-xs text-ink/70">
                 {t("before", { width: job.width, height: job.height })}
               </figcaption>
             </figure>
             <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-panel">
               <img src={artifactUrl(job, "output")} alt={t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })} className="w-full" />
-              <figcaption className="px-4 py-2 text-xs text-ink/50">
+              <figcaption className="px-4 py-2 text-xs text-ink/70">
                 {t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })}
               </figcaption>
             </figure>
@@ -213,17 +213,17 @@ function Home() {
 
           <section className="grid gap-4 md:grid-cols-[2fr_1fr]">
             <div className="rounded-2xl border border-sand bg-panel/90 p-5">
-              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/50">
+              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/70">
                 {t("regions", { count: job.regions.length })}
               </h2>
               <ul className="space-y-2">
                 {job.regions.map((region) => (
                   <li key={region.id} className="rounded-xl border border-sand/70 px-3 py-2 text-sm">
                     <div className="flex items-baseline justify-between gap-3">
-                      <span dir="ltr" className="text-xs text-ink/40">
+                      <span dir="ltr" className="text-xs text-ink/70">
                         {region.source_text || "—"}
                       </span>
-                      <span className="text-xs text-ink/40">
+                      <span className="text-xs text-ink/70">
                         {region.font_family} · {region.font_size}px · {region.style}
                       </span>
                     </div>
@@ -247,11 +247,11 @@ function Home() {
             </div>
 
             <div className="rounded-2xl border border-sand bg-panel/90 p-5">
-              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/50">{t("receipt")}</h2>
+              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/70">{t("receipt")}</h2>
               <dl className="space-y-1 text-xs">
                 {job.stages.map((item) => (
                   <div key={item.name} className="flex justify-between gap-3">
-                    <dt className="text-ink/50">{stage(item.name)}</dt>
+                    <dt className="text-ink/70">{stage(item.name)}</dt>
                     <dd dir="ltr">
                       {item.ms} ms · ${item.cost_usd.toFixed(4)}
                     </dd>
@@ -284,7 +284,7 @@ function Home() {
         </>
       )}
 
-      <footer className="mt-auto border-t border-sand pt-4 text-xs text-ink/40">{t("footer")}</footer>
+      <footer className="mt-auto border-t border-sand pt-4 text-xs text-ink/70">{t("footer")}</footer>
     </main>
   );
 }
