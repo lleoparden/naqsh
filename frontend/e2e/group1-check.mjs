@@ -30,7 +30,7 @@ const docPath = `L:/naqsh/backend/.cache/jobs/${COMIC}/document.json`;
 if (fs.existsSync(docPath)) fs.rmSync(docPath);
 await page.goto(`${BASE}/?job=${COMIC}`, { waitUntil: "networkidle" });
 await page.waitForSelector("svg text");
-await page.locator("aside button", { hasText: "t1" }).first().click();
+await page.getByTestId("layer-name-t1").click();
 await page.screenshot({ path: `${OUT}/01-selected.png` });
 
 // 1. font change actually re-typesets

@@ -35,7 +35,7 @@ await page.waitForSelector("svg text");
 await page.screenshot({ path: `${OUT}/e2e-0-loaded.png` });
 
 // 1. select from the layer list
-const t1 = page.locator("aside button", { hasText: "t1" }).first();
+const t1 = page.getByTestId("layer-name-t1");
 await t1.click();
 const panelTitle = await page.locator("aside .font-mono").first().textContent();
 record("select from list", panelTitle?.trim() === "t1", `panel shows ${panelTitle}`);
@@ -59,7 +59,7 @@ const restored = await page.locator("textarea[dir=rtl]").inputValue();
 record("reload persistence", restored === value, `textarea after reload: ${restored}`);
 
 // 4. drag the selected box
-await page.locator("aside button", { hasText: "t1" }).first().click();
+await page.getByTestId("layer-name-t1").click();
 const boxBefore = (await doc()).layers.find((layer) => layer.id === "t1").box;
 const outline = page.locator('svg rect[stroke="#5B6CFF"]').first();
 const rect = await outline.boundingBox();
@@ -96,7 +96,7 @@ await page.screenshot({ path: `${OUT}/e2e-3-redo.png` });
 
 // 7. cover drag
 const layersBefore = (await doc()).layers.length;
-await page.getByRole("button", { name: "Cover patch" }).click();
+await page.locator('nav[aria-label="Tools"] button[aria-label="Cover patch"]').click();
 const canvas = page.locator('[data-testid="canvas-svg"]');
 const canvasBox = await canvas.boundingBox();
 const coverResponse = page

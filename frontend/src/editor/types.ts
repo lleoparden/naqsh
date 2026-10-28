@@ -16,6 +16,9 @@ export type Layer = {
   locked: boolean;
   strategy: string;
   fill: number[];
+  shape?: "rect" | "ellipse";
+  name?: string;
+  original?: Record<string, unknown>;
 };
 
 export type Document = {

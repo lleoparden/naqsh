@@ -71,6 +71,8 @@ class Layer:
     original: dict[str, Any] = field(default_factory=dict)
     # Free-text name for the layers panel (Spark or the user).
     name: str = ""
+    # Cover layers only: "rect" (default) or "ellipse".
+    shape: str = "rect"
 
     @property
     def text_for(self) -> str:
@@ -100,6 +102,7 @@ class Layer:
             "fill": self.fill,
             "original": self.original,
             "name": self.name,
+            "shape": self.shape,
         }
 
 
@@ -171,6 +174,7 @@ class Document:
                     fill=[int(v) for v in item.get("fill") or []],
                     original=dict(item.get("original") or {}),
                     name=str(item.get("name") or ""),
+                    shape=str(item.get("shape") or "rect"),
                 )
             )
         return cls(

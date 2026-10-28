@@ -63,7 +63,10 @@ def render_png(document: Document, folder: Path) -> Image.Image:
     draw = ImageDraw.Draw(base)
     for layer in visible_layers(document):
         if layer.kind == "cover" and layer.fill:
-            draw.rectangle(layer.box, fill=tuple(layer.fill))  # type: ignore[arg-type]
+            if layer.shape == "ellipse":
+                draw.ellipse(layer.box, fill=tuple(layer.fill))  # type: ignore[arg-type]
+            else:
+                draw.rectangle(layer.box, fill=tuple(layer.fill))  # type: ignore[arg-type]
     for layer in _text_layers(document):
         family = layer.font_family
         for line in layer.lines:
@@ -134,10 +137,16 @@ def build_svg(document: Document, folder: Path, *, outlined: bool = False) -> st
         for layer in covers:
             x1, y1, x2, y2 = layer.box
             fill = "#%02x%02x%02x" % tuple(layer.fill[:3])
-            parts.append(
-                f'<rect id="cover-{escape(layer.id)}" x="{x1}" y="{y1}" width="{x2 - x1}" '
-                f'height="{y2 - y1}" fill="{fill}"/>'
-            )
+            if layer.shape == "ellipse":
+                parts.append(
+                    f'<ellipse id="cover-{escape(layer.id)}" cx="{(x1 + x2) / 2}" cy="{(y1 + y2) / 2}" '
+                    f'rx="{(x2 - x1) / 2}" ry="{(y2 - y1) / 2}" fill="{fill}"/>'
+                )
+            else:
+                parts.append(
+                    f'<rect id="cover-{escape(layer.id)}" x="{x1}" y="{y1}" width="{x2 - x1}" '
+                    f'height="{y2 - y1}" fill="{fill}"/>'
+                )
         parts.append("</g>")
 
     parts.append('<g id="text-layers" data-name="Text layers">')

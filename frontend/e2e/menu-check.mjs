@@ -31,7 +31,7 @@ await page.waitForSelector("svg text");
 await page.screenshot({ path: `${OUT}/menu-editor-loaded.png` });
 
 // 1. select
-await page.locator("aside button", { hasText: "t1" }).first().click();
+await page.getByTestId("layer-name-t1").click();
 const selected = (await page.locator("aside .font-mono").first().textContent())?.trim();
 record("menu select", selected === "t1", `panel shows ${selected}`);
 
