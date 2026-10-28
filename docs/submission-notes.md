@@ -454,6 +454,18 @@ pages; captions for the Arabic; record at 1080p; upload unlisted to YouTube.
 - [ ] Submitted on 3 Nov (buffer before 4 Nov 21:00 ET)
 - [ ] Submission confirmation screenshot saved in `docs/`
 
+## Rules relayed by the owner (screenshot pending)
+
+Relayed from Cerebral Valley by the owner on 2026-10-28. **Marked relayed, screenshot
+pending** until the owner saves the evidence in L:\\naqsh-review\\rules-evidence\\.
+
+- The video must **demo the product that was built**, not slides.
+- It should run **3:00** and be **understandable in English**.
+- An editor who does not touch the build **does not need to be a participant**.
+
+These are recorded, not yet confirmed by screenshot; no submission decision depends on them
+until the owner confirms.
+
 ## Organizer answers (verbatim)
 
 Discord **#questions**, **2026-10-27**. Quoted exactly as received:
@@ -525,6 +537,18 @@ pages; captions for the Arabic; record at 1080p; upload unlisted to YouTube.
 - [ ] Form fields filled, description proofread, X post linked (optional track)
 - [ ] Submitted on 3 Nov (buffer before 4 Nov 21:00 ET)
 - [ ] Submission confirmation screenshot saved in `docs/`
+
+## Rules relayed by the owner (screenshot pending)
+
+Relayed from Cerebral Valley by the owner on 2026-10-28. **Marked relayed, screenshot
+pending** until the owner saves the evidence in L:\\naqsh-review\\rules-evidence\\.
+
+- The video must **demo the product that was built**, not slides.
+- It should run **3:00** and be **understandable in English**.
+- An editor who does not touch the build **does not need to be a participant**.
+
+These are recorded, not yet confirmed by screenshot; no submission decision depends on them
+until the owner confirms.
 
 ## Organizer answers (verbatim)
 
