@@ -60,7 +60,7 @@ record("reload persistence", restored === value, `textarea after reload: ${resto
 // 4. drag the selected box
 await page.locator("aside button", { hasText: "t1" }).first().click();
 const boxBefore = (await doc()).layers.find((layer) => layer.id === "t1").box;
-const outline = page.locator('svg rect[stroke="#a6342c"]').first();
+const outline = page.locator('svg rect[stroke="#5B6CFF"]').first();
 const rect = await outline.boundingBox();
 await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
 await page.mouse.down();
@@ -72,7 +72,7 @@ record("drag box", boxAfterDrag[0] !== boxBefore[0], `${boxBefore} -> ${boxAfter
 await page.screenshot({ path: `${OUT}/e2e-2-dragged.png` });
 
 // 5. resize with the handle
-const handle = page.locator('svg rect[fill="#a6342c"]').first();
+const handle = page.locator('svg rect[fill="#5B6CFF"]').first();
 const handleBox = await handle.boundingBox();
 await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2);
 await page.mouse.down();
@@ -96,7 +96,7 @@ await page.screenshot({ path: `${OUT}/e2e-3-redo.png` });
 // 7. cover drag
 const layersBefore = (await doc()).layers.length;
 await page.getByRole("button", { name: "Cover patch" }).click();
-const canvas = page.locator("svg").first();
+const canvas = page.locator('[data-testid="canvas-svg"]');
 const canvasBox = await canvas.boundingBox();
 const coverResponse = page
   .waitForResponse((response) => response.url().includes("/cover") && response.request().method() === "POST", { timeout: 5000 })

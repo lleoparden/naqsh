@@ -367,6 +367,14 @@ def export_zip(job_id: str) -> Response:
 @app.get("/api/fonts/{name}")
 def get_font(name: str) -> FileResponse:
     allowed = {info[2] for info in export_module.FONT_NAMES.values()} | set(export_module.LICENSES.values())
+    # Bundled UI fonts (docs/ui-design-brief.md).
+    allowed |= {
+        "Inter-Variable.ttf",
+        "IBMPlexSansArabic-Regular.ttf",
+        "IBMPlexSansArabic-SemiBold.ttf",
+        "OFL-Inter.txt",
+        "OFL-IBMPlexSansArabic.txt",
+    }
     if name not in allowed:
         raise HTTPException(status_code=404, detail="font not found")
     path = (REPO_ROOT / "assets" / "fonts" / name).resolve()

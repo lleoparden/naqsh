@@ -331,6 +331,27 @@ pages (it was 75.7 s on the menu before the speed work). Evidence:
 `docs/evidence/phase-8/variance.json` and `variance-summary.json`. The manual baseline
 is still empty; no ratio is claimed.
 
+### UI theme pass — why it came after Group 1
+
+Group 1 fixed behaviour but **did not change the palette**: `frontend/src/index.css`
+still defined the original light `@theme` (`--color-paper: #f6f1e7`, `--color-sand:
+#e7dcc8`, serif `--font-arabic`), so every existing `bg-paper` / `text-ink` utility
+kept rendering beige. The design brief was written but not implemented.
+
+This pass implements it: dark tokens (`bg #0E0F12`, panel `#16181D`, raised `#1D2026`,
+border `#2A2E36`, text `#E6E8EE`, muted `#9AA1AD`), indigo accent **#5B6CFF**, red only
+for destructive/error, and legacy class names remapped to the dark palette so nothing
+silently kept the old colours. **Inter** and **IBM Plex Sans Arabic** are bundled from
+google/fonts (OFL, served by `/api/fonts`, no CDN) and used for UI chrome and Arabic
+samples. Lucide icons replace the undo/redo/Original text controls; all-caps letter-spaced
+labels and the brand-red selection outline were removed (selection is now accent).
+Export buttons remain text until Group 2, as instructed.
+
+Verified: body background `rgb(14,15,18)`, text `rgb(230,232,238)`, Inter resolved,
+fonts served 200; screenshots at 1440×900 in `L:\naqsh-review\theme\`
+(`editor-1440.png`, `home-1440.png`, `theme.json`); click-throughs still green
+(comic 10/10, menu 6/6, Group 1 8/8).
+
 ### UI Group 1 — functional fixes from the owner click-through
 
 - Font dropdown now re-typesets through the HarfBuzz fitter (the old handler called the

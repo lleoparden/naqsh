@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Eye, EyeOff, Redo2, Undo2 } from "lucide-react";
 import DemoBadge from "../DemoBadge";
 import { layerById, FONTS, FONT_LABELS, FONT_SAMPLES, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
@@ -213,19 +214,31 @@ export default function Editor({ jobId }: { jobId: string }) {
   return (
     <div className="flex h-screen flex-col bg-paper text-ink">
       {demoSource && <DemoBadge source={demoSource} />}
-      <header className="flex flex-wrap items-center gap-3 border-b border-sand px-4 py-2 text-sm">
+      <header className="flex flex-wrap items-center gap-3 border-b border-border bg-panel px-4 py-2 text-sm">
         <a href="/" className="font-semibold">
           Naqsh
         </a>
         <span className="text-ink/40">job {doc.id}</span>
-        <button className="rounded border border-sand px-2 py-1" onClick={editor.undo} disabled={!editor.canUndo}>
-          Undo
-        </button>
-        <button className="rounded border border-sand px-2 py-1" onClick={editor.redo} disabled={!editor.canRedo}>
-          Redo
+        <button
+          aria-label="Undo"
+          title="Undo (Ctrl+Z)"
+          className="flex h-8 w-8 items-center justify-center"
+          onClick={editor.undo}
+          disabled={!editor.canUndo}
+        >
+          <Undo2 size={16} />
         </button>
         <button
-          className={`rounded border px-2 py-1 ${tool === "cover" ? "border-lacquer bg-lacquer text-paper" : "border-sand"}`}
+          aria-label="Redo"
+          title="Redo (Ctrl+Shift+Z)"
+          className="flex h-8 w-8 items-center justify-center"
+          onClick={editor.redo}
+          disabled={!editor.canRedo}
+        >
+          <Redo2 size={16} />
+        </button>
+        <button
+          className={`rounded border px-2 py-1 ${tool === "cover" ? "border-lacquer bg-lacquer text-white" : "border-sand"}`}
           onClick={() => setTool(tool === "cover" ? "select" : "cover")}
         >
           Cover patch
@@ -234,7 +247,7 @@ export default function Editor({ jobId }: { jobId: string }) {
           Digits
           <select
             data-testid="numerals-select"
-            className="rounded border border-sand bg-white px-1 py-0.5"
+            className="rounded border border-sand bg-panel px-1 py-0.5"
             value={doc.numerals}
             onChange={(event) => {
               editor.commit((draftDoc) => {
@@ -250,10 +263,16 @@ export default function Editor({ jobId }: { jobId: string }) {
             {doc.numerals === "latin" ? "0123" : "٠١٢٣"}
           </span>
         </label>
-        <label className="flex items-center gap-1">
-          <input type="checkbox" checked={showOriginal} onChange={(event) => setShowOriginal(event.target.checked)} />
-          Original
-        </label>
+        <button
+          aria-label="Original"
+          aria-pressed={showOriginal}
+          title="Show the original page and hide every overlay (O)"
+          className="flex h-8 items-center gap-1.5 px-2"
+          onClick={() => setShowOriginal((value) => !value)}
+        >
+          {showOriginal ? <EyeOff size={16} /> : <Eye size={16} />}
+          <span>Original</span>
+        </button>
         <div className="ms-auto flex gap-2">
           <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export.svg`} target="_blank" rel="noreferrer">
             SVG
@@ -264,7 +283,7 @@ export default function Editor({ jobId }: { jobId: string }) {
           <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export.png`}>
             PNG
           </a>
-          <a className="rounded bg-nile px-2 py-1 text-paper" href={`/api/jobs/${jobId}/export.zip`}>
+          <a className="rounded bg-nile px-2 py-1 text-white" href={`/api/jobs/${jobId}/export.zip`}>
             Bundle
           </a>
         </div>
@@ -273,7 +292,7 @@ export default function Editor({ jobId }: { jobId: string }) {
       <div className="flex min-h-0 flex-1">
         <div
           ref={container}
-          className={`relative flex-1 overflow-hidden ${tool === "cover" ? "cursor-crosshair" : "cursor-grab"}`}
+          className={`relative flex-1 overflow-hidden bg-[#0b0c0f] ${tool === "cover" ? "cursor-crosshair" : "cursor-grab"}`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
@@ -281,6 +300,7 @@ export default function Editor({ jobId }: { jobId: string }) {
         >
           <div style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}>
             <svg
+              data-testid="canvas-svg"
               width={doc.width * zoom}
               height={doc.height * zoom}
               viewBox={`0 0 ${doc.width} ${doc.height}`}
@@ -336,7 +356,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     width={layer.box[2] - layer.box[0]}
                     height={layer.box[3] - layer.box[1]}
                     fill="none"
-                    stroke="#a6342c"
+                    stroke="#5B6CFF"
                     strokeDasharray="6 4"
                     pointerEvents="all"
                   />
@@ -345,7 +365,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                     y={layer.box[3] - 10}
                     width={20}
                     height={20}
-                    fill="#a6342c"
+                    fill="#5B6CFF"
                     style={{ cursor: "nwse-resize" }}
                     onPointerDown={(event) => {
                       event.stopPropagation();
@@ -361,8 +381,8 @@ export default function Editor({ jobId }: { jobId: string }) {
                   y={Math.min(coverDraft.startY, coverDraft.currentY)}
                   width={Math.abs(coverDraft.currentX - coverDraft.startX)}
                   height={Math.abs(coverDraft.currentY - coverDraft.startY)}
-                  fill="rgba(166,52,44,0.25)"
-                  stroke="#a6342c"
+                  fill="rgba(91,108,255,0.22)"
+                  stroke="#5B6CFF"
                 />
               )}
               {showOriginal ? (
@@ -435,14 +455,14 @@ export default function Editor({ jobId }: { jobId: string }) {
           />
         </div>
 
-        <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-s border-sand bg-white/70 p-3 text-sm">
-          <h2 className="mb-2 text-xs uppercase tracking-widest text-ink/50">Region</h2>
+        <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-s border-border bg-panel p-3 text-sm">
+          <h2 className="mb-2 text-xs tracking-wide text-ink/50">Region</h2>
           {!layer && <p className="text-ink/50">Select a region on the canvas or in the list.</p>}
           {layer && layer.kind === "text" && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs">{layer.id}</span>
-                <span className="rounded bg-sand px-1 text-xs">{layer.type}</span>
+                <span className="rounded bg-raised px-1 text-xs">{layer.type}</span>
               </div>
               <label className="block text-xs text-ink/50">Arabic</label>
               <textarea
@@ -507,7 +527,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   Font
                   <select
                     data-testid="font-select"
-                    className="mt-1 w-full rounded border border-sand bg-white px-1 py-1"
+                    className="mt-1 w-full rounded border border-sand bg-panel px-1 py-1"
                     value={layer.font_family}
                     onChange={(event) => {
                       const value = event.target.value;
@@ -530,7 +550,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                 <label className="text-xs">
                   Arabic style
                   <select
-                    className="mt-1 w-full rounded border border-sand bg-white px-1 py-1"
+                    className="mt-1 w-full rounded border border-sand bg-panel px-1 py-1"
                     value={doc.register}
                     title="Switching shows that register's saved text. It does not re-translate; use Re-translate for that (about $0.001 per region)."
                     onChange={(event) => {
@@ -638,7 +658,7 @@ export default function Editor({ jobId }: { jobId: string }) {
             </div>
           )}
 
-          <h2 className="mb-2 mt-4 text-xs uppercase tracking-widest text-ink/50">Layers</h2>
+          <h2 className="mb-2 mt-4 text-xs tracking-wide text-ink/50">Layers</h2>
           <ul className="space-y-1 text-xs">
             {textLayers.map((item) => (
               <li

@@ -102,7 +102,7 @@ function Home() {
         </div>
 
         <div className="flex flex-col items-end gap-2">
-          <span className="text-xs uppercase tracking-widest text-ink/40">{t("language")}</span>
+          <span className="text-xs tracking-wide text-ink/40">{t("language")}</span>
           <div className="flex overflow-hidden rounded-lg border border-sand" role="group" aria-label={t("language")}>
             {(["en", "ar"] as const).map((code) => (
               <button
@@ -111,7 +111,7 @@ function Home() {
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
                 className={`px-3 py-1.5 text-sm transition ${
-                  lang === code ? "bg-nile text-paper" : "bg-white/60 text-ink/70 hover:bg-white"
+                  lang === code ? "bg-nile text-white" : "bg-raised text-ink/70 hover:bg-raised"
                 }`}
               >
                 {code === "en" ? "EN" : "عربي"}
@@ -121,7 +121,7 @@ function Home() {
         </div>
       </header>
 
-      <section className="grid gap-4 rounded-2xl border border-sand bg-white/70 p-5 sm:grid-cols-[1fr_auto]">
+      <section className="grid gap-4 rounded-2xl border border-sand bg-panel/90 p-5 sm:grid-cols-[1fr_auto]">
         <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-sand bg-paper/60 px-6 py-10 text-center transition hover:border-lacquer">
           <input
             type="file"
@@ -137,7 +137,7 @@ function Home() {
         </label>
 
         <div className="flex flex-col justify-center gap-2">
-          <span className="text-xs uppercase tracking-widest text-ink/40">{t("register")}</span>
+          <span className="text-xs tracking-wide text-ink/40">{t("register")}</span>
           <div className="flex gap-2">
             {REGISTERS.map((id) => (
               <button
@@ -148,7 +148,7 @@ function Home() {
                 aria-pressed={register === id}
                 className={`rounded-lg border px-3 py-2 text-sm transition ${
                   register === id
-                    ? "border-lacquer bg-lacquer text-paper"
+                    ? "border-lacquer bg-lacquer text-white"
                     : "border-sand text-ink/70 hover:border-lacquer"
                 }`}
               >
@@ -177,8 +177,8 @@ function Home() {
       {job?.demo && <DemoBadge source={job.demo_source} />}
 
       {job?.demo && !replay.done && (
-        <section className="rounded-2xl border border-sand bg-white/70 p-5">
-          <p className="mb-2 text-xs uppercase tracking-widest text-ink/50">
+        <section className="rounded-2xl border border-sand bg-panel/90 p-5">
+          <p className="mb-2 text-xs tracking-wide text-ink/50">
             Replaying recorded stages at their real pace
           </p>
           <ul className="space-y-1 text-sm">
@@ -197,13 +197,13 @@ function Home() {
         <>
           <section className="grid gap-4 md:grid-cols-2">
             {/* Pixel content: never mirrored, its own LTR coordinate space. */}
-            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-white">
+            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-panel">
               <img src={artifactUrl(job, "source")} alt={t("before", { width: job.width, height: job.height })} className="w-full" />
               <figcaption className="px-4 py-2 text-xs text-ink/50">
                 {t("before", { width: job.width, height: job.height })}
               </figcaption>
             </figure>
-            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-white">
+            <figure dir="ltr" className="overflow-hidden rounded-2xl border border-sand bg-panel">
               <img src={artifactUrl(job, "output")} alt={t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })} className="w-full" />
               <figcaption className="px-4 py-2 text-xs text-ink/50">
                 {t("after", { ms: job.total_ms, cost: job.total_cost_usd.toFixed(4) })}
@@ -212,8 +212,8 @@ function Home() {
           </section>
 
           <section className="grid gap-4 md:grid-cols-[2fr_1fr]">
-            <div className="rounded-2xl border border-sand bg-white/70 p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-ink/50">
+            <div className="rounded-2xl border border-sand bg-panel/90 p-5">
+              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/50">
                 {t("regions", { count: job.regions.length })}
               </h2>
               <ul className="space-y-2">
@@ -246,8 +246,8 @@ function Home() {
               )}
             </div>
 
-            <div className="rounded-2xl border border-sand bg-white/70 p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-ink/50">{t("receipt")}</h2>
+            <div className="rounded-2xl border border-sand bg-panel/90 p-5">
+              <h2 className="mb-3 text-sm font-semibold tracking-wide text-ink/50">{t("receipt")}</h2>
               <dl className="space-y-1 text-xs">
                 {job.stages.map((item) => (
                   <div key={item.name} className="flex justify-between gap-3">
@@ -261,13 +261,13 @@ function Home() {
               <a
                 href={artifactUrl(job, "output")}
                 download={`naqsh-${job.id}.png`}
-                className="me-2 mt-4 inline-block rounded-lg bg-nile px-3 py-2 text-sm text-paper"
+                className="me-2 mt-4 inline-block rounded-lg bg-nile px-3 py-2 text-sm text-white"
               >
                 {t("download")}
               </a>
               <a
                 href={`/?job=${job.id}`}
-                className="ms-2 mt-4 inline-block rounded-lg bg-lacquer px-3 py-2 text-sm text-paper"
+                className="ms-2 mt-4 inline-block rounded-lg bg-lacquer px-3 py-2 text-sm text-white"
               >
                 Open editor
               </a>

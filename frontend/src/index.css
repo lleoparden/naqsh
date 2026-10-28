@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+/* Bundled UI fonts (OFL, local files served by /api/fonts). No CDN. */
+@font-face {
+  font-family: "Inter";
+  src: url("/api/fonts/Inter-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/api/fonts/IBMPlexSansArabic-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("/api/fonts/IBMPlexSansArabic-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
 @font-face {
   font-family: "Tajawal";
   src: url("/api/fonts/Tajawal-Regular.ttf") format("truetype");
@@ -21,13 +41,28 @@
   font-weight: 400;
 }
 
+/* Design tokens: docs/ui-design-brief.md. Legacy names map to the dark palette so
+   existing utilities (bg-paper, text-ink, border-sand, bg-nile, text-lacquer) flip. */
 @theme {
-  --color-ink: #14110f;
-  --color-paper: #f6f1e7;
-  --color-lacquer: #a6342c;
-  --color-nile: #14524f;
-  --color-sand: #e7dcc8;
-  --font-arabic: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", serif;
+  --color-bg: #0e0f12;
+  --color-panel: #16181d;
+  --color-raised: #1d2026;
+  --color-border: #2a2e36;
+  --color-fg: #e6e8ee;
+  --color-muted: #9aa1ad;
+  --color-accent: #5b6cff;
+  --color-accent-strong: #4353e8;
+  --color-danger: #e5484d;
+  --color-success: #3fb950;
+
+  --color-ink: #e6e8ee;
+  --color-paper: #0e0f12;
+  --color-sand: #2a2e36;
+  --color-nile: #5b6cff;
+  --color-lacquer: #e5484d;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "Inter", sans-serif;
 }
 
 html,
@@ -38,6 +73,90 @@ body,
 
 body {
   margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font: inherit;
+  color: var(--color-fg);
+  background: var(--color-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+button:hover:not(:disabled) {
+  background: #242833;
+  border-color: #3a3f4b;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button[aria-pressed="true"] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--color-fg);
+  background: var(--color-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+input[type="range"] {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+input[type="color"] {
+  padding: 2px;
+  height: 28px;
+  width: 36px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2e36;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }

@@ -49,7 +49,7 @@ record(
 
 // 3. drag
 const before = (await doc()).layers.find((layer) => layer.id === "t1").box;
-const outline = page.locator('svg rect[stroke="#a6342c"]').first();
+const outline = page.locator('svg rect[stroke="#5B6CFF"]').first();
 const rect = await outline.boundingBox();
 await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
 await page.mouse.down();
