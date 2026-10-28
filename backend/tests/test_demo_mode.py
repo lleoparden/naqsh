@@ -49,7 +49,7 @@ def test_materialised_job_keeps_the_recorded_numbers() -> None:
     folder = JOBS_DIR / receipt["id"]
     cached_document = json.loads((DEMO / cache["name"] / "document.json").read_text(encoding="utf-8"))
     rebuilt = document_module.load_document(folder, receipt)
-    assert [(layer.id, layer.source_text) for layer in rebuilt.layers] == [
+    assert [(layer.id, layer.source_text) for layer in rebuilt.layers if layer.kind == "text"] == [
         (layer["id"], layer["source_text"]) for layer in cached_document["layers"]
     ]
     for name in ("source.png", "composite.png", "output.png"):

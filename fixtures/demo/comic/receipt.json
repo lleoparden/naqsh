@@ -1,5 +1,5 @@
 {
-  "id": "d3dbface16b8",
+  "id": "4e251c89edaa",
   "register": "egyptian",
   "width": 1280,
   "height": 1920,
@@ -15,52 +15,71 @@
   "stages": [
     {
       "name": "read",
-      "ms": 4691,
-      "cost_usd": 0.0065,
-      "input_tokens": 3636,
-      "output_tokens": 460,
-      "reasoning_tokens": 221,
+      "ms": 8134,
+      "cost_usd": 0.006679,
+      "input_tokens": 3786,
+      "output_tokens": 458,
+      "reasoning_tokens": 199,
       "images": 0,
-      "regions": 3
+      "regions": 3,
+      "regions_before_dedupe": 3,
+      "duplicates_dropped": 0
+    },
+    {
+      "name": "policy",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "translated": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "skipped": [],
+      "optional": [],
+      "keep_numerals": []
     },
     {
       "name": "segment",
-      "ms": 7023,
+      "ms": 11907,
       "cost_usd": 0.0025,
       "masks": 3,
-      "concepts": "box prompts + ink extent"
+      "concepts": "box prompts + ink extent",
+      "leaders": []
     },
     {
       "name": "clean_plate",
-      "ms": 16737,
+      "ms": 12028,
       "cost_usd": 0.01,
       "images": 1,
       "plate_size": [
         1280,
         1920
+      ],
+      "concurrent_with": [
+        "segment"
       ]
     },
     {
       "name": "register_composite",
-      "ms": 14439,
+      "ms": 1144,
       "cost_usd": 0.0,
       "shift": [
-        0,
-        -18
+        2,
+        -10
       ],
-      "vertical_only": true,
+      "vertical_only": false,
       "scale_ratio": [
         1.0,
         1.0
       ],
       "flat_interiors_cleaned": 3,
       "outside_untouched_mean_diff_is_tautological": 0.0,
-      "ring_mean_abs_diff": 30.38,
-      "ring_max_abs_diff": 67.85,
+      "ring_mean_abs_diff": 35.73,
+      "ring_max_abs_diff": 57.19,
       "ring_per_region": [
-        5.89,
-        67.85,
-        17.41
+        9.38,
+        57.19,
+        40.62
       ],
       "ring_band_px": [
         8,
@@ -69,38 +88,61 @@
     },
     {
       "name": "verify",
-      "ms": 2602,
-      "cost_usd": 0.001984,
+      "ms": 3292,
+      "cost_usd": 0.002413,
       "checked": 3,
       "residual": [],
       "notes": {
-        "t1": "clean empty caption box, no text marks",
-        "t2": "clean empty thought bubble, no text marks",
-        "t3": "clean empty thought bubble, no text marks"
+        "t1": "clean empty box, no text",
+        "t2": "clean empty bubble, no text",
+        "t3": "clean empty bubble, no text"
       }
     },
     {
       "name": "final_check",
-      "ms": 2551,
-      "cost_usd": 0.002345,
+      "ms": 2050,
+      "cost_usd": 0.001895,
       "checked": 3,
       "residual": [],
       "notes": {
-        "t1": "empty caption box, no text",
-        "t2": "empty thought bubble, clean",
-        "t3": "empty thought bubble, clean"
+        "t1": "clean empty box",
+        "t2": "clean empty bubble",
+        "t3": "clean empty bubble"
       }
     },
     {
+      "name": "background",
+      "ms": 4478,
+      "cost_usd": 0.0025,
+      "bubbles": 3,
+      "sam": 2,
+      "box_fallback": 1
+    },
+    {
       "name": "typeset",
-      "ms": 221,
+      "ms": 228,
       "cost_usd": 0.0,
       "regions": 3,
       "strategies": {
         "t1": "muse",
         "t2": "muse",
         "t3": "muse"
+      },
+      "types": {
+        "t1": "caption",
+        "t2": "dialogue",
+        "t3": "dialogue"
       }
+    },
+    {
+      "name": "selfcheck",
+      "ms": 7916,
+      "cost_usd": 0.001976,
+      "flagged": [],
+      "issues": {},
+      "fixed": [],
+      "retranslated": [],
+      "still_flagged": []
     }
   ],
   "regions": [
@@ -110,25 +152,27 @@
       "translation_ar": "الفصل الأول",
       "style": "title",
       "font_style": "bold rounded uppercase sans",
+      "type": "caption",
+      "action": "translate",
       "bbox": [
-        306,
-        330,
-        982,
-        457
+        307,
+        311,
+        966,
+        453
       ],
       "container": [
-        306,
-        330,
-        982,
-        457
+        324,
+        323,
+        962,
+        453
       ],
       "mask_path": "mask-t1.png",
       "font_family": "tajawal-bold",
-      "font_size": 108,
+      "font_size": 111,
       "color": [
         20,
         78,
-        96
+        99
       ],
       "lines": [
         "الفصل الأول"
@@ -141,25 +185,27 @@
       "translation_ar": "عيش طازة؟",
       "style": "speech",
       "font_style": "bold rounded uppercase sans",
+      "type": "dialogue",
+      "action": "translate",
       "bbox": [
-        131,
-        520,
-        465,
-        732
+        137,
+        528,
+        453,
+        695
       ],
       "container": [
-        131,
-        520,
-        465,
-        732
+        158,
+        528,
+        453,
+        695
       ],
       "mask_path": "mask-t2.png",
       "font_family": "tajawal-bold",
-      "font_size": 88,
+      "font_size": 67,
       "color": [
         20,
         78,
-        96
+        99
       ],
       "lines": [
         "عيش",
@@ -173,34 +219,36 @@
       "translation_ar": "كل يوم الصبح",
       "style": "speech",
       "font_style": "handwritten rounded uppercase",
+      "type": "dialogue",
+      "action": "translate",
       "bbox": [
-        778,
-        528,
-        1178,
-        712
+        768,
+        538,
+        1135,
+        695
       ],
       "container": [
-        778,
-        528,
-        1178,
-        712
+        768,
+        538,
+        1133,
+        693
       ],
       "mask_path": "mask-t3.png",
       "font_family": "tajawal",
-      "font_size": 73,
+      "font_size": 61,
       "color": [
-        177,
-        90,
-        60
+        184,
+        92,
+        61
       ],
       "lines": [
-        "كل يوم",
-        "الصبح"
+        "كل يوم الصبح"
       ],
       "strategy": "muse"
     }
   ],
   "warnings": [],
-  "total_cost_usd": 0.023329,
-  "total_ms": 48264
+  "total_cost_usd": 0.027963,
+  "total_ms": 39505,
+  "stage_ms_sum": 51177
 }
