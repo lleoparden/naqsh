@@ -73,6 +73,8 @@ class Layer:
     name: str = ""
     # Cover layers only: "rect" (default) or "ellipse".
     shape: str = "rect"
+    # Scene/bubble layers: image file in the job folder (PNG, transparent where cut).
+    asset: str = ""
 
     @property
     def text_for(self) -> str:
@@ -103,6 +105,7 @@ class Layer:
             "original": self.original,
             "name": self.name,
             "shape": self.shape,
+            "asset": self.asset,
         }
 
 
@@ -175,6 +178,7 @@ class Document:
                     original=dict(item.get("original") or {}),
                     name=str(item.get("name") or ""),
                     shape=str(item.get("shape") or "rect"),
+                    asset=str(item.get("asset") or ""),
                 )
             )
         return cls(
@@ -302,14 +306,50 @@ def _snapshot_originals(document: Document) -> None:
             layer.original = snapshot_layer(layer)
 
 
+def _attach_background(folder: Path, document: Document) -> None:
+    """Re-attach scene/bubble layers from background.json when a document is rebuilt.
+
+    The document can be reset (tests do it); the generated background assets and their
+    manifest live in the job folder, so the layers survive a rebuild.
+    """
+    manifest_path = folder / "background.json"
+    if not manifest_path.is_file() or any(layer.kind == "scene" for layer in document.layers):
+        return
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    scene = data.get("scene")
+    if scene and (folder / scene).is_file():
+        document.layers.insert(
+            0,
+            Layer(id="scene", kind="scene", box=[0, 0, document.width, document.height], type="background", name="Scenery", asset=scene, z=-1000),
+        )
+    for index, item in enumerate(data.get("bubbles") or []):
+        asset = item.get("asset")
+        if not asset or not (folder / asset).is_file():
+            continue
+        document.layers.insert(
+            index + 1,
+            Layer(
+                id=str(item.get("id") or f"bubble-{index}"),
+                kind="bubble",
+                box=[int(v) for v in item.get("box") or [0, 0, 1, 1]],
+                type="bubble",
+                name=str(item.get("name") or "Bubble"),
+                asset=str(asset),
+                z=-500 + index,
+            ),
+        )
+
+
 def load_document(folder: Path, receipt: dict[str, Any]) -> Document:
     path = folder / "document.json"
     if path.is_file():
         document = layout_document(Document.from_dict(json.loads(path.read_text(encoding="utf-8"))))
         _snapshot_originals(document)
+        _attach_background(folder, document)
         return document
     document = layout_document(document_from_job(receipt))
     _snapshot_originals(document)
+    _attach_background(folder, document)
     save_document(folder, document)
     return document
 

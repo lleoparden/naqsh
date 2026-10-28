@@ -59,7 +59,16 @@ def _text_layers(document: Document) -> list[Layer]:
 
 def render_png(document: Document, folder: Path) -> Image.Image:
     """Server-side render of the document at source resolution (for parity and PNG)."""
-    base = Image.open(folder / document.composite).convert("RGBA")
+    scene = next((layer for layer in visible_layers(document) if layer.kind == "scene" and layer.asset), None)
+    if scene is not None and (folder / scene.asset).is_file():
+        base = Image.new("RGBA", (document.width, document.height), (0, 0, 0, 0))
+        base.alpha_composite(Image.open(folder / scene.asset).convert("RGBA"))
+        for layer in visible_layers(document):
+            if layer.kind == "bubble" and layer.asset and (folder / layer.asset).is_file():
+                patch = Image.open(folder / layer.asset).convert("RGBA")
+                base.alpha_composite(patch, (layer.box[0], layer.box[1]))
+    else:
+        base = Image.open(folder / document.composite).convert("RGBA")
     draw = ImageDraw.Draw(base)
     for layer in visible_layers(document):
         if layer.kind == "cover" and layer.fill:
@@ -80,7 +89,9 @@ def render_png(document: Document, folder: Path) -> Image.Image:
                 top=top,
                 color=tuple(layer.color),  # type: ignore[arg-type]
             )
-    return base.convert("RGB")
+    page = Image.new("RGB", base.size, "white")
+    page.paste(base, mask=base.split()[3])
+    return page
 
 
 def _outline_path(font: TTFont, glyph_set, glyph_name: str) -> tuple[str, int]:
@@ -125,11 +136,26 @@ def build_svg(document: Document, folder: Path, *, outlined: bool = False) -> st
             f'xmlns:xlink="http://www.w3.org/1999/xlink">'
         ),
         f"<title>Naqsh — {escape(document.id)}</title>",
-        '<g id="plate" data-name="Plate">',
-        f'<image x="0" y="0" width="{document.width}" height="{document.height}" '
-        f'xlink:href="{_data_url(folder / document.composite)}"/>',
-        "</g>",
+        '<g id="plate" data-name="Scenery">',
     ]
+    scene = next((layer for layer in visible_layers(document) if layer.kind == "scene" and layer.asset), None)
+    if scene is not None and (folder / scene.asset).is_file():
+        parts.append(f'<image x="0" y="0" width="{document.width}" height="{document.height}" xlink:href="{_data_url(folder / scene.asset)}"/>')
+    else:
+        parts.append(f'<image x="0" y="0" width="{document.width}" height="{document.height}" xlink:href="{_data_url(folder / document.composite)}"/>')
+    parts.append("</g>")
+
+    bubbles = [layer for layer in visible_layers(document) if layer.kind == "bubble" and layer.asset]
+    if bubbles:
+        parts.append('<g id="bubbles" data-name="Speech bubbles">')
+        for layer in bubbles:
+            x1, y1, x2, y2 = layer.box
+            parts.append(
+                f'<image id="{escape(layer.id)}" data-name="{escape(layer.name or layer.id)}" '
+                f'x="{x1}" y="{y1}" width="{x2 - x1}" height="{y2 - y1}" '
+                f'xlink:href="{_data_url(folder / layer.asset)}"/>'
+            )
+        parts.append("</g>")
 
     covers = [layer for layer in visible_layers(document) if layer.kind == "cover" and layer.fill]
     if covers:

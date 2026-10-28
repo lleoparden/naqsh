@@ -44,6 +44,8 @@ export default function Editor({ jobId }: { jobId: string }) {
   const splitDrag = useRef(false);
 
   const layer = layerById(doc, selected);
+  const sceneLayer = doc?.layers.find((item) => item.kind === "scene") ?? null;
+  const bubbleLayers = doc?.layers.filter((item) => item.kind === "bubble") ?? [];
 
   const fitView = useCallback(() => {
     if (!doc || !container.current) return;
@@ -496,7 +498,29 @@ export default function Editor({ jobId }: { jobId: string }) {
               viewBox={`0 0 ${doc.width} ${doc.height}`}
               style={{ background: "white", boxShadow: "0 4px 24px rgba(0,0,0,0.12)" }}
             >
-              <image data-background="true" href={`/api/jobs/${jobId}/files/composite.png`} width={doc.width} height={doc.height} />
+              {sceneLayer && sceneLayer.visible ? (
+                <image
+                  data-background="true"
+                  href={`/api/jobs/${jobId}/files/${sceneLayer.asset}`}
+                  width={doc.width}
+                  height={doc.height}
+                />
+              ) : (
+                <image data-background="true" href={`/api/jobs/${jobId}/files/composite.png`} width={doc.width} height={doc.height} />
+              )}
+              {!showOriginal &&
+                bubbleLayers
+                  .filter((item) => item.visible && item.asset)
+                  .map((item) => (
+                    <image
+                      key={item.id}
+                      href={`/api/jobs/${jobId}/files/${item.asset}`}
+                      x={item.box[0]}
+                      y={item.box[1]}
+                      width={item.box[2] - item.box[0]}
+                      height={item.box[3] - item.box[1]}
+                    />
+                  ))}
               {!showOriginal &&
                 textLayers
                   .filter((item) => item.kind === "cover" && item.visible && item.fill.length === 3)
@@ -874,6 +898,40 @@ export default function Editor({ jobId }: { jobId: string }) {
               </div>
               <p className="text-[10px] leading-tight text-ink/70">
                 Localize off keeps the original artwork for this region (useful for logos and SFX).
+              </p>
+            </div>
+          )}
+          {layer && (layer.kind === "scene" || layer.kind === "bubble") && (
+            <div className="space-y-3 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs">{layer.id}</span>
+                <span className="rounded bg-raised px-1 text-[10px]">{layer.kind}</span>
+              </div>
+              <label className="block">
+                Name
+                <input
+                  className="mt-1 w-full px-1 py-1"
+                  value={layer.name ?? ""}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    updateLayerFor(layer.id, (target) => {
+                      target.name = value.slice(0, 80);
+                    });
+                  }}
+                />
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={layer.visible}
+                  onChange={() => updateLayerFor(layer.id, (target) => (target.visible = !target.visible))}
+                />
+                Visible
+              </label>
+              <p className="text-[10px] leading-tight text-ink/70">
+                {layer.kind === "scene"
+                  ? "Scenery: the cleaned page with the bubbles cut out. Hide it to reveal nothing behind."
+                  : "Speech bubble cut from the cleaned page. Hide it to see the scenery hole underneath."}
               </p>
             </div>
           )}

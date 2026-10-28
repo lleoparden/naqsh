@@ -1,0 +1,28 @@
+{
+  "feature": "background layers (scenery + speech bubbles)",
+  "jobs": [
+    {
+      "job": "d3dbface16b8",
+      "page": "comic",
+      "scene": "scene.png",
+      "bubbles": 3,
+      "sam_objects": 2,
+      "note": "two bubbles from the SAM concept prompt; the title banner used a box fallback"
+    },
+    {
+      "job": "e13f9585b24f",
+      "page": "menu",
+      "scene": "scene.png",
+      "bubbles": 0,
+      "sam_objects": 0,
+      "note": "SAM found no bubbles on the menu, so it gets a scenery layer only (no fake bubble rows)"
+    }
+  ],
+  "cost_note": "One SAM concept call per page that has dialogue/caption regions; retries during development are in the spend ledger.",
+  "checks": {
+    "pytest": 74,
+    "background_e2e": "8/8",
+    "comic_e2e": "10/10",
+    "menu_e2e": "6/6"
+  }
+}

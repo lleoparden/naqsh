@@ -397,6 +397,16 @@ Checks: pytest 72 passed; Group 2 Playwright 7/7; comic 10/10; menu 6/6; Group 1
 
 Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe contrast 0.
 
+### Background split into layers
+
+- New: the cleaned background is no longer one locked composite. A **Scenery** layer holds the page with speech-bubble areas cut out, and each **Bubble** is its own layer, cut from the cleaned plate.
+- Bubbles come from one SAM 3.1 concept call per page (`speech bubble`); regions with no SAM bubble use their reading box as a rectangular fallback. Pages with no dialogue/caption regions (the menu) get a scenery layer only, with no fake bubble rows.
+- Editor: scene + bubble layers appear in the Layers panel, toggleable, renameable, reorderable; hiding a bubble reveals the scenery hole.
+- Export: the layered SVG has `Scenery` and `Speech bubbles` groups and omits hidden layers; the PNG composites scene + visible bubbles + covers + text on a white page.
+- Assets and `background.json` live in the job folder, so the layers survive a document rebuild/reset (verified by the editor and menu click-throughs).
+- Limits: SAM found 2 of 3 bubbles on the comic (the title used the box fallback); the menu has no bubble detection; this is a per-job build script, not yet part of `run_page_job`, and the demo cache documents are not rebuilt with background layers.
+- Evidence: `docs/evidence/ui/background-layers.json`; screenshots at `L:\naqsh-review\bg\01-layers.png`, `02-bubble-hidden.png`, `03-bubble-restored.png`.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both

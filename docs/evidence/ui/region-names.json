@@ -1,20 +1,13 @@
 {
-  "total_cost_usd": 0.004208,
+  "total_cost_usd": 0.001708,
   "pages": [
     {
-      "job": "e13f9585b24f",
-      "cost_usd": 0.004208,
+      "job": "d3dbface16b8",
+      "cost_usd": 0.001708,
       "names": {
-        "t1": "Kushary House title",
-        "t2": "Empty menu divider",
-        "t3": "Kushari dish price",
-        "t4": "Mint tea price",
-        "t5": "Mint tea dotted price",
-        "t6": "Falafel dish price",
-        "t7": "Basbousa dessert price",
-        "t8": "Obscured menu price line",
-        "t9": "Daily opening hours",
-        "t10": "Fresh dishes notice"
+        "t1": "Chapter One Title",
+        "t2": "Fresh Bread Question",
+        "t3": "Every Morning Statement"
       }
     }
   ]
