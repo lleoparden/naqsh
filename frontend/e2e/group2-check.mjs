@@ -48,7 +48,11 @@ const items = await page.getByRole("menuitem").count();
 const descriptions = await page.getByRole("menuitem").first().textContent();
 record("export menu", items === 4 && Boolean(descriptions?.includes("Editable")), `${items} items; first: ${descriptions}`);
 await page.screenshot({ path: `${OUT}/03-export-menu.png` });
-await page.keyboard.press("Escape");
+await page.getByRole("menuitem", { name: /PNG/ }).click();
+await page.waitForSelector("text=/exported · \\d+ KB/", { timeout: 30000 });
+const exported = await page.locator('[role="status"]').last().textContent();
+record("export toast with size", Boolean(exported && exported.includes("KB")), exported || "missing");
+await page.screenshot({ path: `${OUT}/03b-export-done.png` });
 
 // Ellipse cover patch.
 await page.locator('nav[aria-label="Tools"] button[aria-label="Cover patch"]').click();
