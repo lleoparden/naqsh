@@ -1,0 +1,41 @@
+[
+  {
+    "job": "d3dbface16b8",
+    "size": [
+      1280,
+      1920
+    ],
+    "outside_pixels": 1656284,
+    "outside_max_abs_diff": 0,
+    "outside_mean_abs_diff": 0.0,
+    "outside_differing_pixels": 0,
+    "outside_over_8_pixels": 0,
+    "border_top_left_max": 0
+  },
+  {
+    "job": "e13f9585b24f",
+    "size": [
+      1280,
+      1920
+    ],
+    "outside_pixels": 156871,
+    "outside_max_abs_diff": 0,
+    "outside_mean_abs_diff": 0.0,
+    "outside_differing_pixels": 0,
+    "outside_over_8_pixels": 0,
+    "border_top_left_max": 153
+  },
+  {
+    "job": "6a8aa7a0829b",
+    "size": [
+      1280,
+      1920
+    ],
+    "outside_pixels": 1881172,
+    "outside_max_abs_diff": 0,
+    "outside_mean_abs_diff": 0.0,
+    "outside_differing_pixels": 0,
+    "outside_over_8_pixels": 0,
+    "border_top_left_max": 255
+  }
+]

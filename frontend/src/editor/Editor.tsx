@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Eye, EyeOff, Redo2, Undo2 } from "lucide-react";
+import { Eye, EyeOff, Maximize2, Minus, Plus, Redo2, Undo2 } from "lucide-react";
 import DemoBadge from "../DemoBadge";
 import { layerById, FONTS, FONT_LABELS, FONT_SAMPLES, type Document, type Layer } from "./types";
 import { useEditor } from "./useEditor";
@@ -32,6 +32,20 @@ export default function Editor({ jobId }: { jobId: string }) {
   const splitDrag = useRef(false);
 
   const layer = layerById(doc, selected);
+
+  const fitView = useCallback(() => {
+    if (!doc || !container.current) return;
+    const rect = container.current.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const fit = Math.min((rect.width - 60) / doc.width, (rect.height - 90) / doc.height);
+    setZoom(fit);
+    setOffset({ x: (rect.width - doc.width * fit) / 2, y: (rect.height - doc.height * fit) / 2 });
+  }, [doc]);
+
+  const zoomBy = useCallback((factor: number) => {
+    setZoom((value) => Math.min(3, Math.max(0.1, value * factor)));
+  }, []);
+
 
   useEffect(() => {
     if (!jobId) return;
@@ -71,6 +85,15 @@ export default function Editor({ jobId }: { jobId: string }) {
       } else if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "y") {
         event.preventDefault();
         editor.redo();
+      } else if ((event.key === "+" || event.key === "=") && !(event.target as HTMLElement)?.closest("input, textarea, select")) {
+        event.preventDefault();
+        zoomBy(1.1);
+      } else if (event.key === "-" && !(event.target as HTMLElement)?.closest("input, textarea, select")) {
+        event.preventDefault();
+        zoomBy(0.9);
+      } else if (event.key === "0" && !(event.target as HTMLElement)?.closest("input, textarea, select")) {
+        event.preventDefault();
+        fitView();
       } else if (event.key === "Escape") {
         setSelected(null);
       } else if (event.key === "Delete" && selected) {
@@ -82,7 +105,7 @@ export default function Editor({ jobId }: { jobId: string }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [editor, selected]);
+  }, [editor, selected, fitView, zoomBy]);
 
   const sampleColor = useCallback(
     (x: number, y: number): number[] => {
@@ -273,6 +296,36 @@ export default function Editor({ jobId }: { jobId: string }) {
           {showOriginal ? <EyeOff size={16} /> : <Eye size={16} />}
           <span>Original</span>
         </button>
+
+        <div className="flex items-center gap-1" role="group" aria-label="Zoom">
+          <button
+            aria-label="Zoom out"
+            title="Zoom out (-)"
+            className="flex h-8 w-8 items-center justify-center"
+            onClick={() => zoomBy(0.9)}
+          >
+            <Minus size={16} />
+          </button>
+          <span data-testid="zoom-level" className="w-12 text-center text-xs text-ink/70">
+            {Math.round(zoom * 100)}%
+          </span>
+          <button
+            aria-label="Zoom in"
+            title="Zoom in (+)"
+            className="flex h-8 w-8 items-center justify-center"
+            onClick={() => zoomBy(1.1)}
+          >
+            <Plus size={16} />
+          </button>
+          <button
+            aria-label="Fit to screen"
+            title="Fit to screen (0)"
+            className="flex h-8 w-8 items-center justify-center"
+            onClick={fitView}
+          >
+            <Maximize2 size={16} />
+          </button>
+        </div>
         <div className="ms-auto flex gap-2">
           <a className="rounded border border-sand px-2 py-1" href={`/api/jobs/${jobId}/export.svg`} target="_blank" rel="noreferrer">
             SVG
@@ -424,8 +477,12 @@ export default function Editor({ jobId }: { jobId: string }) {
               )}
             </svg>
           </div>
-          <div dir="ltr" className="absolute bottom-4 start-4 flex items-center gap-2 rounded bg-[#16181D]/90 px-2 py-1 text-xs text-[#E6E8EE]">
-            <span>{Math.round(zoom * 100)}%</span>
+          <div
+            dir="ltr"
+            data-testid="before-after-control"
+            className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded border border-border bg-panel/95 px-3 py-1.5 text-xs text-ink"
+          >
+            <span className="text-ink/70">Before / after</span>
             <input
               aria-label="Before and after reveal"
               type="range"
@@ -434,9 +491,9 @@ export default function Editor({ jobId }: { jobId: string }) {
               value={showOriginal ? 100 : split}
               disabled={showOriginal}
               onChange={(event) => setSplit(Number(event.target.value))}
-              className="w-40"
+              className="w-48"
             />
-            <span>Before / after</span>
+            <span className="w-9 text-end text-ink/70">{showOriginal ? 100 : split}%</span>
           </div>
           <canvas ref={plateCanvas} className="hidden" />
           <img
@@ -539,7 +596,7 @@ export default function Editor({ jobId }: { jobId: string }) {
                   >
                     {FONTS.map((font) => (
                       <option key={font} value={font} style={{ fontFamily: FONT_LABELS[font] }}>
-                        {FONT_LABELS[font]} — {FONT_SAMPLES[font]}
+                        {`${FONT_LABELS[font]} — \u2067${FONT_SAMPLES[font]}\u2069`}
                       </option>
                     ))}
                   </select>
