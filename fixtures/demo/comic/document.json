@@ -1,5 +1,5 @@
 {
-  "id": "d3dbface16b8",
+  "id": "4e251c89edaa",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -14,7 +14,7 @@
     {
       "id": "t1",
       "kind": "text",
-      "type": "dialogue",
+      "type": "caption",
       "action": "translate",
       "source_text": "CHAPTER ONE",
       "arabic": {
@@ -22,34 +22,38 @@
         "msa": "الفصل الأول"
       },
       "box": [
-        306,
-        330,
-        982,
-        457
+        307,
+        311,
+        966,
+        453
       ],
       "font_family": "tajawal-bold",
-      "font_size": 108,
+      "font_size": 111,
       "lines": [
         {
           "text": "الفصل الأول",
-          "size": 108,
-          "x": 644.0,
-          "baseline": 424.0,
-          "width": 582,
-          "height": 103
+          "size": 111,
+          "x": 636.5,
+          "baseline": 413.0,
+          "width": 597,
+          "height": 106
         }
       ],
       "align": "center",
       "color": [
         20,
         78,
-        96
+        99
       ],
       "z": 0,
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t2",
@@ -59,45 +63,49 @@
       "source_text": "FRESH BREAD?",
       "arabic": {
         "egyptian": "عيش طازة؟",
-        "msa": "خبز طازج؟"
+        "msa": "عيش طازة؟"
       },
       "box": [
-        131,
-        520,
-        465,
-        732
+        137,
+        528,
+        453,
+        695
       ],
       "font_family": "tajawal-bold",
-      "font_size": 88,
+      "font_size": 67,
       "lines": [
         {
           "text": "عيش",
-          "size": 88,
-          "x": 298.0,
-          "baseline": 603.0,
-          "width": 200,
-          "height": 91
+          "size": 67,
+          "x": 295.0,
+          "baseline": 594.5,
+          "width": 153,
+          "height": 69
         },
         {
           "text": "طازة؟",
-          "size": 88,
-          "x": 298.0,
-          "baseline": 703.0,
-          "width": 215,
-          "height": 79
+          "size": 67,
+          "x": 295.0,
+          "baseline": 669.5,
+          "width": 164,
+          "height": 60
         }
       ],
       "align": "center",
       "color": [
         20,
         78,
-        96
+        99
       ],
       "z": 1,
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     },
     {
       "id": "t3",
@@ -107,45 +115,41 @@
       "source_text": "EVERY MORNING",
       "arabic": {
         "egyptian": "كل يوم الصبح",
-        "msa": "كل صباح"
+        "msa": "كل يوم الصبح"
       },
       "box": [
-        778,
-        528,
-        1178,
-        712
+        768,
+        538,
+        1135,
+        695
       ],
       "font_family": "tajawal",
-      "font_size": 73,
+      "font_size": 61,
       "lines": [
         {
-          "text": "كل يوم",
-          "size": 73,
-          "x": 978.0,
-          "baseline": 587.0,
-          "width": 200,
-          "height": 71
-        },
-        {
-          "text": "الصبح",
-          "size": 73,
-          "x": 978.0,
-          "baseline": 673.0,
-          "width": 178,
-          "height": 76
+          "text": "كل يوم الصبح",
+          "size": 61,
+          "x": 951.5,
+          "baseline": 625.0,
+          "width": 338,
+          "height": 63
         }
       ],
       "align": "center",
       "color": [
-        177,
-        90,
-        60
+        184,
+        92,
+        61
       ],
       "z": 2,
       "visible": true,
       "locked": false,
       "strategy": "muse",
-      "fill": []
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
     }
   ]
 }

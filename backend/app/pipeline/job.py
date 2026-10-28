@@ -17,6 +17,7 @@ import io
 from concurrent.futures import ThreadPoolExecutor
 import json
 import re
+import logging
 import time
 import uuid
 from pathlib import Path
@@ -33,9 +34,12 @@ from . import residual as residual_stage
 from . import segment as segment_stage
 from . import selfcheck as selfcheck_stage
 from . import typeset
+from .background import build_assets
 from .meta import MetaAPIError
 from .meta import spark_translate as retranslate_line
 from .types import BBox, Layout, PageJob, TextRegion
+
+log = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 JOBS_DIR = REPO_ROOT / "backend" / ".cache" / "jobs"
@@ -350,7 +354,49 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     for region in regions:
         region.strategy = strategies.get(region.id, "muse")
 
-    # 6. Typeset + render ---------------------------------------------------------
+    # 6. Background layers (scenery + speech bubbles) -----------------------------
+    background_started = time.perf_counter()
+    try:
+        summary = build_assets(
+            folder,
+            image_bytes,
+            composite,
+            [
+                {
+                    "id": region.id,
+                    "bbox": [region.bbox.x1, region.bbox.y1, region.bbox.x2, region.bbox.y2],
+                    "type": region.type,
+                    "name": getattr(region, "name", "") or region.id,
+                }
+                for region in repaint
+            ],
+            source.width,
+            source.height,
+        )
+        usage = summary.get("usage")
+        background_cost = (usage.images * 2.50 / 1000) if usage else 0.0
+        counts = summary["counts"]
+        job.add_stage(
+            "background",
+            _ms(background_started),
+            background_cost,
+            bubbles=counts["bubbles"],
+            sam=counts["sam"],
+            box_fallback=counts["box_fallback"],
+        )
+        logging.getLogger("uvicorn.error").info(
+            "%s: background bubbles=%s sam=%s box_fallback=%s",
+            job.id,
+            counts["bubbles"],
+            counts["sam"],
+            counts["box_fallback"],
+        )
+    except Exception as exc:  # never fail the job for a background split
+        job.warnings.append(f"background layers unavailable: {exc}")
+        job.add_stage("background", _ms(background_started), 0.0, error=str(exc)[:300])
+        log.warning("%s: background layers failed: %s", job.id, exc)
+
+    # 7. Typeset + render ---------------------------------------------------------
     started = time.perf_counter()
     layouts: dict[str, Layout] = {}
     colors: dict[str, tuple[int, int, int]] = {}

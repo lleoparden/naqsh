@@ -38,8 +38,8 @@ OUT = REPO / "fixtures" / "demo"
 
 # name -> (real job id, fixture file, what it is for)
 CURATED = {
-    "comic": ("d3dbface16b8", "01-comic-flat.png", "flat comic page, three regions"),
-    "menu": ("e13f9585b24f", "03-menu-paper.png", "dense menu with prices and leaders"),
+    "comic": ("4e251c89edaa", "01-comic-flat.png", "flat comic page, three regions"),
+    "menu": ("2c34e573a187", "03-menu-paper.png", "dense menu with prices and leaders"),
     "chalkboard": ("605213b894ff", "04-chalkboard.png", "chalk text on a dark board"),
     "sfx-comic": ("6a8aa7a0829b", "07-comic-sfx.png", "captions plus a kept sound effect"),
     "label-fail": ("5d6de0e0c1be", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
@@ -74,6 +74,36 @@ def build(name: str, job_id: str, fixture: str, note: str) -> dict:
         for mask in sorted(folder.glob("mask-*.png")):
             archive.write(mask, mask.name)
 
+    files = {
+        "receipt": "receipt.json",
+        "document": "document.json",
+        "plate": "plate.webp",
+        "source": "source.jpg",
+        "masks": "masks.zip",
+    }
+    background_path = folder / "background.json"
+    background_counts = {}
+    if background_path.is_file():
+        background = json.loads(background_path.read_text(encoding="utf-8"))
+        scene = background.get("scene")
+        if scene and (folder / scene).is_file():
+            Image.open(folder / scene).convert("RGBA").save(target / "scene.webp", "WEBP", lossless=True, method=4)
+            background["scene"] = "scene.webp"
+            with zipfile.ZipFile(target / "background.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+                archive.writestr("background.json", json.dumps(background, indent=2, ensure_ascii=False))
+                archive.write(target / "scene.webp", "scene.webp")
+                for bubble in background.get("bubbles") or []:
+                    asset = bubble.get("asset")
+                    if asset and (folder / asset).is_file():
+                        archive.write(folder / asset, asset)
+            (target / "scene.webp").unlink()
+            files["background"] = "background.zip"
+            background_counts = {
+                "bubbles": background.get("bubbles") and len(background["bubbles"]) or 0,
+                "sam": sum(1 for bubble in background.get("bubbles") or [] if bubble.get("source") == "sam"),
+                "box_fallback": sum(1 for bubble in background.get("bubbles") or [] if bubble.get("source") == "box_fallback"),
+            }
+
     fixture_path = FIXTURES / fixture
     entry = {
         "name": name,
@@ -90,13 +120,8 @@ def build(name: str, job_id: str, fixture: str, note: str) -> dict:
             {"name": stage.get("name"), "ms": stage.get("ms"), "cost_usd": stage.get("cost_usd")}
             for stage in receipt.get("stages") or []
         ],
-        "files": {
-            "receipt": "receipt.json",
-            "document": "document.json",
-            "plate": "plate.webp",
-            "source": "source.jpg",
-            "masks": "masks.zip",
-        },
+        "files": files,
+        "background": background_counts,
         "exported": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
     }
     print(name, f"{entry['regions']} regions", f"{entry['total_ms']} ms", f"${entry['total_cost_usd']:.4f}")
@@ -105,8 +130,17 @@ def build(name: str, job_id: str, fixture: str, note: str) -> dict:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    only = {part.strip() for part in (sys.argv[1] if len(sys.argv) > 1 else "").split(",") if part.strip()}
     manifest = []
+    existing = []
+    if (OUT / "manifest.json").is_file():
+        existing = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
     for name, (job_id, fixture, note) in CURATED.items():
+        if only and name not in only:
+            kept = next((entry for entry in existing if entry.get("name") == name), None)
+            if kept:
+                manifest.append(kept)
+            continue
         manifest.append(build(name, job_id, fixture, note))
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
     total = sum(path.stat().st_size for path in OUT.rglob("*") if path.is_file())

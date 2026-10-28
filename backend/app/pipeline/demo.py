@@ -83,6 +83,11 @@ def materialise(entry: dict[str, Any]) -> dict[str, Any] | None:
     with zipfile.ZipFile(source_dir / entry["files"]["masks"]) as archive:
         archive.extractall(folder)
 
+    background_zip = entry["files"].get("background")
+    if background_zip and (source_dir / background_zip).is_file():
+        with zipfile.ZipFile(source_dir / background_zip) as archive:
+            archive.extractall(folder)
+
     shutil.copyfile(source_dir / entry["files"]["document"], folder / "document.json")
     document = document_module.load_document(folder, receipt)
 

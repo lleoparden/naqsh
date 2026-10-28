@@ -47,4 +47,5 @@ def test_patch_can_rename_and_change_shape(client) -> None:
         json={"layers": [{"id": layer["id"], "name": "Title banner"}]},
     )
     assert patched.status_code == 200
-    assert patched.json()["layers"][0]["name"] == "Title banner"
+    renamed = next(item for item in patched.json()["layers"] if item["id"] == layer["id"])
+    assert renamed["name"] == "Title banner"

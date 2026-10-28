@@ -407,6 +407,16 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - Limits: SAM found 2 of 3 bubbles on the comic (the title used the box fallback); the menu has no bubble detection; this is a per-job build script, not yet part of `run_page_job`, and the demo cache documents are not rebuilt with background layers.
 - Evidence: `docs/evidence/ui/background-layers.json`; screenshots at `L:\naqsh-review\bg\01-layers.png`, `02-bubble-hidden.png`, `03-bubble-restored.png`.
 
+### Background build inside the pipeline + rebuilt demo comic/menu
+
+- `run_page_job` now builds the background layers itself: one SAM 3.1 `speech bubble` call, `scene.png` with bubble holes, `bubble-<region>.png` assets, and `background.json` with each bubble's **source** (`sam` or `box_fallback`) and the counts.
+- The stage is recorded as `background` with `bubbles`, `sam`, `box_fallback`; the counts are also written to the server log. A failure is caught, logged as a warning, recorded on the stage, and the job continues with the single plate (verified by two live runs that failed on a BBox bug and still finished).
+- Rebuilt through the real upload path (POST `/api/localize`, live mode): comic `4e251c89edaa` (39.5 s, $0.027963, bubbles 3 / sam 2 / fallback 1) and menu `2c34e573a187` (75.9 s, $0.051303, bubbles 2 / sam 0 / fallback 2).
+- Layers now: comic **scene, bubble-t1, bubble-t2, bubble-t3, t1, t2, t3**; menu **scene, bubble-t2, bubble-t16, t1..t16**.
+- Demo cache rebuilt from those live jobs: `fixtures/demo/comic` and `fixtures/demo/menu` now carry `background.zip` (scene + bubbles + manifest); replay on a demo-mode server returns the same layer list. Total cache 14.21 MB (was 11.0 MB). The chalkboard, sfx and label demo entries were **not** rebuilt and have no background layers.
+- Limits to eyeball: the menu's two bubbles are both **box_fallback** (SAM found no bubble), so they may be false positives around dialogue-typed regions; the comic's title banner is also a box fallback. Only comic/menu demo entries were rebuilt.
+- Evidence: `docs/evidence/ui/pipeline-background.json`; screenshots not regenerated in this step.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both

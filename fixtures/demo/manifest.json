@@ -4,47 +4,62 @@
     "note": "flat comic page, three regions",
     "fixture": "01-comic-flat.png",
     "sha256": "3b8b2958fd4b470b689abecde02c9b4ba17282be24ecd3bf411ed189dd60f94f",
-    "job_id": "d3dbface16b8",
+    "job_id": "4e251c89edaa",
     "width": 1280,
     "height": 1920,
     "regions": 3,
-    "total_ms": 48264,
-    "total_cost_usd": 0.023329,
+    "total_ms": 39505,
+    "total_cost_usd": 0.027963,
     "recorded_stages": [
       {
         "name": "read",
-        "ms": 4691,
-        "cost_usd": 0.0065
+        "ms": 8134,
+        "cost_usd": 0.006679
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0
       },
       {
         "name": "segment",
-        "ms": 7023,
+        "ms": 11907,
         "cost_usd": 0.0025
       },
       {
         "name": "clean_plate",
-        "ms": 16737,
+        "ms": 12028,
         "cost_usd": 0.01
       },
       {
         "name": "register_composite",
-        "ms": 14439,
+        "ms": 1144,
         "cost_usd": 0.0
       },
       {
         "name": "verify",
-        "ms": 2602,
-        "cost_usd": 0.001984
+        "ms": 3292,
+        "cost_usd": 0.002413
       },
       {
         "name": "final_check",
-        "ms": 2551,
-        "cost_usd": 0.002345
+        "ms": 2050,
+        "cost_usd": 0.001895
+      },
+      {
+        "name": "background",
+        "ms": 4478,
+        "cost_usd": 0.0025
       },
       {
         "name": "typeset",
-        "ms": 221,
+        "ms": 228,
         "cost_usd": 0.0
+      },
+      {
+        "name": "selfcheck",
+        "ms": 7916,
+        "cost_usd": 0.001976
       }
     ],
     "files": {
@@ -52,56 +67,77 @@
       "document": "document.json",
       "plate": "plate.webp",
       "source": "source.jpg",
-      "masks": "masks.zip"
+      "masks": "masks.zip",
+      "background": "background.zip"
     },
-    "exported": "2026-10-27"
+    "background": {
+      "bubbles": 3,
+      "sam": 2,
+      "box_fallback": 1
+    },
+    "exported": "2026-10-28"
   },
   {
     "name": "menu",
     "note": "dense menu with prices and leaders",
     "fixture": "03-menu-paper.png",
     "sha256": "4393a5a9a192f70afe6588bc77870d981f9154a4fc2161b3f83428fe64e84630",
-    "job_id": "e13f9585b24f",
+    "job_id": "2c34e573a187",
     "width": 1280,
     "height": 1920,
-    "regions": 10,
-    "total_ms": 95587,
-    "total_cost_usd": 0.029668,
+    "regions": 16,
+    "total_ms": 75949,
+    "total_cost_usd": 0.051303,
     "recorded_stages": [
       {
         "name": "read",
-        "ms": 6783,
-        "cost_usd": 0.009998
+        "ms": 9922,
+        "cost_usd": 0.012004
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0
       },
       {
         "name": "segment",
-        "ms": 13488,
+        "ms": 38172,
         "cost_usd": 0.0025
       },
       {
         "name": "clean_plate",
-        "ms": 22196,
+        "ms": 38307,
         "cost_usd": 0.01
       },
       {
         "name": "register_composite",
-        "ms": 45766,
+        "ms": 1877,
         "cost_usd": 0.0
       },
       {
         "name": "verify",
-        "ms": 3388,
-        "cost_usd": 0.003617
+        "ms": 4249,
+        "cost_usd": 0.005876
       },
       {
         "name": "final_check",
-        "ms": 3634,
-        "cost_usd": 0.003553
+        "ms": 3365,
+        "cost_usd": 0.005745
+      },
+      {
+        "name": "background",
+        "ms": 5093,
+        "cost_usd": 0.0025
       },
       {
         "name": "typeset",
-        "ms": 332,
+        "ms": 329,
         "cost_usd": 0.0
+      },
+      {
+        "name": "selfcheck",
+        "ms": 12285,
+        "cost_usd": 0.012678
       }
     ],
     "files": {
@@ -109,9 +145,15 @@
       "document": "document.json",
       "plate": "plate.webp",
       "source": "source.jpg",
-      "masks": "masks.zip"
+      "masks": "masks.zip",
+      "background": "background.zip"
     },
-    "exported": "2026-10-27"
+    "background": {
+      "bubbles": 2,
+      "sam": 0,
+      "box_fallback": 2
+    },
+    "exported": "2026-10-28"
   },
   {
     "name": "chalkboard",
