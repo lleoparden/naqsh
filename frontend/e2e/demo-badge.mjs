@@ -1,3 +1,4 @@
+// No model calls: this script only uses document/layout/reset/cover/export endpoints.
 // Demo-mode evidence: the badge on the result page and in the editor, with ?clean=1.
 // Usage: node e2e/demo-badge.mjs  (backend must run with DEMO_MODE=1)
 import { chromium } from "playwright-core";

@@ -1,3 +1,4 @@
+// No model calls: this script only uses document/layout/reset/cover/export endpoints.
 // Theme screenshots at 1440x900.
 import { chromium } from "playwright-core";
 import fs from "node:fs";

@@ -1,3 +1,4 @@
+// No model calls: this script only uses document/layout/reset/cover/export endpoints.
 // Group 1 checks: font re-typeset, live size, reset to AI, original hides overlays,
 // before/after slider with keyboard and pointer, digits on the menu.
 import { chromium } from "playwright-core";
