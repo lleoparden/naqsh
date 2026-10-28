@@ -67,6 +67,10 @@ class Layer:
     strategy: str = "muse"
     # Cover layers only
     fill: list[int] = field(default_factory=list)
+    # First AI result for this layer, used by "Reset to AI result".
+    original: dict[str, Any] = field(default_factory=dict)
+    # Free-text name for the layers panel (Spark or the user).
+    name: str = ""
 
     @property
     def text_for(self) -> str:
@@ -94,6 +98,8 @@ class Layer:
             "locked": self.locked,
             "strategy": self.strategy,
             "fill": self.fill,
+            "original": self.original,
+            "name": self.name,
         }
 
 
@@ -163,6 +169,8 @@ class Document:
                     locked=bool(item.get("locked", False)),
                     strategy=str(item.get("strategy") or "muse"),
                     fill=[int(v) for v in item.get("fill") or []],
+                    original=dict(item.get("original") or {}),
+                    name=str(item.get("name") or ""),
                 )
             )
         return cls(
@@ -190,7 +198,9 @@ def layout_text(
     size_limit: int | None = None,
 ) -> tuple[int, list[LineBox]]:
     """Fit text into a box and return (size, lines with baselines)."""
-    shown = to_numerals(text, numerals) if action in ("keep", "keep_numerals") else text
+    # The digits setting applies to any text the page shows: prices are the common
+    # case, but dates and quantities should follow the same switch.
+    shown = to_numerals(text, numerals)
     bbox = BBox(*box)
     layout = typeset.fit_text(shown, bbox.width, bbox.height, family=family, max_size=size_limit, padding=6)
     lines: list[LineBox] = []
@@ -270,11 +280,32 @@ def layout_document(document: Document, *, only_layer: str | None = None) -> Doc
     return document
 
 
+def snapshot_layer(layer: Layer) -> dict[str, Any]:
+    """The first AI result for a text layer, enough to restore it exactly."""
+    return {
+        "arabic": dict(layer.arabic),
+        "font_family": layer.font_family,
+        "font_size": layer.font_size,
+        "color": list(layer.color),
+        "box": list(layer.box),
+        "action": layer.action,
+    }
+
+
+def _snapshot_originals(document: Document) -> None:
+    for layer in document.layers:
+        if layer.kind == "text" and not layer.original:
+            layer.original = snapshot_layer(layer)
+
+
 def load_document(folder: Path, receipt: dict[str, Any]) -> Document:
     path = folder / "document.json"
     if path.is_file():
-        return layout_document(Document.from_dict(json.loads(path.read_text(encoding="utf-8"))))
+        document = layout_document(Document.from_dict(json.loads(path.read_text(encoding="utf-8"))))
+        _snapshot_originals(document)
+        return document
     document = layout_document(document_from_job(receipt))
+    _snapshot_originals(document)
     save_document(folder, document)
     return document
 

@@ -21,6 +21,7 @@ from .pipeline import document as document_module
 from .pipeline import export as export_module
 from .pipeline import job as job_module
 from .pipeline import spend
+from .pipeline import throttle
 from .pipeline.meta import MetaAPIError, spark_translate
 from .pipeline.regions import REGISTERS
 
@@ -166,7 +167,7 @@ def patch_document(job_id: str, body: dict[str, object]) -> dict[str, object]:
         if "font_family" in update:
             layer.font_family = str(update["font_family"])
         if "font_size" in update:
-            layer.font_size = max(0, int(update["font_size"]))  # type: ignore[arg-type]
+            layer.font_size = min(1000, max(0, int(update["font_size"])))  # type: ignore[arg-type]
         if "color" in update and isinstance(update["color"], list):
             layer.color = [int(v) for v in update["color"]]  # type: ignore[arg-type]
         if "visible" in update:
@@ -187,6 +188,42 @@ def patch_document(job_id: str, body: dict[str, object]) -> dict[str, object]:
     return doc.to_dict()
 
 
+@app.post("/api/jobs/{job_id}/reset-region")
+def reset_region(job_id: str, body: dict[str, object]) -> dict[str, object]:
+    """Restore one region to its first AI result (text, font, size, colour, box, action)."""
+    folder, doc = _document(job_id)
+    layer = doc.layer(str(body.get("layer_id") or ""))
+    if layer is None or layer.kind != "text":
+        raise HTTPException(status_code=404, detail="text layer not found")
+    original = layer.original
+    if not original:
+        raise HTTPException(status_code=409, detail="this layer has no saved AI result")
+    if isinstance(original.get("arabic"), dict):
+        layer.arabic = {str(k): str(v) for k, v in original["arabic"].items()}
+    if "font_family" in original:
+        layer.font_family = str(original["font_family"])
+    if "color" in original and isinstance(original["color"], list):
+        layer.color = [int(v) for v in original["color"]]
+    if "box" in original and isinstance(original["box"], list) and len(original["box"]) == 4:
+        layer.box = [int(v) for v in original["box"]]
+    if "action" in original:
+        layer.action = str(original["action"])
+    text = layer.active_text(doc.register)
+    size, lines = document_module.layout_text(
+        text,
+        layer.box,
+        family=layer.font_family,
+        register=doc.register,
+        numerals=doc.numerals,
+        action=layer.action,
+        size_limit=int(original.get("font_size") or 0) or None,
+    )
+    layer.font_size = size
+    layer.lines = lines
+    document_module.save_document(folder, doc)
+    return {"layer": layer.to_dict(), "size": size}
+
+
 @app.post("/api/jobs/{job_id}/layout")
 def layout_region(job_id: str, body: dict[str, object]) -> dict[str, object]:
     folder, doc = _document(job_id)
@@ -200,7 +237,7 @@ def layout_region(job_id: str, body: dict[str, object]) -> dict[str, object]:
     if "font_family" in body:
         layer.font_family = str(body["font_family"])
     if "font_size" in body:
-        layer.font_size = max(0, int(body["font_size"]))  # type: ignore[arg-type]
+        layer.font_size = min(1000, max(0, int(body["font_size"])))  # type: ignore[arg-type]
     text = layer.active_text(doc.register)
     size, lines = document_module.layout_text(
         text,
@@ -250,6 +287,11 @@ def retranslate_region(job_id: str, body: dict[str, object]) -> dict[str, object
             }
     if not settings.has_key:
         raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
+    refusal = throttle.acquire(job_id, layer.id)
+    if refusal == "in_flight":
+        raise HTTPException(status_code=429, detail="this region is already being re-translated")
+    if refusal == "rate_limited":
+        raise HTTPException(status_code=429, detail="too many re-translations for this job; wait a minute")
     try:
         text, usage = spark_translate(
             layer.source_text,
@@ -259,6 +301,8 @@ def retranslate_region(job_id: str, body: dict[str, object]) -> dict[str, object
         )
     except MetaAPIError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
+    finally:
+        throttle.release(job_id, layer.id)
     cost = usage.spark_cost()
     spend.record_spend(f"retranslate {job_id}/{layer.id}", cost, kind="text")
     layer.arabic[register_name] = text

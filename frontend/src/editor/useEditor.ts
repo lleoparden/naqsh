@@ -170,7 +170,10 @@ export function useEditor(jobId: string | null) {
   }, []);
 
   const layout = useCallback(
-    async (layerId: string) => {
+    async (
+      layerId: string,
+      overrides: Partial<{ text: string; box: [number, number, number, number]; font_family: string; font_size: number }> = {},
+    ) => {
       if (!jobId || !document) return;
       // Send the current layer state with the layout call: the debounced PATCH may not
       // have reached the server yet, and an early layout would overwrite the edit.
@@ -178,10 +181,10 @@ export function useEditor(jobId: string | null) {
       if (!layer) return;
       const response = await patch("layout", jobId, {
         layer_id: layerId,
-        text: layer.arabic[document.register] ?? layer.source_text,
-        box: layer.box,
-        font_family: layer.font_family,
-        font_size: layer.font_size,
+        text: overrides.text ?? layer.arabic[document.register] ?? layer.source_text,
+        box: overrides.box ?? layer.box,
+        font_family: overrides.font_family ?? layer.font_family,
+        font_size: overrides.font_size ?? layer.font_size,
       });
       if (!response.ok) return;
       const payload = (await response.json()) as { layer: Layer };
@@ -197,7 +200,10 @@ export function useEditor(jobId: string | null) {
     async (layerId: string, register: "egyptian" | "msa") => {
       if (!jobId) return null;
       const response = await patch("retranslate", jobId, { layer_id: layerId, register });
-      if (!response.ok) return null;
+      if (!response.ok) {
+        const detail = (await response.json().catch(() => ({}))) as { detail?: string };
+        throw new Error(detail.detail || `Re-translate failed (${response.status})`);
+      }
       const payload = (await response.json()) as { layer: Layer; cost_usd: number };
       update(
         (draft) => {
@@ -207,6 +213,30 @@ export function useEditor(jobId: string | null) {
         [layerId],
       );
       return payload.cost_usd;
+    },
+    [jobId, update],
+  );
+
+  const reset = useCallback(
+    async (layerId: string) => {
+      if (!jobId) return;
+      const response = await fetch(`${API}/jobs/${jobId}/reset-region`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ layer_id: layerId }),
+      });
+      if (!response.ok) {
+        const detail = (await response.json().catch(() => ({}))) as { detail?: string };
+        throw new Error(detail.detail || `Reset failed (${response.status})`);
+      }
+      const payload = (await response.json()) as { layer: Layer };
+      update(
+        (draft) => {
+          const index = draft.layers.findIndex((layer) => layer.id === layerId);
+          if (index >= 0) draft.layers[index] = payload.layer;
+        },
+        [layerId],
+      );
     },
     [jobId, update],
   );
@@ -230,8 +260,9 @@ export function useEditor(jobId: string | null) {
       finish,
       layout,
       retranslate,
+      reset,
       reload: () => (jobId ? load(jobId) : Promise.resolve()),
     }),
-    [document, history.past.length, history.future.length, commit, preview, finish, layout, retranslate, jobId, load],
+    [document, history.past.length, history.future.length, commit, preview, finish, layout, retranslate, reset, jobId, load],
   );
 }
