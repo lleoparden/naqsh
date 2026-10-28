@@ -1,6 +1,6 @@
 export type Layer = {
   id: string;
-  kind: "text" | "cover";
+  kind: "text" | "cover" | "scene" | "bubble";
   type: string;
   action: string;
   source_text: string;
@@ -16,6 +16,7 @@ export type Layer = {
   locked: boolean;
   strategy: string;
   fill: number[];
+  asset?: string;
   shape?: "rect" | "ellipse";
   name?: string;
   original?: Record<string, unknown>;

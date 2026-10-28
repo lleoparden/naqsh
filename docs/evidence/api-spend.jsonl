@@ -63,3 +63,12 @@
 {"ts": "2026-10-28T17:54:51+00:00", "label": "region names d3dbface16b8", "cost_usd": 0.001895, "kind": "read", "regions": 4}
 {"ts": "2026-10-28T17:54:54+00:00", "label": "region names e13f9585b24f", "cost_usd": 0.003078, "kind": "read", "regions": 10}
 {"ts": "2026-10-28T18:21:55+00:00", "label": "region names e13f9585b24f", "cost_usd": 0.004208, "kind": "read", "regions": 10}
+{"ts": "2026-10-28T18:38:16+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
+{"ts": "2026-10-28T18:38:26+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
+{"ts": "2026-10-28T18:41:52+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
+{"ts": "2026-10-28T18:42:02+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
+{"ts": "2026-10-28T18:42:21+00:00", "label": "region names d3dbface16b8", "cost_usd": 0.001708, "kind": "read", "regions": 8}
+{"ts": "2026-10-28T18:42:55+00:00", "label": "background bubbles e13f9585b24f", "cost_usd": 0.0025, "kind": "segment", "objects": 0}
+{"ts": "2026-10-28T18:43:10+00:00", "label": "background bubbles e13f9585b24f", "cost_usd": 0.0025, "kind": "segment", "objects": 0}
+{"ts": "2026-10-28T18:43:16+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
+{"ts": "2026-10-28T18:43:32+00:00", "label": "background bubbles e13f9585b24f", "cost_usd": 0.0025, "kind": "segment", "objects": 0}
