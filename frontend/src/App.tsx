@@ -157,6 +157,7 @@ function Home() {
               </button>
             ))}
           </div>
+          <p className="text-xs text-ink/70">{t("registerHint")}</p>
           {!clean && (
             <p className="text-xs text-ink/70">
               {health
