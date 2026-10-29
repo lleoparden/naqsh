@@ -19,7 +19,7 @@ function Home() {
   const [replay, setReplay] = useState<{ index: number; done: boolean }>({ index: 0, done: true });
   const [health, setHealth] = useState<Health | null>(null);
   const [register, setRegister] = useState<string>("egyptian");
-  const [backgroundLayers, setBackgroundLayers] = useState(true);
+  const [backgroundLayers, setBackgroundLayers] = useState(false);
   const [job, setJob] = useState<Job | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);

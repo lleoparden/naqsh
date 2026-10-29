@@ -286,9 +286,9 @@ errored, hung, or failed; 6/6 returned 200. The spend also
 includes a few extra live runs produced while a background measurement script was
 misbehaving (killed); they are counted, the table uses the six clean receipts.
 
-The human baseline is **still empty**: `docs/time-saved.md` carries the Naqsh numbers,
-an empty manual column, and a ratio cell that says "not computed — baseline empty" until
-the owner times a run. No estimated ratio appears anywhere.
+The time-saved ratio is **removed** (owner decision, 2026-10-29): the owner is not an
+editor, so a manual baseline would not be honest. Naqsh's own times remain in the receipts
+as context; the only allowed wording is **"faster"**, never a multiplier or minutes saved.
 
 **Audit** (`docs/audit.md`): no key material in the tree or history (`.env` never
 committed; the only `LLM_` strings are documentation and a test asserting the key never
@@ -443,20 +443,18 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - API: `POST /api/localize` accepts `background_layers=true|false`; the receipt records `background: {enabled: false, skipped: "disabled by request"}` when off.
 - This was added because the background pass visibly increased processing time; no speed claim is recorded until timed with the switch off vs on.
 
-### Time-saved measurement (the Impact claim)
+### Time-saved claim — removed
 
-Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both
-pages by hand, screen-recorded, per step, and stops when the output is comparable in
-quality to Naqsh's. Ratios are reported per page, never pooled, and every ratio is
-**PENDING** until that run exists. No estimated ratio appears anywhere.
+Owner decision, 2026-10-29: **no time-saved ratio is claimed**. The owner is not an
+editor, so a manual baseline would not be honest. The Naqsh medians below stay as context
+for the receipts; the only allowed comparative wording is **"faster"**.
 
-| Page | Regions | Naqsh median (live receipt) | Manual total (owner) | Ratio |
-|---|---|---|---|---|
-| comic `01-comic-flat.png` | 3 | 33.8 s (0.56 min) | _empty_ | **PENDING** |
-| menu `03-menu-paper.png` | 16 | 61.8 s (1.03 min) | _empty_ | **PENDING** |
+| Page | Regions | Naqsh median (live receipt) |
+|---|---|---|
+| comic `01-comic-flat.png` | 3 | 33.8 s (0.56 min) |
+| menu `03-menu-paper.png` | 16 | 61.8 s (1.03 min) |
 
-The Naqsh side comes from `docs/evidence/phase-8/variance-summary.json` (wall-time
-medians). The manual side stays empty until the protocol is run.
+Source: `docs/evidence/phase-8/variance-summary.json`. No manual column, no ratio.
 
 ## Media worth using (screenshots / clips)
 

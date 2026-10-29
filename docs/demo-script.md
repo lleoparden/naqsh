@@ -85,7 +85,7 @@ exportable. Built with Meta Muse Spark, SAM 3.1 and Muse Image.”
 
 ## What the narration must NOT say
 
-- No time-saved ratio or “N× faster” — baseline PENDING.
+- No time-saved ratio or multiplier. Saying **“faster”** is allowed; a number is not.
 - No “fully automatic”, “no editing needed”, “any language”.
 - No “live model call” while the demo badge is on.
 - No clean-plate success claim for the label page.

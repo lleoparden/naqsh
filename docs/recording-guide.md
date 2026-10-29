@@ -68,8 +68,7 @@ cost below are the recorded ones; this page did not call the model API”. Never
 
 ## 5. What NOT to claim
 
-- **No time-saved percentage or ratio.** Baseline is empty; only recorded page times and
-  costs are allowed.
+- No time-saved ratio or multiplier. Saying **“faster”** is allowed; a number is not.
 - No “fully automatic”, “no editing needed”, “any language”, “works on photos/branding”.
 - No “the demo is calling the model live” — the badge is there because it is a replay.
 - No clean-plate claim for the label-fail page; it is shown as a limitation.
