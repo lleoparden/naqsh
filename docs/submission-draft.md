@@ -62,6 +62,11 @@ can defeat the plate (the kraft-label run shows brown smears, cached as `label-f
 
 Model roles and the API shapes are recorded in `docs/api-findings.md`.
 
+Muse Image is an allowed model (organizer answer, Discord #questions, 2026-10-28):
+the demo artwork in this repo and the video was generated with `muse-image-1.0`, so it is
+project-owned and used with rights. No on-screen credit is required; this answer and
+`ASSETS.md` record the prompts, model and source for each generated asset.
+
 ## Why Meta's models matter
 
 - **Spark's vision reading is the entry point.** It returns boxes, text, type and style

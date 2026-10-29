@@ -237,11 +237,10 @@ recording, re-narrated.
 problem statement, description, public repo with clean history and no secrets, the
 video link, Meta-products and why-it-matters answers, feedback, and the optional X
 link. Re-read the repo as a judge (README, history, assets); run the secret scan.
-**Submit early on 3 Nov with everything except the X link, then edit the submission
-before the deadline to add the best-performing X post link** — edits are allowed until
-the deadline (organizer answer, Discord #questions, 2026-10-27). Save the confirmation.
-X post: Most Viral is counted through **Nov 8 EOD**, so the post can go live during the
-event; build-in-public posts do not affect eligibility.
+**Submit Nov 3 with all fields. Then edit before the deadline to add the X link.
+After the deadline no edits are possible, so the X post must exist before that.**
+(Organizer answers, Discord #questions, 2026-10-28 21:49 Cairo.) Most Viral is counted
+through **Nov 8 EOD**; posting anytime during the event is allowed.
 
 **Gate:** the form is submitted early on 3 Nov, edited with the X link before the
 deadline, and a confirmation screenshot exists in `docs/`.
