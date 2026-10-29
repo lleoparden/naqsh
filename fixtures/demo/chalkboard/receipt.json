@@ -1,5 +1,5 @@
 {
-  "id": "231bfa7361a0",
+  "id": "79753c06d42e",
   "register": "egyptian",
   "width": 1280,
   "height": 1920,
@@ -15,14 +15,14 @@
   "stages": [
     {
       "name": "read",
-      "ms": 8922,
-      "cost_usd": 0.009191,
+      "ms": 9374,
+      "cost_usd": 0.007015,
       "input_tokens": 3786,
-      "output_tokens": 1049,
-      "reasoning_tokens": 641,
+      "output_tokens": 537,
+      "reasoning_tokens": 261,
       "images": 0,
-      "regions": 5,
-      "regions_before_dedupe": 5,
+      "regions": 3,
+      "regions_before_dedupe": 3,
       "duplicates_dropped": 0
     },
     {
@@ -32,28 +32,23 @@
       "translated": [
         "t1",
         "t2",
-        "t3",
-        "t4",
-        "t5"
+        "t3"
       ],
       "skipped": [],
       "optional": [],
-      "keep_numerals": [
-        "t3",
-        "t5"
-      ]
+      "keep_numerals": []
     },
     {
       "name": "segment",
-      "ms": 24285,
+      "ms": 20728,
       "cost_usd": 0.0025,
-      "masks": 5,
+      "masks": 3,
       "concepts": "box prompts + ink extent",
       "leaders": []
     },
     {
       "name": "clean_plate",
-      "ms": 24375,
+      "ms": 20802,
       "cost_usd": 0.01,
       "images": 1,
       "plate_size": [
@@ -66,7 +61,7 @@
     },
     {
       "name": "register_composite",
-      "ms": 1225,
+      "ms": 1007,
       "cost_usd": 0.0,
       "shift": [
         0,
@@ -77,16 +72,14 @@
         1.0,
         1.0
       ],
-      "flat_interiors_cleaned": 4,
+      "flat_interiors_cleaned": 3,
       "outside_untouched_mean_diff_is_tautological": 0.0,
-      "ring_mean_abs_diff": 21.27,
-      "ring_max_abs_diff": 34.75,
+      "ring_mean_abs_diff": 20.57,
+      "ring_max_abs_diff": 33.3,
       "ring_per_region": [
-        34.75,
-        25.01,
-        21.02,
-        8.8,
-        16.76
+        33.3,
+        7.0,
+        21.43
       ],
       "ring_band_px": [
         8,
@@ -95,32 +88,32 @@
     },
     {
       "name": "verify",
-      "ms": 4219,
-      "cost_usd": 0.002893,
-      "checked": 5,
+      "ms": 4014,
+      "cost_usd": 0.002925,
+      "checked": 3,
       "residual": [
+        "t1",
         "t2"
       ],
       "notes": {
-        "t1": "only chalk smudges and scratches",
-        "t2": "faint dark ghost letters like M on left",
-        "t3": "only texture noise",
-        "t4": "only chalk streaks",
-        "t5": "only chalk smudges"
+        "t1": "faint ghost lettering across center",
+        "t2": "faint ghost letters M A shapes",
+        "t3": "chalk smears only, no letterforms"
       }
     },
     {
       "name": "retry",
-      "ms": 22589,
-      "cost_usd": 0.013302,
-      "retried": "t2",
-      "still_residual": [],
+      "ms": 22269,
+      "cost_usd": 0.012084,
+      "retried": "t1, t2",
+      "still_residual": [
+        "t1",
+        "t2"
+      ],
       "notes": {
-        "t1": "chalk smears only, no letter forms",
-        "t2": "chalk smears and blotches only, no letter forms",
-        "t3": "dark texture only, clean",
-        "t4": "chalk streaks only, clean",
-        "t5": "chalk streaks only, clean"
+        "t1": "ghost dark letterforms across center",
+        "t2": "faint TEA ghost center-right",
+        "t3": "only chalk smudges, no letters"
       },
       "shift": [
         0,
@@ -128,25 +121,32 @@
       ]
     },
     {
+      "name": "repair",
+      "ms": 6526,
+      "cost_usd": 0.0,
+      "strategies": {
+        "t1": "flat-fill",
+        "t2": "flat-fill"
+      }
+    },
+    {
       "name": "final_check",
-      "ms": 4832,
-      "cost_usd": 0.003939,
-      "checked": 5,
+      "ms": 4010,
+      "cost_usd": 0.002118,
+      "checked": 3,
       "residual": [
         "t1",
         "t2"
       ],
       "notes": {
-        "t1": "very faint ghost lettering across top",
-        "t2": "dark ghost letters, TEA visible right",
-        "t3": "chalk smudges only, no letters",
-        "t4": "chalk smudges only, no letters",
-        "t5": "chalk smudges only, no letters"
+        "t1": "faint ghost lettering smeared across center",
+        "t2": "faint ghost TEA-like shapes center-right",
+        "t3": "only chalk smears, no letter forms"
       }
     },
     {
       "name": "background",
-      "ms": 277,
+      "ms": 259,
       "cost_usd": 0.0,
       "bubbles": 0,
       "sam": 0,
@@ -155,28 +155,24 @@
     },
     {
       "name": "typeset",
-      "ms": 231,
+      "ms": 211,
       "cost_usd": 0.0,
-      "regions": 5,
+      "regions": 3,
       "strategies": {
-        "t1": "muse-retry",
-        "t2": "muse-retry",
-        "t3": "muse-retry",
-        "t4": "muse-retry",
-        "t5": "muse-retry"
+        "t1": "flat-fill",
+        "t2": "flat-fill",
+        "t3": "muse-retry"
       },
       "types": {
         "t1": "signage",
         "t2": "menu_item",
-        "t3": "price",
-        "t4": "menu_item",
-        "t5": "price"
+        "t3": "menu_item"
       }
     },
     {
       "name": "selfcheck",
-      "ms": 2813,
-      "cost_usd": 0.002652,
+      "ms": 3601,
+      "cost_usd": 0.002516,
       "flagged": [],
       "issues": {},
       "fixed": [],
@@ -194,165 +190,99 @@
       "type": "signage",
       "action": "translate",
       "bbox": [
-        243,
-        221,
-        1110,
-        365
+        210,
+        186,
+        1076,
+        326
       ],
       "container": [
-        249,
-        221,
-        1046,
-        359
+        247,
+        209,
+        1048,
+        322
       ],
       "mask_path": "mask-t1.png",
       "font_family": "tajawal-bold",
-      "font_size": 119,
+      "font_size": 95,
       "color": [
         242,
-        232,
-        155
+        234,
+        160
       ],
       "lines": [
         "عرض النهاردة"
       ],
-      "strategy": "muse-retry"
+      "strategy": "flat-fill"
     },
     {
       "id": "t2",
-      "source_text": "MINT TEA",
-      "translation_ar": "شاي بالنعناع",
+      "source_text": "MINT TEA 25",
+      "translation_ar": "شاي بالنعناع 25",
       "style": "label",
       "font_style": "handwritten chalk uppercase",
       "type": "menu_item",
       "action": "translate",
       "bbox": [
-        262,
-        643,
-        838,
-        816
+        250,
+        634,
+        1053,
+        764
       ],
       "container": [
         276,
-        643,
-        838,
-        763
+        641,
+        1035,
+        761
       ],
       "mask_path": "mask-t2.png",
       "font_family": "tajawal-bold",
       "font_size": 83,
       "color": [
-        238,
-        238,
-        238
+        232,
+        232,
+        232
       ],
       "lines": [
-        "شاي بالنعناع"
+        "شاي بالنعناع 25"
       ],
-      "strategy": "muse-retry"
+      "strategy": "flat-fill"
     },
     {
       "id": "t3",
-      "source_text": "25",
-      "translation_ar": "25",
-      "style": "label",
-      "font_style": "handwritten chalk uppercase",
-      "type": "price",
-      "action": "keep_numerals",
-      "bbox": [
-        870,
-        643,
-        1043,
-        787
-      ],
-      "container": [
-        901,
-        647,
-        1037,
-        743
-      ],
-      "mask_path": "mask-t3.png",
-      "font_family": "tajawal-bold",
-      "font_size": 79,
-      "color": [
-        238,
-        238,
-        238
-      ],
-      "lines": [
-        "25"
-      ],
-      "strategy": "muse-retry"
-    },
-    {
-      "id": "t4",
-      "source_text": "BASBOUSA",
-      "translation_ar": "بسبوسة",
+      "source_text": "BASBOUSA 30",
+      "translation_ar": "بسبوسة 30",
       "style": "label",
       "font_style": "handwritten chalk uppercase",
       "type": "menu_item",
       "action": "translate",
       "bbox": [
-        333,
-        883,
-        877,
-        979
+        324,
+        791,
+        1107,
+        920
       ],
       "container": [
-        350,
-        860,
-        865,
-        953
+        336,
+        849,
+        1070,
+        920
       ],
-      "mask_path": "mask-t4.png",
+      "mask_path": "mask-t3.png",
       "font_family": "tajawal-bold",
-      "font_size": 76,
+      "font_size": 55,
       "color": [
-        238,
-        238,
-        238
+        232,
+        232,
+        232
       ],
       "lines": [
-        "بسبوسة"
-      ],
-      "strategy": "muse-retry"
-    },
-    {
-      "id": "t5",
-      "source_text": "30",
-      "translation_ar": "30",
-      "style": "label",
-      "font_style": "handwritten chalk uppercase",
-      "type": "price",
-      "action": "keep_numerals",
-      "bbox": [
-        915,
-        883,
-        1088,
-        970
-      ],
-      "container": [
-        941,
-        883,
-        1069,
-        946
-      ],
-      "mask_path": "mask-t5.png",
-      "font_family": "tajawal-bold",
-      "font_size": 47,
-      "color": [
-        238,
-        238,
-        238
-      ],
-      "lines": [
-        "30"
+        "بسبوسة 30"
       ],
       "strategy": "muse-retry"
     }
   ],
   "warnings": [],
-  "total_cost_usd": 0.044477,
-  "total_ms": 69815,
-  "stage_ms_sum": 93768
+  "total_cost_usd": 0.039157,
+  "total_ms": 72396,
+  "stage_ms_sum": 92801
 }

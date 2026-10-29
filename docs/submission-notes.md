@@ -427,6 +427,15 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - README "What's new" gained one line about the layered background.
 - Limits: the suppression change is one rule (zero SAM objects); quality of box_fallback on pages with >=1 detected bubble is still unverified visually; comic's flag is absent because it was not re-run.
 
+### Background follow-ups: dialogue-only fallback, explicit live mode, rebuilt demos
+
+- Bubble layers are now **dialogue only**. SAM zero objects still means scenery only (menu); with SAM output, `box_fallback` is only allowed for dialogue regions — captions, menu items, prices and signage never become bubbles.
+- `LIVE_MODE=1` is required for any paid call. `/api/localize` (unknown uploads) and `/api/retranslate` return 403 otherwise; demo replay still needs no key. Startup prints `=== Naqsh LIVE MODE — paid model calls ENABLED ===` or the DEMO equivalent.
+- Observed in a real server log: comic `7e997e7b7e9f` → `background bubbles=2 sam=2 box_fallback=0`; chalkboard `79753c06d42e`, sfx `3d06d47ba521`, label `f6d1bc33524b` → 0 bubbles, 0 fallbacks.
+- Rebuilt demos after the rule change (live, cap noted): comic `7e997e7b7e9f` $0.0298, chalkboard `79753c06d42e` $0.0392, sfx `3d06d47ba521` $0.0258, label `f6d1bc33524b` $0.0269 → **$0.1216** total (the three requested entries were $0.0919 of it; comic was re-run because the caption rule removed one bubble). Menu was not re-run: its layers (scene + 16 text) do not change under the rule.
+- Demo cache rebuilt from the new receipts: **20.40 MB**, +0.38 MB. Demo replay layer lists verified for all five entries (comic: scene + bubble-t2 + bubble-t3 + 3 text; menu/chalkboard/sfx/label: scene + text only).
+- Evidence: `docs/evidence/ui/background-followups.json`.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both

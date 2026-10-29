@@ -1,0 +1,34 @@
+{
+  "task": "background-layer follow-ups",
+  "date": "2026-10-29",
+  "fallback_rule": {
+    "zero_sam": "no bubble layers; background stage fallback_suppressed=true",
+    "sam_present": "box_fallback only for regions typed dialogue; captions/items/prices/signage excluded"
+  },
+  "live_mode": {
+    "gate": "LIVE_MODE=1 required for /api/localize (unknown) and /api/retranslate",
+    "banner": "=== Naqsh LIVE MODE — paid model calls ENABLED ===",
+    "log": [
+      "7e997e7b7e9f: background bubbles=2 sam=2 box_fallback=0 fallback_suppressed=False",
+      "79753c06d42e: background bubbles=0 sam=0 box_fallback=0 fallback_suppressed=False",
+      "3d06d47ba521: background bubbles=0 sam=0 box_fallback=0 fallback_suppressed=False",
+      "f6d1bc33524b: background bubbles=0 sam=0 box_fallback=0 fallback_suppressed=False"
+    ]
+  },
+  "live_runs": {
+    "comic": {"id": "7e997e7b7e9f", "ms": 39795, "cost_usd": 0.0298, "layers": ["scene", "bubble-t2", "bubble-t3", "t1", "t2", "t3"]},
+    "chalkboard": {"id": "79753c06d42e", "ms": 72396, "cost_usd": 0.0392, "layers": ["scene", "t1", "t2", "t3"]},
+    "sfx": {"id": "3d06d47ba521", "ms": 42557, "cost_usd": 0.0258, "layers": ["scene", "t1", "t2", "t3"]},
+    "label": {"id": "f6d1bc33524b", "ms": 39678, "cost_usd": 0.0269, "layers": ["scene", "t1", "t2", "t3"]}
+  },
+  "live_total_usd": 0.1216,
+  "menu_skipped": "fallback rule did not change its layers (scene + 16 text); cache rebuilt from its existing receipt",
+  "demo_replays": {
+    "comic": "demo-a72f209f",
+    "menu": "demo-83a37315",
+    "chalkboard": "demo-da94b808",
+    "sfx": "demo-303d66e9",
+    "label": "demo-285418b3"
+  },
+  "cache_mb": {"before": 20.02, "after": 20.40, "growth": 0.38}
+}

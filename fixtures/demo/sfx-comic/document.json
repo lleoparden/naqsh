@@ -1,5 +1,5 @@
 {
-  "id": "8e07fe0a4a4d",
+  "id": "3d06d47ba521",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -22,21 +22,21 @@
         "msa": "بعد تلات أيام"
       },
       "box": [
-        58,
-        96,
-        506,
-        202
+        49,
+        100,
+        468,
+        204
       ],
       "font_family": "tajawal-bold",
-      "font_size": 59,
+      "font_size": 56,
       "lines": [
         {
           "text": "بعد تلات أيام",
-          "size": 59,
-          "x": 282.0,
-          "baseline": 165.5,
-          "width": 329,
-          "height": 71
+          "size": 56,
+          "x": 258.5,
+          "baseline": 168.0,
+          "width": 312,
+          "height": 68
         }
       ],
       "align": "center",
@@ -66,10 +66,10 @@
         "msa": "وفي نفس الوقت"
       },
       "box": [
-        902,
-        96,
-        1220,
-        198
+        909,
+        100,
+        1217,
+        205
       ],
       "font_family": "tajawal-bold",
       "font_size": 39,
@@ -77,8 +77,8 @@
         {
           "text": "وفي نفس الوقت",
           "size": 39,
-          "x": 1061.0,
-          "baseline": 152.0,
+          "x": 1063.0,
+          "baseline": 157.5,
           "width": 277,
           "height": 44
         }
@@ -110,10 +110,10 @@
         "msa": "كراك!"
       },
       "box": [
-        77,
-        509,
-        1257,
-        995
+        76,
+        490,
+        1256,
+        1016
       ],
       "font_family": "tajawal-bold",
       "font_size": 220,
@@ -121,8 +121,8 @@
         {
           "text": "كراك!",
           "size": 220,
-          "x": 667.0,
-          "baseline": 801.5,
+          "x": 666.0,
+          "baseline": 802.5,
           "width": 512,
           "height": 185
         }
@@ -130,7 +130,7 @@
       "align": "center",
       "color": [
         255,
-        217,
+        210,
         26
       ],
       "z": 2,

@@ -1,5 +1,5 @@
 {
-  "id": "76bb774d72f1",
+  "id": "f6d1bc33524b",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -14,7 +14,7 @@
     {
       "id": "t1",
       "kind": "text",
-      "type": "menu_item",
+      "type": "signage",
       "action": "translate",
       "source_text": "CUMIN",
       "arabic": {
@@ -23,32 +23,32 @@
       },
       "box": [
         307,
-        977,
-        979,
-        1150
+        962,
+        986,
+        1096
       ],
       "font_family": "naskh",
-      "font_size": 127,
+      "font_size": 78,
       "lines": [
         {
           "text": "كمون",
-          "size": 127,
-          "x": 643.0,
-          "baseline": 1088.5,
-          "width": 229,
-          "height": 118
+          "size": 78,
+          "x": 646.5,
+          "baseline": 1044.5,
+          "width": 140,
+          "height": 73
         }
       ],
       "align": "center",
       "color": [
         43,
         26,
-        14
+        18
       ],
       "z": 0,
       "visible": true,
       "locked": false,
-      "strategy": "flat-fill",
+      "strategy": "muse",
       "fill": [],
       "original": {},
       "name": "",
@@ -58,7 +58,7 @@
     {
       "id": "t2",
       "kind": "text",
-      "type": "menu_item",
+      "type": "signage",
       "action": "translate",
       "source_text": "GROUND",
       "arabic": {
@@ -66,33 +66,33 @@
         "msa": "مطحون"
       },
       "box": [
-        484,
-        1200,
+        479,
+        1137,
         817,
-        1256
+        1188
       ],
       "font_family": "naskh",
-      "font_size": 20,
+      "font_size": 23,
       "lines": [
         {
           "text": "مطحون",
-          "size": 20,
-          "x": 650.5,
-          "baseline": 1232.0,
-          "width": 55,
-          "height": 20
+          "size": 23,
+          "x": 648.0,
+          "baseline": 1167.0,
+          "width": 63,
+          "height": 23
         }
       ],
       "align": "center",
       "color": [
         43,
         26,
-        14
+        18
       ],
       "z": 1,
       "visible": true,
       "locked": false,
-      "strategy": "flat-fill",
+      "strategy": "muse",
       "fill": [],
       "original": {},
       "name": "",
@@ -102,41 +102,41 @@
     {
       "id": "t3",
       "kind": "text",
-      "type": "price",
-      "action": "keep_numerals",
+      "type": "signage",
+      "action": "translate",
       "source_text": "NET 100 G",
       "arabic": {
-        "egyptian": "صافي ١٠٠ جم",
-        "msa": "صافي ١٠٠ جم"
+        "egyptian": "صافي 100 جم",
+        "msa": "صافي 100 جم"
       },
       "box": [
-        499,
-        1423,
-        800,
-        1476
+        504,
+        1411,
+        787,
+        1463
       ],
       "font_family": "naskh",
-      "font_size": 11,
+      "font_size": 15,
       "lines": [
         {
-          "text": "صافي ١٠٠ جم",
-          "size": 11,
-          "x": 649.5,
-          "baseline": 1451.0,
-          "width": 55,
-          "height": 13
+          "text": "صافي 100 جم",
+          "size": 15,
+          "x": 645.5,
+          "baseline": 1439.0,
+          "width": 80,
+          "height": 18
         }
       ],
       "align": "center",
       "color": [
         43,
         26,
-        14
+        18
       ],
       "z": 2,
       "visible": true,
       "locked": false,
-      "strategy": "flat-fill",
+      "strategy": "muse",
       "fill": [],
       "original": {},
       "name": "",
