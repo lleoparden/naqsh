@@ -5,7 +5,9 @@ Creative Commons (with the license recorded), public domain, or images generated
 for this project with Muse Image. **No copyrighted comics, manga, or Webtoon
 material is used, ever** — not even as a test image.
 
-Every asset gets a row here *before* it is committed.
+Every asset gets a row here *before* it is committed. **Organizer confirmation
+(2026-10-28, Discord #questions): Muse Image is an allowed model, so demo artwork
+generated with it may be used in the video and repo; no on-screen credit is required.**
 
 ## Media
 
@@ -25,11 +27,11 @@ Every asset gets a row here *before* it is committed.
 | `assets/generated/fixtures/06-real-pd-poster.png` | Phase 5: real-world page with arched headline and tiny footer | [Wikimedia Commons — Cook's Nile and Palestine Tours poster, c.1902](https://commons.wikimedia.org/wiki/File:Cook%27s_Nile_and_Palestine_Tours_poster_-_circa_1902.jpg) | **Public domain** (Commons `LicenseShortName`: "Public domain"; anonymous, published c.1902). Metadata snapshot in `fixtures/06-real-pd-poster.json`; accessed 2026-10-27 | 2026-10-27 |
 | `assets/generated/fixtures/07-comic-sfx.png` | Phase 5: small captions + stylised SFX | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
 | `assets/generated/fixtures/08-curved-poster.png` | Phase 5: curved headline + tiny footer | Generated with Muse Image; prompt in `fixtures/manifest.json` | Generated output, project-owned | 2026-10-27 |
-| `fixtures/demo/comic/` | Demo-mode cache of a real comic run (receipt, document, plate, source, masks) | Derived from `01-comic-flat.png` and recorded job `d3dbface16b8`; rebuilt by `backend/scripts/build_demo_cache.py` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
-| `fixtures/demo/menu/` | Demo-mode cache of a real menu run | Derived from `03-menu-paper.png`, job `e13f9585b24f` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
-| `fixtures/demo/chalkboard/` | Demo-mode cache of a real chalkboard run | Derived from `04-chalkboard.png`, job `605213b894ff` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
-| `fixtures/demo/sfx-comic/` | Demo-mode cache of the SFX comic run | Derived from `07-comic-sfx.png`, job `6a8aa7a0829b` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
-| `fixtures/demo/label-fail/` | Demo-mode cache of the failing photo-label run (honest limit) | Derived from `05-label-kraft.png`, job `5d6de0e0c1be` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
+| `fixtures/demo/comic/` | Demo-mode cache of a real comic run (receipt, document, plate, source, masks) | Derived from `01-comic-flat.png` and recorded job `4e251c89edaa`; rebuilt by `backend/scripts/build_demo_cache.py` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
+| `fixtures/demo/menu/` | Demo-mode cache of a real menu run | Derived from `03-menu-paper.png`, job `9b6f89fbc2b3` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
+| `fixtures/demo/chalkboard/` | Demo-mode cache of a real chalkboard run | Derived from `04-chalkboard.png`, job `231bfa7361a0` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
+| `fixtures/demo/sfx-comic/` | Demo-mode cache of the SFX comic run | Derived from `07-comic-sfx.png`, job `8e07fe0a4a4d` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
+| `fixtures/demo/label-fail/` | Demo-mode cache of the failing photo-label run (honest limit) | Derived from `05-label-kraft.png`, job `76bb774d72f1` | Same as the source fixture (generated, project-owned) | 2026-10-27 |
 
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
