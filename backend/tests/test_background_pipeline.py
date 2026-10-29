@@ -100,6 +100,59 @@ def test_background_failure_is_recorded_and_does_not_raise(tmp_path: Path, monke
     assert any("background layers unavailable" in warning for warning in job.warnings)
 
 
+def test_captions_items_and_prices_never_become_bubbles(tmp_path: Path, monkeypatch) -> None:
+    folder, composite = _page(tmp_path)
+    called = {"sam": 0}
+
+    def fake_sam(*_args, **_kwargs):
+        called["sam"] += 1
+        return ([_sam(120, 90, 5, 5)], SimpleNamespace(images=1))
+
+    monkeypatch.setattr(background, "sam_segment", fake_sam)
+    summary = background.build_assets(
+        folder,
+        b"x",
+        composite,
+        [
+            {"id": "t1", "bbox": [5, 5, 25, 25], "type": "caption"},
+            {"id": "t2", "bbox": [40, 5, 70, 25], "type": "menu_item"},
+            {"id": "t3", "bbox": [75, 5, 105, 25], "type": "price"},
+        ],
+        120,
+        90,
+    )
+    assert called["sam"] == 0  # no dialogue means no SAM call at all
+    assert summary["counts"] == {
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": False,
+    }
+
+
+def test_caption_near_a_sam_bubble_is_still_skipped(tmp_path: Path, monkeypatch) -> None:
+    folder, composite = _page(tmp_path)
+    monkeypatch.setattr(
+        background,
+        "sam_segment",
+        lambda *_args, **_kwargs: ([_sam(120, 90, 5, 5)], SimpleNamespace(images=1)),
+    )
+    summary = background.build_assets(
+        folder,
+        b"x",
+        composite,
+        [
+            {"id": "t1", "bbox": [5, 5, 25, 25], "type": "caption"},
+            {"id": "t2", "bbox": [10, 10, 24, 24], "type": "dialogue"},
+        ],
+        120,
+        90,
+    )
+    assert summary["counts"]["bubbles"] == 1
+    assert summary["counts"]["sam"] == 1
+    assert summary["counts"]["box_fallback"] == 0
+
+
 def test_manifest_attaches_layers(tmp_path: Path) -> None:
     folder, composite = _page(tmp_path)
     background.build_assets(folder, b"x", composite, [], 120, 90)
