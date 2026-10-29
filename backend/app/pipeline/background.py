@@ -22,7 +22,9 @@ from PIL import Image, ImageDraw
 from .meta import sam_segment
 from .segment import _paste
 
-BUBBLE_TYPES = {"dialogue", "caption"}
+# Only dialogue regions may become bubble layers. Captions, items, prices and signage
+# are never bubbled, so a SAM miss can never cut a hole around them.
+BUBBLE_TYPES = {"dialogue"}
 MIN_OVERLAP = 0.25
 
 
