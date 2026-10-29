@@ -93,7 +93,7 @@ def test_full_job_survives_injected_background_failure(tmp_path: Path, monkeypat
 
     monkeypatch.setattr(job_module, "build_assets", boom)
 
-    receipt = job_module.run_page_job(plate_bytes, register="egyptian").to_dict()
+    receipt = job_module.run_page_job(plate_bytes, register="egyptian", background_layers=True).to_dict()
 
     assert receipt["warnings"] and "background layers unavailable" in receipt["warnings"][0]
     background = next(stage for stage in receipt["stages"] if stage["name"] == "background")

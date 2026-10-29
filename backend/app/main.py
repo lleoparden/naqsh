@@ -75,7 +75,7 @@ def health() -> dict[str, object]:
 async def localize(
     image: UploadFile = File(...),
     register_name: str = Form("egyptian", alias="register"),
-    background_layers: bool = Form(True),
+    background_layers: bool = Form(False),
 ) -> dict[str, object]:
     """Run the full pipeline on one uploaded page and return the receipt."""
     register = register_name

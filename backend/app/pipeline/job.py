@@ -139,7 +139,7 @@ def _check(composite: Image.Image, regions: list) -> tuple[list, float, dict]:
     return verdicts, usage.spark_cost(), residual_stage.summarise(verdicts)
 
 
-def run_page_job(image_bytes: bytes, register: str = "egyptian", *, background_layers: bool = True) -> PageJob:
+def run_page_job(image_bytes: bytes, register: str = "egyptian", *, background_layers: bool = False) -> PageJob:
     job_id = uuid.uuid4().hex[:12]
     folder = JOBS_DIR / job_id
     folder.mkdir(parents=True, exist_ok=True)
