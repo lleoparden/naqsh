@@ -1,5 +1,5 @@
 {
-  "id": "76bb774d72f1",
+  "id": "f6d1bc33524b",
   "register": "egyptian",
   "width": 1280,
   "height": 1920,
@@ -15,11 +15,11 @@
   "stages": [
     {
       "name": "read",
-      "ms": 6823,
-      "cost_usd": 0.007168,
+      "ms": 10720,
+      "cost_usd": 0.0084,
       "input_tokens": 3786,
-      "output_tokens": 573,
-      "reasoning_tokens": 313,
+      "output_tokens": 863,
+      "reasoning_tokens": 603,
       "images": 0,
       "regions": 3,
       "regions_before_dedupe": 3,
@@ -36,13 +36,11 @@
       ],
       "skipped": [],
       "optional": [],
-      "keep_numerals": [
-        "t3"
-      ]
+      "keep_numerals": []
     },
     {
       "name": "segment",
-      "ms": 17156,
+      "ms": 19259,
       "cost_usd": 0.0025,
       "masks": 3,
       "concepts": "box prompts + ink extent",
@@ -50,7 +48,7 @@
     },
     {
       "name": "clean_plate",
-      "ms": 17268,
+      "ms": 19373,
       "cost_usd": 0.01,
       "images": 1,
       "plate_size": [
@@ -63,7 +61,7 @@
     },
     {
       "name": "register_composite",
-      "ms": 1163,
+      "ms": 1132,
       "cost_usd": 0.0,
       "shift": [
         0,
@@ -74,14 +72,14 @@
         1.0,
         1.0
       ],
-      "flat_interiors_cleaned": 3,
+      "flat_interiors_cleaned": 1,
       "outside_untouched_mean_diff_is_tautological": 0.0,
-      "ring_mean_abs_diff": 7.84,
-      "ring_max_abs_diff": 8.98,
+      "ring_mean_abs_diff": 12.13,
+      "ring_max_abs_diff": 23.24,
       "ring_per_region": [
-        6.54,
-        8.98,
-        8.01
+        5.75,
+        23.24,
+        7.4
       ],
       "ring_band_px": [
         8,
@@ -90,68 +88,31 @@
     },
     {
       "name": "verify",
-      "ms": 3533,
-      "cost_usd": 0.002254,
+      "ms": 3670,
+      "cost_usd": 0.002266,
       "checked": 3,
-      "residual": [
-        "t1",
-        "t2",
-        "t3"
-      ],
+      "residual": [],
       "notes": {
-        "t1": "faint CUMIN lettering across center",
-        "t2": "faint blurred dotted word fragments mid-band",
-        "t3": "faint blurred dots bottom edge"
-      }
-    },
-    {
-      "name": "retry",
-      "ms": 19399,
-      "cost_usd": 0.011901,
-      "retried": "t1, t2, t3",
-      "still_residual": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "notes": {
-        "t1": "faint CUMIN lettering across center",
-        "t2": "faint dotted residual marks mid-left",
-        "t3": "very faint smudged marks at bottom"
-      },
-      "shift": [
-        0,
-        0
-      ]
-    },
-    {
-      "name": "repair",
-      "ms": 9741,
-      "cost_usd": 0.0,
-      "strategies": {
-        "t1": "flat-fill",
-        "t2": "flat-fill",
-        "t3": "flat-fill"
+        "t1": "clean paper texture only",
+        "t2": "clean paper texture only",
+        "t3": "clean texture with inpaint smudge, no letter forms"
       }
     },
     {
       "name": "final_check",
-      "ms": 3372,
-      "cost_usd": 0.002245,
+      "ms": 2303,
+      "cost_usd": 0.002096,
       "checked": 3,
-      "residual": [
-        "t1",
-        "t2"
-      ],
+      "residual": [],
       "notes": {
-        "t1": "faint large letters C L A M I ghost across texture",
-        "t2": "row of faint small blot letter fragments",
-        "t3": "only paper texture, no text"
+        "t1": "only paper texture, no text",
+        "t2": "only paper texture, no text",
+        "t3": "only paper texture and paint patch, no letters"
       }
     },
     {
       "name": "background",
-      "ms": 217,
+      "ms": 275,
       "cost_usd": 0.0,
       "bubbles": 0,
       "sam": 0,
@@ -160,37 +121,29 @@
     },
     {
       "name": "typeset",
-      "ms": 165,
+      "ms": 228,
       "cost_usd": 0.0,
       "regions": 3,
       "strategies": {
-        "t1": "flat-fill",
-        "t2": "flat-fill",
-        "t3": "flat-fill"
+        "t1": "muse",
+        "t2": "muse",
+        "t3": "muse"
       },
       "types": {
-        "t1": "menu_item",
-        "t2": "menu_item",
-        "t3": "price"
+        "t1": "signage",
+        "t2": "signage",
+        "t3": "signage"
       }
     },
     {
       "name": "selfcheck",
-      "ms": 9056,
-      "cost_usd": 0.006084,
-      "flagged": [
-        "t3"
-      ],
-      "issues": {
-        "t3": "bad_translation"
-      },
+      "ms": 1642,
+      "cost_usd": 0.001653,
+      "flagged": [],
+      "issues": {},
       "fixed": [],
-      "retranslated": [
-        "t3"
-      ],
-      "still_flagged": [
-        "t3"
-      ]
+      "retranslated": [],
+      "still_flagged": []
     }
   ],
   "regions": [
@@ -200,104 +153,102 @@
       "translation_ar": "كمون",
       "style": "label",
       "font_style": "classic serif uppercase",
-      "type": "menu_item",
+      "type": "signage",
       "action": "translate",
       "bbox": [
         307,
-        977,
-        979,
-        1150
+        962,
+        986,
+        1096
       ],
       "container": [
-        324,
-        1003,
-        967,
-        1150
+        323,
+        1001,
+        969,
+        1096
       ],
       "mask_path": "mask-t1.png",
       "font_family": "naskh",
-      "font_size": 127,
+      "font_size": 78,
       "color": [
         43,
         26,
-        14
+        18
       ],
       "lines": [
         "كمون"
       ],
-      "strategy": "flat-fill"
+      "strategy": "muse"
     },
     {
       "id": "t2",
       "source_text": "GROUND",
       "translation_ar": "مطحون",
       "style": "label",
-      "font_style": "spaced serif uppercase",
-      "type": "menu_item",
+      "font_style": "spaced serif uppercase small",
+      "type": "signage",
       "action": "translate",
       "bbox": [
-        484,
-        1200,
+        479,
+        1137,
         817,
-        1256
+        1188
       ],
       "container": [
-        495,
-        1222,
-        801,
-        1256
+        479,
+        1151,
+        817,
+        1188
       ],
       "mask_path": "mask-t2.png",
       "font_family": "naskh",
-      "font_size": 20,
+      "font_size": 23,
       "color": [
         43,
         26,
-        14
+        18
       ],
       "lines": [
         "مطحون"
       ],
-      "strategy": "flat-fill"
+      "strategy": "muse"
     },
     {
       "id": "t3",
       "source_text": "NET 100 G",
-      "translation_ar": "صافي ١٠٠ جم",
+      "translation_ar": "صافي 100 جم",
       "style": "label",
-      "font_style": "spaced serif uppercase",
-      "type": "price",
-      "action": "keep_numerals",
+      "font_style": "spaced serif uppercase small",
+      "type": "signage",
+      "action": "translate",
       "bbox": [
-        499,
-        1423,
-        800,
-        1476
+        504,
+        1411,
+        787,
+        1463
       ],
       "container": [
-        511,
-        1457,
+        512,
+        1431,
         780,
-        1476
+        1463
       ],
       "mask_path": "mask-t3.png",
       "font_family": "naskh",
-      "font_size": 11,
+      "font_size": 15,
       "color": [
         43,
         26,
-        14
+        18
       ],
       "lines": [
-        "صافي ١٠٠ جم"
+        "صافي 100 جم"
       ],
-      "strategy": "flat-fill"
+      "strategy": "muse"
     }
   ],
-  "warnings": [
-    "t3: text did not fit and was clamped"
-  ],
-  "total_cost_usd": 0.042152,
-  "total_ms": 71019,
-  "stage_ms_sum": 87893
+  "warnings": [],
+  "total_cost_usd": 0.026914,
+  "total_ms": 39678,
+  "stage_ms_sum": 58602
 }

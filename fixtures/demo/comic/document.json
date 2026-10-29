@@ -1,5 +1,5 @@
 {
-  "id": "4e251c89edaa",
+  "id": "7e997e7b7e9f",
   "width": 1280,
   "height": 1920,
   "register": "egyptian",
@@ -23,27 +23,27 @@
       },
       "box": [
         307,
-        311,
-        966,
-        453
+        361,
+        979,
+        470
       ],
       "font_family": "tajawal-bold",
-      "font_size": 111,
+      "font_size": 91,
       "lines": [
         {
           "text": "الفصل الأول",
-          "size": 111,
-          "x": 636.5,
-          "baseline": 413.0,
-          "width": 597,
-          "height": 106
+          "size": 91,
+          "x": 643.0,
+          "baseline": 441.0,
+          "width": 490,
+          "height": 87
         }
       ],
       "align": "center",
       "color": [
         20,
         78,
-        99
+        90
       ],
       "z": 0,
       "visible": true,
@@ -66,36 +66,36 @@
         "msa": "عيش طازة؟"
       },
       "box": [
-        137,
-        528,
-        453,
-        695
+        134,
+        538,
+        442,
+        720
       ],
       "font_family": "tajawal-bold",
-      "font_size": 67,
+      "font_size": 58,
       "lines": [
         {
           "text": "عيش",
-          "size": 67,
-          "x": 295.0,
-          "baseline": 594.5,
-          "width": 153,
-          "height": 69
+          "size": 58,
+          "x": 288.0,
+          "baseline": 613.5,
+          "width": 132,
+          "height": 60
         },
         {
           "text": "طازة؟",
-          "size": 67,
-          "x": 295.0,
-          "baseline": 669.5,
-          "width": 164,
-          "height": 60
+          "size": 58,
+          "x": 288.0,
+          "baseline": 679.5,
+          "width": 142,
+          "height": 53
         }
       ],
       "align": "center",
       "color": [
         20,
         78,
-        99
+        90
       ],
       "z": 1,
       "visible": true,
@@ -118,27 +118,35 @@
         "msa": "كل يوم الصبح"
       },
       "box": [
-        768,
+        749,
         538,
-        1135,
-        695
+        1133,
+        720
       ],
       "font_family": "tajawal",
-      "font_size": 61,
+      "font_size": 72,
       "lines": [
         {
-          "text": "كل يوم الصبح",
-          "size": 61,
-          "x": 951.5,
-          "baseline": 625.0,
-          "width": 338,
-          "height": 63
+          "text": "كل يوم",
+          "size": 72,
+          "x": 941.0,
+          "baseline": 597.0,
+          "width": 198,
+          "height": 70
+        },
+        {
+          "text": "الصبح",
+          "size": 72,
+          "x": 941.0,
+          "baseline": 681.0,
+          "width": 176,
+          "height": 74
         }
       ],
       "align": "center",
       "color": [
-        184,
-        92,
+        178,
+        90,
         61
       ],
       "z": 2,

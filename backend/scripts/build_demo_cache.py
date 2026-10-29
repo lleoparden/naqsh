@@ -38,11 +38,11 @@ OUT = REPO / "fixtures" / "demo"
 
 # name -> (real job id, fixture file, what it is for)
 CURATED = {
-    "comic": ("4e251c89edaa", "01-comic-flat.png", "flat comic page, three regions"),
+    "comic": ("7e997e7b7e9f", "01-comic-flat.png", "flat comic page, three regions"),
     "menu": ("9b6f89fbc2b3", "03-menu-paper.png", "dense menu with prices and leaders"),
-    "chalkboard": ("231bfa7361a0", "04-chalkboard.png", "chalk text on a dark board"),
-    "sfx-comic": ("8e07fe0a4a4d", "07-comic-sfx.png", "captions plus a kept sound effect"),
-    "label-fail": ("76bb774d72f1", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
+    "chalkboard": ("79753c06d42e", "04-chalkboard.png", "chalk text on a dark board"),
+    "sfx-comic": ("3d06d47ba521", "07-comic-sfx.png", "captions plus a kept sound effect"),
+    "label-fail": ("f6d1bc33524b", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
 }
 
 
