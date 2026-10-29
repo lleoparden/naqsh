@@ -88,7 +88,7 @@ def test_localize_unknown_image_is_rejected_without_live_mode(demo_on, monkeypat
     from PIL import Image
     import io
 
-    def live_path(raw: bytes, register: str):
+    def live_path(raw: bytes, register: str, **kwargs):
         raise AssertionError("paid pipeline must not be reached without LIVE_MODE=1")
 
     monkeypatch.setattr("app.main.job_module.run_page_job", live_path)
@@ -112,7 +112,7 @@ def test_localize_unknown_image_runs_when_live_mode_is_on(demo_on, monkeypatch) 
     from PIL import Image
     import io
 
-    def live_path(raw: bytes, register: str):
+    def live_path(raw: bytes, register: str, **kwargs):
         raise ValueError("live path reached")
 
     monkeypatch.setattr("app.main.job_module.run_page_job", live_path)
@@ -141,3 +141,36 @@ def test_mode_banner_names_the_mode() -> None:
         assert "LIVE MODE" in mode_banner() and "ENABLED" in mode_banner()
     finally:
         object.__setattr__(settings, "live_mode", previous)
+
+
+def test_localize_passes_background_layers_flag(demo_on, monkeypatch) -> None:
+    client = TestClient(app)
+    from PIL import Image
+    import io
+
+    captured = {}
+
+    class FakeJob:
+        def to_dict(self):
+            return {"id": "fake"}
+
+    def fake_job(raw: bytes, register: str, *, background_layers: bool = True):
+        captured["background_layers"] = background_layers
+        return FakeJob()
+
+    monkeypatch.setattr("app.main.job_module.run_page_job", fake_job)
+    object.__setattr__(settings, "live_mode", True)
+    object.__setattr__(settings, "api_key", "test-key")
+    try:
+        buffer = io.BytesIO()
+        Image.new("RGB", (64, 64), (10, 120, 60)).save(buffer, format="PNG")
+        response = client.post(
+            "/api/localize",
+            files={"image": ("unknown.png", buffer.getvalue(), "image/png")},
+            data={"register": "egyptian", "background_layers": "false"},
+        )
+    finally:
+        object.__setattr__(settings, "api_key", "")
+        object.__setattr__(settings, "live_mode", False)
+    assert response.status_code == 200
+    assert captured["background_layers"] is False
