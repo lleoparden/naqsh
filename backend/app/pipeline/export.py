@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import base64
 import io
+import json
 import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -217,7 +218,9 @@ def _readme(document: Document) -> str:
         "Files\n"
         "- export.svg           editable layered SVG (one <text> per line)\n"
         "- export-outlined.svg  same artwork with text converted to paths, always looks right\n"
-        "- plate.png            the cleaned background used by the SVG\n"
+        "- plate.png            the flat composite fallback\n"
+        "- layers.json          every visible layer: id, kind, name, box, asset, z, locked\n"
+        "- layers/              scene texture and speech-bubble PNGs used by the layers\n"
         "- fonts/               the exact OFL fonts used, with their licence texts\n\n"
         "Fonts\n"
         "Install the fonts in fonts/ before opening export.svg, or the Arabic will fall\n"
@@ -225,9 +228,9 @@ def _readme(document: Document) -> str:
         "the .ttf files and choose Install. Linux: copy to ~/.local/share/fonts and run\n"
         "fc-cache -f. export-outlined.svg needs no fonts.\n\n"
         "Layers\n"
-        "Every layer is a group with an id and a data-name (Plate, Cover patches, Text\n"
-        "layers, Original reference). The original reference group is hidden; unhide it\n"
-        "in the layers panel to compare.\n\n"
+        "The SVG has Scenery, Speech bubbles, Cover patches and Text layers groups, each\n"
+        "with an id and a data-name that match layers.json. Hidden layers are omitted; the\n"
+        "original reference group is hidden; unhide it in the layers panel to compare.\n\n"
         "Licences\n"
         "Tajawal, Noto Naskh Arabic and Amiri are licensed under the SIL Open Font\n"
         "License 1.1; the full licence text ships beside each font.\n"
@@ -238,10 +241,31 @@ def build_bundle(document: Document, folder: Path) -> bytes:
     editable = build_svg(document, folder, outlined=False)
     outlined = build_svg(document, folder, outlined=True)
     buffer = io.BytesIO()
+    layers = visible_layers(document)
+    manifest = {
+        "width": document.width,
+        "height": document.height,
+        "layers": [
+            {
+                "id": layer.id,
+                "kind": layer.kind,
+                "name": layer.name or layer.id,
+                "box": list(layer.box),
+                "asset": layer.asset,
+                "z": layer.z,
+                "locked": layer.locked,
+            }
+            for layer in layers
+        ],
+    }
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
         archive.writestr("export.svg", editable)
         archive.writestr("export-outlined.svg", outlined)
         archive.write(folder / document.composite, "plate.png")
+        archive.writestr("layers.json", json.dumps(manifest, indent=2, ensure_ascii=False))
+        for layer in layers:
+            if layer.kind in ("scene", "bubble") and layer.asset and (folder / layer.asset).is_file():
+                archive.write(folder / layer.asset, f"layers/{layer.asset}")
         archive.writestr("README.md", _readme(document))
         for family, file_name in {name: info[2] for name, info in FONT_NAMES.items()}.items():
             path = shaping.FONT_DIR / file_name

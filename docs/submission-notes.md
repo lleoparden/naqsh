@@ -434,6 +434,7 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - Observed in a real server log: comic `7e997e7b7e9f` → `background bubbles=2 sam=2 box_fallback=0`; chalkboard `79753c06d42e`, sfx `3d06d47ba521`, label `f6d1bc33524b` → 0 bubbles, 0 fallbacks.
 - Rebuilt demos after the rule change (live, cap noted): comic `7e997e7b7e9f` $0.0298, chalkboard `79753c06d42e` $0.0392, sfx `3d06d47ba521` $0.0258, label `f6d1bc33524b` $0.0269 → **$0.1216** total (the three requested entries were $0.0919 of it; comic was re-run because the caption rule removed one bubble). Menu was not re-run: its layers (scene + 16 text) do not change under the rule.
 - Demo cache rebuilt from the new receipts: **20.40 MB**, +0.38 MB. Demo replay layer lists verified for all five entries (comic: scene + bubble-t2 + bubble-t3 + 3 text; menu/chalkboard/sfx/label: scene + text only).
+- Editor/export: scene, bubble and text layers share the Layers panel (name, eye, lock, drag reorder); locked layers cannot be drag-reordered. The ZIP now carries `layers.json` (id, kind, name, box, asset, z, locked) plus `layers/` with the scene and bubble PNGs, matching the SVG's Scenery / Speech bubbles / Cover patches / Text groups and the PNG composite.
 - Evidence: `docs/evidence/ui/background-followups.json`.
 
 ### Time-saved measurement (the Impact claim)
