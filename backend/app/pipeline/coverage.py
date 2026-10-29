@@ -67,15 +67,23 @@ def coverage_for(
     *,
     dilate_px: int = 10,
 ) -> tuple[Image.Image, BBox]:
-    """Mask ∪ real ink extent ∪ reading box, dilated for antialiased edges."""
-    extent = ink_extent(source, mask, reading_box)
-    area = reading_box
+    """Mask ∪ nearby ink, dilated for antialiased edges.
+
+    The ink search is anchored to the SAM mask, not to Spark's reading box, and only
+    grows the mask by a few pixels. A reading-box search (the old behaviour) could
+    reach a frame line ~20 px above the lettering; the repainted plate there is shifted
+    by the image edit, so the frame moved by several pixels on the after side.
+    """
+    mask_bbox = mask.getbbox()
+    base = BBox(*mask_bbox) if mask_bbox else reading_box
+    extent = ink_extent(source, mask, base, search_pad=8)
+    area = base
     if extent is not None:
         area = BBox(
-            min(reading_box.x1, extent.x1),
-            min(reading_box.y1, extent.y1),
-            max(reading_box.x2, extent.x2),
-            max(reading_box.y2, extent.y2),
+            min(base.x1, extent.x1),
+            min(base.y1, extent.y1),
+            max(base.x2, extent.x2),
+            max(base.y2, extent.y2),
         )
 
     coverage = mask.copy()

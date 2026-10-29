@@ -31,7 +31,7 @@ def test_coverage_covers_the_ink() -> None:
     image, mask = _bubble_page()
     reading = BBox(90, 85, 200, 110)
     coverage, _area = coverage_for(image, mask, reading)
-    extent = ink_extent(image, mask, reading)
+    extent = ink_extent(image, mask, BBox(*mask.getbbox()), search_pad=8)
     assert extent is not None
     assert coverage.getpixel((extent.x1 + 2, extent.y2 - 2)) == 255
 
@@ -66,3 +66,39 @@ def test_textured_region_is_not_flat() -> None:
         draw.line([(x, 0), (x, 120)], fill=(200, 200, 200), width=2)
     mask = Image.new("L", (120, 120), 255)
     assert region_is_flat(image, mask) is False
+
+
+def test_coverage_does_not_reach_a_nearby_frame_line() -> None:
+    """A repainted plate shifted by 5 px must not move a frame line 21 px above the mask."""
+    image = Image.new("RGB", (300, 220), (250, 250, 250))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle([0, 30, 300, 34], fill=(10, 10, 10))  # page frame line
+    draw.rectangle([60, 50, 240, 150], fill=(250, 244, 228), outline=(10, 10, 10), width=3)
+    mask = Image.new("L", image.size, 0)
+    ImageDraw.Draw(mask).rectangle([70, 60, 230, 140], fill=255)
+
+    plate = image.transform(image.size, Image.AFFINE, (1, 0, 0, 0, 1, -5))  # edit moved art up 5 px
+    coverage, _area = coverage_for(image, mask, BBox(90, 70, 200, 120))
+    composite, _stats = __import__("app.pipeline.plate", fromlist=["composite"]).composite(
+        image, plate, [coverage]
+    )
+
+    pixels = composite.convert("L")
+    frame_y = next(y for y in range(0, 80) if pixels.getpixel((150, y)) < 80)
+    assert frame_y == 30, f"frame moved to {frame_y}"
+
+
+def test_structural_frame_survives_a_plate_shift_even_inside_the_mask() -> None:
+    image = Image.new("RGB", (300, 220), (250, 250, 250))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle([0, 30, 300, 34], fill=(10, 10, 10))
+    mask = Image.new("L", image.size, 0)
+    ImageDraw.Draw(mask).rectangle([60, 30, 250, 160], fill=255)  # mask includes the frame
+
+    plate = image.transform(image.size, Image.AFFINE, (1, 0, 0, 0, 1, -5))
+    coverage, _area = coverage_for(image, mask, BBox(60, 30, 250, 160))
+    from app.pipeline.plate import composite
+
+    result = composite(image, plate, [coverage])[0].convert("L")
+    frame_y = next(y for y in range(0, 80) if result.getpixel((150, y)) < 80)
+    assert frame_y == 30, f"frame moved to {frame_y}"
