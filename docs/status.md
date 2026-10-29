@@ -9,12 +9,13 @@ One line per item; status is DONE / NOT STARTED / BLOCKED ON OWNER.
 | `docs/feature-plan.md` | #100 / #109 | **DONE** | batch mode, layers-only, extra RTL, gates/fallbacks/effort, rubric ranking, cut order |
 | `docs/hosting-plan.md` | #101 / #110 | **DONE** | five host options, $3/day live cap, per-IP limits, paused banner, 8–12 h estimate, owner steps |
 | Baseline protocol + time-saved results table | #9 / — | **BLOCKED ON OWNER** | protocol in `docs/baseline-protocol.md`; `docs/time-saved.md` table is empty/PENDING until the owner records a manual baseline |
-| Clean-plate gate (#3) | #3 / — | **BLOCKED ON OWNER** | gate needs the owner to inspect the plate at 100 % zoom; risk tracked in #4 |
+| Clean-plate gate (#3) | #3 / — | **DONE** | owner closed #3 as completed on 2026-10-29; risk #4 (ghost/smear) remains open |
+| Browser click-through (#8) | #8 / — | **DONE** | owner closed #8 as completed on 2026-10-29 |
+| Official-rules question (#10) | #10 / — | **DONE (owner-closed)** | owner closed #10 on 2026-10-29; outside-tools and live-URL answers are still not recorded anywhere |
 
 Notes:
 
-- The clean-plate gate is **not** a code task; the risk issue #4 stays open until the owner
-  judges the plate.
+- The clean-plate gate was closed by the owner; the ghost/smear risk **#4** is still open.
 - No time-saved ratio may be claimed until the baseline row exists; the demo script and
   recording guide repeat this.
 - Live mode is opt-in (`LIVE_MODE=1`); demo replay is the default and needs no key.
