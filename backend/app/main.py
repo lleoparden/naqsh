@@ -75,6 +75,7 @@ def health() -> dict[str, object]:
 async def localize(
     image: UploadFile = File(...),
     register_name: str = Form("egyptian", alias="register"),
+    background_layers: bool = Form(True),
 ) -> dict[str, object]:
     """Run the full pipeline on one uploaded page and return the receipt."""
     register = register_name
@@ -115,7 +116,7 @@ async def localize(
         raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
 
     try:
-        job = await run_in_threadpool(job_module.run_page_job, raw, register)
+        job = await run_in_threadpool(job_module.run_page_job, raw, register, background_layers=background_layers)
     except MetaAPIError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except ValueError as exc:

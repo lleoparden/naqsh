@@ -19,6 +19,7 @@ function Home() {
   const [replay, setReplay] = useState<{ index: number; done: boolean }>({ index: 0, done: true });
   const [health, setHealth] = useState<Health | null>(null);
   const [register, setRegister] = useState<string>("egyptian");
+  const [backgroundLayers, setBackgroundLayers] = useState(true);
   const [job, setJob] = useState<Job | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,14 +55,14 @@ function Home() {
       setJob(null);
       setBusy(true);
       try {
-        setJob(await localize(file, register));
+        setJob(await localize(file, register, backgroundLayers));
       } catch (err) {
         setError(err instanceof Error ? err.message : "unknown error");
       } finally {
         setBusy(false);
       }
     },
-    [register],
+    [register, backgroundLayers],
   );
 
   useEffect(() => {
@@ -158,6 +159,20 @@ function Home() {
             ))}
           </div>
           <p className="text-xs text-ink/70">{t("registerHint")}</p>
+          <label className="mt-1 flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-2 text-sm">
+            <span className="flex flex-col">
+              <span>{t("backgroundLayers")}</span>
+              <span className="text-[11px] leading-tight text-ink/70">{t("backgroundLayersHint")}</span>
+            </span>
+            <input
+              type="checkbox"
+              role="switch"
+              aria-label={t("backgroundLayers")}
+              checked={backgroundLayers}
+              onChange={(event) => setBackgroundLayers(event.target.checked)}
+              className="h-5 w-9 accent-accent"
+            />
+          </label>
           {!clean && (
             <p className="text-xs text-ink/70">
               {health

@@ -54,10 +54,11 @@ export async function fetchHealth(signal?: AbortSignal): Promise<Health> {
   return (await response.json()) as Health;
 }
 
-export async function localize(file: File, register: string): Promise<Job> {
+export async function localize(file: File, register: string, backgroundLayers = true): Promise<Job> {
   const body = new FormData();
   body.append("image", file);
   body.append("register", register);
+  body.append("background_layers", String(backgroundLayers));
   const response = await fetch("/api/localize", { method: "POST", body });
   if (!response.ok) {
     const detail = await response.json().catch(() => ({ detail: response.statusText }));

@@ -139,7 +139,7 @@ def _check(composite: Image.Image, regions: list) -> tuple[list, float, dict]:
     return verdicts, usage.spark_cost(), residual_stage.summarise(verdicts)
 
 
-def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
+def run_page_job(image_bytes: bytes, register: str = "egyptian", *, background_layers: bool = True) -> PageJob:
     job_id = uuid.uuid4().hex[:12]
     folder = JOBS_DIR / job_id
     folder.mkdir(parents=True, exist_ok=True)
@@ -354,8 +354,11 @@ def run_page_job(image_bytes: bytes, register: str = "egyptian") -> PageJob:
     for region in regions:
         region.strategy = strategies.get(region.id, "muse")
 
-    # 6. Background layers (scenery + speech bubbles) -----------------------------
-    _background_stage(job, folder, image_bytes, composite, repaint, source.width, source.height)
+    # 6. Background layers (scenery + speech bubbles), optional ---------------------
+    if background_layers:
+        _background_stage(job, folder, image_bytes, composite, repaint, source.width, source.height)
+    else:
+        job.add_stage("background", 0, 0.0, enabled=False, skipped="disabled by request")
 
     # 7. Typeset + render ---------------------------------------------------------
     started = time.perf_counter()
