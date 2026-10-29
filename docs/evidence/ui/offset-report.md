@@ -1,43 +1,52 @@
-# After-side offset — investigation
+# After-side offset — cause and fix
 
-Date: 2026-10-28. Owner reports the "after" side looks ~8 px higher than the original at
-the before/after divider when seen in the browser.
+Date: 2026-10-29. Owner reports an ~8 px vertical offset on the after side at the
+before/after divider, while exported pixels match.
 
-## What was measured
+## Reproduction
 
-The on-screen canvas was screenshotted at **exactly 100 % zoom** (viewport sized so the
-fit calculation lands on 1.0) at device pixel ratios **1, 1.25, 1.5 and 2**, with the
-slider fully on the original and fully on the after side. For every column across the
-comic frame, the first dark row (frame top edge) was compared:
+With a real comic job at exactly 100 % zoom (1:1 screenshots, 1280×1920), the **source**
+frame line sits at y=299 and the **composite** frame line at y=294 (5 px higher) across
+the title area; at split 50 the left (original) and right (after) frame edges differed by
+4–5 px. Screenshots: `L:\naqsh-review\offset\split-50.png`, `split-50-crop.png`,
+`after-split-0.png`, `export.png`.
 
-| DPR | Screenshot size | Columns compared | Δy between before and after |
-|---|---|---|---|
-| 1 | 1280×1921 | 90 | **0** |
-| 1.25 | 1600×2401 | 90 | **0** |
-| 1.5 | 1920×2882 | 90 | **0** |
-| 2 | 2560×3842 | 90 | **0** |
+## Root cause
 
-At 106 % zoom (stepped with the zoom buttons) the same test over 85 columns also gives
-**Δy = 0**.
+1. The title region's SAM mask includes the panel frame: `mask-t1` bbox starts at y=303,
+   while the frame line is at y=299.
+2. Coverage (the area replaced by the cleaned plate) was built from the mask **plus** the
+   reading box and an ink-extent search with a 72 px pad, so it covered the frame line.
+3. Muse Image's repaint redrew the caption box/frame a few pixels higher (plate frame at
+   y=294, or y=285 on another generation). The composite therefore took the shifted frame
+   from the plate, moving the after side while the original stayed put.
+4. Export matched the composite, so pixel diffs against the export could not see it; the
+   visible offset was between the original and the repainted background.
 
-Exported pixels were already proven equal outside the text coverage (max diff 0, see
-`docs/evidence/ui/after-alignment.json`).
+## Fix
 
-## Conclusion
+- `coverage_for` now anchors the ink search to the **SAM mask bbox** (8 px pad) instead of
+  the reading box ±72 px, so a nearby frame line is not pulled into the repaint area.
+- `plate.composite` protects **long straight dark lines** (panel borders/frames) from both
+  the source and the plate: those rows/columns (±6 px) are restored from the source, so a
+  shifted redraw can never move the frame.
+- Regression tests: synthetic frame 21 px above the mask stays put; a frame inside the
+  mask also stays put when the plate is shifted 5 px.
 
-The offset is **not reproducible** in headless Chrome at 100 % (fit), 106 %, DPR 1–2, or
-with fractional DPR values that mimic Windows display scaling. Before and after use the
-same `<image>` geometry inside one SVG (`x=0, y=0, width=doc.width, height=doc.height`),
-and the original is clipped with a `<clipPath>` rect, not re-positioned, so there is no
-code path that could shift one side by 8 px.
+## Verification
 
-## What would be needed to proceed
+- Synthetic tests pass (`tests/test_coverage.py`, 8 tests).
+- Offline recompute on the real job `5313ddafca2e` (plate + masks from a live run):
+  source frame y=299, composite after the final fix y=299 at x=200, 280, 320, 400, 500,
+  700. Before the fix it was y=285–294.
+- **Not live-verified after the final union-of-lines change**: the two live comics
+  (37.2 s / $0.0294 and 69.9 s / $0.0401) were run before that last tweak, and the
+  remaining $0.10 task cap could not cover another run. The code path used offline is the
+  same `composite()` call; only the pipeline wrapper is untested live.
 
-If the offset is still visible on the owner's machine, it is outside what this harness can
-reproduce. Needed: browser + version, OS display scaling, browser zoom, the exact job id,
-and a screenshot of the canvas. Possible remaining suspects are GPU compositing of the
-CSS-transformed canvas at fractional browser zoom, or a monitor/OS-level artifact — not
-the page geometry, which measures 0.
+## Limits
 
-Screenshots: `L:\naqsh-review\offset\canvas-{100,50,0}.png`,
-`exact-dpr{1,1.25,1.5,2}-{0,100}.png`, `offset.json`, `exact.json`.
+- The existing demo cache still contains the old composites; rebuild it before recording
+  the before/after divider close-up.
+- Line protection restores source on any row/column whose dark pixels exceed 45 % of the
+  page; unusually dark full-width illustrations could keep original pixels there.
