@@ -437,6 +437,12 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - Editor/export: scene, bubble and text layers share the Layers panel (name, eye, lock, drag reorder); locked layers cannot be drag-reordered. The ZIP now carries `layers.json` (id, kind, name, box, asset, z, locked) plus `layers/` with the scene and bubble PNGs, matching the SVG's Scenery / Speech bubbles / Cover patches / Text groups and the PNG composite.
 - Evidence: `docs/evidence/ui/background-followups.json`.
 
+### Background-layer switch
+
+- The home upload now has a **Background layers** switch (default on). On = current behaviour: scenery + speech-bubble layers (one SAM pass and asset generation). Off = skip the background stage entirely; the job only translates and produces text layers, so the page keeps the flat composite.
+- API: `POST /api/localize` accepts `background_layers=true|false`; the receipt records `background: {enabled: false, skipped: "disabled by request"}` when off.
+- This was added because the background pass visibly increased processing time; no speed claim is recorded until timed with the switch off vs on.
+
 ### Time-saved measurement (the Impact claim)
 
 Protocol: [`docs/baseline-protocol.md`](baseline-protocol.md). The owner times both
