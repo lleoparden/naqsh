@@ -1,49 +1,89 @@
-# Recording guide (one page)
+# Backup video — recording guide (pre-recording, 2026-10-29)
 
-For recording the demo video. Demo mode replays **real cached runs**; it is labelled
-on screen. The final video must include **at least one live run** — that is a rule,
-not a suggestion.
+Goal: a 3:00 backup video that shows the real product, recorded before the deadline so a
+bad live run cannot block the submission. **Do not claim a time-saved ratio** until the
+owner's manual baseline exists (`docs/time-saved.md` is still PENDING).
 
-## Setup
+## 1. Start the app in demo mode (no paid calls)
 
-- Start the backend with demo mode on: `set DEMO_MODE=1` then
-  `cd backend && uvicorn app.main:app --port 8010`.
-- Build once: `cd frontend && npm run build && npm run preview -- --port 4174`.
-- Browser: Chrome, **window 1920×1080** (full screen, `F11`), **zoom 100%** (Ctrl+0),
-  clean mode on: `http://localhost:4174/?clean=1`.
-- OBS: canvas 1920×1080, 30 fps, record the window, cursor visible. Hide notifications.
-- Load the fixture first so the upload dialog opens in the repo folder
-  `assets/generated/fixtures/`.
+```powershell
+cd backend
+$env:DEMO_MODE='1'; $env:LIVE_MODE='0'
+uvicorn app.main:app --port 8000
 
-## Flows to record
+cd frontend
+npm run build
+npm run preview -- --port 4174
+```
 
-1. **Page in / out with slider** — upload `01-comic-flat.png`. The badge appears;
-   stages tick for ~48 s at the recorded pace; the result shows before/after. Drag
-   the before/after slider left and right at 100% zoom.
-2. **Menu** — upload `03-menu-paper.png` (~96 s). Point at the prices keeping their
-   Latin numerals and the dot leaders gone.
-3. **Editor: edit / register / skip / nudge / cover / undo** — click *Open editor*.
-   Select `t1`, change one word, press Tab; switch the register and re-translate one
-   region (shows the cost); skip a region; drag one box; draw a cover patch; Ctrl+Z
-   twice. Reload the page to show the edits persisted.
-4. **Receipt** — scroll to the receipt: per-stage milliseconds and cost. Say the
-   number out loud ("this page cost $0.0233 and took 48 seconds, and these are the
-   recorded numbers").
-5. **SVG export** — click SVG, open it, show the text layer is selectable; then the
-   Bundle ZIP: fonts + licences + outlined variant.
-6. **Failing photo page (honest limit)** — upload `05-label-kraft.png`; the plate
-   smears brown over the jar. Say plainly that photographed labels still fail and
-   that this is why the editor has a manual cover tool.
-7. **One live run** — disable demo (`DEMO_MODE=0`, restart the backend), upload a
-   page, and let it run for real. Keep this in the final cut.
+Open `http://localhost:4174/?clean=1` (clean hides the API-key status chip; the demo badge
+stays visible). Browser Chrome, window 1920×1080 (full screen F11), zoom 100 % (Ctrl+0).
 
-## Order that cuts well
+Never start a live-mode server (`LIVE_MODE=1`) without telling the owner first.
 
-Live run first (proof it is real) → menu → editor edit → SVG → failing photo →
-close on the receipt. Keep the badge legible whenever demo mode is on.
+## 2. Pages and recorded waits
 
-## What not to do
+All five demo entries replay from real runs; timings and costs are the recorded ones:
 
-- Do not hide the badge, crop it out, or claim a replay is live.
-- Do not speed up the replay; it already runs at the recorded pace.
-- Do not show the failing page as a success; it is the honest limit.
+| Page | Use in the video | Recorded total | Recorded cost |
+|---|---|---|---|
+| comic | hero: layers, bubbles, edit, export | **39.8 s** | $0.0280 |
+| menu | dense page: 16 regions, scenery only | **90.3 s** | $0.0391 |
+| chalkboard | second style: scene + text | **72.4 s** | $0.0445 |
+| sfx-comic | captions + kept SFX | **42.6 s** | $0.0276 |
+| label-fail | honest limit: photo label, plate not clean | **39.7 s** | $0.0269 |
+
+Source: `fixtures/demo/*/receipt.json` (`total_ms`, `total_cost_usd`). On the demo server
+the upload returns the recorded receipt; do not narrate those seconds as live waiting.
+
+## 3. What the badge shows
+
+A visible **Demo mode** chip: “replaying a recorded run — <fixture>”, plus “timings and
+cost below are the recorded ones; this page did not call the model API”. Never hide it;
+`?clean=1` does not remove it.
+
+## 4. Takes
+
+1. **Home** (`/?clean=1`, 5 s): title, Arabic style toggle, drop zone.
+2. **Comic upload** (demo, badge visible): show the result, open Layers.
+3. **Layers** (20 s): Scenery, 2 bubbles, 3 text; hide one bubble, show it, rename the
+   title, drag a text layer.
+4. **Edit** (20 s): change one line, switch register, reset to the AI result.
+5. **Cover + colour** (15 s): draw an ellipse patch, change fill with the colour control.
+6. **Export** (15 s): open Export, run PNG/SVG, show the size toast; mention the ZIP has
+   `layers.json` + `layers/`.
+7. **Menu page** (20 s): 16 regions, scenery-only background.
+8. **Honest limit** (15 s): label-fail; say the plate is not clean on photographed labels
+   and the editor is where you fix it.
+9. **Close** (10 s): repo, test count, demo-mode honesty.
+
+### DEMO vs LIVE_MODE=1
+
+- **Default and safest:** every take above is DEMO (`DEMO_MODE=1`, `LIVE_MODE=0`). No key,
+  no spend, badge honest.
+- **Optional live take:** only after telling the owner, restart with
+  `$env:LIVE_MODE='1'; $env:DEMO_MODE='0'`, upload the comic once (≈$0.03, ~37 s live),
+  then restart demo mode. If live fails, the demo cut is already complete.
+- Do not run live more than once for the backup.
+
+## 5. What NOT to claim
+
+- **No time-saved percentage or ratio.** Baseline is empty; only recorded page times and
+  costs are allowed.
+- No “fully automatic”, “no editing needed”, “any language”, “works on photos/branding”.
+- No “the demo is calling the model live” — the badge is there because it is a replay.
+- No clean-plate claim for the label-fail page; it is shown as a limitation.
+- No visual-quality claim about a 100 %-zoom before/after divider: the demo cache predates
+  the frame-offset fix, so avoid that close-up until the cache is rebuilt.
+
+## 6. Before you record
+
+- `pytest -q` green, `npm run typecheck && npm run build` clean (last: 88 tests).
+- Servers on 8000/4174 only; no live-mode server running.
+- Close notifications; cursor visible; keep the demo badge in frame.
+
+## 7. After recording
+
+Save the file outside the repo (`L:\naqsh-review\video\`), name it with the date, and add
+the link to `docs/submission-notes.md`. The submission can be edited until the deadline;
+after the deadline no edits are possible.
