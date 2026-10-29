@@ -182,12 +182,36 @@ def alignment_report(
     }
 
 
+def _structural_lines(image: Image.Image) -> np.ndarray:
+    """Pixels on long, near-horizontal/vertical dark lines (panel borders, frames).
+
+    Muse Image often redraws a caption box or frame slightly shifted. Replacing those
+    pixels with the plate moves the frame on the after side, which is visible at the
+    before/after divider. Long straight dark runs are structure, not lettering, so the
+    composite restores the source there.
+    """
+    gray = np.asarray(image.convert("L"), dtype=np.uint8)
+    dark = gray < 70
+    rows = np.where(dark.mean(axis=1) > 0.45)[0]
+    cols = np.where(dark.mean(axis=0) > 0.45)[0]
+    mask = np.zeros_like(dark, dtype=bool)
+    if rows.size:
+        mask[rows, :] = True
+    if cols.size:
+        mask[:, cols] = True
+    if rows.size or cols.size:
+        grown = morph.dilate(Image.fromarray((mask * 255).astype(np.uint8)), 16)
+        return np.asarray(grown) > 127
+    return mask
+
+
 def composite(
     source: Image.Image,
     plate: Image.Image,
     masks: list[Image.Image],
     *,
     dilation: int = 8,
+    preserve_lines: bool = True,
 ) -> tuple[Image.Image, dict[str, float]]:
     """Take plate pixels only inside the (dilated) text masks."""
     if not masks:
@@ -202,6 +226,9 @@ def composite(
     replacement = np.asarray(plate.convert("RGB"), dtype=np.uint8)
     output = original.copy()
     output[inside] = replacement[inside]
+    if preserve_lines:
+        lines = _structural_lines(source)
+        output[lines] = original[lines]
 
     outside = ~inside
     diff_inside = float(np.abs(original.astype(np.int16) - replacement.astype(np.int16))[inside].mean()) if inside.any() else 0.0
