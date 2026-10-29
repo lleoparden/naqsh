@@ -44,6 +44,10 @@ class Settings:
     demo_mode: bool = field(
         default_factory=lambda: os.getenv("DEMO_MODE", "").strip().lower() not in ("", "0", "false", "no")
     )
+    # Paid Meta API calls are only allowed when this is explicitly on.
+    live_mode: bool = field(
+        default_factory=lambda: os.getenv("LIVE_MODE", "").strip().lower() in ("1", "true", "yes")
+    )
     cors_origins: list[str] = field(
         default_factory=lambda: [
             o.strip()

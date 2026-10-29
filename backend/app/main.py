@@ -36,6 +36,15 @@ app = FastAPI(
     version="0.2.0",
 )
 
+
+def mode_banner() -> str:
+    mode = "LIVE" if settings.live_mode else "DEMO"
+    calls = "paid model calls ENABLED" if settings.live_mode else "paid model calls BLOCKED"
+    return f"=== Naqsh {mode} MODE — {calls} ==="
+
+
+print(mode_banner(), flush=True)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
@@ -97,6 +106,11 @@ async def localize(
             if receipt is not None:
                 return receipt
 
+    if not settings.live_mode:
+        raise HTTPException(
+            status_code=403,
+            detail="Live mode is off. Set LIVE_MODE=1 on the server to allow paid model calls.",
+        )
     if not settings.has_key:
         raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
 
@@ -289,6 +303,11 @@ def retranslate_region(job_id: str, body: dict[str, object]) -> dict[str, object
                 "demo": True,
                 "note": "replayed from the recorded run; no model call",
             }
+    if not settings.live_mode:
+        raise HTTPException(
+            status_code=403,
+            detail="Live mode is off. Set LIVE_MODE=1 on the server to allow paid model calls.",
+        )
     if not settings.has_key:
         raise HTTPException(status_code=503, detail="MODEL_API_KEY is not configured on the server")
     refusal = throttle.acquire(job_id, layer.id)

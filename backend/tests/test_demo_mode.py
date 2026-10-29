@@ -1,4 +1,4 @@
-"""Demo mode: cache hit replays the recorded run; unknown bytes go live."""
+"""Demo mode: cache hit replays; unknown bytes need explicit LIVE_MODE=1."""
 
 import json
 import random
@@ -8,7 +8,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.config import settings
-from app.main import app
+from app.main import app, mode_banner
 from app.pipeline import demo, document as document_module
 from app.pipeline.job import JOBS_DIR
 
@@ -83,14 +83,13 @@ def test_localize_replays_a_known_fixture_without_a_key(demo_on) -> None:
     assert len(payload["regions"]) == cache["regions"]
 
 
-def test_localize_unknown_image_does_not_replay(demo_on, monkeypatch) -> None:
+def test_localize_unknown_image_is_rejected_without_live_mode(demo_on, monkeypatch) -> None:
     client = TestClient(app)
     from PIL import Image
     import io
 
-    # The unknown image must reach the live pipeline; stub it so no paid call happens.
     def live_path(raw: bytes, register: str):
-        raise ValueError("live path reached")
+        raise AssertionError("paid pipeline must not be reached without LIVE_MODE=1")
 
     monkeypatch.setattr("app.main.job_module.run_page_job", live_path)
     object.__setattr__(settings, "api_key", "test-key")
@@ -104,5 +103,41 @@ def test_localize_unknown_image_does_not_replay(demo_on, monkeypatch) -> None:
         )
     finally:
         object.__setattr__(settings, "api_key", "")
+    assert response.status_code == 403
+    assert "LIVE_MODE=1" in response.json()["detail"]
+
+
+def test_localize_unknown_image_runs_when_live_mode_is_on(demo_on, monkeypatch) -> None:
+    client = TestClient(app)
+    from PIL import Image
+    import io
+
+    def live_path(raw: bytes, register: str):
+        raise ValueError("live path reached")
+
+    monkeypatch.setattr("app.main.job_module.run_page_job", live_path)
+    object.__setattr__(settings, "live_mode", True)
+    object.__setattr__(settings, "api_key", "test-key")
+    try:
+        buffer = io.BytesIO()
+        Image.new("RGB", (64, 64), (200, 30, 30)).save(buffer, format="PNG")
+        response = client.post(
+            "/api/localize",
+            files={"image": ("unknown.png", buffer.getvalue(), "image/png")},
+            data={"register": "egyptian"},
+        )
+    finally:
+        object.__setattr__(settings, "api_key", "")
     assert response.status_code == 422
     assert "live path reached" in response.json()["detail"]
+
+
+def test_mode_banner_names_the_mode() -> None:
+    previous = settings.live_mode
+    try:
+        object.__setattr__(settings, "live_mode", False)
+        assert "DEMO MODE" in mode_banner() and "BLOCKED" in mode_banner()
+        object.__setattr__(settings, "live_mode", True)
+        assert "LIVE MODE" in mode_banner() and "ENABLED" in mode_banner()
+    finally:
+        object.__setattr__(settings, "live_mode", previous)

@@ -177,6 +177,8 @@ owner judges images.
 - No direct pushes to `main`. Branch, PR, merge commit.
 - Do not merge while CI is red or **pending**; wait for every required check.
 - Hand-written commit titles; never pass a PR-body file to `git commit -F`.
+- Never start a live-mode server (`LIVE_MODE=1`) without telling the owner first.
+  Demo mode is the default; paid model calls are blocked unless `LIVE_MODE=1`.
 
 ### Budget
 
