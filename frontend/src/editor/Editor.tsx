@@ -989,11 +989,13 @@ export default function Editor({ jobId }: { jobId: string }) {
             {[...textLayers].sort((a, b) => b.z - a.z).map((item) => (
               <li
                 key={item.id}
-                draggable
-                onDragStart={() => setDragLayer(item.id)}
+                draggable={!item.locked}
+                onDragStart={() => {
+                  if (!item.locked) setDragLayer(item.id);
+                }}
                 onDragOver={(event) => event.preventDefault()}
                 onDrop={() => {
-                  if (dragLayer && dragLayer !== item.id) swapZ(dragLayer, item.id);
+                  if (!item.locked && dragLayer && dragLayer !== item.id) swapZ(dragLayer, item.id);
                   setDragLayer(null);
                 }}
                 className={`flex items-center gap-1.5 rounded border px-2 py-1 ${selected === item.id ? "border-accent" : "border-border"}`}

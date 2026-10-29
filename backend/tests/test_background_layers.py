@@ -1,11 +1,13 @@
 """Scene/bubble export: groups exist, hidden bubbles are omitted, PNG composites them."""
 
+import json
+import zipfile
 from pathlib import Path
 
 from PIL import Image
 
 from app.pipeline.document import Document, Layer
-from app.pipeline.export import build_svg, render_png
+from app.pipeline.export import build_bundle, build_svg, render_png
 
 
 def _document(tmp_path: Path) -> Document:
@@ -41,3 +43,20 @@ def test_hidden_bubble_is_omitted_and_png_keeps_hole(tmp_path: Path) -> None:
     png = render_png(visible, tmp_path).convert("RGB")
     assert png.getpixel((20, 20)) == (255, 0, 0)
     assert png.getpixel((100, 70)) == (255, 255, 255)  # transparent scene over white
+
+
+def test_bundle_carries_layer_manifest_and_assets(tmp_path: Path) -> None:
+    document = _document(tmp_path)
+    document.layers.append(
+        Layer(id="t1", kind="text", box=[60, 50, 110, 70], type="dialogue", name="Title", z=10)
+    )
+    data = build_bundle(document, tmp_path)
+    with zipfile.ZipFile(__import__("io").BytesIO(data)) as archive:
+        names = set(archive.namelist())
+        assert "layers/scene.png" in names
+        assert "layers/bubble-t1.png" in names
+        assert "layers.json" in names
+        manifest = json.loads(archive.read("layers.json"))
+    assert [layer["kind"] for layer in manifest["layers"]] == ["scene", "bubble", "text"]
+    assert manifest["layers"][1]["asset"] == "bubble-t1.png"
+    assert manifest["layers"][2]["name"] == "Title"
