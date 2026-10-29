@@ -200,7 +200,7 @@ def _structural_lines(image: Image.Image) -> np.ndarray:
     if cols.size:
         mask[:, cols] = True
     if rows.size or cols.size:
-        grown = morph.dilate(Image.fromarray((mask * 255).astype(np.uint8)), 6)
+        grown = morph.dilate(Image.fromarray((mask * 255).astype(np.uint8)), 16)
         return np.asarray(grown) > 127
     return mask
 
@@ -227,7 +227,7 @@ def composite(
     output = original.copy()
     output[inside] = replacement[inside]
     if preserve_lines:
-        lines = _structural_lines(source) | _structural_lines(plate)
+        lines = _structural_lines(source)
         output[lines] = original[lines]
 
     outside = ~inside
