@@ -459,6 +459,15 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - Task spend: **$0.8184** of the $1.00 cap (images $0.18 + live runs $0.6279 +
   translation $0.0105).
 
+### Pepper&Carrot — rights stop (2026-10-31)
+
+Official license page (fetched 2026-10-31):
+<https://www.peppercarrot.com/en/about/index.html#license> — CC BY 4.0 **and** the
+statement **“AI derivation prohibited on all my art, lore, stories and comics.”**
+Feeding pages to Muse Image/Spark is an AI derivation, so **no Pepper&Carrot page was
+downloaded, committed, hashed, or run**; no fetch script exists. Recorded in
+`ATTRIBUTION.md` and `docs/demo-v3-peppercarrot.md`.
+
 ### Time-saved claim — removed
 
 Owner decision, 2026-10-29: **no time-saved ratio is claimed**. The owner is not an
