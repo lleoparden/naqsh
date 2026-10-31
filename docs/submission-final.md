@@ -45,6 +45,10 @@ needs no key; it is a fallback, not the main path. Offline tests: `pytest -q`,
 
 ## Use of Meta products
 
+Every model called at runtime is a Meta model. AI coding tools used during
+development (OpenCode/Claude/Codex) are allowed and need no disclosure (organizer
+answer, Discord #questions, 2026-10-31).
+
 Muse Spark vision reads/checks, Muse Spark text translates, SAM 3.1 segments, Muse Image
 repaints. Muse Image outputs are allowed with no on-screen credit (organizer answer
 2026-10-28, Discord #questions); prompts/model/source are in `ASSETS.md`.
@@ -59,4 +63,3 @@ headlines are read but set straight; about 0.4% of browser-vs-server SVG pixels 
 
 - Record the live-first 3:00 video and add its link.
 - Post on X and add the link before the deadline.
-- Outside AI coding tools remain PENDING; it does not change the repo or the video.

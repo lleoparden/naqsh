@@ -549,8 +549,12 @@ until the owner confirms.
   still runs live from its setup instructions and the README explains how to use the demo
   mode."
 
-**PENDING — no answer yet, do not assume:** whether outside AI coding tools (DeepSeek,
-Claude) are allowed. (The owner will paste the exact text when available.)
+- **Outside AI coding tools:** "Yes, you can build with other AI coding tools such as
+  OpenCode, Claude or Codex, and you don't need to use Muse Code or disclose them. Every
+  model your project calls at runtime must be a Meta model, and this won't affect your
+  eligibility as long as that holds." (Discord #questions, Cerebral Valley, 2026-10-31.)
+
+**No rules items remain pending.**
 
 ### Discord #questions — 2026-10-28 21:49 Cairo
 
