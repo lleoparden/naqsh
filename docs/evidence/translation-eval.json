@@ -1,0 +1,2004 @@
+{
+  "summary": {
+    "cases": 40,
+    "cost_usd": 0.010465,
+    "checks": {
+      "egyptian.arabic_ratio": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.968,
+        1.0
+      ],
+      "egyptian.digits_source": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "145"
+        ],
+        [
+          "1",
+          "200"
+        ],
+        [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        [
+          "18",
+          "00"
+        ],
+        [
+          "4",
+          "20",
+          "15"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "06",
+          "45"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "6",
+          "21",
+          "00"
+        ],
+        [],
+        [],
+        [
+          "500"
+        ],
+        []
+      ],
+      "egyptian.digits_arabic": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "3"
+        ],
+        [],
+        [],
+        [],
+        [
+          "145"
+        ],
+        [
+          "1",
+          "200"
+        ],
+        [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        [
+          "18",
+          "00"
+        ],
+        [
+          "4",
+          "20",
+          "15"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "30",
+          "8"
+        ],
+        [
+          "06",
+          "45"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "6",
+          "21",
+          "00"
+        ],
+        [],
+        [],
+        [
+          "500"
+        ],
+        []
+      ],
+      "egyptian.digits_preserved": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "egyptian.latin_left": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "g",
+        ""
+      ],
+      "egyptian.latin_ok": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "egyptian.length_ratio": [
+        0.59,
+        0.75,
+        0.75,
+        0.91,
+        0.77,
+        0.88,
+        1.2,
+        0.92,
+        1.0,
+        0.96,
+        0.76,
+        0.79,
+        1.02,
+        0.67,
+        0.69,
+        0.91,
+        0.77,
+        0.77,
+        0.85,
+        0.72,
+        1.28,
+        0.69,
+        0.77,
+        1.21,
+        0.8,
+        0.83,
+        0.78,
+        0.89,
+        0.81,
+        0.62,
+        0.85,
+        0.7,
+        0.69,
+        0.75,
+        0.79,
+        0.98,
+        1.05,
+        0.9,
+        1.08,
+        0.59
+      ],
+      "egyptian.empty": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "msa.arabic_ratio": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "msa.digits_source": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "145"
+        ],
+        [
+          "1",
+          "200"
+        ],
+        [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        [
+          "18",
+          "00"
+        ],
+        [
+          "4",
+          "20",
+          "15"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "06",
+          "45"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "6",
+          "21",
+          "00"
+        ],
+        [],
+        [],
+        [
+          "500"
+        ],
+        []
+      ],
+      "msa.digits_arabic": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "145"
+        ],
+        [
+          "1",
+          "200"
+        ],
+        [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        [
+          "18",
+          "00"
+        ],
+        [
+          "20",
+          "15"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "06",
+          "45"
+        ],
+        [
+          "3"
+        ],
+        [
+          "21",
+          "00"
+        ],
+        [],
+        [],
+        [
+          "500"
+        ],
+        []
+      ],
+      "msa.digits_preserved": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "msa.latin_left": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "msa.latin_ok": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "msa.length_ratio": [
+        0.63,
+        0.94,
+        1.18,
+        0.78,
+        0.81,
+        1.38,
+        1.2,
+        0.85,
+        0.82,
+        0.84,
+        0.59,
+        0.76,
+        0.89,
+        1.0,
+        0.73,
+        1.03,
+        0.74,
+        0.79,
+        0.88,
+        0.83,
+        1.44,
+        0.81,
+        0.88,
+        1.28,
+        0.8,
+        0.67,
+        0.78,
+        0.89,
+        0.78,
+        0.76,
+        0.81,
+        0.83,
+        0.77,
+        0.72,
+        0.88,
+        0.93,
+        0.96,
+        0.96,
+        0.92,
+        0.65
+      ],
+      "msa.empty": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "results": {
+    "egyptian": {
+      "t01": "عيش طازة كل صبح.",
+      "t02": "صباح الخير! جاهز ليوم جديد؟",
+      "t03": "إزيك، وحشتني من زمان!",
+      "t04": "ولا يهمك، بتحصل عادي.",
+      "t05": "يلا نشرب قهوة بعدين.",
+      "t06": "خلص كله",
+      "t07": "الدخول ببلاش",
+      "t08": "مواعيد الفتح",
+      "t09": "استنى... إيه اللي حصل؟",
+      "t10": "يعني... نفس المعاد بكرة؟",
+      "t11": "\"لسه طالع من الفرن!\" قالت.",
+      "t12": "سميرة ماسكة المخبز في شارع المعز.",
+      "t13": "عمر وليلى جايين يزوروا القاهرة الأسبوع الجاي.",
+      "t14": "محل نور جنب محطة إسكندرية.",
+      "t15": "يوسف ودينا وكريم طلبوا 3 أرغفة.",
+      "t16": "اسأل سلمى على وصفة العيش المخمر.",
+      "t17": "حسن ومنى فتحوا كافيه في أسوان.",
+      "t18": "طارق ورانيا وفادي وهالة جايين.",
+      "t19": "زياد دفع 145 جنيه في التورتة.",
+      "t20": "منيو التذوق بـ 1,200 جنيه.",
+      "t21": "الرغيف الواحد بـ 6.50، والاتنين بـ 12.00.",
+      "t22": "بنفتح 08:30 وبنقفل 19:45.",
+      "t23": "سوق الليل بيبدأ 18:00 يوم الجمعة.",
+      "t24": "ترابيزة لـ 4 الساعة 20:15، لو سمحت.",
+      "t25": "بوم!",
+      "t26": "طراخ!",
+      "t27": "فششش...",
+      "t28": "جرب خلطة مونبرو الجديدة.",
+      "t29": "مونبرو بيتحمص على دفعات صغيرة.",
+      "t30": "اطلب مونبرو وحتة تورتة.",
+      "t31": "أمينة وبلال وفرح وخالد بيتشاركوا المحل أيام السبت.",
+      "t32": "الخباز بيصحى قبل الشروق، يسخن الفرن، ويشكل كل رغيف بإيده والمدينة لسه هادية.",
+      "t33": "خد بالك إن المطبخ بيقفل قبل المحل بـ 30 دقيقة، وآخر طلبات منيو التذوق بتتاخد الساعة 8.",
+      "t34": "سمير ولينا ومريم هيجيبوا العيش السوق الساعة 06:45.",
+      "t35": "كافيه نادية بيقدم 3 أنواع شاي و 2 أنواع قهوة.",
+      "t36": "رامي وسارة حجزوا ترابيزة لـ 6 الساعة 21:00.",
+      "t37": "بوستر السفر بتاع تامر مكتوب عليه جولات الغروب بحروف كبيرة.",
+      "t38": "يارا لقت ورقة مكتوبة بالإيد: 'عيش طازة يوميا'.",
+      "t39": "التيكت مكتوب عليه عسل الزهور البرية 500g.",
+      "t40": "شكرا لدعمكم مخبز محلي صغير!"
+    },
+    "msa": {
+      "t01": "خبز طازج كل صباح.",
+      "t02": "صباح الخير! هل أنت مستعد ليوم آخر؟",
+      "t03": "مرحبا، مضى وقت طويل منذ أن رأيتك!",
+      "t04": "لا تقلق، هذا يحدث.",
+      "t05": "لنتناول القهوة لاحقا.",
+      "t06": "نفدت الكمية",
+      "t07": "الدخول مجاني",
+      "t08": "ساعات العمل",
+      "t09": "انتظر... ماذا حدث؟",
+      "t10": "إذن... نفس الوقت غدا؟",
+      "t11": "قالت: طازج من الفرن!",
+      "t12": "تدير سميرة المخبز في شارع المعز.",
+      "t13": "سيزور عمر وليلى القاهرة الأسبوع المقبل.",
+      "t14": "يقع متجر نور بالقرب من محطة الإسكندرية.",
+      "t15": "طلب يوسف ودينا وكريم ثلاثة أرغفة.",
+      "t16": "اسأل سلمى عن وصفة خبز العجين المخمر.",
+      "t17": "افتتح حسن ومنى مقهى في أسوان.",
+      "t18": "طارق ورانيا وفادي وهالة قادمون.",
+      "t19": "دفع زياد 145 جنيها ثمن الكعكة.",
+      "t20": "تتكلف قائمة التذوق 1,200 جنيه.",
+      "t21": "الرغيف الواحد بسعر 6.50، والرغيفان بسعر 12.00.",
+      "t22": "نفتح في 08:30 ونغلق في 19:45.",
+      "t23": "يبدأ السوق الليلي في 18:00 يوم الجمعة.",
+      "t24": "طاولة لأربعة أشخاص في 20:15، من فضلك.",
+      "t25": "بوم!",
+      "t26": "طاخ!",
+      "t27": "وششش...",
+      "t28": "جرب خلطة مونبرو الجديدة.",
+      "t29": "يُحمص مونبرو على دفعات صغيرة.",
+      "t30": "اطلب مونبرو وشريحة من الكعك.",
+      "t31": "تتشارك أمينة وبلال وفرح وخالد المتجر أيام السبت.",
+      "t32": "يستيقظ الخباز قبل شروق الشمس، ويسخن الفرن، ويشكل كل رغيف بيده بينما لا تزال المدينة هادئة.",
+      "t33": "يرجى ملاحظة أن المطبخ يغلق قبل المتجر بثلاثين دقيقة، ويتم أخذ آخر طلبات قائمة التذوق في الثامنة.",
+      "t34": "سيحضر سمير ولينا ومريم الخبز إلى السوق في 06:45.",
+      "t35": "يقدم مقهى نادية 3 أنواع من الشاي ونوعين من القهوة.",
+      "t36": "حجز رامي وسارة طاولة لستة أشخاص في 21:00.",
+      "t37": "يقول ملصق السفر الخاص بتامر جولات الغروب بحروف كبيرة.",
+      "t38": "وجدت يارا ملاحظة مكتوبة بخط اليد: خبز طازج يوميا.",
+      "t39": "الملصق يقول عسل الزهور البرية 500غ.",
+      "t40": "شكرا لدعمكم مخبزا محليا صغيرا!"
+    }
+  },
+  "per_case": [
+    {
+      "id": "t01",
+      "text": "Fresh bread, every morning.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.59,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.63,
+        "empty": false
+      }
+    },
+    {
+      "id": "t02",
+      "text": "Good morning! Ready for another day?",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.75,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.94,
+        "empty": false
+      }
+    },
+    {
+      "id": "t03",
+      "text": "Hey there, long time no see!",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.75,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.18,
+        "empty": false
+      }
+    },
+    {
+      "id": "t04",
+      "text": "No worries, it happens.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.91,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.78,
+        "empty": false
+      }
+    },
+    {
+      "id": "t05",
+      "text": "Let's grab a coffee later.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.77,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.81,
+        "empty": false
+      }
+    },
+    {
+      "id": "t06",
+      "text": "SOLD OUT",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.88,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.38,
+        "empty": false
+      }
+    },
+    {
+      "id": "t07",
+      "text": "FREE ENTRY",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.2,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.2,
+        "empty": false
+      }
+    },
+    {
+      "id": "t08",
+      "text": "OPENING HOURS",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.92,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.85,
+        "empty": false
+      }
+    },
+    {
+      "id": "t09",
+      "text": "Wait... what happened?",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.0,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.82,
+        "empty": false
+      }
+    },
+    {
+      "id": "t10",
+      "text": "So... same time tomorrow?",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.96,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.84,
+        "empty": false
+      }
+    },
+    {
+      "id": "t11",
+      "text": "\"Fresh out of the oven!\" she said.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.76,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.59,
+        "empty": false
+      }
+    },
+    {
+      "id": "t12",
+      "text": "Samira runs the bakery on El-Muizz Street.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.79,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.76,
+        "empty": false
+      }
+    },
+    {
+      "id": "t13",
+      "text": "Omar and Layla are visiting Cairo next week.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.02,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.89,
+        "empty": false
+      }
+    },
+    {
+      "id": "t14",
+      "text": "Nour's shop is near Alexandria station.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.67,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.0,
+        "empty": false
+      }
+    },
+    {
+      "id": "t15",
+      "text": "Youssef, Dina and Karim ordered three loaves.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [
+          "3"
+        ],
+        "digits_preserved": false,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.69,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.73,
+        "empty": false
+      }
+    },
+    {
+      "id": "t16",
+      "text": "Ask Salma for the sourdough recipe.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.91,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.03,
+        "empty": false
+      }
+    },
+    {
+      "id": "t17",
+      "text": "Hassan and Mona opened a cafe in Aswan.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.77,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.74,
+        "empty": false
+      }
+    },
+    {
+      "id": "t18",
+      "text": "Tarek, Rania, Fadi and Hala are coming.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.77,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.79,
+        "empty": false
+      }
+    },
+    {
+      "id": "t19",
+      "text": "Ziad paid 145 pounds for the cake.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "145"
+        ],
+        "digits_arabic": [
+          "145"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.85,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "145"
+        ],
+        "digits_arabic": [
+          "145"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.88,
+        "empty": false
+      }
+    },
+    {
+      "id": "t20",
+      "text": "The tasting menu costs 1,200 pounds.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "1",
+          "200"
+        ],
+        "digits_arabic": [
+          "1",
+          "200"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.72,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "1",
+          "200"
+        ],
+        "digits_arabic": [
+          "1",
+          "200"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.83,
+        "empty": false
+      }
+    },
+    {
+      "id": "t21",
+      "text": "One loaf is 6.50, two are 12.00.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        "digits_arabic": [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.28,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        "digits_arabic": [
+          "6",
+          "50",
+          "12",
+          "00"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.44,
+        "empty": false
+      }
+    },
+    {
+      "id": "t22",
+      "text": "We open at 08:30 and close at 19:45.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        "digits_arabic": [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.69,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        "digits_arabic": [
+          "08",
+          "30",
+          "19",
+          "45"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.81,
+        "empty": false
+      }
+    },
+    {
+      "id": "t23",
+      "text": "The night market starts at 18:00 on Friday.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "18",
+          "00"
+        ],
+        "digits_arabic": [
+          "18",
+          "00"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.77,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "18",
+          "00"
+        ],
+        "digits_arabic": [
+          "18",
+          "00"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.88,
+        "empty": false
+      }
+    },
+    {
+      "id": "t24",
+      "text": "Table for 4 at 20:15, please.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "4",
+          "20",
+          "15"
+        ],
+        "digits_arabic": [
+          "4",
+          "20",
+          "15"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.21,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "4",
+          "20",
+          "15"
+        ],
+        "digits_arabic": [
+          "20",
+          "15"
+        ],
+        "digits_preserved": false,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.28,
+        "empty": false
+      }
+    },
+    {
+      "id": "t25",
+      "text": "BOOM!",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.8,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.8,
+        "empty": false
+      }
+    },
+    {
+      "id": "t26",
+      "text": "CRASH!",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.83,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.67,
+        "empty": false
+      }
+    },
+    {
+      "id": "t27",
+      "text": "WHOOSH...",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.78,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.78,
+        "empty": false
+      }
+    },
+    {
+      "id": "t28",
+      "text": "Try the new Moonbrew blend.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.89,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.89,
+        "empty": false
+      }
+    },
+    {
+      "id": "t29",
+      "text": "Moonbrew is roasted in small batches.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.81,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.78,
+        "empty": false
+      }
+    },
+    {
+      "id": "t30",
+      "text": "Order a Moonbrew and a slice of cake.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.62,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.76,
+        "empty": false
+      }
+    },
+    {
+      "id": "t31",
+      "text": "Amina, Bilal, Farah and Khalid share the shop on Saturdays.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.85,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.81,
+        "empty": false
+      }
+    },
+    {
+      "id": "t32",
+      "text": "The baker wakes before sunrise, warms the oven, and shapes every loaf by hand while the city is still quiet.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.7,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.83,
+        "empty": false
+      }
+    },
+    {
+      "id": "t33",
+      "text": "Please note that the kitchen closes thirty minutes before the shop, and last orders for the tasting menu are taken at eight.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [
+          "30",
+          "8"
+        ],
+        "digits_preserved": false,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.69,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.77,
+        "empty": false
+      }
+    },
+    {
+      "id": "t34",
+      "text": "Samir, Lina and Mariam will bring the bread to the market at 06:45.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "06",
+          "45"
+        ],
+        "digits_arabic": [
+          "06",
+          "45"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.75,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "06",
+          "45"
+        ],
+        "digits_arabic": [
+          "06",
+          "45"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.72,
+        "empty": false
+      }
+    },
+    {
+      "id": "t35",
+      "text": "Nadia's cafe serves 3 kinds of tea and 2 kinds of coffee.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "3",
+          "2"
+        ],
+        "digits_arabic": [
+          "3",
+          "2"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.79,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "3",
+          "2"
+        ],
+        "digits_arabic": [
+          "3"
+        ],
+        "digits_preserved": false,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.88,
+        "empty": false
+      }
+    },
+    {
+      "id": "t36",
+      "text": "Rami and Sara booked a table for 6 at 21:00.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "6",
+          "21",
+          "00"
+        ],
+        "digits_arabic": [
+          "6",
+          "21",
+          "00"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.98,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "6",
+          "21",
+          "00"
+        ],
+        "digits_arabic": [
+          "21",
+          "00"
+        ],
+        "digits_preserved": false,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.93,
+        "empty": false
+      }
+    },
+    {
+      "id": "t37",
+      "text": "Tamer's travel poster says SUNSET TOURS in big letters.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 1.05,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.96,
+        "empty": false
+      }
+    },
+    {
+      "id": "t38",
+      "text": "Yara found a handwritten note: 'fresh bread daily'.",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.9,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.96,
+        "empty": false
+      }
+    },
+    {
+      "id": "t39",
+      "text": "The label reads WILDFLOWER HONEY 500g.",
+      "egyptian": {
+        "arabic_ratio": 0.968,
+        "digits_source": [
+          "500"
+        ],
+        "digits_arabic": [
+          "500"
+        ],
+        "digits_preserved": true,
+        "latin_left": "g",
+        "latin_ok": true,
+        "length_ratio": 1.08,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [
+          "500"
+        ],
+        "digits_arabic": [
+          "500"
+        ],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.92,
+        "empty": false
+      }
+    },
+    {
+      "id": "t40",
+      "text": "Thank you for supporting a small local bakery!",
+      "egyptian": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.59,
+        "empty": false
+      },
+      "msa": {
+        "arabic_ratio": 1.0,
+        "digits_source": [],
+        "digits_arabic": [],
+        "digits_preserved": true,
+        "latin_left": "",
+        "latin_ok": true,
+        "length_ratio": 0.65,
+        "empty": false
+      }
+    }
+  ]
+}
