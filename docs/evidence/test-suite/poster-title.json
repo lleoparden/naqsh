@@ -1,0 +1,432 @@
+{
+  "receipt": {
+    "id": "06ba5e13f1fa",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 3222,
+        "cost_usd": 0.00684,
+        "input_tokens": 3786,
+        "output_tokens": 496,
+        "reasoning_tokens": 297,
+        "images": 0,
+        "regions": 2,
+        "regions_before_dedupe": 2,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 13858,
+        "cost_usd": 0.0025,
+        "masks": 2,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 14023,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 966,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          0
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 0,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 9.38,
+        "ring_max_abs_diff": 16.16,
+        "ring_per_region": [
+          2.61,
+          16.16
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 5017,
+        "cost_usd": 0.001518,
+        "checked": 2,
+        "residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "NIGHT MARKET visible at top",
+          "t2": "THAI AND CHINESE STREET text overlay across middle"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 22923,
+        "cost_usd": 0.011522,
+        "retried": "t1, t2",
+        "still_residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "NIGHT MARKET at top",
+          "t2": "dark MARKET text overlay across center"
+        },
+        "shift": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 763,
+        "cost_usd": 0.0,
+        "strategies": {
+          "t1": "inpaint",
+          "t2": "inpaint"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 3872,
+        "cost_usd": 0.001488,
+        "checked": 2,
+        "residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "NIGHT MARKET visible at top edge",
+          "t2": "faint smeared text across middle e.g. THAI AND ... MASSAGE ... PRICE"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 206,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 168,
+        "cost_usd": 0.0,
+        "regions": 2,
+        "strategies": {
+          "t1": "inpaint",
+          "t2": "inpaint"
+        },
+        "types": {
+          "t1": "signage",
+          "t2": "signage"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 10507,
+        "cost_usd": 0.006158,
+        "flagged": [
+          "t2"
+        ],
+        "issues": {
+          "t2": "unreadable"
+        },
+        "fixed": [
+          "t2"
+        ],
+        "retranslated": [],
+        "still_flagged": [
+          "t2"
+        ]
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "NIGHT MARKET",
+        "translation_ar": "سوق بالليل",
+        "style": "title",
+        "font_style": "clean uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          428,
+          348,
+          855,
+          394
+        ],
+        "container": [
+          428,
+          348,
+          855,
+          394
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "سوق بالليل"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t2",
+        "source_text": "FRIDAY 8:00 HALL 3 FREE ENTRY",
+        "translation_ar": "الجمعة 8 قاعة 3 الدخول ببلاش",
+        "style": "label",
+        "font_style": "clean uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          151,
+          1638,
+          1146,
+          1693
+        ],
+        "container": [
+          151,
+          1638,
+          1146,
+          1693
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal",
+        "font_size": 32,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "الجمعة 8 قاعة 3 الدخول ببلاش"
+        ],
+        "strategy": "inpaint"
+      }
+    ],
+    "warnings": [],
+    "total_cost_usd": 0.040026,
+    "total_ms": 61877,
+    "stage_ms_sum": 75525
+  },
+  "document": {
+    "id": "06ba5e13f1fa",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "NIGHT MARKET",
+        "arabic": {
+          "egyptian": "سوق بالليل",
+          "msa": "سوق بالليل"
+        },
+        "box": [
+          428,
+          348,
+          855,
+          394
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "lines": [
+          {
+            "text": "سوق بالليل",
+            "size": 31,
+            "x": 641.5,
+            "baseline": 378.0,
+            "width": 156,
+            "height": 28
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "سوق بالليل",
+            "msa": "سوق بالليل"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 31,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            428,
+            348,
+            855,
+            394
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "FRIDAY 8:00 HALL 3 FREE ENTRY",
+        "arabic": {
+          "egyptian": "الجمعة 8 قاعة 3 الدخول ببلاش",
+          "msa": "الجمعة 8 قاعة 3 الدخول ببلاش"
+        },
+        "box": [
+          151,
+          1638,
+          1146,
+          1693
+        ],
+        "font_family": "tajawal",
+        "font_size": 32,
+        "lines": [
+          {
+            "text": "الجمعة 8 قاعة 3 الدخول ببلاش",
+            "size": 32,
+            "x": 648.5,
+            "baseline": 1673.5,
+            "width": 398,
+            "height": 30
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "الجمعة 8 قاعة 3 الدخول ببلاش",
+            "msa": "الجمعة 8 قاعة 3 الدخول ببلاش"
+          },
+          "font_family": "tajawal",
+          "font_size": 32,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            151,
+            1638,
+            1146,
+            1693
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  },
+  "captured_at": "2026-10-31T20:43:51"
+}

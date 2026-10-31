@@ -1,0 +1,298 @@
+{
+  "receipt": {
+    "id": "c10ad82551a8",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 3915,
+        "cost_usd": 0.005791,
+        "input_tokens": 3786,
+        "output_tokens": 249,
+        "reasoning_tokens": 151,
+        "images": 0,
+        "regions": 1,
+        "regions_before_dedupe": 1,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 25895,
+        "cost_usd": 0.0025,
+        "masks": 1,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 26540,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 1012,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          0
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 1,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 4.26,
+        "ring_max_abs_diff": 4.26,
+        "ring_per_region": [
+          4.26
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 3366,
+        "cost_usd": 0.002107,
+        "checked": 1,
+        "residual": [],
+        "notes": {
+          "t1": "large blue mask, no letter fragments visible"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 3733,
+        "cost_usd": 0.001738,
+        "checked": 1,
+        "residual": [],
+        "notes": {
+          "t1": "solid overpaint arch over sky, no letter fragments"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 215,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 255,
+        "cost_usd": 0.0,
+        "regions": 1,
+        "strategies": {
+          "t1": "muse"
+        },
+        "types": {
+          "t1": "signage"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 2135,
+        "cost_usd": 0.001288,
+        "flagged": [],
+        "issues": {},
+        "fixed": [],
+        "retranslated": [],
+        "still_flagged": []
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "SUNSET TOURS",
+        "translation_ar": "رحلات الغروب",
+        "style": "title",
+        "font_style": "bold vintage condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          19,
+          42,
+          1251,
+          701
+        ],
+        "container": [
+          65,
+          65,
+          1215,
+          598
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 220,
+        "color": [
+          245,
+          230,
+          191
+        ],
+        "lines": [
+          "رحلات",
+          "الغروب"
+        ],
+        "strategy": "muse"
+      }
+    ],
+    "warnings": [],
+    "total_cost_usd": 0.023423,
+    "total_ms": 41447,
+    "stage_ms_sum": 67066
+  },
+  "document": {
+    "id": "c10ad82551a8",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "SUNSET TOURS",
+        "arabic": {
+          "egyptian": "رحلات الغروب",
+          "msa": "رحلات الغروب"
+        },
+        "box": [
+          19,
+          42,
+          1251,
+          701
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 220,
+        "lines": [
+          {
+            "text": "رحلات",
+            "size": 220,
+            "x": 635.0,
+            "baseline": 299.5,
+            "width": 534,
+            "height": 185
+          },
+          {
+            "text": "الغروب",
+            "size": 220,
+            "x": 635.0,
+            "baseline": 535.5,
+            "width": 673,
+            "height": 199
+          }
+        ],
+        "align": "center",
+        "color": [
+          245,
+          230,
+          191
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "رحلات الغروب",
+            "msa": "رحلات الغروب"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 220,
+          "color": [
+            245,
+            230,
+            191
+          ],
+          "box": [
+            19,
+            42,
+            1251,
+            701
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  },
+  "captured_at": "2026-10-31T20:47:51"
+}

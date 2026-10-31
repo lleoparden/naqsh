@@ -1,0 +1,1053 @@
+{
+  "receipt": {
+    "id": "928ac3a865e2",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 4153,
+        "cost_usd": 0.008523,
+        "input_tokens": 3786,
+        "output_tokens": 892,
+        "reasoning_tokens": 191,
+        "images": 0,
+        "regions": 8,
+        "regions_before_dedupe": 8,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7",
+          "t8"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 30272,
+        "cost_usd": 0.0025,
+        "masks": 8,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 30403,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 1113,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          46
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 7,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 14.75,
+        "ring_max_abs_diff": 26.94,
+        "ring_per_region": [
+          14.45,
+          15.94,
+          12.1,
+          22.23,
+          26.94,
+          16.26,
+          5.18,
+          4.93
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 3716,
+        "cost_usd": 0.003002,
+        "checked": 8,
+        "residual": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "notes": {
+          "t1": "no letters, only artwork",
+          "t2": "digits 30 at right edge",
+          "t3": "SOU clearly visible",
+          "t4": "BRIOCHE 5 00 across top",
+          "t5": "FOCACCIA 7 25 across top",
+          "t6": "partial RITA and price at top",
+          "t7": "blank tags, no text",
+          "t8": "blank tags, no text"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 35540,
+        "cost_usd": 0.0133,
+        "retried": "t2, t3, t4, t5, t6",
+        "still_residual": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "notes": {
+          "t1": "no letters, only artwork",
+          "t2": "digits 30 at right edge",
+          "t3": "SOU clearly visible",
+          "t4": "BRIOCHE 5 00 across top",
+          "t5": "FOCACCIA 7 25 across top",
+          "t6": "partial RITA and price at top",
+          "t7": "blank tags, no text",
+          "t8": "blank tags, no text"
+        },
+        "shift": [
+          0,
+          2
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 13091,
+        "cost_usd": 0.0,
+        "strategies": {
+          "t2": "flat-fill",
+          "t3": "flat-fill",
+          "t4": "inpaint",
+          "t5": "flat-fill",
+          "t6": "flat-fill"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 3188,
+        "cost_usd": 0.003083,
+        "checked": 8,
+        "residual": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "notes": {
+          "t1": "only pastry artwork, no text",
+          "t2": "partial 30 digits at right edge",
+          "t3": "SOU fragment at left",
+          "t4": "BRIOCHE 5.00 across top",
+          "t5": "FOCACCIA 7.25 across top",
+          "t6": "RITA 0.75 fragment at top",
+          "t7": "blank tags, no text",
+          "t8": "blank tags, no text"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 129,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 136,
+        "cost_usd": 0.0,
+        "regions": 8,
+        "strategies": {
+          "t1": "muse",
+          "t2": "flat-fill",
+          "t3": "flat-fill",
+          "t4": "inpaint",
+          "t5": "flat-fill",
+          "t6": "flat-fill",
+          "t7": "muse",
+          "t8": "muse"
+        },
+        "types": {
+          "t1": "menu_item",
+          "t2": "menu_item",
+          "t3": "menu_item",
+          "t4": "menu_item",
+          "t5": "menu_item",
+          "t6": "menu_item",
+          "t7": "menu_item",
+          "t8": "menu_item"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 5895,
+        "cost_usd": 0.0,
+        "error": "Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "RYE 4.50",
+        "translation_ar": "راي 4.50",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          143,
+          386,
+          379,
+          428
+        ],
+        "container": [
+          147,
+          386,
+          363,
+          423
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal",
+        "font_size": 22,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "راي 4.50"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "source_text": "BAGUETTE 3.00",
+        "translation_ar": "باجيت 3.00",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          415,
+          384,
+          812,
+          428
+        ],
+        "container": [
+          470,
+          384,
+          794,
+          428
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal",
+        "font_size": 29,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "باجيت 3.00"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t3",
+        "source_text": "SOURDOUGH 6.50",
+        "translation_ar": "ساوردو 6.50",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          806,
+          386,
+          1235,
+          430
+        ],
+        "container": [
+          951,
+          386,
+          1235,
+          427
+        ],
+        "mask_path": "mask-t3.png",
+        "font_family": "tajawal",
+        "font_size": 26,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "ساوردو 6.50"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t4",
+        "source_text": "BRIOCHE 5.00",
+        "translation_ar": "بريوش 5.00",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          90,
+          776,
+          417,
+          820
+        ],
+        "container": [
+          102,
+          776,
+          417,
+          799
+        ],
+        "mask_path": "mask-t4.png",
+        "font_family": "tajawal",
+        "font_size": 10,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "بريوش 5.00"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t5",
+        "source_text": "FOCACCIA 7.25",
+        "translation_ar": "فوكاتشا 7.25",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          448,
+          776,
+          805,
+          818
+        ],
+        "container": [
+          507,
+          777,
+          770,
+          818
+        ],
+        "mask_path": "mask-t5.png",
+        "font_family": "tajawal",
+        "font_size": 26,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "فوكاتشا 7.25"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t6",
+        "source_text": "PITA 2.75",
+        "translation_ar": "عيش بلدي 2.75",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          922,
+          776,
+          1134,
+          818
+        ],
+        "container": [
+          933,
+          776,
+          1118,
+          818
+        ],
+        "mask_path": "mask-t6.png",
+        "font_family": "tajawal",
+        "font_size": 25,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "عيش بلدي 2.75"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t7",
+        "source_text": "CAKE 8.00",
+        "translation_ar": "كيك 8.00",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          125,
+          1075,
+          367,
+          1117
+        ],
+        "container": [
+          122,
+          1075,
+          381,
+          1124
+        ],
+        "mask_path": "mask-t7.png",
+        "font_family": "tajawal",
+        "font_size": 34,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "كيك 8.00"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t8",
+        "source_text": "TARTS 9.50",
+        "translation_ar": "تارت 9.50",
+        "style": "label",
+        "font_style": "plain uppercase sans",
+        "type": "menu_item",
+        "action": "translate",
+        "bbox": [
+          508,
+          1075,
+          771,
+          1117
+        ],
+        "container": [
+          502,
+          1075,
+          782,
+          1124
+        ],
+        "mask_path": "mask-t8.png",
+        "font_family": "tajawal",
+        "font_size": 34,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [
+          "تارت 9.50"
+        ],
+        "strategy": "muse"
+      }
+    ],
+    "warnings": [
+      "t4: text did not fit and was clamped",
+      "visual self-check unavailable: Meta API 200: response incomplete: {'reason': 'max_output_tokens'}"
+    ],
+    "total_cost_usd": 0.040409,
+    "total_ms": 97512,
+    "stage_ms_sum": 127636
+  },
+  "document": {
+    "id": "928ac3a865e2",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "RYE 4.50",
+        "arabic": {
+          "egyptian": "راي 4.50",
+          "msa": "راي 4.50"
+        },
+        "box": [
+          143,
+          386,
+          379,
+          428
+        ],
+        "font_family": "tajawal",
+        "font_size": 22,
+        "lines": [
+          {
+            "text": "راي 4.50",
+            "size": 22,
+            "x": 261.0,
+            "baseline": 410.5,
+            "width": 73,
+            "height": 23
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "راي 4.50",
+            "msa": "راي 4.50"
+          },
+          "font_family": "tajawal",
+          "font_size": 22,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            143,
+            386,
+            379,
+            428
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "BAGUETTE 3.00",
+        "arabic": {
+          "egyptian": "باجيت 3.00",
+          "msa": "باجيت 3.00"
+        },
+        "box": [
+          415,
+          384,
+          812,
+          428
+        ],
+        "font_family": "tajawal",
+        "font_size": 29,
+        "lines": [
+          {
+            "text": "باجيت 3.00",
+            "size": 29,
+            "x": 613.5,
+            "baseline": 412.5,
+            "width": 126,
+            "height": 25
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "باجيت 3.00",
+            "msa": "باجيت 3.00"
+          },
+          "font_family": "tajawal",
+          "font_size": 29,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            415,
+            384,
+            812,
+            428
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t3",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "SOURDOUGH 6.50",
+        "arabic": {
+          "egyptian": "ساوردو 6.50",
+          "msa": "ساوردو 6.50"
+        },
+        "box": [
+          806,
+          386,
+          1235,
+          430
+        ],
+        "font_family": "tajawal",
+        "font_size": 26,
+        "lines": [
+          {
+            "text": "ساوردو 6.50",
+            "size": 26,
+            "x": 1020.5,
+            "baseline": 414.0,
+            "width": 129,
+            "height": 22
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 2,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "ساوردو 6.50",
+            "msa": "ساوردو 6.50"
+          },
+          "font_family": "tajawal",
+          "font_size": 26,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            806,
+            386,
+            1235,
+            430
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t4",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "BRIOCHE 5.00",
+        "arabic": {
+          "egyptian": "بريوش 5.00",
+          "msa": "بريوش 5.00"
+        },
+        "box": [
+          90,
+          776,
+          417,
+          820
+        ],
+        "font_family": "tajawal",
+        "font_size": 10,
+        "lines": [
+          {
+            "text": "بريوش 5.00",
+            "size": 10,
+            "x": 253.5,
+            "baseline": 801.0,
+            "width": 50,
+            "height": 10
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 3,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "بريوش 5.00",
+            "msa": "بريوش 5.00"
+          },
+          "font_family": "tajawal",
+          "font_size": 10,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            90,
+            776,
+            417,
+            820
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t5",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "FOCACCIA 7.25",
+        "arabic": {
+          "egyptian": "فوكاتشا 7.25",
+          "msa": "فوكاتشا 7.25"
+        },
+        "box": [
+          448,
+          776,
+          805,
+          818
+        ],
+        "font_family": "tajawal",
+        "font_size": 26,
+        "lines": [
+          {
+            "text": "فوكاتشا 7.25",
+            "size": 26,
+            "x": 626.5,
+            "baseline": 804.0,
+            "width": 137,
+            "height": 24
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 4,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "فوكاتشا 7.25",
+            "msa": "فوكاتشا 7.25"
+          },
+          "font_family": "tajawal",
+          "font_size": 26,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            448,
+            776,
+            805,
+            818
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t6",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "PITA 2.75",
+        "arabic": {
+          "egyptian": "عيش بلدي 2.75",
+          "msa": "عيش بلدي 2.75"
+        },
+        "box": [
+          922,
+          776,
+          1134,
+          818
+        ],
+        "font_family": "tajawal",
+        "font_size": 25,
+        "lines": [
+          {
+            "text": "عيش بلدي 2.75",
+            "size": 25,
+            "x": 1028.0,
+            "baseline": 801.5,
+            "width": 156,
+            "height": 27
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 5,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "عيش بلدي 2.75",
+            "msa": "عيش بلدي 2.75"
+          },
+          "font_family": "tajawal",
+          "font_size": 25,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            922,
+            776,
+            1134,
+            818
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t7",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "CAKE 8.00",
+        "arabic": {
+          "egyptian": "كيك 8.00",
+          "msa": "كيك 8.00"
+        },
+        "box": [
+          125,
+          1075,
+          367,
+          1117
+        ],
+        "font_family": "tajawal",
+        "font_size": 27,
+        "lines": [
+          {
+            "text": "كيك 8.00",
+            "size": 27,
+            "x": 246.0,
+            "baseline": 1102.0,
+            "width": 103,
+            "height": 24
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 6,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "كيك 8.00",
+            "msa": "كيك 8.00"
+          },
+          "font_family": "tajawal",
+          "font_size": 27,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            125,
+            1075,
+            367,
+            1117
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t8",
+        "kind": "text",
+        "type": "menu_item",
+        "action": "translate",
+        "source_text": "TARTS 9.50",
+        "arabic": {
+          "egyptian": "تارت 9.50",
+          "msa": "تارت 9.50"
+        },
+        "box": [
+          508,
+          1075,
+          771,
+          1117
+        ],
+        "font_family": "tajawal",
+        "font_size": 27,
+        "lines": [
+          {
+            "text": "تارت 9.50",
+            "size": 27,
+            "x": 639.5,
+            "baseline": 1102.0,
+            "width": 101,
+            "height": 24
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 7,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "تارت 9.50",
+            "msa": "تارت 9.50"
+          },
+          "font_family": "tajawal",
+          "font_size": 27,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            508,
+            1075,
+            771,
+            1117
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  },
+  "captured_at": "2026-10-31T20:41:46"
+}

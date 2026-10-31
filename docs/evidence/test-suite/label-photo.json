@@ -1,0 +1,501 @@
+{
+  "receipt": {
+    "id": "6f830fa96942",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 5029,
+        "cost_usd": 0.007975,
+        "input_tokens": 3786,
+        "output_tokens": 763,
+        "reasoning_tokens": 506,
+        "images": 0,
+        "regions": 3,
+        "regions_before_dedupe": 3,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2",
+          "t3"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": [
+          "t3"
+        ]
+      },
+      {
+        "name": "segment",
+        "ms": 15207,
+        "cost_usd": 0.0025,
+        "masks": 3,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 15385,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 1042,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          2
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 2,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 15.0,
+        "ring_max_abs_diff": 22.13,
+        "ring_per_region": [
+          10.91,
+          22.13,
+          11.98
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 2202,
+        "cost_usd": 0.001755,
+        "checked": 3,
+        "residual": [],
+        "notes": {
+          "t1": "clean paper texture only",
+          "t2": "clean paper texture only",
+          "t3": "clean paper texture only"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 2801,
+        "cost_usd": 0.002252,
+        "checked": 3,
+        "residual": [],
+        "notes": {
+          "t1": "only paper texture and mask, no letters",
+          "t2": "only paper texture and masks, no letters",
+          "t3": "only paper texture and mask, no letters"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 250,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 215,
+        "cost_usd": 0.0,
+        "regions": 3,
+        "strategies": {
+          "t1": "muse",
+          "t2": "muse",
+          "t3": "muse"
+        },
+        "types": {
+          "t1": "signage",
+          "t2": "signage",
+          "t3": "price"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 8380,
+        "cost_usd": 0.005231,
+        "flagged": [
+          "t3"
+        ],
+        "issues": {
+          "t3": "bad_translation"
+        },
+        "fixed": [],
+        "retranslated": [
+          "t3"
+        ],
+        "still_flagged": []
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "WILDFLOWER",
+        "translation_ar": "زهور برية",
+        "style": "label",
+        "font_style": "handwritten casual uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          399,
+          977,
+          911,
+          1077
+        ],
+        "container": [
+          425,
+          977,
+          879,
+          1048
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal",
+        "font_size": 55,
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "lines": [
+          "زهور برية"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "source_text": "HONEY",
+        "translation_ar": "عسل",
+        "style": "label",
+        "font_style": "handwritten casual uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          524,
+          1110,
+          818,
+          1198
+        ],
+        "container": [
+          524,
+          1110,
+          772,
+          1165
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal",
+        "font_size": 40,
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "lines": [
+          "عسل"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t3",
+        "source_text": "500g",
+        "translation_ar": "نص كيلو",
+        "style": "label",
+        "font_style": "handwritten casual script",
+        "type": "price",
+        "action": "keep_numerals",
+        "bbox": [
+          563,
+          1221,
+          762,
+          1340
+        ],
+        "container": [
+          568,
+          1221,
+          736,
+          1311
+        ],
+        "mask_path": "mask-t3.png",
+        "font_family": "tajawal",
+        "font_size": 44,
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "lines": [
+          "نص كيلو"
+        ],
+        "strategy": "muse"
+      }
+    ],
+    "warnings": [],
+    "total_cost_usd": 0.029713,
+    "total_ms": 35529,
+    "stage_ms_sum": 50511
+  },
+  "document": {
+    "id": "6f830fa96942",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "WILDFLOWER",
+        "arabic": {
+          "egyptian": "زهور برية",
+          "msa": "زهور برية"
+        },
+        "box": [
+          399,
+          977,
+          911,
+          1077
+        ],
+        "font_family": "tajawal",
+        "font_size": 55,
+        "lines": [
+          {
+            "text": "زهور برية",
+            "size": 55,
+            "x": 655.0,
+            "baseline": 1039.5,
+            "width": 188,
+            "height": 47
+          }
+        ],
+        "align": "center",
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "زهور برية",
+            "msa": "زهور برية"
+          },
+          "font_family": "tajawal",
+          "font_size": 55,
+          "color": [
+            43,
+            33,
+            30
+          ],
+          "box": [
+            399,
+            977,
+            911,
+            1077
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "HONEY",
+        "arabic": {
+          "egyptian": "عسل",
+          "msa": "عسل"
+        },
+        "box": [
+          524,
+          1110,
+          818,
+          1198
+        ],
+        "font_family": "tajawal",
+        "font_size": 40,
+        "lines": [
+          {
+            "text": "عسل",
+            "size": 40,
+            "x": 671.0,
+            "baseline": 1163.0,
+            "width": 90,
+            "height": 34
+          }
+        ],
+        "align": "center",
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "عسل",
+            "msa": "عسل"
+          },
+          "font_family": "tajawal",
+          "font_size": 40,
+          "color": [
+            43,
+            33,
+            30
+          ],
+          "box": [
+            524,
+            1110,
+            818,
+            1198
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t3",
+        "kind": "text",
+        "type": "price",
+        "action": "keep_numerals",
+        "source_text": "500g",
+        "arabic": {
+          "egyptian": "نص كيلو",
+          "msa": "نص كيلو"
+        },
+        "box": [
+          563,
+          1221,
+          762,
+          1340
+        ],
+        "font_family": "tajawal",
+        "font_size": 44,
+        "lines": [
+          {
+            "text": "نص كيلو",
+            "size": 44,
+            "x": 662.5,
+            "baseline": 1290.5,
+            "width": 152,
+            "height": 38
+          }
+        ],
+        "align": "center",
+        "color": [
+          43,
+          33,
+          30
+        ],
+        "z": 2,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "نص كيلو",
+            "msa": "نص كيلو"
+          },
+          "font_family": "tajawal",
+          "font_size": 44,
+          "color": [
+            43,
+            33,
+            30
+          ],
+          "box": [
+            563,
+            1221,
+            762,
+            1340
+          ],
+          "action": "keep_numerals"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  },
+  "captured_at": "2026-10-31T20:48:26"
+}

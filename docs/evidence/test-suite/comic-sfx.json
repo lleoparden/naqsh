@@ -1,0 +1,240 @@
+{
+  "receipt": {
+    "id": "efe45f7644ba",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 4448,
+        "cost_usd": 0.006543,
+        "input_tokens": 3786,
+        "output_tokens": 426,
+        "reasoning_tokens": 259,
+        "images": 0,
+        "regions": 2,
+        "regions_before_dedupe": 2,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [],
+        "skipped": [],
+        "optional": [
+          "t1",
+          "t2"
+        ],
+        "keep_numerals": []
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "BOOM!",
+        "translation_ar": "بوم!",
+        "style": "label",
+        "font_style": "plain thin uppercase sans",
+        "type": "sfx",
+        "action": "optional",
+        "bbox": [
+          284,
+          390,
+          468,
+          444
+        ],
+        "container": null,
+        "mask_path": null,
+        "font_family": "kufi",
+        "font_size": 0,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "source_text": "CRASH!",
+        "translation_ar": "طراخ!",
+        "style": "label",
+        "font_style": "plain thin uppercase sans",
+        "type": "sfx",
+        "action": "optional",
+        "bbox": [
+          828,
+          1029,
+          1039,
+          1083
+        ],
+        "container": null,
+        "mask_path": null,
+        "font_family": "kufi",
+        "font_size": 0,
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "lines": [],
+        "strategy": "muse"
+      }
+    ],
+    "warnings": [
+      "every region was skipped by policy"
+    ],
+    "total_cost_usd": 0.006543,
+    "total_ms": 4580,
+    "stage_ms_sum": 4448
+  },
+  "document": {
+    "id": "efe45f7644ba",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "sfx",
+        "action": "optional",
+        "source_text": "BOOM!",
+        "arabic": {
+          "egyptian": "بوم!",
+          "msa": "بوم!"
+        },
+        "box": [
+          284,
+          390,
+          468,
+          444
+        ],
+        "font_family": "tajawal",
+        "font_size": 39,
+        "lines": [
+          {
+            "text": "بوم!",
+            "size": 39,
+            "x": 376.0,
+            "baseline": 423.0,
+            "width": 57,
+            "height": 38
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "بوم!",
+            "msa": "بوم!"
+          },
+          "font_family": "tajawal",
+          "font_size": 39,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            284,
+            390,
+            468,
+            444
+          ],
+          "action": "optional"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "sfx",
+        "action": "optional",
+        "source_text": "CRASH!",
+        "arabic": {
+          "egyptian": "طراخ!",
+          "msa": "طراخ!"
+        },
+        "box": [
+          828,
+          1029,
+          1039,
+          1083
+        ],
+        "font_family": "tajawal",
+        "font_size": 37,
+        "lines": [
+          {
+            "text": "طراخ!",
+            "size": 37,
+            "x": 933.5,
+            "baseline": 1061.0,
+            "width": 83,
+            "height": 38
+          }
+        ],
+        "align": "center",
+        "color": [
+          0,
+          0,
+          0
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "طراخ!",
+            "msa": "طراخ!"
+          },
+          "font_family": "tajawal",
+          "font_size": 37,
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "box": [
+            828,
+            1029,
+            1039,
+            1083
+          ],
+          "action": "optional"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  },
+  "captured_at": "2026-10-31T20:40:09"
+}
