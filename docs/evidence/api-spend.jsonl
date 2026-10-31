@@ -110,3 +110,5 @@
 {"ts": "2026-10-31T19:35:15+00:00", "label": "demo-v2 image chalkboard-flat", "cost_usd": 0.01, "kind": "image"}
 {"ts": "2026-10-31T19:35:38+00:00", "label": "demo-v2 image postcard-flat", "cost_usd": 0.01, "kind": "image"}
 {"ts": "2026-10-31T19:35:52+00:00", "label": "demo-v2 image children-flat", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:45:00+00:00", "label": "fresh-clone live comic (API, approved)", "cost_usd": 0.039521, "kind": "pipeline"}
+{"ts": "2026-10-31T19:50:00+00:00", "label": "fresh-clone live comic (UI, approved)", "cost_usd": 0.027682, "kind": "pipeline"}
