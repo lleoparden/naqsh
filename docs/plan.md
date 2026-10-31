@@ -196,13 +196,14 @@ embedding proves unreliable.
 
 ## Phase 7 — Impact measurement and backup video
 
-**Work:** run the stopwatch protocol in `submission-notes.md` (hand baseline vs.
-Naqsh, same page, same definition of done); record the numbers; record a rough
-screen capture of the whole flow as the backup demo. **Recorded after UI Group 2** (the redesign), not before; the tag v0-pre-redesign is the rollback point for the old UI.
+**Work:** record a rough screen capture of the whole flow as the backup demo.
+**No time-saved ratio is measured or claimed** (owner decision, 2026-10-29: the owner is
+not an editor, so a manual baseline would not be honest). Wording may say Naqsh is
+**faster**, but no multiplier and no minutes-saved figure. Recorded after UI Group 2 (the
+redesign); tag v0-pre-redesign is the rollback point for the old UI.
 
-**Gate:** numbers recorded with method and sample size; a backup video file exists
-by 30 Oct. **Fallback:** reduce to n=1 and say so; the point is a defensible
-measurement, not a study.
+**Gate:** a backup video file exists by 30 Oct and contains no time-saved ratio.
+**Fallback:** if the video slips, the demo-mode replay is the backup artifact.
 
 ## Phase 8 — Polish and the second page type
 

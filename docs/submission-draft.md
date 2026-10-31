@@ -109,17 +109,17 @@ themselves, and small businesses that need menus and posters in Arabic. They are
 translators first — they are people whose tools handle RTL badly, so they mask,
 translate, re-letter and re-export by hand.
 
-**Where the measured claim goes:** time saved per page and cost per page, each tied to
-a named page so it cannot be read as a generic speed claim.
+**What is claimed:** cost per page and Naqsh's own time per page, each tied to a named
+page. **No time-saved ratio is claimed** (owner decision, 2026-10-29: the owner is not an
+editor, so a manual baseline would not be honest). At most the text may say **faster**.
 
-| Page | Regions | Naqsh median | Cost | Manual baseline | Ratio |
-|---|---|---|---|---|---|
-| comic `01-comic-flat.png` | 3 | 33.8 s | $0.0257–$0.0291 | _empty_ | **PENDING** |
-| menu `03-menu-paper.png` | 16 | 61.8 s | $0.0367–$0.0661 | _empty_ | **PENDING** |
+| Page | Regions | Naqsh median | Cost |
+|---|---|---|---|
+| comic `01-comic-flat.png` | 3 | 33.8 s | $0.0257–$0.0291 |
+| menu `03-menu-paper.png` | 16 | 61.8 s | $0.0367–$0.0661 |
 
-The Naqsh numbers are wall-time medians from `docs/evidence/phase-8/variance-summary.json`.
-The manual baseline is the owner's timed run under `docs/baseline-protocol.md`; until it
-exists, **no time-saved ratio is claimed**.
+The times and costs are wall-time medians from
+`docs/evidence/phase-8/variance-summary.json`.
 
 **Honest limits:** designed for stylised pages (comics, flat posters, printed menus);
 curved or rotated lettering is read but set as a straight line; painted/photographic
@@ -131,9 +131,8 @@ the browser and server renders of the same SVG (`docs/evidence/phase-6/parity.js
 
 - Repository: `https://github.com/lleoparden/naqsh` (public; no secrets — audit in
   `docs/audit.md`).
-- Demo video: **not recorded yet**; the recording plan and the one-live-run rule are in
-  `docs/recording-guide.md`.
-- Impact claim: the time-saved ratio is **pending** the owner's manual baseline
-  (`docs/time-saved.md`); no ratio is claimed here.
+- Demo video: **not recorded yet**; the recording plan is in `docs/recording-guide.md`
+  and the narration/shot list in `docs/demo-script.md`.
+- Impact claim: **no ratio is claimed**; only Naqsh's own page times and costs appear.
 - Live runs used for the numbers above were made on 2026-10-27 with `DEMO_MODE=0`; demo
   mode replays real cached runs and is labelled in the UI.
