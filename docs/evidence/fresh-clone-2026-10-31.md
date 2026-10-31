@@ -44,3 +44,20 @@ pins are documented in the README.
 - macOS/Linux setup (only Windows tested).
 - The live UI path (only the API live call was run).
 - Whether `npm run build` works with the blocked esbuild postinstall (dev server did).
+
+
+## Re-run after the README quickstart fix
+
+Fresh clone L:\naqsh-review\fresh-clone-rerun, same Windows/Python 3.12.10/Node
+24.18.0, following only the new quickstart:
+
+- backend venv + pip install -r requirements.txt: clean; frontend 
+pm install and
+  
+pm run build: **succeeds** (esbuild warning only).
+- demo backend on **8000**, 
+pm run preview -- --port 4174: /api/health through the
+  Vite proxy returns **200**, the page returns **200**, and a comic upload through the
+  proxy replays as demo: true (39.8 s recorded).
+- The 8010/proxy mismatch is fixed; no NAQSH_API override needed.
+- Clone deleted; no .env was copied in this re-run.
