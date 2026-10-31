@@ -1,0 +1,72 @@
+{
+  "posters": [
+    {
+      "file": "Grand_Canyon_National_Park__a_free_government_service_LCCN2007676131.jpg",
+      "id": "a868a1c715c5",
+      "regions": 7,
+      "text_layers": 6,
+      "bubbles": 0,
+      "seconds": 88.2,
+      "cost_usd": 0.0548,
+      "plate_diff_outside": 7.087,
+      "verify": {
+        "t1": "plain pink background only",
+        "t2": "S DEPARTMENT and NATIONAL PAR visible",
+        "t3": "U.S. DEPARTMENT visible",
+        "t4": "NATIONAL PARK visible",
+        "t5": "U.S. DEPARTMENT visible",
+        "t6": "NATIONAL PARK visible"
+      },
+      "result": "L:\\naqsh-review\\demo-v3\\results\\Grand_Canyon_National_Park__a_free_government_service_LCCN2007676131.png"
+    },
+    {
+      "file": "Lassen_Volcanic_National_Park__Ranger_Naturalist_Service_LCCN2007676132.tif",
+      "id": "a167d9a28282",
+      "regions": 17,
+      "text_layers": 16,
+      "bubbles": 0,
+      "seconds": 103.3,
+      "cost_usd": 0.0606,
+      "plate_diff_outside": 7.045,
+      "verify": {
+        "t1": "solid brown, clean",
+        "t2": "solid brown, clean",
+        "t3": "solid brown, clean",
+        "t4": "solid brown, clean",
+        "t5": "solid brown, clean",
+        "t6": "solid brown, clean",
+        "t7": "solid brown with tiny yellow artifact, not lettering",
+        "t8": "solid brown, clean",
+        "t9": "solid brown, clean",
+        "t10": "solid brown, clean",
+        "t11": "solid brown with yellow artwork edge, no text",
+        "t12": "LASSEN VOLCANIC visible",
+        "t13": "LASSEN NATIONAL visible",
+        "t14": "VOLCANIC PARK visible",
+        "t15": "NATIONAL U.S. DEPARTMENT OF THE INTERIOR",
+        "t16": "PARK NATIONAL PARK SERVICE"
+      },
+      "result": "L:\\naqsh-review\\demo-v3\\results\\Lassen_Volcanic_National_Park__Ranger_Naturalist_Service_LCCN2007676132.png"
+    },
+    {
+      "file": "Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.jpg",
+      "id": "dc076a5fee62",
+      "regions": 8,
+      "text_layers": 7,
+      "bubbles": 0,
+      "seconds": 94.5,
+      "cost_usd": 0.0535,
+      "plate_diff_outside": 5.56,
+      "verify": {
+        "t1": "faint ghost lettering visible in blue band",
+        "t2": "clean blue field",
+        "t3": "artwork only, no text",
+        "t4": "clean solid fill",
+        "t5": "clean solid fill",
+        "t6": "clean solid fill",
+        "t7": "clean solid fill"
+      },
+      "result": "L:\\naqsh-review\\demo-v3\\results\\Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.png"
+    }
+  ]
+}
