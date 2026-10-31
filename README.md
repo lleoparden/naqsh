@@ -37,7 +37,7 @@ older project. In particular:
 - Only assets with clear rights are used: CC0/public-domain media, or images
   generated with Muse Image. Every asset and its license is recorded in
   [`ASSETS.md`](ASSETS.md).
-- **Layered background:** the cleaned plate is split into a Scenery layer and one layer per speech bubble (SAM 3.1), each named, toggleable, lockable and reorderable in the editor and present as separate groups in the SVG/ZIP exports. Bubbles are built in the pipeline (one SAM pass per page); zero detections means scenery only, and a box fallback is allowed only for dialogue. All five demo entries are rebuilt through that pipeline: the cache is **20.4 MB**, with the comic at scene + 2 bubbles + 3 text layers and the menu/chalkboard/sfx/label at scene + text.
+- **Layered background:** the cleaned plate is split into a Scenery layer and one layer per speech bubble (SAM 3.1), each named, toggleable, lockable and reorderable in the editor and present as separate groups in the SVG/ZIP exports. Bubbles are built in the pipeline (one SAM pass per page) **when the Background layers switch is on — it is off by default for speed**; zero detections means scenery only, and a box fallback is allowed only for dialogue. All five demo entries are rebuilt through that pipeline: the cache is **20.4 MB**, with the comic at scene + 2 bubbles + 3 text layers and the menu/chalkboard/sfx/label at scene + text.
 
 ## The pipeline
 

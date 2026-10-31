@@ -1,4 +1,9 @@
-# Time saved — measurement sheet
+# Time saved — measurement sheet (archived)
+
+**Archived 2026-10-29:** the owner is not an editor, so a manual baseline would not be
+honest. **No time-saved ratio is claimed**; the only allowed wording is “faster”. The
+Naqsh numbers below remain as historical context, and the manual column stays empty.
+
 
 Status: **baseline column is empty.** The ratio is not computed until the owner's timed
 manual run exists. No estimated number appears in this file.
