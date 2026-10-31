@@ -1,0 +1,48 @@
+{
+  "receipt": {
+    "id": "96da71928dac",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 2133,
+        "cost_usd": 0.004919,
+        "input_tokens": 3786,
+        "output_tokens": 44,
+        "reasoning_tokens": 30,
+        "images": 0,
+        "regions": 0,
+        "regions_before_dedupe": 0,
+        "duplicates_dropped": 0
+      }
+    ],
+    "regions": [],
+    "warnings": [
+      "no text regions found"
+    ],
+    "total_cost_usd": 0.004919,
+    "total_ms": 2316,
+    "stage_ms_sum": 2133
+  },
+  "document": {
+    "id": "96da71928dac",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": []
+  },
+  "captured_at": "2026-10-31T20:47:09"
+}

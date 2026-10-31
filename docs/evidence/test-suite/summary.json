@@ -1,0 +1,304 @@
+{
+  "pages": 13,
+  "pass_pages": 10,
+  "fail_pages": 3,
+  "mean_recall_pass": 0.97,
+  "total_cost_usd": 0.4296,
+  "results": [
+    {
+      "id": "comic-three-bubbles",
+      "expected": "pass",
+      "features": [
+        "three speech bubbles"
+      ],
+      "expected_regions": 3,
+      "detected_regions": 3,
+      "matched": 3,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 3,
+      "seconds": 93.0,
+      "cost_usd": 0.0436,
+      "detected_text": [
+        "FRESH BREAD?",
+        "EVERY MORNING",
+        "IS THAT YOU?"
+      ],
+      "note": ""
+    },
+    {
+      "id": "comic-thought-caption",
+      "expected": "pass",
+      "features": [
+        "caption banner",
+        "thought bubble"
+      ],
+      "expected_regions": 2,
+      "detected_regions": 2,
+      "matched": 2,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 1,
+      "seconds": 46.4,
+      "cost_usd": 0.0398,
+      "detected_text": [
+        "CHAPTER ONE",
+        "MAYBE MORE FLOUR?"
+      ],
+      "note": ""
+    },
+    {
+      "id": "comic-sfx",
+      "expected": "pass",
+      "features": [
+        "SFX"
+      ],
+      "expected_regions": 2,
+      "detected_regions": 2,
+      "matched": 2,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 4.6,
+      "cost_usd": 0.0065,
+      "detected_text": [
+        "BOOM!",
+        "CRASH!"
+      ],
+      "note": ""
+    },
+    {
+      "id": "crowded-shelf",
+      "expected": "pass",
+      "features": [
+        "crowded page",
+        "prices"
+      ],
+      "expected_regions": 8,
+      "detected_regions": 8,
+      "matched": 8,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 97.5,
+      "cost_usd": 0.0404,
+      "detected_text": [
+        "RYE 4.50",
+        "BAGUETTE 3.00",
+        "SOURDOUGH 6.50",
+        "BRIOCHE 5.00",
+        "FOCACCIA 7.25",
+        "PITA 2.75",
+        "CAKE 8.00",
+        "TARTS 9.50"
+      ],
+      "note": ""
+    },
+    {
+      "id": "tiny-hours",
+      "expected": "pass",
+      "features": [
+        "tiny text",
+        "opening times"
+      ],
+      "expected_regions": 1,
+      "detected_regions": 4,
+      "matched": 1,
+      "recall": 1.0,
+      "splits": 3,
+      "cer": 0.794,
+      "bubbles": 0,
+      "seconds": 62.9,
+      "cost_usd": 0.0373,
+      "detected_text": [
+        "OPENING HOURS",
+        "MON-FRI 07:00 - 19:00",
+        "SAT 08:00 - 16:00",
+        "CLOSED SUNDAY"
+      ],
+      "note": ""
+    },
+    {
+      "id": "poster-title",
+      "expected": "pass",
+      "features": [
+        "large title",
+        "small print"
+      ],
+      "expected_regions": 2,
+      "detected_regions": 2,
+      "matched": 2,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.017,
+      "bubbles": 0,
+      "seconds": 61.9,
+      "cost_usd": 0.04,
+      "detected_text": [
+        "NIGHT MARKET",
+        "FRIDAY 8:00 HALL 3 FREE ENTRY"
+      ],
+      "note": ""
+    },
+    {
+      "id": "poster-lowcontrast",
+      "expected": "pass",
+      "features": [
+        "low contrast"
+      ],
+      "expected_regions": 2,
+      "detected_regions": 2,
+      "matched": 2,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 68.0,
+      "cost_usd": 0.0411,
+      "detected_text": [
+        "NIGHT MARKET",
+        "FRIDAY 18:00 HALL 3 FREE ENTRY"
+      ],
+      "note": ""
+    },
+    {
+      "id": "menu-prices",
+      "expected": "pass",
+      "features": [
+        "prices",
+        "3-4 digit numbers",
+        "decimals",
+        "times"
+      ],
+      "expected_regions": 7,
+      "detected_regions": 7,
+      "matched": 5,
+      "recall": 0.71,
+      "splits": 2,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 57.8,
+      "cost_usd": 0.0415,
+      "detected_text": [
+        "TODAY'S MENU",
+        "SOURDOUGH 6.50",
+        "1200",
+        "BRIOCHE 5.00",
+        "145",
+        "OPEN 08:30 - 19:45",
+        "12.50"
+      ],
+      "note": ""
+    },
+    {
+      "id": "chalkboard",
+      "expected": "pass",
+      "features": [
+        "chalk text"
+      ],
+      "expected_regions": 3,
+      "detected_regions": 3,
+      "matched": 3,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 69.8,
+      "cost_usd": 0.0445,
+      "detected_text": [
+        "TODAY'S LOAF",
+        "SOURDOUGH 6.00",
+        "RYE 4.50"
+      ],
+      "note": ""
+    },
+    {
+      "id": "no-text",
+      "expected": "pass",
+      "features": [
+        "zero regions"
+      ],
+      "expected_regions": 0,
+      "detected_regions": 0,
+      "matched": 0,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": null,
+      "bubbles": 0,
+      "seconds": 2.3,
+      "cost_usd": 0.0049,
+      "detected_text": [],
+      "note": ""
+    },
+    {
+      "id": "poster-curved",
+      "expected": "fail",
+      "features": [
+        "curved headline"
+      ],
+      "expected_regions": 1,
+      "detected_regions": 1,
+      "matched": 1,
+      "recall": 1.0,
+      "splits": 0,
+      "cer": 0.0,
+      "bubbles": 0,
+      "seconds": 41.4,
+      "cost_usd": 0.0234,
+      "detected_text": [
+        "SUNSET TOURS"
+      ],
+      "note": "model-rendered curved headline; manual transcription"
+    },
+    {
+      "id": "label-photo",
+      "expected": "fail",
+      "features": [
+        "photo-like background",
+        "handwritten label"
+      ],
+      "expected_regions": 1,
+      "detected_regions": 3,
+      "matched": 1,
+      "recall": 1.0,
+      "splits": 2,
+      "cer": 0.524,
+      "bubbles": 0,
+      "seconds": 35.5,
+      "cost_usd": 0.0297,
+      "detected_text": [
+        "WILDFLOWER",
+        "HONEY",
+        "500g"
+      ],
+      "note": "model-rendered handwriting on a photo-like label; manual transcription"
+    },
+    {
+      "id": "sign-handwriting",
+      "expected": "fail",
+      "features": [
+        "handwriting",
+        "chalk"
+      ],
+      "expected_regions": 1,
+      "detected_regions": 3,
+      "matched": 1,
+      "recall": 1.0,
+      "splits": 2,
+      "cer": 0.706,
+      "bubbles": 0,
+      "seconds": 67.4,
+      "cost_usd": 0.0369,
+      "detected_text": [
+        "FRESH",
+        "BREAD",
+        "DAILY"
+      ],
+      "note": "model-rendered handwriting; manual transcription"
+    }
+  ]
+}
