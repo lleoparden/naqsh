@@ -1,0 +1,274 @@
+{
+  "pages": [
+    {
+      "id": "comic-bakery-flat",
+      "image": "pages/comic-bakery-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "3 speech bubbles",
+        "caption banner"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "dialogue",
+          "box": [
+            70,
+            120,
+            590,
+            420
+          ],
+          "text": "FRESH BREAD?"
+        },
+        {
+          "id": "t2",
+          "type": "dialogue",
+          "box": [
+            660,
+            260,
+            1210,
+            560
+          ],
+          "text": "EVERY MORNING"
+        },
+        {
+          "id": "t3",
+          "type": "dialogue",
+          "box": [
+            260,
+            1180,
+            900,
+            1460
+          ],
+          "text": "IS THAT YOU?"
+        },
+        {
+          "id": "t4",
+          "type": "signage",
+          "box": [
+            180,
+            40,
+            1100,
+            150
+          ],
+          "text": "CHAPTER ONE"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple bakery counter with a baker, bread shelves and lamps. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    },
+    {
+      "id": "cafe-poster-flat",
+      "image": "pages/cafe-poster-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "large title",
+        "small subtitle"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            100,
+            180,
+            1180,
+            480
+          ],
+          "text": "THE COFFEE CORNER"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            180,
+            1480,
+            1100,
+            1680
+          ],
+          "text": "OPEN EVERY DAY"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple cafe storefront with an awning, a cup and a plant. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    },
+    {
+      "id": "honey-label-flat",
+      "image": "pages/honey-label-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "product label"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            300,
+            780,
+            980,
+            900
+          ],
+          "text": "WILDFLOWER"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            300,
+            920,
+            980,
+            1040
+          ],
+          "text": "HONEY"
+        },
+        {
+          "id": "t3",
+          "type": "signage",
+          "box": [
+            300,
+            1060,
+            980,
+            1180
+          ],
+          "text": "SMALL BATCH"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple honey jar on a wooden table, blank label area, wheat stems. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    },
+    {
+      "id": "chalkboard-flat",
+      "image": "pages/chalkboard-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "chalkboard",
+        "3 lines"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            120,
+            260,
+            1160,
+            640
+          ],
+          "text": "TODAY'S BREAD"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            120,
+            700,
+            1160,
+            1080
+          ],
+          "text": "SOURDOUGH"
+        },
+        {
+          "id": "t3",
+          "type": "signage",
+          "box": [
+            120,
+            1140,
+            1160,
+            1520
+          ],
+          "text": "RYE"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple dark chalkboard with a wooden frame, empty centre. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    },
+    {
+      "id": "postcard-flat",
+      "image": "pages/postcard-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "travel postcard"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            120,
+            200,
+            1160,
+            620
+          ],
+          "text": "SEASIDE POSTCARD"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            220,
+            1500,
+            1060,
+            1680
+          ],
+          "text": "WISH YOU WERE HERE"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple seaside landscape with a lighthouse and gulls, large calm sky. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    },
+    {
+      "id": "children-flat",
+      "image": "pages/children-flat.jpg",
+      "expected": "pass",
+      "features": [
+        "children's book",
+        "2 bubbles"
+      ],
+      "regions": [
+        {
+          "id": "t1",
+          "type": "dialogue",
+          "box": [
+            80,
+            140,
+            640,
+            460
+          ],
+          "text": "LET'S GO OUTSIDE!"
+        },
+        {
+          "id": "t2",
+          "type": "dialogue",
+          "box": [
+            640,
+            360,
+            1200,
+            680
+          ],
+          "text": "WAIT FOR ME!"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter Bold",
+        "prompt": "A simple friendly rabbit in a meadow with flowers, two large plain sky areas. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no shading, no lettering, no text, no logos, no watermark, portrait 2:3."
+      }
+    }
+  ]
+}
