@@ -443,6 +443,22 @@ Checks: 72 backend tests, comic 10/10, menu 6/6, Group 1 12/12, Group 2 8/8, axe
 - API: `POST /api/localize` accepts `background_layers=true|false`; the receipt records `background: {enabled: false, skipped: "disabled by request"}` when off.
 - This was added because the background pass visibly increased processing time; no speed claim is recorded until timed with the switch off vs on.
 
+### English test suite + demo candidates (2026-10-31)
+
+- 13-page English suite (10 code-drawn text over Muse Image art, 3 model-rendered-text
+  expected-fail pages) + 40 translation strings in both registers. Details and run
+  commands: `docs/test-suite.md`.
+- Live eval (13 pages, background layers on): cost **$0.4296**, **2.3–97.5 s/page**,
+  **$0.0049–$0.0445/page**, recall **0.71–1.00** on pass pages (mean 0.97), CER
+  **0.0–0.794**; comic 3 bubbles = 3 bubble layers; no-text page = 0 regions.
+- Translation: 40/40 in both registers; Arabic ratio 0.968–1.0 (Egyptian) / 1.0 (MSA);
+  digits preserved 38/40 Egyptian, 37/40 MSA; review sheet at
+  `L:\naqsh-review\arabic-review\review.md`. No correctness claim.
+- Five demo candidates, one live run each: **45.2–93.6 s**, **$0.0251–$0.0459**;
+  contact sheet at `L:\naqsh-review\demo-candidates\contact-sheet.jpg`.
+- Task spend: **$0.8184** of the $1.00 cap (images $0.18 + live runs $0.6279 +
+  translation $0.0105).
+
 ### Time-saved claim — removed
 
 Owner decision, 2026-10-29: **no time-saved ratio is claimed**. The owner is not an
