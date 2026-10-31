@@ -46,8 +46,14 @@ Naqsh** (Muse Spark translation, Muse Image repaint, SAM masks).
 - Author field: **Work Projects Administration Poster Collection**
 - Modification: translated into Arabic by Naqsh.
 
-## Pepper&Carrot — not used
+## Pepper&Carrot — rights stop (not used)
 
-Pepper&Carrot is CC BY 4.0 **and** its license page states **“AI derivation prohibited on
-all my art, lore, stories and comics.”** No Pepper&Carrot file was downloaded or fed to a
-model. See `docs/demo-v3.md`.
+Checked 2026-10-31 at
+<https://www.peppercarrot.com/en/about/index.html#license>. The page licenses the comics
+under CC BY 4.0 **and** states:
+
+> **“AI derivation prohibited on all my art, lore, stories and comics”**
+
+Running a page through Muse Image repaint or Muse Spark translation is an AI derivation.
+**No Pepper&Carrot file was downloaded, committed, hashed, or fed to a model; no fetch
+script exists.** This is a rights stop, not a technical failure.
