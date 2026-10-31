@@ -19,3 +19,13 @@ Notes:
 - No time-saved ratio is claimed; saying **faster** is allowed. The demo script and
   recording guide repeat this.
 - Live mode is opt-in (`LIVE_MODE=1`); demo replay is the default and needs no key.
+
+
+## 2026-10-31 (part 2) — judge-path hardening
+
+| Item | Issue / PR | Status | Evidence |
+|---|---|---|---|
+| Spark region names | #98 / #107 | **DONE** | names cached in the document and shown in Layers; `docs/evidence/ui/region-names.json` |
+| UI polish pass | #99 / #108 | **DONE** | state component + spacing; `L:\naqsh-review\group3\` screenshots |
+| ~8 px after-side offset, browser re-check | #136 / #141 | **DONE (fix landed; demo cache NOT rebuilt)** | reproduced at 1:1 (source y=299 vs composite y=294), coverage/line-band fix + tests; offline recheck on live job 5313ddafca2e; demo cache still holds old composites |
+| Demo candidates v2 | #178 / #181, #182 | **DONE — 6 pages, 2 pass / 4 fail** | live prefilter `docs/evidence/demo-v2/summary.json`; contact sheet `L:\naqsh-review\demo-candidates-v2\contact-sheet.jpg` |
