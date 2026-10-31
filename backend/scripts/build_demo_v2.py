@@ -36,8 +36,8 @@ PAGES_SPEC = {
     "comic-bakery-flat": {
         "prompt": "A simple bakery counter with a baker, bread shelves and lamps. " + STYLE,
         "containers": [
-            ("bubble", [70, 120, 590, 420]),
-            ("bubble", [660, 260, 1210, 560]),
+            ("bubble", [140, 140, 600, 420]),
+            ("bubble", [660, 280, 1140, 560]),
             ("bubble", [260, 1180, 900, 1460]),
             ("banner", [180, 40, 1100, 150]),
         ],
@@ -47,7 +47,7 @@ PAGES_SPEC = {
     "cafe-poster-flat": {
         "prompt": "A simple cafe storefront with an awning, a cup and a plant. " + STYLE,
         "containers": [
-            ("panel", [100, 180, 1180, 480]),
+            ("panel", [140, 200, 1140, 480]),
             ("panel", [180, 1480, 1100, 1680]),
         ],
         "texts": ["THE COFFEE CORNER", "OPEN EVERY DAY"],
@@ -68,13 +68,13 @@ PAGES_SPEC = {
     },
     "postcard-flat": {
         "prompt": "A simple seaside landscape with a lighthouse and gulls, large calm sky. " + STYLE,
-        "containers": [("panel", [120, 200, 1160, 620]), ("panel", [220, 1500, 1060, 1680])],
+        "containers": [("panel", [160, 220, 1120, 620]), ("panel", [220, 1500, 1060, 1680])],
         "texts": ["SEASIDE POSTCARD", "WISH YOU WERE HERE"],
         "features": ["travel postcard"],
     },
     "children-flat": {
         "prompt": "A simple friendly rabbit in a meadow with flowers, two large plain sky areas. " + STYLE,
-        "containers": [("bubble", [80, 140, 640, 460]), ("bubble", [640, 360, 1200, 680])],
+        "containers": [("bubble", [140, 160, 620, 460]), ("bubble", [660, 380, 1140, 680])],
         "texts": ["LET'S GO OUTSIDE!", "WAIT FOR ME!"],
         "features": ["children's book", "2 bubbles"],
     },

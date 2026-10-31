@@ -13,9 +13,9 @@
           "id": "t1",
           "type": "dialogue",
           "box": [
-            70,
-            120,
-            590,
+            140,
+            140,
+            600,
             420
           ],
           "text": "FRESH BREAD?"
@@ -25,8 +25,8 @@
           "type": "dialogue",
           "box": [
             660,
-            260,
-            1210,
+            280,
+            1140,
             560
           ],
           "text": "EVERY MORNING"
@@ -73,9 +73,9 @@
           "id": "t1",
           "type": "signage",
           "box": [
-            100,
-            180,
-            1180,
+            140,
+            200,
+            1140,
             480
           ],
           "text": "THE COFFEE CORNER"
@@ -207,9 +207,9 @@
           "id": "t1",
           "type": "signage",
           "box": [
-            120,
-            200,
-            1160,
+            160,
+            220,
+            1120,
             620
           ],
           "text": "SEASIDE POSTCARD"
@@ -245,9 +245,9 @@
           "id": "t1",
           "type": "dialogue",
           "box": [
-            80,
             140,
-            640,
+            160,
+            620,
             460
           ],
           "text": "LET'S GO OUTSIDE!"
@@ -256,9 +256,9 @@
           "id": "t2",
           "type": "dialogue",
           "box": [
-            640,
-            360,
-            1200,
+            660,
+            380,
+            1140,
             680
           ],
           "text": "WAIT FOR ME!"
