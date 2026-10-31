@@ -1,0 +1,727 @@
+{
+  "receipt": {
+    "id": "270d7b503a40",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 3501,
+        "cost_usd": 0.007618,
+        "input_tokens": 3786,
+        "output_tokens": 679,
+        "reasoning_tokens": 334,
+        "images": 0,
+        "regions": 4,
+        "regions_before_dedupe": 4,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 13765,
+        "cost_usd": 0.0025,
+        "masks": 4,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 13856,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 976,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          -2
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 2,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 7.2,
+        "ring_max_abs_diff": 21.14,
+        "ring_per_region": [
+          21.14,
+          2.78,
+          2.71,
+          2.17
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 3407,
+        "cost_usd": 0.002179,
+        "checked": 4,
+        "residual": [
+          "t1",
+          "t2",
+          "t3"
+        ],
+        "notes": {
+          "t1": "bottom fragments of black letters peeking below beige cover bar",
+          "t2": "clear FRESH BREAD? text",
+          "t3": "clear EVERY MORNING text",
+          "t4": "clean empty bubble, no text"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 25725,
+        "cost_usd": 0.012366,
+        "retried": "t1, t2, t3",
+        "still_residual": [
+          "t1",
+          "t2",
+          "t3"
+        ],
+        "notes": {
+          "t1": "clipped bottoms of large letters visible on middle line",
+          "t2": "FRESH BREAD? clearly visible",
+          "t3": "EVERY MORNING clearly visible",
+          "t4": "clean empty bubble, no text"
+        },
+        "shift": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 3939,
+        "cost_usd": 0.0,
+        "strategies": {
+          "t1": "flat-fill",
+          "t2": "inpaint",
+          "t3": "inpaint"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 3036,
+        "cost_usd": 0.002332,
+        "checked": 4,
+        "residual": [
+          "t1"
+        ],
+        "notes": {
+          "t1": "black tops of letters clipped at top edge",
+          "t2": "clean empty bubble",
+          "t3": "clean empty bubble",
+          "t4": "clean empty box"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 4043,
+        "cost_usd": 0.0025,
+        "bubbles": 3,
+        "sam": 3,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 139,
+        "cost_usd": 0.0,
+        "regions": 4,
+        "strategies": {
+          "t1": "flat-fill",
+          "t2": "inpaint",
+          "t3": "inpaint",
+          "t4": "muse-retry"
+        },
+        "types": {
+          "t1": "caption",
+          "t2": "dialogue",
+          "t3": "dialogue",
+          "t4": "dialogue"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 3034,
+        "cost_usd": 0.002222,
+        "flagged": [],
+        "issues": {},
+        "fixed": [],
+        "retranslated": [],
+        "still_flagged": []
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "CHAPTER ONE",
+        "translation_ar": "الفصل الأول",
+        "style": "title",
+        "font_style": "bold uppercase sans",
+        "type": "caption",
+        "action": "translate",
+        "bbox": [
+          329,
+          71,
+          943,
+          142
+        ],
+        "container": [
+          343,
+          75,
+          938,
+          140
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 49,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "الفصل الأول"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t2",
+        "source_text": "FRESH BREAD?",
+        "translation_ar": "عيش طازة؟",
+        "style": "speech",
+        "font_style": "bold uppercase sans",
+        "type": "dialogue",
+        "action": "translate",
+        "bbox": [
+          56,
+          257,
+          669,
+          351
+        ],
+        "container": [
+          65,
+          259,
+          669,
+          322
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "عيش طازة؟"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t3",
+        "source_text": "EVERY MORNING",
+        "translation_ar": "كل يوم الصبح",
+        "style": "speech",
+        "font_style": "bold uppercase sans",
+        "type": "dialogue",
+        "action": "translate",
+        "bbox": [
+          540,
+          420,
+          1267,
+          493
+        ],
+        "container": [
+          547,
+          420,
+          1253,
+          463
+        ],
+        "mask_path": "mask-t3.png",
+        "font_family": "tajawal-bold",
+        "font_size": 26,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "كل يوم الصبح"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t4",
+        "source_text": "IS THAT YOU?",
+        "translation_ar": "ده انت؟",
+        "style": "speech",
+        "font_style": "bold uppercase sans",
+        "type": "dialogue",
+        "action": "translate",
+        "bbox": [
+          289,
+          1281,
+          860,
+          1363
+        ],
+        "container": [
+          292,
+          1300,
+          860,
+          1360
+        ],
+        "mask_path": "mask-t4.png",
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "ده انت؟"
+        ],
+        "strategy": "muse-retry"
+      }
+    ],
+    "warnings": [],
+    "total_cost_usd": 0.041719,
+    "total_ms": 61788,
+    "stage_ms_sum": 75421
+  },
+  "document": {
+    "id": "270d7b503a40",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "bubble-t2",
+        "kind": "bubble",
+        "type": "bubble",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          142,
+          151,
+          599,
+          419
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -500,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Bubble · t2",
+        "shape": "rect",
+        "asset": "bubble-t2.png"
+      },
+      {
+        "id": "bubble-t3",
+        "kind": "bubble",
+        "type": "bubble",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          663,
+          282,
+          1140,
+          559
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -499,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Bubble · t3",
+        "shape": "rect",
+        "asset": "bubble-t3.png"
+      },
+      {
+        "id": "bubble-t4",
+        "kind": "bubble",
+        "type": "bubble",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          263,
+          1182,
+          898,
+          1459
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -498,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Bubble · t4",
+        "shape": "rect",
+        "asset": "bubble-t4.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "caption",
+        "action": "translate",
+        "source_text": "CHAPTER ONE",
+        "arabic": {
+          "egyptian": "الفصل الأول",
+          "msa": "الفصل الأول"
+        },
+        "box": [
+          329,
+          71,
+          943,
+          142
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 49,
+        "lines": [
+          {
+            "text": "الفصل الأول",
+            "size": 49,
+            "x": 636.0,
+            "baseline": 120.0,
+            "width": 264,
+            "height": 47
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "الفصل الأول",
+            "msa": "الفصل الأول"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 49,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            329,
+            71,
+            943,
+            142
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "dialogue",
+        "action": "translate",
+        "source_text": "FRESH BREAD?",
+        "arabic": {
+          "egyptian": "عيش طازة؟",
+          "msa": "عيش طازة؟"
+        },
+        "box": [
+          56,
+          257,
+          669,
+          351
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "lines": [
+          {
+            "text": "عيش طازة؟",
+            "size": 45,
+            "x": 362.5,
+            "baseline": 316.5,
+            "width": 229,
+            "height": 47
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "عيش طازة؟",
+            "msa": "عيش طازة؟"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 45,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            56,
+            257,
+            669,
+            351
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t3",
+        "kind": "text",
+        "type": "dialogue",
+        "action": "translate",
+        "source_text": "EVERY MORNING",
+        "arabic": {
+          "egyptian": "كل يوم الصبح",
+          "msa": "كل يوم الصبح"
+        },
+        "box": [
+          540,
+          420,
+          1267,
+          493
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 26,
+        "lines": [
+          {
+            "text": "كل يوم الصبح",
+            "size": 26,
+            "x": 903.5,
+            "baseline": 460.0,
+            "width": 156,
+            "height": 27
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 2,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "كل يوم الصبح",
+            "msa": "كل يوم الصبح"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 26,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            540,
+            420,
+            1267,
+            493
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t4",
+        "kind": "text",
+        "type": "dialogue",
+        "action": "translate",
+        "source_text": "IS THAT YOU?",
+        "arabic": {
+          "egyptian": "ده انت؟",
+          "msa": "ده انت؟"
+        },
+        "box": [
+          289,
+          1281,
+          860,
+          1363
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "lines": [
+          {
+            "text": "ده انت؟",
+            "size": 45,
+            "x": 574.5,
+            "baseline": 1337.0,
+            "width": 144,
+            "height": 32
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 3,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "ده انت؟",
+            "msa": "ده انت؟"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 45,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            289,
+            1281,
+            860,
+            1363
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  }
+}

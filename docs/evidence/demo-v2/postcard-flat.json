@@ -1,0 +1,431 @@
+{
+  "receipt": {
+    "id": "b92ef05d024d",
+    "register": "egyptian",
+    "width": 1280,
+    "height": 1920,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 3184,
+        "cost_usd": 0.006258,
+        "input_tokens": 3786,
+        "output_tokens": 359,
+        "reasoning_tokens": 174,
+        "images": 0,
+        "regions": 2,
+        "regions_before_dedupe": 2,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 12977,
+        "cost_usd": 0.0025,
+        "masks": 2,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 13029,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1280,
+          1920
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 783,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          0
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.0,
+          1.0
+        ],
+        "flat_interiors_cleaned": 2,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 5.04,
+        "ring_max_abs_diff": 9.02,
+        "ring_per_region": [
+          1.07,
+          9.02
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 4873,
+        "cost_usd": 0.001764,
+        "checked": 2,
+        "residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "black letter fragments SEASIDE POSTCARD at top",
+          "t2": "WISH YOU WERE HERE text visible"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 18725,
+        "cost_usd": 0.012236,
+        "retried": "t1, t2",
+        "still_residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "black letter fragments SEASIDE POSTCARD along top edge",
+          "t2": "WISH YOU WERE HERE text visible"
+        },
+        "shift": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 6342,
+        "cost_usd": 0.0,
+        "strategies": {
+          "t1": "flat-fill",
+          "t2": "flat-fill"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 8609,
+        "cost_usd": 0.001488,
+        "checked": 2,
+        "residual": [
+          "t1",
+          "t2"
+        ],
+        "notes": {
+          "t1": "partial SEASIDE POSTCARD lettering at top edge",
+          "t2": "faint WISH YOU WERE HERE in black bar"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 62,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 61,
+        "cost_usd": 0.0,
+        "regions": 2,
+        "strategies": {
+          "t1": "flat-fill",
+          "t2": "flat-fill"
+        },
+        "types": {
+          "t1": "signage",
+          "t2": "caption"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 8147,
+        "cost_usd": 0.006248,
+        "flagged": [
+          "t2"
+        ],
+        "issues": {
+          "t2": "unreadable"
+        },
+        "fixed": [
+          "t2"
+        ],
+        "retranslated": [],
+        "still_flagged": [
+          "t2"
+        ]
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "SEASIDE POSTCARD",
+        "translation_ar": "كارت من المصيف",
+        "style": "title",
+        "font_style": "bold uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          198,
+          432,
+          1088,
+          528
+        ],
+        "container": [
+          220,
+          432,
+          1062,
+          474
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 27,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "كارت من المصيف"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t2",
+        "source_text": "WISH YOU WERE HERE",
+        "translation_ar": "ياريتك كنت هنا",
+        "style": "caption",
+        "font_style": "bold uppercase sans",
+        "type": "caption",
+        "action": "translate",
+        "bbox": [
+          168,
+          1557,
+          1130,
+          1640
+        ],
+        "container": [
+          168,
+          1561,
+          1126,
+          1629
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal-bold",
+        "font_size": 41,
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "lines": [
+          "ياريتك كنت هنا"
+        ],
+        "strategy": "flat-fill"
+      }
+    ],
+    "warnings": [],
+    "total_cost_usd": 0.040494,
+    "total_ms": 63901,
+    "stage_ms_sum": 76792
+  },
+  "document": {
+    "id": "b92ef05d024d",
+    "width": 1280,
+    "height": 1920,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1280,
+          1920
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "SEASIDE POSTCARD",
+        "arabic": {
+          "egyptian": "كارت من المصيف",
+          "msa": "كارت من المصيف"
+        },
+        "box": [
+          198,
+          432,
+          1088,
+          528
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 27,
+        "lines": [
+          {
+            "text": "كارت من المصيف",
+            "size": 27,
+            "x": 643.0,
+            "baseline": 485.5,
+            "width": 203,
+            "height": 25
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "كارت من المصيف",
+            "msa": "كارت من المصيف"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 27,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            198,
+            432,
+            1088,
+            528
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "caption",
+        "action": "translate",
+        "source_text": "WISH YOU WERE HERE",
+        "arabic": {
+          "egyptian": "ياريتك كنت هنا",
+          "msa": "ياريتك كنت هنا"
+        },
+        "box": [
+          168,
+          1557,
+          1130,
+          1640
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 41,
+        "lines": [
+          {
+            "text": "ياريتك كنت هنا",
+            "size": 41,
+            "x": 649.0,
+            "baseline": 1607.5,
+            "width": 258,
+            "height": 38
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          26,
+          26
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "ياريتك كنت هنا",
+            "msa": "ياريتك كنت هنا"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 41,
+          "color": [
+            26,
+            26,
+            26
+          ],
+          "box": [
+            168,
+            1557,
+            1130,
+            1640
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  }
+}

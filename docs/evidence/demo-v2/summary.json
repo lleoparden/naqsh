@@ -1,0 +1,106 @@
+{
+  "pages": [
+    {
+      "id": "comic-bakery-flat",
+      "regions_expected": 4,
+      "regions_detected": 4,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "seconds": 61.8,
+      "cost_usd": 0.0417,
+      "verify": {
+        "t1": "bottom fragments of black letters peeking below beige cover bar",
+        "t2": "clear FRESH BREAD? text",
+        "t3": "clear EVERY MORNING text",
+        "t4": "clean empty bubble, no text"
+      },
+      "plate_diff_outside": 5.205,
+      "pass": false,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\270d7b503a40\\output.png"
+    },
+    {
+      "id": "cafe-poster-flat",
+      "regions_expected": 2,
+      "regions_detected": 2,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "seconds": 56.4,
+      "cost_usd": 0.0404,
+      "verify": {
+        "t1": "THE COFFEE CORNER lettering visible, partially cropped",
+        "t2": "OPEN EVERY DAY lettering partially visible at bottom"
+      },
+      "plate_diff_outside": 6.126,
+      "pass": true,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\51865827d46d\\output.png"
+    },
+    {
+      "id": "honey-label-flat",
+      "regions_expected": 3,
+      "regions_detected": 1,
+      "recall": 0.33,
+      "cer": 4.6,
+      "splits": 0,
+      "seconds": 32.4,
+      "cost_usd": 0.0232,
+      "verify": {
+        "t1": "clean beige background, no text marks"
+      },
+      "plate_diff_outside": 4.41,
+      "pass": false,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\9ada8040ec2c\\output.png"
+    },
+    {
+      "id": "chalkboard-flat",
+      "regions_expected": 3,
+      "regions_detected": 1,
+      "recall": 0.33,
+      "cer": 2.0,
+      "splits": 0,
+      "seconds": 48.1,
+      "cost_usd": 0.0384,
+      "verify": {
+        "t1": "clear TODAY'S BREAD SOURDOUGH text"
+      },
+      "plate_diff_outside": 2.485,
+      "pass": false,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\6246f5fe0e48\\output.png"
+    },
+    {
+      "id": "postcard-flat",
+      "regions_expected": 2,
+      "regions_detected": 2,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "seconds": 63.9,
+      "cost_usd": 0.0405,
+      "verify": {
+        "t1": "black letter fragments SEASIDE POSTCARD at top",
+        "t2": "WISH YOU WERE HERE text visible"
+      },
+      "plate_diff_outside": 4.284,
+      "pass": false,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\b92ef05d024d\\output.png"
+    },
+    {
+      "id": "children-flat",
+      "regions_expected": 2,
+      "regions_detected": 2,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "seconds": 49.2,
+      "cost_usd": 0.0385,
+      "verify": {
+        "t1": "black letter-bottom fragments along top edge above box",
+        "t2": "black letter-bottom fragments along top edge above box"
+      },
+      "plate_diff_outside": 7.376,
+      "pass": true,
+      "result": "L:\\naqsh\\backend\\.cache\\jobs\\b64fd9a867da\\output.png"
+    }
+  ]
+}
