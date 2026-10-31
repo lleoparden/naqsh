@@ -1,0 +1,287 @@
+{
+  "id": "4b1912cbcd74",
+  "width": 1920,
+  "height": 2596,
+  "register": "egyptian",
+  "numerals": "latin",
+  "images": {
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "source": "source.png"
+  },
+  "layers": [
+    {
+      "id": "t1",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "RANGER NATURALIST SERVICE",
+      "arabic": {
+        "egyptian": "خدمة المرشد الطبيعي",
+        "msa": "خدمة المرشد الطبيعي"
+      },
+      "box": [
+        96,
+        99,
+        1805,
+        195
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 48,
+      "lines": [
+        {
+          "text": "خدمة المرشد الطبيعي",
+          "size": 48,
+          "x": 950.5,
+          "baseline": 156.5,
+          "width": 461,
+          "height": 59
+        }
+      ],
+      "align": "center",
+      "color": [
+        212,
+        168,
+        122
+      ],
+      "z": 0,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t2",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "FIELD TRIPS - CAMPFIRE PROGRAMS NATURAL HISTORY TALKS & EXHIBITS GENERAL INFORMATION",
+      "arabic": {
+        "egyptian": "رحلات وسهرة نار وكلام طبيعة ومعلومات عامة",
+        "msa": "رحلات وسهرة نار وكلام طبيعة ومعلومات عامة"
+      },
+      "box": [
+        902,
+        254,
+        1766,
+        410
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 48,
+      "lines": [
+        {
+          "text": "رحلات وسهرة نار وكلام",
+          "size": 48,
+          "x": 1334.0,
+          "baseline": 313.5,
+          "width": 474,
+          "height": 50
+        },
+        {
+          "text": "طبيعة ومعلومات عامة",
+          "size": 48,
+          "x": 1334.0,
+          "baseline": 373.5,
+          "width": 473,
+          "height": 45
+        }
+      ],
+      "align": "center",
+      "color": [
+        212,
+        168,
+        122
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "ZION",
+      "arabic": {
+        "egyptian": "زيون",
+        "msa": "زيون"
+      },
+      "box": [
+        605,
+        2134,
+        1363,
+        2230
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 57,
+      "lines": [
+        {
+          "text": "زيون",
+          "size": 57,
+          "x": 984.0,
+          "baseline": 2195.0,
+          "width": 107,
+          "height": 52
+        }
+      ],
+      "align": "center",
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "z": 2,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t4",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "NATIONAL PARK",
+      "arabic": {
+        "egyptian": "الحديقة الوطنية",
+        "msa": "الحديقة الوطنية"
+      },
+      "box": [
+        202,
+        2259,
+        1718,
+        2329
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 41,
+      "lines": [
+        {
+          "text": "الحديقة الوطنية",
+          "size": 41,
+          "x": 960.0,
+          "baseline": 2303.5,
+          "width": 278,
+          "height": 39
+        }
+      ],
+      "align": "center",
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "z": 3,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t5",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+      "arabic": {
+        "egyptian": "وزارة الداخلية الأمريكية",
+        "msa": "وزارة الداخلية الأمريكية"
+      },
+      "box": [
+        163,
+        2365,
+        787,
+        2445
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 56,
+      "lines": [
+        {
+          "text": "وزارة الداخلية الأمريكية",
+          "size": 56,
+          "x": 475.0,
+          "baseline": 2420.0,
+          "width": 548,
+          "height": 56
+        }
+      ],
+      "align": "center",
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "z": 4,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t6",
+      "kind": "text",
+      "type": "signage",
+      "action": "translate",
+      "source_text": "NATIONAL PARK SERVICE",
+      "arabic": {
+        "egyptian": "هيئة الحدائق القومية",
+        "msa": "هيئة الحدائق القومية"
+      },
+      "box": [
+        1142,
+        2368,
+        1805,
+        2448
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 51,
+      "lines": [
+        {
+          "text": "هيئة الحدائق القومية",
+          "size": 51,
+          "x": 1473.5,
+          "baseline": 2421.0,
+          "width": 455,
+          "height": 50
+        }
+      ],
+      "align": "center",
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "z": 5,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    }
+  ]
+}

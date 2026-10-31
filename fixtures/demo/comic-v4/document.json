@@ -1,0 +1,215 @@
+{
+  "id": "81a193834757",
+  "width": 1280,
+  "height": 1920,
+  "register": "egyptian",
+  "numerals": "latin",
+  "images": {
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "source": "source.png"
+  },
+  "layers": [
+    {
+      "id": "t1",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "FRESH BREAD?",
+      "arabic": {
+        "egyptian": "عيش طازه؟",
+        "msa": "عيش طازه؟"
+      },
+      "box": [
+        108,
+        263,
+        440,
+        482
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 88,
+      "lines": [
+        {
+          "text": "عيش",
+          "size": 88,
+          "x": 274.0,
+          "baseline": 350.5,
+          "width": 200,
+          "height": 91
+        },
+        {
+          "text": "طازه؟",
+          "size": 88,
+          "x": 274.0,
+          "baseline": 448.5,
+          "width": 215,
+          "height": 77
+        }
+      ],
+      "align": "center",
+      "color": [
+        26,
+        126,
+        138
+      ],
+      "z": 0,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t2",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "EVERY MORNING",
+      "arabic": {
+        "egyptian": "كل يوم الصبح",
+        "msa": "كل يوم الصبح"
+      },
+      "box": [
+        468,
+        232,
+        922,
+        445
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 86,
+      "lines": [
+        {
+          "text": "كل يوم",
+          "size": 86,
+          "x": 695.0,
+          "baseline": 299.5,
+          "width": 254,
+          "height": 84
+        },
+        {
+          "text": "الصبح",
+          "size": 86,
+          "x": 695.0,
+          "baseline": 400.5,
+          "width": 230,
+          "height": 89
+        }
+      ],
+      "align": "center",
+      "color": [
+        201,
+        106,
+        80
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "IS THAT YOU?",
+      "arabic": {
+        "egyptian": "هو ده انت؟",
+        "msa": "هو ده انت؟"
+      },
+      "box": [
+        916,
+        390,
+        1212,
+        599
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 112,
+      "lines": [
+        {
+          "text": "هو ده",
+          "size": 112,
+          "x": 1064.0,
+          "baseline": 460.5,
+          "width": 260,
+          "height": 77
+        },
+        {
+          "text": "انت؟",
+          "size": 112,
+          "x": 1064.0,
+          "baseline": 580.5,
+          "width": 214,
+          "height": 79
+        }
+      ],
+      "align": "center",
+      "color": [
+        231,
+        169,
+        61
+      ],
+      "z": 2,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t4",
+      "kind": "text",
+      "type": "caption",
+      "action": "translate",
+      "source_text": "CHAPTER ONE",
+      "arabic": {
+        "egyptian": "الفصل الأول",
+        "msa": "الفصل الأول"
+      },
+      "box": [
+        280,
+        1736,
+        1029,
+        1843
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 70,
+      "lines": [
+        {
+          "text": "الفصل الأول",
+          "size": 70,
+          "x": 654.5,
+          "baseline": 1809.0,
+          "width": 378,
+          "height": 67
+        }
+      ],
+      "align": "center",
+      "color": [
+        26,
+        126,
+        138
+      ],
+      "z": 3,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    }
+  ]
+}

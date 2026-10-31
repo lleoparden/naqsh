@@ -7,15 +7,16 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 DEMO = REPO / "fixtures" / "demo"
+FIXTURES = REPO / "assets" / "generated" / "fixtures"
 
 
 def manifest() -> list[dict]:
     return json.loads((DEMO / "manifest.json").read_text(encoding="utf-8"))
 
 
-def test_cache_has_the_five_curated_pages() -> None:
+def test_cache_has_the_curated_pages() -> None:
     names = {entry["name"] for entry in manifest()}
-    assert names == {"comic", "menu", "chalkboard", "sfx-comic", "label-fail"}
+    assert names == {"comic", "menu", "chalkboard", "sfx-comic", "label-fail", "phase1-baker", "comic-v4", "zion-limit"}
 
 
 def test_every_entry_has_files_and_a_real_hash() -> None:
@@ -23,7 +24,7 @@ def test_every_entry_has_files_and_a_real_hash() -> None:
         for key in ("receipt", "document", "plate", "source", "masks"):
             assert (DEMO / entry["name"] / entry["files"][key]).is_file(), (entry["name"], key)
         assert len(entry["sha256"]) == 64
-        fixture = REPO / "assets" / "generated" / "fixtures" / entry["fixture"]
+        fixture = REPO / entry["fixture"] if (REPO / entry["fixture"]).exists() else FIXTURES / entry["fixture"]
         assert hashlib.sha256(fixture.read_bytes()).hexdigest() == entry["sha256"]
 
 
