@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "file": "Grand_Canyon_National_Park__a_free_government_service_LCCN2007676131.jpg",
+      "sha256": "0549689168c6bd11b8b848e055c58fe0898b1d0b47c28be54e83ff47054bc44a",
+      "width": 1920,
+      "height": 2585,
+      "license": "Public domain"
+    },
+    {
+      "file": "Lassen_Volcanic_National_Park__Ranger_Naturalist_Service_LCCN2007676132.tif",
+      "sha256": "f4514ea75bcd781efd1c4056a6eb381876cd6b6262580a63d9b130148e0a5311",
+      "width": 1920,
+      "height": 2572,
+      "license": "Public domain"
+    },
+    {
+      "file": "Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.jpg",
+      "sha256": "2b546919cbfbb24c02e539354fee8b6353f010fc4165fc3b2e759ff572bd01a9",
+      "width": 1920,
+      "height": 2596,
+      "license": "Public domain"
+    }
+  ]
+}

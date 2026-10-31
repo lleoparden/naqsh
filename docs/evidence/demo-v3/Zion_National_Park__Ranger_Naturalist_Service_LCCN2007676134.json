@@ -1,0 +1,954 @@
+{
+  "receipt": {
+    "id": "dc076a5fee62",
+    "register": "egyptian",
+    "width": 1920,
+    "height": 2596,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 5536,
+        "cost_usd": 0.009376,
+        "input_tokens": 4682,
+        "output_tokens": 829,
+        "reasoning_tokens": 192,
+        "images": 0,
+        "regions": 7,
+        "regions_before_dedupe": 7,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 25158,
+        "cost_usd": 0.0025,
+        "masks": 7,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 25517,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1344,
+          1808
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 2424,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          -2
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.4286,
+          1.4358
+        ],
+        "flat_interiors_cleaned": 7,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 11.98,
+        "ring_max_abs_diff": 16.83,
+        "ring_per_region": [
+          5.63,
+          3.88,
+          12.91,
+          14.49,
+          13.36,
+          16.77,
+          16.83
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 2606,
+        "cost_usd": 0.003192,
+        "checked": 7,
+        "residual": [
+          "t1"
+        ],
+        "notes": {
+          "t1": "faint ghost lettering visible in blue band",
+          "t2": "clean blue field",
+          "t3": "artwork only, no text",
+          "t4": "clean solid fill",
+          "t5": "clean solid fill",
+          "t6": "clean solid fill",
+          "t7": "clean solid fill"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 31200,
+        "cost_usd": 0.013052,
+        "retried": "t1",
+        "still_residual": [
+          "t1"
+        ],
+        "notes": {
+          "t1": "faint ghost RAMEN text top left",
+          "t2": "clean blue field",
+          "t3": "clean camo shapes only",
+          "t4": "clean solid field",
+          "t5": "clean solid field",
+          "t6": "clean solid field",
+          "t7": "clean solid field"
+        },
+        "shift": [
+          0,
+          -2
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 6697,
+        "cost_usd": 0.0,
+        "strategies": {}
+      },
+      {
+        "name": "final_check",
+        "ms": 3231,
+        "cost_usd": 0.003175,
+        "checked": 7,
+        "residual": [
+          "t1"
+        ],
+        "notes": {
+          "t1": "faint block ghost text at top left",
+          "t2": "clean blue field",
+          "t3": "foliage shapes only, no text",
+          "t4": "clean olive field",
+          "t5": "clean olive field",
+          "t6": "clean olive field",
+          "t7": "clean olive field"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 455,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 466,
+        "cost_usd": 0.0,
+        "regions": 7,
+        "strategies": {
+          "t1": "muse",
+          "t2": "muse-retry",
+          "t3": "muse-retry",
+          "t4": "muse-retry",
+          "t5": "muse-retry",
+          "t6": "muse-retry",
+          "t7": "muse-retry"
+        },
+        "types": {
+          "t1": "signage",
+          "t2": "signage",
+          "t3": "signage",
+          "t4": "signage",
+          "t5": "signage",
+          "t6": "signage",
+          "t7": "signage"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 15921,
+        "cost_usd": 0.012244,
+        "flagged": [
+          "t4",
+          "t5"
+        ],
+        "issues": {
+          "t4": "bad_translation",
+          "t5": "bad_translation"
+        },
+        "fixed": [],
+        "retranslated": [
+          "t4",
+          "t5"
+        ],
+        "still_flagged": [
+          "t4"
+        ]
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "RANGER NATURALIST SERVICE",
+        "translation_ar": "خدمة الحراس والمرشدين",
+        "style": "title",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          115,
+          99,
+          1759,
+          195
+        ],
+        "container": [
+          130,
+          113,
+          1759,
+          187
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 56,
+        "color": [
+          212,
+          162,
+          106
+        ],
+        "lines": [
+          "خدمة الحراس والمرشدين"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t2",
+        "source_text": "FIELD TRIPS - CAMPFIRE PROGRAMS NATURAL HISTORY TALKS & EXHIBITS GENERAL INFORMATION",
+        "translation_ar": "رحلات وسهرات وندوات طبيعة ومعلومات",
+        "style": "label",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          872,
+          234,
+          1738,
+          402
+        ],
+        "container": [
+          885,
+          268,
+          1738,
+          391
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal-bold",
+        "font_size": 52,
+        "color": [
+          212,
+          162,
+          106
+        ],
+        "lines": [
+          "رحلات وسهرات وندوات",
+          "طبيعة ومعلومات"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t3",
+        "source_text": "ZION",
+        "translation_ar": "صهيون",
+        "style": "title",
+        "font_style": "extra-bold block uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          605,
+          2108,
+          1354,
+          2222
+        ],
+        "container": [
+          628,
+          2156,
+          1282,
+          2222
+        ],
+        "mask_path": "mask-t3.png",
+        "font_family": "tajawal-bold",
+        "font_size": 50,
+        "color": [
+          107,
+          126,
+          74
+        ],
+        "lines": [
+          "صهيون"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t4",
+        "source_text": "NATIONAL",
+        "translation_ar": "ناشيونال",
+        "style": "title",
+        "font_style": "extra-bold block uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          205,
+          2233,
+          845,
+          2305
+        ],
+        "container": [
+          214,
+          2255,
+          819,
+          2305
+        ],
+        "mask_path": "mask-t4.png",
+        "font_family": "tajawal-bold",
+        "font_size": 41,
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "lines": [
+          "ناشيونال"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t5",
+        "source_text": "PARK",
+        "translation_ar": "جنينة",
+        "style": "title",
+        "font_style": "extra-bold block uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          1202,
+          2233,
+          1726,
+          2305
+        ],
+        "container": [
+          1202,
+          2268,
+          1705,
+          2305
+        ],
+        "mask_path": "mask-t5.png",
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "lines": [
+          "جنينة"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t6",
+        "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+        "translation_ar": "وزارة الداخلية الأمريكية",
+        "style": "label",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          165,
+          2336,
+          787,
+          2438
+        ],
+        "container": [
+          176,
+          2342,
+          787,
+          2438
+        ],
+        "mask_path": "mask-t6.png",
+        "font_family": "tajawal-bold",
+        "font_size": 58,
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "lines": [
+          "وزارة الداخلية الأمريكية"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t7",
+        "source_text": "NATIONAL PARK SERVICE",
+        "translation_ar": "هيئة المنتزهات القومية",
+        "style": "label",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          1146,
+          2336,
+          1751,
+          2440
+        ],
+        "container": [
+          1148,
+          2379,
+          1746,
+          2440
+        ],
+        "mask_path": "mask-t7.png",
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "lines": [
+          "هيئة المنتزهات القومية"
+        ],
+        "strategy": "muse-retry"
+      }
+    ],
+    "warnings": [
+      "t1: flat fill skipped (not flat)"
+    ],
+    "total_cost_usd": 0.053539,
+    "total_ms": 94474,
+    "stage_ms_sum": 119211
+  },
+  "document": {
+    "id": "dc076a5fee62",
+    "width": 1920,
+    "height": 2596,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1920,
+          2596
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "RANGER NATURALIST SERVICE",
+        "arabic": {
+          "egyptian": "خدمة الحراس والمرشدين",
+          "msa": "خدمة الحراس والمرشدين"
+        },
+        "box": [
+          115,
+          99,
+          1759,
+          195
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 56,
+        "lines": [
+          {
+            "text": "خدمة الحراس والمرشدين",
+            "size": 56,
+            "x": 937.0,
+            "baseline": 163.0,
+            "width": 614,
+            "height": 58
+          }
+        ],
+        "align": "center",
+        "color": [
+          212,
+          162,
+          106
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "خدمة الحراس والمرشدين",
+            "msa": "خدمة الحراس والمرشدين"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 56,
+          "color": [
+            212,
+            162,
+            106
+          ],
+          "box": [
+            115,
+            99,
+            1759,
+            195
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "FIELD TRIPS - CAMPFIRE PROGRAMS NATURAL HISTORY TALKS & EXHIBITS GENERAL INFORMATION",
+        "arabic": {
+          "egyptian": "رحلات وسهرات وندوات طبيعة ومعلومات",
+          "msa": "رحلات وسهرات وندوات طبيعة ومعلومات"
+        },
+        "box": [
+          872,
+          234,
+          1738,
+          402
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 52,
+        "lines": [
+          {
+            "text": "رحلات وسهرات وندوات",
+            "size": 52,
+            "x": 1305.0,
+            "baseline": 301.0,
+            "width": 520,
+            "height": 47
+          },
+          {
+            "text": "طبيعة ومعلومات",
+            "size": 52,
+            "x": 1305.0,
+            "baseline": 359.0,
+            "width": 392,
+            "height": 49
+          }
+        ],
+        "align": "center",
+        "color": [
+          212,
+          162,
+          106
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "رحلات وسهرات وندوات طبيعة ومعلومات",
+            "msa": "رحلات وسهرات وندوات طبيعة ومعلومات"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 52,
+          "color": [
+            212,
+            162,
+            106
+          ],
+          "box": [
+            872,
+            234,
+            1738,
+            402
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t3",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "ZION",
+        "arabic": {
+          "egyptian": "صهيون",
+          "msa": "صهيون"
+        },
+        "box": [
+          605,
+          2108,
+          1354,
+          2222
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 50,
+        "lines": [
+          {
+            "text": "صهيون",
+            "size": 50,
+            "x": 979.5,
+            "baseline": 2173.5,
+            "width": 161,
+            "height": 41
+          }
+        ],
+        "align": "center",
+        "color": [
+          107,
+          126,
+          74
+        ],
+        "z": 2,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "صهيون",
+            "msa": "صهيون"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 50,
+          "color": [
+            107,
+            126,
+            74
+          ],
+          "box": [
+            605,
+            2108,
+            1354,
+            2222
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t4",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "NATIONAL",
+        "arabic": {
+          "egyptian": "ناشيونال",
+          "msa": "ناشيونال"
+        },
+        "box": [
+          205,
+          2233,
+          845,
+          2305
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 41,
+        "lines": [
+          {
+            "text": "ناشيونال",
+            "size": 41,
+            "x": 525.0,
+            "baseline": 2280.5,
+            "width": 161,
+            "height": 43
+          }
+        ],
+        "align": "center",
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "z": 3,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "ناشيونال",
+            "msa": "ناشيونال"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 41,
+          "color": [
+            138,
+            154,
+            106
+          ],
+          "box": [
+            205,
+            2233,
+            845,
+            2305
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t5",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "PARK",
+        "arabic": {
+          "egyptian": "جنينة",
+          "msa": "جنينة"
+        },
+        "box": [
+          1202,
+          2233,
+          1726,
+          2305
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "lines": [
+          {
+            "text": "جنينة",
+            "size": 31,
+            "x": 1464.0,
+            "baseline": 2276.5,
+            "width": 70,
+            "height": 29
+          }
+        ],
+        "align": "center",
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "z": 4,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "جنينة",
+            "msa": "جنينة"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 31,
+          "color": [
+            138,
+            154,
+            106
+          ],
+          "box": [
+            1202,
+            2233,
+            1726,
+            2305
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t6",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+        "arabic": {
+          "egyptian": "وزارة الداخلية الأمريكية",
+          "msa": "وزارة الداخلية الأمريكية"
+        },
+        "box": [
+          165,
+          2336,
+          787,
+          2438
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 58,
+        "lines": [
+          {
+            "text": "وزارة الداخلية الأمريكية",
+            "size": 58,
+            "x": 476.0,
+            "baseline": 2402.5,
+            "width": 568,
+            "height": 57
+          }
+        ],
+        "align": "center",
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "z": 5,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "وزارة الداخلية الأمريكية",
+            "msa": "وزارة الداخلية الأمريكية"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 58,
+          "color": [
+            138,
+            154,
+            106
+          ],
+          "box": [
+            165,
+            2336,
+            787,
+            2438
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t7",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "NATIONAL PARK SERVICE",
+        "arabic": {
+          "egyptian": "هيئة المنتزهات القومية",
+          "msa": "هيئة المنتزهات القومية"
+        },
+        "box": [
+          1146,
+          2336,
+          1751,
+          2440
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 45,
+        "lines": [
+          {
+            "text": "هيئة المنتزهات القومية",
+            "size": 45,
+            "x": 1448.5,
+            "baseline": 2399.5,
+            "width": 450,
+            "height": 45
+          }
+        ],
+        "align": "center",
+        "color": [
+          138,
+          154,
+          106
+        ],
+        "z": 6,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "هيئة المنتزهات القومية",
+            "msa": "هيئة المنتزهات القومية"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 45,
+          "color": [
+            138,
+            154,
+            106
+          ],
+          "box": [
+            1146,
+            2336,
+            1751,
+            2440
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  }
+}

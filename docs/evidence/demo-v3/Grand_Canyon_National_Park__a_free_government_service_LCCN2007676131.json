@@ -1,0 +1,848 @@
+{
+  "receipt": {
+    "id": "a868a1c715c5",
+    "register": "egyptian",
+    "width": 1920,
+    "height": 2585,
+    "artifacts": {
+      "source": "source.png",
+      "mask_overlay": "masks-overlay.png",
+      "plate_raw": "plate-raw.png",
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "before_after": "before-after.png"
+    },
+    "stages": [
+      {
+        "name": "read",
+        "ms": 7186,
+        "cost_usd": 0.01179,
+        "input_tokens": 4682,
+        "output_tokens": 1397,
+        "reasoning_tokens": 866,
+        "images": 0,
+        "regions": 6,
+        "regions_before_dedupe": 6,
+        "duplicates_dropped": 0
+      },
+      {
+        "name": "policy",
+        "ms": 0,
+        "cost_usd": 0.0,
+        "translated": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "skipped": [],
+        "optional": [],
+        "keep_numerals": []
+      },
+      {
+        "name": "segment",
+        "ms": 17647,
+        "cost_usd": 0.0025,
+        "masks": 6,
+        "concepts": "box prompts + ink extent",
+        "leaders": []
+      },
+      {
+        "name": "clean_plate",
+        "ms": 18006,
+        "cost_usd": 0.01,
+        "images": 1,
+        "plate_size": [
+          1344,
+          1808
+        ],
+        "concurrent_with": [
+          "segment"
+        ]
+      },
+      {
+        "name": "register_composite",
+        "ms": 2382,
+        "cost_usd": 0.0,
+        "shift": [
+          0,
+          -4
+        ],
+        "vertical_only": true,
+        "scale_ratio": [
+          1.4286,
+          1.4298
+        ],
+        "flat_interiors_cleaned": 4,
+        "outside_untouched_mean_diff_is_tautological": 0.0,
+        "ring_mean_abs_diff": 47.35,
+        "ring_max_abs_diff": 65.63,
+        "ring_per_region": [
+          65.63,
+          61.57,
+          52.51,
+          41.21,
+          37.4,
+          25.76
+        ],
+        "ring_band_px": [
+          8,
+          24
+        ]
+      },
+      {
+        "name": "verify",
+        "ms": 4384,
+        "cost_usd": 0.003864,
+        "checked": 6,
+        "residual": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "notes": {
+          "t1": "plain pink background only",
+          "t2": "S DEPARTMENT and NATIONAL PAR visible",
+          "t3": "U.S. DEPARTMENT visible",
+          "t4": "NATIONAL PARK visible",
+          "t5": "U.S. DEPARTMENT visible",
+          "t6": "NATIONAL PARK visible"
+        }
+      },
+      {
+        "name": "retry",
+        "ms": 19686,
+        "cost_usd": 0.013137,
+        "retried": "t2, t3, t4, t5, t6",
+        "still_residual": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "notes": {
+          "t1": "clean pink field, no letters",
+          "t2": "S DEPARTMENT and NATIONAL PAR fragments",
+          "t3": "U.S. DEPARTMENT",
+          "t4": "NATIONAL PARK",
+          "t5": "U.S. DEPARTMENT",
+          "t6": "NATIONAL PARK"
+        },
+        "shift": [
+          0,
+          -2
+        ]
+      },
+      {
+        "name": "repair",
+        "ms": 20670,
+        "cost_usd": 0.0,
+        "strategies": {
+          "t2": "flat-fill",
+          "t3": "inpaint",
+          "t4": "inpaint",
+          "t6": "flat-fill"
+        }
+      },
+      {
+        "name": "final_check",
+        "ms": 4389,
+        "cost_usd": 0.004281,
+        "checked": 6,
+        "residual": [],
+        "notes": {
+          "t1": "tiny dark edge specks, not text-like",
+          "t2": "small dark artwork crop at bottom center, no letters",
+          "t3": "clean pink field",
+          "t4": "dark graphic fragment at right edge, not text",
+          "t5": "clean pink field",
+          "t6": "dark graphic fragment at top right, not text"
+        }
+      },
+      {
+        "name": "background",
+        "ms": 455,
+        "cost_usd": 0.0,
+        "bubbles": 0,
+        "sam": 0,
+        "box_fallback": 0,
+        "fallback_suppressed": false
+      },
+      {
+        "name": "typeset",
+        "ms": 389,
+        "cost_usd": 0.0,
+        "regions": 6,
+        "strategies": {
+          "t1": "muse-retry",
+          "t2": "flat-fill",
+          "t3": "inpaint",
+          "t4": "inpaint",
+          "t5": "muse",
+          "t6": "flat-fill"
+        },
+        "types": {
+          "t1": "signage",
+          "t2": "signage",
+          "t3": "signage",
+          "t4": "signage",
+          "t5": "signage",
+          "t6": "signage"
+        }
+      },
+      {
+        "name": "selfcheck",
+        "ms": 10267,
+        "cost_usd": 0.009205,
+        "flagged": [
+          "t6"
+        ],
+        "issues": {
+          "t6": "clipping"
+        },
+        "fixed": [
+          "t6"
+        ],
+        "retranslated": [],
+        "still_flagged": []
+      }
+    ],
+    "regions": [
+      {
+        "id": "t1",
+        "source_text": "A FREE GOVERNMENT SERVICE",
+        "translation_ar": "خدمة حكومية ببلاش",
+        "style": "title",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          242,
+          2202,
+          1676,
+          2257
+        ],
+        "container": [
+          311,
+          2202,
+          1588,
+          2239
+        ],
+        "mask_path": "mask-t1.png",
+        "font_family": "tajawal-bold",
+        "font_size": 22,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "خدمة حكومية ببلاش"
+        ],
+        "strategy": "muse-retry"
+      },
+      {
+        "id": "t2",
+        "source_text": "GRAND CANYON",
+        "translation_ar": "الأخدود العظيم",
+        "style": "title",
+        "font_style": "extra-bold expanded uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          275,
+          2262,
+          1644,
+          2326
+        ],
+        "container": [
+          275,
+          2275,
+          1644,
+          2325
+        ],
+        "mask_path": "mask-t2.png",
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "الأخدود العظيم"
+        ],
+        "strategy": "flat-fill"
+      },
+      {
+        "id": "t3",
+        "source_text": "NATIONAL",
+        "translation_ar": "القومية",
+        "style": "title",
+        "font_style": "bold expanded uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          205,
+          2339,
+          781,
+          2391
+        ],
+        "container": [
+          205,
+          2349,
+          767,
+          2391
+        ],
+        "mask_path": "mask-t3.png",
+        "font_family": "tajawal-bold",
+        "font_size": 27,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "القومية"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t4",
+        "source_text": "PARK",
+        "translation_ar": "حديقة",
+        "style": "title",
+        "font_style": "bold expanded uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          1179,
+          2339,
+          1701,
+          2391
+        ],
+        "container": [
+          1179,
+          2339,
+          1701,
+          2391
+        ],
+        "mask_path": "mask-t4.png",
+        "font_family": "tajawal-bold",
+        "font_size": 37,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "حديقة"
+        ],
+        "strategy": "inpaint"
+      },
+      {
+        "id": "t5",
+        "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+        "translation_ar": "وزارة الداخلية الأمريكية",
+        "style": "label",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          131,
+          2399,
+          787,
+          2474
+        ],
+        "container": [
+          166,
+          2399,
+          763,
+          2440
+        ],
+        "mask_path": "mask-t5.png",
+        "font_family": "tajawal-bold",
+        "font_size": 26,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "وزارة الداخلية الأمريكية"
+        ],
+        "strategy": "muse"
+      },
+      {
+        "id": "t6",
+        "source_text": "NATIONAL PARK SERVICE",
+        "translation_ar": "هيئة الحدائق الوطنية",
+        "style": "label",
+        "font_style": "bold condensed uppercase sans",
+        "type": "signage",
+        "action": "translate",
+        "bbox": [
+          1175,
+          2399,
+          1716,
+          2474
+        ],
+        "container": [
+          1175,
+          2399,
+          1687,
+          2442
+        ],
+        "mask_path": "mask-t6.png",
+        "font_family": "tajawal-bold",
+        "font_size": 22,
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "lines": [
+          "هيئة الحدائق الوطنية"
+        ],
+        "strategy": "flat-fill"
+      }
+    ],
+    "warnings": [
+      "t5: flat fill skipped (not flat)"
+    ],
+    "total_cost_usd": 0.054776,
+    "total_ms": 88214,
+    "stage_ms_sum": 105461
+  },
+  "document": {
+    "id": "a868a1c715c5",
+    "width": 1920,
+    "height": 2585,
+    "register": "egyptian",
+    "numerals": "latin",
+    "images": {
+      "plate": "plate.png",
+      "composite": "composite.png",
+      "output": "output.png",
+      "source": "source.png"
+    },
+    "layers": [
+      {
+        "id": "scene",
+        "kind": "scene",
+        "type": "background",
+        "action": "translate",
+        "source_text": "",
+        "arabic": {},
+        "box": [
+          0,
+          0,
+          1920,
+          2585
+        ],
+        "font_family": "tajawal",
+        "font_size": 0,
+        "lines": [],
+        "align": "center",
+        "color": [
+          20,
+          17,
+          15
+        ],
+        "z": -1000,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {},
+        "name": "Scenery",
+        "shape": "rect",
+        "asset": "scene.png"
+      },
+      {
+        "id": "t1",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "A FREE GOVERNMENT SERVICE",
+        "arabic": {
+          "egyptian": "خدمة حكومية ببلاش",
+          "msa": "خدمة حكومية ببلاش"
+        },
+        "box": [
+          242,
+          2202,
+          1676,
+          2257
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 22,
+        "lines": [
+          {
+            "text": "خدمة حكومية ببلاش",
+            "size": 22,
+            "x": 959.0,
+            "baseline": 2236.0,
+            "width": 191,
+            "height": 23
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 0,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse-retry",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "خدمة حكومية ببلاش",
+            "msa": "خدمة حكومية ببلاش"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 22,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            242,
+            2202,
+            1676,
+            2257
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t2",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "GRAND CANYON",
+        "arabic": {
+          "egyptian": "الأخدود العظيم",
+          "msa": "الأخدود العظيم"
+        },
+        "box": [
+          275,
+          2262,
+          1644,
+          2326
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 31,
+        "lines": [
+          {
+            "text": "الأخدود العظيم",
+            "size": 31,
+            "x": 959.5,
+            "baseline": 2301.0,
+            "width": 204,
+            "height": 34
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 1,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "الأخدود العظيم",
+            "msa": "الأخدود العظيم"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 31,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            275,
+            2262,
+            1644,
+            2326
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t3",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "NATIONAL",
+        "arabic": {
+          "egyptian": "القومية",
+          "msa": "القومية"
+        },
+        "box": [
+          205,
+          2339,
+          781,
+          2391
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 27,
+        "lines": [
+          {
+            "text": "القومية",
+            "size": 27,
+            "x": 493.0,
+            "baseline": 2371.0,
+            "width": 86,
+            "height": 26
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 2,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "القومية",
+            "msa": "القومية"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 27,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            205,
+            2339,
+            781,
+            2391
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t4",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "PARK",
+        "arabic": {
+          "egyptian": "حديقة",
+          "msa": "حديقة"
+        },
+        "box": [
+          1179,
+          2339,
+          1701,
+          2391
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 37,
+        "lines": [
+          {
+            "text": "حديقة",
+            "size": 37,
+            "x": 1440.0,
+            "baseline": 2373.5,
+            "width": 93,
+            "height": 35
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 3,
+        "visible": true,
+        "locked": false,
+        "strategy": "inpaint",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "حديقة",
+            "msa": "حديقة"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 37,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            1179,
+            2339,
+            1701,
+            2391
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t5",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+        "arabic": {
+          "egyptian": "وزارة الداخلية الأمريكية",
+          "msa": "وزارة الداخلية الأمريكية"
+        },
+        "box": [
+          131,
+          2399,
+          787,
+          2474
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 26,
+        "lines": [
+          {
+            "text": "وزارة الداخلية الأمريكية",
+            "size": 26,
+            "x": 459.0,
+            "baseline": 2443.5,
+            "width": 255,
+            "height": 26
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 4,
+        "visible": true,
+        "locked": false,
+        "strategy": "muse",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "وزارة الداخلية الأمريكية",
+            "msa": "وزارة الداخلية الأمريكية"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 26,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            131,
+            2399,
+            787,
+            2474
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      },
+      {
+        "id": "t6",
+        "kind": "text",
+        "type": "signage",
+        "action": "translate",
+        "source_text": "NATIONAL PARK SERVICE",
+        "arabic": {
+          "egyptian": "هيئة الحدائق الوطنية",
+          "msa": "هيئة الحدائق الوطنية"
+        },
+        "box": [
+          1175,
+          2399,
+          1716,
+          2474
+        ],
+        "font_family": "tajawal-bold",
+        "font_size": 22,
+        "lines": [
+          {
+            "text": "هيئة الحدائق الوطنية",
+            "size": 22,
+            "x": 1445.5,
+            "baseline": 2442.5,
+            "width": 198,
+            "height": 22
+          }
+        ],
+        "align": "center",
+        "color": [
+          26,
+          42,
+          58
+        ],
+        "z": 5,
+        "visible": true,
+        "locked": false,
+        "strategy": "flat-fill",
+        "fill": [],
+        "original": {
+          "arabic": {
+            "egyptian": "هيئة الحدائق الوطنية",
+            "msa": "هيئة الحدائق الوطنية"
+          },
+          "font_family": "tajawal-bold",
+          "font_size": 22,
+          "color": [
+            26,
+            42,
+            58
+          ],
+          "box": [
+            1175,
+            2399,
+            1716,
+            2474
+          ],
+          "action": "translate"
+        },
+        "name": "",
+        "shape": "rect",
+        "asset": ""
+      }
+    ]
+  }
+}
