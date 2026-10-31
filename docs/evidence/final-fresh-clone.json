@@ -1,0 +1,288 @@
+{
+  "id": "fa69ee2c287c",
+  "register": "egyptian",
+  "width": 1280,
+  "height": 1920,
+  "artifacts": {
+    "source": "source.png",
+    "mask_overlay": "masks-overlay.png",
+    "plate_raw": "plate-raw.png",
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "before_after": "before-after.png"
+  },
+  "stages": [
+    {
+      "name": "read",
+      "ms": 5348,
+      "cost_usd": 0.006947,
+      "input_tokens": 3786,
+      "output_tokens": 521,
+      "reasoning_tokens": 261,
+      "images": 0,
+      "regions": 3,
+      "regions_before_dedupe": 3,
+      "duplicates_dropped": 0
+    },
+    {
+      "name": "policy",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "translated": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "skipped": [],
+      "optional": [],
+      "keep_numerals": []
+    },
+    {
+      "name": "segment",
+      "ms": 17700,
+      "cost_usd": 0.0025,
+      "masks": 3,
+      "concepts": "box prompts + ink extent",
+      "leaders": []
+    },
+    {
+      "name": "clean_plate",
+      "ms": 18128,
+      "cost_usd": 0.01,
+      "images": 1,
+      "plate_size": [
+        1280,
+        1920
+      ],
+      "concurrent_with": [
+        "segment"
+      ]
+    },
+    {
+      "name": "register_composite",
+      "ms": 1899,
+      "cost_usd": 0.0,
+      "shift": [
+        0,
+        -16
+      ],
+      "vertical_only": true,
+      "scale_ratio": [
+        1.0,
+        1.0
+      ],
+      "flat_interiors_cleaned": 3,
+      "outside_untouched_mean_diff_is_tautological": 0.0,
+      "ring_mean_abs_diff": 39.21,
+      "ring_max_abs_diff": 45.78,
+      "ring_per_region": [
+        45.78,
+        27.27,
+        44.57
+      ],
+      "ring_band_px": [
+        8,
+        24
+      ]
+    },
+    {
+      "name": "verify",
+      "ms": 2602,
+      "cost_usd": 0.00198,
+      "checked": 3,
+      "residual": [
+        "t2",
+        "t3"
+      ],
+      "notes": {
+        "t1": "clean empty caption box",
+        "t2": "blue BR letter fragment",
+        "t3": "brown MORNING fragment with NG visible"
+      }
+    },
+    {
+      "name": "retry",
+      "ms": 15081,
+      "cost_usd": 0.011925,
+      "retried": "t2, t3",
+      "still_residual": [
+        "t2",
+        "t3"
+      ],
+      "notes": {
+        "t1": "clean empty caption box",
+        "t2": "partial BR visible left",
+        "t3": "partial MORNING with NG at bottom"
+      },
+      "shift": [
+        2,
+        -8
+      ]
+    },
+    {
+      "name": "repair",
+      "ms": 8312,
+      "cost_usd": 0.0,
+      "strategies": {
+        "t2": "flat-fill",
+        "t3": "flat-fill"
+      }
+    },
+    {
+      "name": "final_check",
+      "ms": 2452,
+      "cost_usd": 0.002175,
+      "checked": 3,
+      "residual": [
+        "t2",
+        "t3"
+      ],
+      "notes": {
+        "t1": "clean empty caption box",
+        "t2": "BR fragment in bubble",
+        "t3": "partial MORNING at bottom"
+      }
+    },
+    {
+      "name": "background",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "enabled": false,
+      "skipped": "disabled by request"
+    },
+    {
+      "name": "typeset",
+      "ms": 544,
+      "cost_usd": 0.0,
+      "regions": 3,
+      "strategies": {
+        "t1": "muse-retry",
+        "t2": "flat-fill",
+        "t3": "flat-fill"
+      },
+      "types": {
+        "t1": "caption",
+        "t2": "dialogue",
+        "t3": "dialogue"
+      }
+    },
+    {
+      "name": "selfcheck",
+      "ms": 3774,
+      "cost_usd": 0.002422,
+      "flagged": [],
+      "issues": {},
+      "fixed": [],
+      "retranslated": [],
+      "still_flagged": []
+    }
+  ],
+  "regions": [
+    {
+      "id": "t1",
+      "source_text": "CHAPTER ONE",
+      "translation_ar": "الفصل الأول",
+      "style": "title",
+      "font_style": "bold rounded uppercase sans",
+      "type": "caption",
+      "action": "translate",
+      "bbox": [
+        307,
+        323,
+        984,
+        444
+      ],
+      "container": [
+        324,
+        323,
+        963,
+        444
+      ],
+      "mask_path": "mask-t1.png",
+      "font_family": "tajawal-bold",
+      "font_size": 102,
+      "color": [
+        24,
+        78,
+        94
+      ],
+      "lines": [
+        "الفصل الأول"
+      ],
+      "strategy": "muse-retry"
+    },
+    {
+      "id": "t2",
+      "source_text": "FRESH BREAD?",
+      "translation_ar": "عيش طازه؟",
+      "style": "speech",
+      "font_style": "bold rounded uppercase sans",
+      "type": "dialogue",
+      "action": "translate",
+      "bbox": [
+        133,
+        507,
+        461,
+        684
+      ],
+      "container": [
+        147,
+        496,
+        461,
+        646
+      ],
+      "mask_path": "mask-t2.png",
+      "font_family": "tajawal-bold",
+      "font_size": 62,
+      "color": [
+        24,
+        78,
+        94
+      ],
+      "lines": [
+        "عيش",
+        "طازه؟"
+      ],
+      "strategy": "flat-fill"
+    },
+    {
+      "id": "t3",
+      "source_text": "EVERY MORNING",
+      "translation_ar": "كل يوم الصبح",
+      "style": "speech",
+      "font_style": "handwritten uppercase sans",
+      "type": "dialogue",
+      "action": "translate",
+      "bbox": [
+        787,
+        507,
+        1174,
+        682
+      ],
+      "container": [
+        798,
+        512,
+        1172,
+        674
+      ],
+      "mask_path": "mask-t3.png",
+      "font_family": "tajawal",
+      "font_size": 63,
+      "color": [
+        182,
+        93,
+        61
+      ],
+      "lines": [
+        "كل يوم",
+        "الصبح"
+      ],
+      "strategy": "flat-fill"
+    }
+  ],
+  "warnings": [],
+  "total_cost_usd": 0.037948,
+  "total_ms": 58763,
+  "stage_ms_sum": 75840
+}
