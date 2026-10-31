@@ -1,0 +1,248 @@
+{
+  "pages": [
+    {
+      "id": "comic-a",
+      "image": "pages/comic-a.jpg",
+      "requested_texts": [
+        "FRESH BREAD?",
+        "EVERY MORNING",
+        "IS THAT YOU?",
+        "CHAPTER ONE"
+      ],
+      "expected_texts": [
+        "FRESH BREAD?",
+        "EVERY MORNING",
+        "IS THAT YOU?",
+        "CHAPTER ONE"
+      ],
+      "note": "model-rendered text; actual transcription pending",
+      "prompt": "A simple bakery counter with a baker, three empty speech bubbles and one empty caption banner. Inside the first bubble the exact English words FRESH BREAD?; inside the second EVERY MORNING; inside the third IS THAT YOU?; inside the caption box CHAPTER ONE. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "regions": [
+        {
+          "id": "t1",
+          "type": "dialogue",
+          "box": [
+            70,
+            140,
+            580,
+            450
+          ],
+          "text": "FRESH BREAD?"
+        },
+        {
+          "id": "t2",
+          "type": "dialogue",
+          "box": [
+            320,
+            70,
+            900,
+            430
+          ],
+          "text": "EVERY MORNING"
+        },
+        {
+          "id": "t3",
+          "type": "dialogue",
+          "box": [
+            680,
+            260,
+            1210,
+            570
+          ],
+          "text": "IS THAT YOU?"
+        },
+        {
+          "id": "t4",
+          "type": "caption",
+          "box": [
+            160,
+            1560,
+            1120,
+            1770
+          ],
+          "text": "CHAPTER ONE"
+        }
+      ],
+      "selected": true
+    },
+    {
+      "id": "comic-b",
+      "image": "pages/comic-b.jpg",
+      "requested_texts": [
+        "BAKED TODAY",
+        "SMELLS GOOD",
+        "SAVE ME ONE"
+      ],
+      "expected_texts": [
+        "BAKED TODAY",
+        "SMELLS GOOD",
+        "SAVE ME ONE"
+      ],
+      "note": "alternate variant; not selected, not transcribed",
+      "prompt": "A simple bakery counter with a baker, three empty speech bubbles. Inside them the exact English words BAKED TODAY, SMELLS GOOD, SAVE ME ONE. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "selected": false
+    },
+    {
+      "id": "shop-a",
+      "image": "pages/shop-a.jpg",
+      "requested_texts": [
+        "THE BREAD BOX",
+        "OPEN EVERY DAY"
+      ],
+      "expected_texts": [
+        "THE BREAD BOX",
+        "OPEN EVERY DAY"
+      ],
+      "note": "model-rendered text; actual transcription pending",
+      "prompt": "A simple bread shop poster with a loaf and wheat, one large empty panel. Inside it the exact English words THE BREAD BOX and OPEN EVERY DAY. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            60,
+            640,
+            1210,
+            1460
+          ],
+          "text": "THE BREAD BOX"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            140,
+            1470,
+            1130,
+            1610
+          ],
+          "text": "OPEN EVERY DAY"
+        }
+      ],
+      "selected": true
+    },
+    {
+      "id": "shop-b",
+      "image": "pages/shop-b.jpg",
+      "requested_texts": [
+        "THE COFFEE CORNER",
+        "FRESH PASTRIES"
+      ],
+      "expected_texts": [
+        "THE COFFEE CORNER",
+        "FRESH PASTRIES"
+      ],
+      "note": "alternate variant; not selected, not transcribed",
+      "prompt": "A simple cafe poster with a cup and a plant, one large empty panel. Inside it the exact English words THE COFFEE CORNER and FRESH PASTRIES. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "selected": false
+    },
+    {
+      "id": "label-a",
+      "image": "pages/label-a.jpg",
+      "requested_texts": [
+        "WILDFLOWER HONEY",
+        "SMALL BATCH"
+      ],
+      "expected_texts": [
+        "WILDFLOWER HONEY",
+        "SMALL BATCH"
+      ],
+      "note": "model-rendered text; actual transcription pending",
+      "prompt": "A simple honey jar with a blank cream label. On the label the exact English words WILDFLOWER HONEY and SMALL BATCH. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            140,
+            900,
+            1130,
+            1070
+          ],
+          "text": "WILDFLOWER HONEY"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            230,
+            1080,
+            1040,
+            1240
+          ],
+          "text": "SMALL BATCH"
+        }
+      ],
+      "selected": true
+    },
+    {
+      "id": "label-b",
+      "image": "pages/label-b.jpg",
+      "requested_texts": [
+        "GOLDEN HONEY",
+        "PURE AND SIMPLE"
+      ],
+      "expected_texts": [
+        "GOLDEN HONEY",
+        "PURE AND SIMPLE"
+      ],
+      "note": "alternate variant; not selected, not transcribed",
+      "prompt": "A simple honey jar with a blank cream label. On the label the exact English words GOLDEN HONEY and PURE AND SIMPLE. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "selected": false
+    },
+    {
+      "id": "postcard-a",
+      "image": "pages/postcard-a.jpg",
+      "requested_texts": [
+        "SEASIDE POSTCARD",
+        "WISH YOU WERE HERE"
+      ],
+      "expected_texts": [
+        "SEASIDE POSTCARD",
+        "WISH YOU WERE HERE"
+      ],
+      "note": "model-rendered text; actual transcription pending",
+      "prompt": "A simple seaside postcard with a lighthouse, one large white panel. Inside it the exact English words SEASIDE POSTCARD and WISH YOU WERE HERE. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "regions": [
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            40,
+            1090,
+            1240,
+            1340
+          ],
+          "text": "SEASIDE POSTCARD"
+        },
+        {
+          "id": "t2",
+          "type": "signage",
+          "box": [
+            60,
+            1360,
+            1220,
+            1600
+          ],
+          "text": "WISH YOU WERE HERE"
+        }
+      ],
+      "selected": true
+    },
+    {
+      "id": "postcard-b",
+      "image": "pages/postcard-b.jpg",
+      "requested_texts": [
+        "MOUNTAIN POSTCARD",
+        "GREETINGS FROM THE HILLS"
+      ],
+      "expected_texts": [
+        "MOUNTAIN POSTCARD",
+        "GREETINGS FROM THE HILLS"
+      ],
+      "note": "alternate variant; not selected, not transcribed",
+      "prompt": "A simple mountain postcard with hills, one large white panel. Inside it the exact English words MOUNTAIN POSTCARD and GREETINGS FROM THE HILLS. No other text. Flat vector illustration, solid colour fills only, thick dark outlines, limited palette of cream, teal, terracotta and mustard, no gradients, no texture, no watermark, portrait 2:3.",
+      "selected": false
+    }
+  ]
+}
