@@ -1,0 +1,573 @@
+{
+  "pages": [
+    {
+      "id": "comic-three-bubbles",
+      "image": "pages/comic-three-bubbles.jpg",
+      "expected": "pass",
+      "features": [
+        "three speech bubbles"
+      ],
+      "regions": [
+        {
+          "id": "b1",
+          "type": "dialogue",
+          "box": [
+            90,
+            170,
+            560,
+            360
+          ],
+          "text": "FRESH BREAD?"
+        },
+        {
+          "id": "b2",
+          "type": "dialogue",
+          "box": [
+            650,
+            300,
+            1180,
+            520
+          ],
+          "text": "EVERY MORNING"
+        },
+        {
+          "id": "b3",
+          "type": "dialogue",
+          "box": [
+            300,
+            980,
+            900,
+            1180
+          ],
+          "text": "IS THAT YOU?"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Flat vector comic panel, original artwork: a bakery counter at dusk, a young baker, warm lamps, three EMPTY speech bubbles with thick black outlines (left, right, lower middle), cream/teal/terracotta palette, no lettering, no text, no logos, no signature, portrait."
+      }
+    },
+    {
+      "id": "comic-thought-caption",
+      "image": "pages/comic-thought-caption.jpg",
+      "expected": "pass",
+      "features": [
+        "caption banner",
+        "thought bubble"
+      ],
+      "regions": [
+        {
+          "id": "cap",
+          "type": "caption",
+          "box": [
+            150,
+            100,
+            1130,
+            250
+          ],
+          "text": "CHAPTER ONE"
+        },
+        {
+          "id": "thought",
+          "type": "dialogue",
+          "box": [
+            240,
+            560,
+            900,
+            860
+          ],
+          "text": "MAYBE MORE FLOUR?"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Flat vector comic panel, original artwork: a baker thinking at a window, one EMPTY cloud-shaped thought bubble in the middle and one EMPTY rectangular caption banner at the top, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "comic-sfx",
+      "image": "pages/comic-sfx.jpg",
+      "expected": "pass",
+      "features": [
+        "SFX"
+      ],
+      "regions": [
+        {
+          "id": "sfx1",
+          "type": "sfx",
+          "box": [
+            120,
+            250,
+            620,
+            520
+          ],
+          "text": "BOOM!"
+        },
+        {
+          "id": "sfx2",
+          "type": "sfx",
+          "box": [
+            700,
+            900,
+            1180,
+            1150
+          ],
+          "text": "CRASH!"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Flat vector comic action panel, original artwork: a tray of bread falling, an EMPTY jagged explosion shape on the right, motion lines, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "crowded-shelf",
+      "image": "pages/crowded-shelf.jpg",
+      "expected": "pass",
+      "features": [
+        "crowded page",
+        "prices"
+      ],
+      "regions": [
+        {
+          "id": "l0",
+          "type": "menu_item",
+          "box": [
+            80,
+            300,
+            420,
+            420
+          ],
+          "text": "RYE 4.50"
+        },
+        {
+          "id": "l1",
+          "type": "menu_item",
+          "box": [
+            470,
+            300,
+            810,
+            420
+          ],
+          "text": "BAGUETTE 3.00"
+        },
+        {
+          "id": "l2",
+          "type": "menu_item",
+          "box": [
+            860,
+            300,
+            1200,
+            420
+          ],
+          "text": "SOURDOUGH 6.50"
+        },
+        {
+          "id": "l3",
+          "type": "menu_item",
+          "box": [
+            80,
+            680,
+            420,
+            800
+          ],
+          "text": "BRIOCHE 5.00"
+        },
+        {
+          "id": "l4",
+          "type": "menu_item",
+          "box": [
+            470,
+            680,
+            810,
+            800
+          ],
+          "text": "FOCACCIA 7.25"
+        },
+        {
+          "id": "l5",
+          "type": "menu_item",
+          "box": [
+            860,
+            680,
+            1200,
+            800
+          ],
+          "text": "PITA 2.75"
+        },
+        {
+          "id": "l6",
+          "type": "menu_item",
+          "box": [
+            80,
+            1060,
+            420,
+            1180
+          ],
+          "text": "CAKE 8.00"
+        },
+        {
+          "id": "l7",
+          "type": "menu_item",
+          "box": [
+            470,
+            1060,
+            810,
+            1180
+          ],
+          "text": "TARTS 9.50"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Flat vector illustration of a dense bakery shelf with many breads, jars, cakes and small price tags, all tags EMPTY, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "tiny-hours",
+      "image": "pages/tiny-hours.jpg",
+      "expected": "pass",
+      "features": [
+        "tiny text",
+        "opening times"
+      ],
+      "regions": [
+        {
+          "id": "hours",
+          "type": "signage",
+          "box": [
+            120,
+            240,
+            1160,
+            420
+          ],
+          "text": "OPENING HOURS MON-FRI 07:00 - 19:00 SAT 08:00 - 16:00 CLOSED SUNDAY"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Flat vector poster background, original artwork: a small bakery facade, large empty sign area at the top, pale paper, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "poster-title",
+      "image": "pages/poster-title.jpg",
+      "expected": "pass",
+      "features": [
+        "large title",
+        "small print"
+      ],
+      "regions": [
+        {
+          "id": "title",
+          "type": "signage",
+          "box": [
+            80,
+            150,
+            1200,
+            450
+          ],
+          "text": "NIGHT MARKET"
+        },
+        {
+          "id": "sub",
+          "type": "signage",
+          "box": [
+            200,
+            1600,
+            1080,
+            1760
+          ],
+          "text": "FRIDAY 18:00 · HALL 3 · FREE ENTRY"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Retro travel poster background, original artwork: a night market with lanterns, large empty sky area at the top for a headline, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "poster-lowcontrast",
+      "image": "pages/poster-lowcontrast.jpg",
+      "expected": "pass",
+      "features": [
+        "low contrast"
+      ],
+      "regions": [
+        {
+          "id": "title",
+          "type": "signage",
+          "box": [
+            80,
+            150,
+            1200,
+            450
+          ],
+          "text": "NIGHT MARKET"
+        },
+        {
+          "id": "sub",
+          "type": "signage",
+          "box": [
+            200,
+            1600,
+            1080,
+            1760
+          ],
+          "text": "FRIDAY 18:00 · HALL 3 · FREE ENTRY"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Retro travel poster background in pale low-contrast pastel tones, night market with lanterns, large empty sky area, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "menu-prices",
+      "image": "pages/menu-prices.jpg",
+      "expected": "pass",
+      "features": [
+        "prices",
+        "3-4 digit numbers",
+        "decimals",
+        "times"
+      ],
+      "regions": [
+        {
+          "id": "h",
+          "type": "signage",
+          "box": [
+            300,
+            120,
+            980,
+            240
+          ],
+          "text": "TODAY'S MENU"
+        },
+        {
+          "id": "m1",
+          "type": "menu_item",
+          "box": [
+            120,
+            340,
+            760,
+            430
+          ],
+          "text": "SOURDOUGH 6.50"
+        },
+        {
+          "id": "m2",
+          "type": "menu_item",
+          "box": [
+            120,
+            470,
+            760,
+            560
+          ],
+          "text": "BRIOCHE 5.00"
+        },
+        {
+          "id": "m3",
+          "type": "price",
+          "box": [
+            820,
+            340,
+            1180,
+            430
+          ],
+          "text": "1200"
+        },
+        {
+          "id": "m4",
+          "type": "price",
+          "box": [
+            820,
+            470,
+            1180,
+            560
+          ],
+          "text": "145"
+        },
+        {
+          "id": "t1",
+          "type": "signage",
+          "box": [
+            120,
+            1500,
+            760,
+            1590
+          ],
+          "text": "OPEN 08:30 - 19:45"
+        },
+        {
+          "id": "t2",
+          "type": "price",
+          "box": [
+            820,
+            1500,
+            1180,
+            1590
+          ],
+          "text": "12.50"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Printed menu paper texture, original artwork: cream paper with faint stains and a thin border, empty columns, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "chalkboard",
+      "image": "pages/chalkboard.jpg",
+      "expected": "pass",
+      "features": [
+        "chalk text"
+      ],
+      "regions": [
+        {
+          "id": "ch1",
+          "type": "signage",
+          "box": [
+            140,
+            300,
+            1140,
+            520
+          ],
+          "text": "TODAY'S LOAF"
+        },
+        {
+          "id": "ch2",
+          "type": "menu_item",
+          "box": [
+            140,
+            700,
+            1140,
+            850
+          ],
+          "text": "SOURDOUGH 6.00"
+        },
+        {
+          "id": "ch3",
+          "type": "menu_item",
+          "box": [
+            140,
+            950,
+            1140,
+            1100
+          ],
+          "text": "RYE 4.50"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "code-drawn Inter",
+        "prompt": "Dark green chalkboard texture, original artwork: wooden frame, faint chalk dust, completely empty centre, no lettering, no text, no logos, portrait."
+      }
+    },
+    {
+      "id": "no-text",
+      "image": "pages/no-text.jpg",
+      "expected": "pass",
+      "features": [
+        "zero regions"
+      ],
+      "regions": [],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "none",
+        "prompt": "Still life illustration, original artwork: bread basket, jam jar and wheat on a table, warm light, no lettering, no text, no labels, no logos, portrait."
+      }
+    },
+    {
+      "id": "poster-curved",
+      "image": "pages/poster-curved.jpg",
+      "expected": "fail",
+      "features": [
+        "curved headline"
+      ],
+      "regions": [
+        {
+          "id": "curved",
+          "type": "signage",
+          "box": [
+            40,
+            80,
+            1240,
+            680
+          ],
+          "text": "SUNSET TOURS"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "muse-rendered",
+        "prompt": "Retro travel poster, original artwork: a sunset over dunes, and a large CURVED headline in English reading exactly 'SUNSET TOURS', no other text, no logos, no real brands, portrait."
+      },
+      "note": "model-rendered curved headline; manual transcription"
+    },
+    {
+      "id": "label-photo",
+      "image": "pages/label-photo.jpg",
+      "expected": "fail",
+      "features": [
+        "photo-like background",
+        "handwritten label"
+      ],
+      "regions": [
+        {
+          "id": "label",
+          "type": "signage",
+          "box": [
+            250,
+            800,
+            970,
+            1250
+          ],
+          "text": "WILDFLOWER HONEY 500g"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "muse-rendered",
+        "prompt": "Photo-like product shot, original artwork: a honey jar on a wooden table, label with handwritten English text reading exactly 'WILDFLOWER HONEY 500g', no other text, no logos, no real brands, portrait."
+      },
+      "note": "model-rendered handwriting on a photo-like label; manual transcription"
+    },
+    {
+      "id": "sign-handwriting",
+      "image": "pages/sign-handwriting.jpg",
+      "expected": "fail",
+      "features": [
+        "handwriting",
+        "chalk"
+      ],
+      "regions": [
+        {
+          "id": "sign",
+          "type": "signage",
+          "box": [
+            260,
+            470,
+            1020,
+            1370
+          ],
+          "text": "FRESH BREAD DAILY"
+        }
+      ],
+      "generator": {
+        "images": "muse-image-1.0",
+        "text": "muse-rendered",
+        "prompt": "Chalkboard sign, original artwork: handwritten English text in chalk reading exactly 'FRESH BREAD DAILY', no other text, no logos, no real brands, portrait."
+      },
+      "note": "model-rendered handwriting; manual transcription"
+    }
+  ]
+}
