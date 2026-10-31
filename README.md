@@ -24,7 +24,8 @@ businesses still localize by hand. Naqsh is built for them first.
 ## Quickstart for judges
 
 Works on Windows, macOS and Linux. Tested on **Python 3.12** and **Node 20+** (Node 24
-tested); no other versions are pinned.
+tested); no other versions are pinned. The demo-mode smoke test runs in CI on
+**Ubuntu, macOS and Windows** (GitHub Actions) and passes on all three.
 
 1. **Clone and install the backend**
 
