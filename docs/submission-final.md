@@ -3,6 +3,25 @@
 Every number is a range from the cited receipt; no time-saved ratio is claimed (owner
 decision 2026-10-29). Live URL is **not required** (organizer answer 2026-10-31).
 
+## Final pages
+
+- **PAGE_A:** phase1-baker — 3 regions, 2 bubbles, live **63.8 s / $0.0417**; clean verify.
+- **PAGE_B:** comic-a — 4 regions, 3 bubbles + caption, live **39.9 s / $0.0297**.
+- **LIMITS:** Zion (WPA/LoC, public domain) — **80.4 s / $0.0466**, visible lettering
+  artifacts; shown as the honest limit, not a success.
+
+Coverage claim: “Outside the edited text areas, exported pixels are identical to the
+original” — coverage = mask ∪ ink ∪ reading box, dilated; max diff **0** on three jobs
+(`docs/evidence/ui/after-alignment.json`). The raw Muse Image plate is a full-page
+re-render and is **not** identical.
+
+Costs/waits: comic **≈29–62 s / $0.026–0.040**; menu **≈62–122 s / $0.037–0.066**
+(receipts in `fixtures/demo/*/receipt.json`, `docs/evidence/phase-8/variance-summary.json`,
+fresh-clone runs).
+
+**Disclosure:** “AI coding assistants were used during development; every runtime model
+call is a Meta model.”
+
 ## Form fields
 
 | Field | Value |
