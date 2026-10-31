@@ -72,3 +72,23 @@
 {"ts": "2026-10-28T18:43:10+00:00", "label": "background bubbles e13f9585b24f", "cost_usd": 0.0025, "kind": "segment", "objects": 0}
 {"ts": "2026-10-28T18:43:16+00:00", "label": "background bubbles d3dbface16b8", "cost_usd": 0.0025, "kind": "segment", "objects": 2}
 {"ts": "2026-10-28T18:43:32+00:00", "label": "background bubbles e13f9585b24f", "cost_usd": 0.0025, "kind": "segment", "objects": 0}
+{"ts": "2026-10-31T18:30:33+00:00", "label": "test-suite image comic-three-bubbles", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:30:54+00:00", "label": "test-suite image comic-thought-caption", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:31:07+00:00", "label": "test-suite image comic-sfx", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:31:29+00:00", "label": "test-suite image crowded-shelf", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:31:42+00:00", "label": "test-suite image tiny-hours", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:32:05+00:00", "label": "test-suite image poster-title", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:32:27+00:00", "label": "test-suite image poster-lowcontrast", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:32:49+00:00", "label": "test-suite image menu-prices", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:33:01+00:00", "label": "test-suite image chalkboard", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:33:15+00:00", "label": "test-suite image no-text", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:33:28+00:00", "label": "test-suite image poster-curved", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:33:39+00:00", "label": "test-suite image label-photo", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:33:50+00:00", "label": "test-suite image sign-handwriting", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:36:11+00:00", "label": "translation cases egyptian", "cost_usd": 0.004482, "kind": "text", "cases": 40}
+{"ts": "2026-10-31T18:36:17+00:00", "label": "translation cases msa", "cost_usd": 0.005984, "kind": "text", "cases": 40}
+{"ts": "2026-10-31T18:51:44+00:00", "label": "demo candidate image comic-bakery", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:53:06+00:00", "label": "demo candidate image bakery-poster", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:54:31+00:00", "label": "demo candidate image cafe-menu", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:55:40+00:00", "label": "demo candidate image honey-label", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T18:56:45+00:00", "label": "demo candidate image night-market", "cost_usd": 0.01, "kind": "image"}
