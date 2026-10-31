@@ -163,7 +163,7 @@ before/after pair.
 | --- | --- | --- |
 | **SAM 3.1** | Pixel-accurate text/bubble/object masks | Mask geometry with stable object ids, streaming, and base85 masks — the layer boundary comes from here, not from a bounding box guess. |
 | **Muse Spark** | Reads text in place, translates to Arabic, names the style | Vision + multilingual register control in one call; the translation must fit the bubble, so we ask for both at once. |
-| **Muse Image** | Removes original lettering, repaints the plate | Instruction-based editing that preserves the rest of the artwork; no mask parameter, so Naqsh composites the result back through SAM's masks. |
+| **Muse Image** | Removes original lettering, repaints the plate | Instruction-based editing with no mask parameter; the raw plate is a full-page re-render, so Naqsh takes plate pixels only inside the repainted coverage and keeps the original elsewhere. |
 
 ## Stack
 

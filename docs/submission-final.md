@@ -56,7 +56,7 @@ repaints. Muse Image outputs are allowed with no on-screen credit (organizer ans
 
 ## Honest limits
 
-Photographed/painted textures can defeat the plate (`fixtures/demo/label-fail/`); curved
+The **composite/export** keeps the original pixels outside the repainted coverage (max diff 0, three jobs); the raw Muse Image plate is a full-page re-render and is not identical. Photographed/painted textures can defeat the plate (`fixtures/demo/label-fail/`); curved
 headlines are read but set straight; about 0.4% of browser-vs-server SVG pixels differ
 (`docs/evidence/phase-6/parity.json`). No time-saved ratio.
 
