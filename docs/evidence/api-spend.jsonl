@@ -112,3 +112,11 @@
 {"ts": "2026-10-31T19:35:52+00:00", "label": "demo-v2 image children-flat", "cost_usd": 0.01, "kind": "image"}
 {"ts": "2026-10-31T18:45:00+00:00", "label": "fresh-clone live comic (API, approved)", "cost_usd": 0.039521, "kind": "pipeline"}
 {"ts": "2026-10-31T19:50:00+00:00", "label": "fresh-clone live comic (UI, approved)", "cost_usd": 0.027682, "kind": "pipeline"}
+{"ts": "2026-10-31T20:13:19+00:00", "label": "demo-v4 image comic-a", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:13:29+00:00", "label": "demo-v4 image comic-b", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:13:40+00:00", "label": "demo-v4 image shop-a", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:13:51+00:00", "label": "demo-v4 image shop-b", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:13:59+00:00", "label": "demo-v4 image label-a", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:14:09+00:00", "label": "demo-v4 image label-b", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:14:19+00:00", "label": "demo-v4 image postcard-a", "cost_usd": 0.01, "kind": "image"}
+{"ts": "2026-10-31T20:14:28+00:00", "label": "demo-v4 image postcard-b", "cost_usd": 0.01, "kind": "image"}
