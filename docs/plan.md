@@ -217,23 +217,27 @@ table has measured numbers. **Fallback:** demo one page type and say it.
 ## Phase 9 — Feature freeze, gallery copy and final video
 
 **Work:** freeze on 1 Nov; **write the public-gallery title, tagline, short
-description and thumbnail for a public audience** — voters see this page, not the
-judges' technical rubric (thumbnail 1280×720 or the gallery's required size, no
-unlicensed art); script per `submission-notes.md`; record at 1080p with captions;
-upload unlisted; verify the link in a private window; trim to ≤3:00.
+description and thumbnail for a public audience**; script per `docs/demo-script.md`;
+record at 1080p, **live-first**: main takes run with `LIVE_MODE=1`, the LIVE banner,
+stage progress and receipt/cost visible; show waits honestly with a “sped up”/“cut”
+label; demo replay only as a labelled fallback. Upload unlisted; verify logged out;
+trim to ≤3:00. The repo must be judge-runnable from the README quickstart (fresh clone
+tested 2026-10-31) because judges run it themselves.
 
 **Public demo URL — NOT NEEDED** (organizer answer, Discord #questions, 2026-10-31): a public live URL is not required; judges run the project from the README and watch the 3-minute video. No deployment is planned.
 
-**Gate:** video link works logged out, shows only hackathon work, shows the full
-pipeline, the editor, and the layered export. **Fallback:** the Phase 7 backup
-recording, re-narrated.
+**Gate:** video link works logged out, shows live model calls (or a labelled fallback),
+the full pipeline, the editor and the layered export; README quickstart was verified in a
+fresh clone. **Fallback:** the Phase 7 backup recording, re-narrated.
 
 ## Phase 10 — Submission package *(must be last)*
 
 **Work:** produce and check every item in section 7 of the brief: team, track,
 problem statement, description, public repo with clean history and no secrets, the
 video link, Meta-products and why-it-matters answers, feedback, and the optional X
-link. Re-read the repo as a judge (README, history, assets); run the secret scan.
+link. Re-read the repo as a judge (README quickstart, history, assets); run the secret
+scan and a final fresh-clone smoke test. `docs/submission-final.md` is the form-facing
+copy.
 **Submit Nov 3 with all fields. Then edit before the deadline to add the X link.
 After the deadline no edits are possible, so the X post must exist before that.**
 (Organizer answers, Discord #questions, 2026-10-28 21:49 Cairo.) Most Viral is counted
