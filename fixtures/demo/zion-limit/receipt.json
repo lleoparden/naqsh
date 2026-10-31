@@ -1,0 +1,405 @@
+{
+  "id": "4b1912cbcd74",
+  "register": "egyptian",
+  "width": 1920,
+  "height": 2596,
+  "artifacts": {
+    "source": "source.png",
+    "mask_overlay": "masks-overlay.png",
+    "plate_raw": "plate-raw.png",
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "before_after": "before-after.png"
+  },
+  "stages": [
+    {
+      "name": "read",
+      "ms": 6530,
+      "cost_usd": 0.010885,
+      "input_tokens": 4682,
+      "output_tokens": 1184,
+      "reasoning_tokens": 630,
+      "images": 0,
+      "regions": 6,
+      "regions_before_dedupe": 6,
+      "duplicates_dropped": 0
+    },
+    {
+      "name": "policy",
+      "ms": 0,
+      "cost_usd": 0.0,
+      "translated": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "skipped": [],
+      "optional": [],
+      "keep_numerals": []
+    },
+    {
+      "name": "segment",
+      "ms": 27031,
+      "cost_usd": 0.0025,
+      "masks": 6,
+      "concepts": "box prompts + ink extent",
+      "leaders": []
+    },
+    {
+      "name": "clean_plate",
+      "ms": 27396,
+      "cost_usd": 0.01,
+      "images": 1,
+      "plate_size": [
+        1344,
+        1808
+      ],
+      "concurrent_with": [
+        "segment"
+      ]
+    },
+    {
+      "name": "register_composite",
+      "ms": 2684,
+      "cost_usd": 0.0,
+      "shift": [
+        0,
+        0
+      ],
+      "vertical_only": true,
+      "scale_ratio": [
+        1.4286,
+        1.4358
+      ],
+      "flat_interiors_cleaned": 6,
+      "outside_untouched_mean_diff_is_tautological": 0.0,
+      "ring_mean_abs_diff": 13.75,
+      "ring_max_abs_diff": 22.73,
+      "ring_per_region": [
+        6.03,
+        3.91,
+        11.84,
+        17.55,
+        22.73,
+        20.44
+      ],
+      "ring_band_px": [
+        8,
+        24
+      ]
+    },
+    {
+      "name": "verify",
+      "ms": 3681,
+      "cost_usd": 0.002895,
+      "checked": 6,
+      "residual": [
+        "t1"
+      ],
+      "notes": {
+        "t1": "faint light ghost lettering visible under blue at top left",
+        "t2": "solid blue, clean",
+        "t3": "solid olive, clean",
+        "t4": "solid olive, clean",
+        "t5": "solid olive, clean",
+        "t6": "solid olive, clean"
+      }
+    },
+    {
+      "name": "retry",
+      "ms": 21396,
+      "cost_usd": 0.013388,
+      "retried": "t1",
+      "still_residual": [
+        "t1"
+      ],
+      "notes": {
+        "t1": "faint ghost lettering across top blue band",
+        "t2": "clean blue field",
+        "t3": "clean green field",
+        "t4": "clean green field",
+        "t5": "clean green field",
+        "t6": "clean green field"
+      },
+      "shift": [
+        0,
+        -2
+      ]
+    },
+    {
+      "name": "repair",
+      "ms": 7319,
+      "cost_usd": 0.0,
+      "strategies": {}
+    },
+    {
+      "name": "final_check",
+      "ms": 3955,
+      "cost_usd": 0.002873,
+      "checked": 6,
+      "residual": [
+        "t1"
+      ],
+      "notes": {
+        "t1": "faint blue-on-blue lettering visible at top",
+        "t2": "clean blue field, no text",
+        "t3": "clean olive field, top edge marks not letter-like",
+        "t4": "clean olive field",
+        "t5": "clean olive field",
+        "t6": "clean olive field"
+      }
+    },
+    {
+      "name": "background",
+      "ms": 459,
+      "cost_usd": 0.0,
+      "bubbles": 0,
+      "sam": 0,
+      "box_fallback": 0,
+      "fallback_suppressed": false
+    },
+    {
+      "name": "typeset",
+      "ms": 496,
+      "cost_usd": 0.0,
+      "regions": 6,
+      "strategies": {
+        "t1": "muse",
+        "t2": "muse-retry",
+        "t3": "muse-retry",
+        "t4": "muse-retry",
+        "t5": "muse-retry",
+        "t6": "muse-retry"
+      },
+      "types": {
+        "t1": "signage",
+        "t2": "signage",
+        "t3": "signage",
+        "t4": "signage",
+        "t5": "signage",
+        "t6": "signage"
+      }
+    },
+    {
+      "name": "selfcheck",
+      "ms": 6033,
+      "cost_usd": 0.004019,
+      "flagged": [],
+      "issues": {},
+      "fixed": [],
+      "retranslated": [],
+      "still_flagged": []
+    }
+  ],
+  "regions": [
+    {
+      "id": "t1",
+      "source_text": "RANGER NATURALIST SERVICE",
+      "translation_ar": "خدمة المرشد الطبيعي",
+      "style": "title",
+      "font_style": "bold condensed uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        96,
+        99,
+        1805,
+        195
+      ],
+      "container": [
+        129,
+        112,
+        1786,
+        187
+      ],
+      "mask_path": "mask-t1.png",
+      "font_family": "tajawal-bold",
+      "font_size": 48,
+      "color": [
+        212,
+        168,
+        122
+      ],
+      "lines": [
+        "خدمة المرشد الطبيعي"
+      ],
+      "strategy": "muse"
+    },
+    {
+      "id": "t2",
+      "source_text": "FIELD TRIPS - CAMPFIRE PROGRAMS NATURAL HISTORY TALKS & EXHIBITS GENERAL INFORMATION",
+      "translation_ar": "رحلات وسهرة نار وكلام طبيعة ومعلومات عامة",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        902,
+        254,
+        1766,
+        410
+      ],
+      "container": [
+        902,
+        269,
+        1766,
+        392
+      ],
+      "mask_path": "mask-t2.png",
+      "font_family": "tajawal-bold",
+      "font_size": 48,
+      "color": [
+        212,
+        168,
+        122
+      ],
+      "lines": [
+        "رحلات وسهرة نار وكلام",
+        "طبيعة ومعلومات عامة"
+      ],
+      "strategy": "muse-retry"
+    },
+    {
+      "id": "t3",
+      "source_text": "ZION",
+      "translation_ar": "زيون",
+      "style": "title",
+      "font_style": "bold block uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        605,
+        2134,
+        1363,
+        2230
+      ],
+      "container": [
+        628,
+        2157,
+        1283,
+        2230
+      ],
+      "mask_path": "mask-t3.png",
+      "font_family": "tajawal-bold",
+      "font_size": 57,
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "lines": [
+        "زيون"
+      ],
+      "strategy": "muse-retry"
+    },
+    {
+      "id": "t4",
+      "source_text": "NATIONAL PARK",
+      "translation_ar": "الحديقة الوطنية",
+      "style": "title",
+      "font_style": "bold block uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        202,
+        2259,
+        1718,
+        2329
+      ],
+      "container": [
+        213,
+        2273,
+        1700,
+        2329
+      ],
+      "mask_path": "mask-t4.png",
+      "font_family": "tajawal-bold",
+      "font_size": 41,
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "lines": [
+        "الحديقة الوطنية"
+      ],
+      "strategy": "muse-retry"
+    },
+    {
+      "id": "t5",
+      "source_text": "U.S. DEPARTMENT OF THE INTERIOR",
+      "translation_ar": "وزارة الداخلية الأمريكية",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        163,
+        2365,
+        787,
+        2445
+      ],
+      "container": [
+        174,
+        2378,
+        766,
+        2465
+      ],
+      "mask_path": "mask-t5.png",
+      "font_family": "tajawal-bold",
+      "font_size": 56,
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "lines": [
+        "وزارة الداخلية الأمريكية"
+      ],
+      "strategy": "muse-retry"
+    },
+    {
+      "id": "t6",
+      "source_text": "NATIONAL PARK SERVICE",
+      "translation_ar": "هيئة الحدائق القومية",
+      "style": "label",
+      "font_style": "bold condensed uppercase sans",
+      "type": "signage",
+      "action": "translate",
+      "bbox": [
+        1142,
+        2368,
+        1805,
+        2448
+      ],
+      "container": [
+        1149,
+        2381,
+        1746,
+        2448
+      ],
+      "mask_path": "mask-t6.png",
+      "font_family": "tajawal-bold",
+      "font_size": 51,
+      "color": [
+        106,
+        127,
+        74
+      ],
+      "lines": [
+        "هيئة الحدائق القومية"
+      ],
+      "strategy": "muse-retry"
+    }
+  ],
+  "warnings": [
+    "t1: flat fill skipped (not flat)"
+  ],
+  "total_cost_usd": 0.046559,
+  "total_ms": 80386,
+  "stage_ms_sum": 106980
+}

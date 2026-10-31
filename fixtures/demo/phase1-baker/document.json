@@ -1,0 +1,163 @@
+{
+  "id": "4fca92652b05",
+  "width": 1280,
+  "height": 1920,
+  "register": "egyptian",
+  "numerals": "latin",
+  "images": {
+    "plate": "plate.png",
+    "composite": "composite.png",
+    "output": "output.png",
+    "source": "source.png"
+  },
+  "layers": [
+    {
+      "id": "t1",
+      "kind": "text",
+      "type": "caption",
+      "action": "translate",
+      "source_text": "CHAPTER ONE",
+      "arabic": {
+        "egyptian": "الفصل الأول",
+        "msa": "الفصل الأول"
+      },
+      "box": [
+        325,
+        311,
+        1012,
+        436
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 94,
+      "lines": [
+        {
+          "text": "الفصل الأول",
+          "size": 94,
+          "x": 668.5,
+          "baseline": 400.0,
+          "width": 506,
+          "height": 89
+        }
+      ],
+      "align": "center",
+      "color": [
+        20,
+        79,
+        94
+      ],
+      "z": 0,
+      "visible": true,
+      "locked": false,
+      "strategy": "muse-retry",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t2",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "FRESH BREAD?",
+      "arabic": {
+        "egyptian": "عيش طازة؟",
+        "msa": "عيش طازة؟"
+      },
+      "box": [
+        150,
+        499,
+        468,
+        678
+      ],
+      "font_family": "tajawal-bold",
+      "font_size": 61,
+      "lines": [
+        {
+          "text": "عيش",
+          "size": 61,
+          "x": 309.0,
+          "baseline": 572.5,
+          "width": 138,
+          "height": 63
+        },
+        {
+          "text": "طازة؟",
+          "size": 61,
+          "x": 309.0,
+          "baseline": 641.5,
+          "width": 149,
+          "height": 55
+        }
+      ],
+      "align": "center",
+      "color": [
+        20,
+        79,
+        94
+      ],
+      "z": 1,
+      "visible": true,
+      "locked": false,
+      "strategy": "flat-fill",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    },
+    {
+      "id": "t3",
+      "kind": "text",
+      "type": "dialogue",
+      "action": "translate",
+      "source_text": "EVERY MORNING",
+      "arabic": {
+        "egyptian": "كل يوم الصبح",
+        "msa": "كل يوم الصبح"
+      },
+      "box": [
+        803,
+        509,
+        1166,
+        682
+      ],
+      "font_family": "tajawal",
+      "font_size": 63,
+      "lines": [
+        {
+          "text": "كل يوم",
+          "size": 63,
+          "x": 984.5,
+          "baseline": 567.0,
+          "width": 173,
+          "height": 61
+        },
+        {
+          "text": "الصبح",
+          "size": 63,
+          "x": 984.5,
+          "baseline": 641.0,
+          "width": 154,
+          "height": 65
+        }
+      ],
+      "align": "center",
+      "color": [
+        178,
+        90,
+        60
+      ],
+      "z": 2,
+      "visible": true,
+      "locked": false,
+      "strategy": "flat-fill",
+      "fill": [],
+      "original": {},
+      "name": "",
+      "shape": "rect",
+      "asset": ""
+    }
+  ]
+}

@@ -43,6 +43,9 @@ CURATED = {
     "chalkboard": ("79753c06d42e", "04-chalkboard.png", "chalk text on a dark board"),
     "sfx-comic": ("3d06d47ba521", "07-comic-sfx.png", "captions plus a kept sound effect"),
     "label-fail": ("f6d1bc33524b", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
+    "phase1-baker": ("4fca92652b05", "assets/generated/test-panel.png", "final PAGE_A: Phase 1 baker comic"),
+    "comic-v4": ("81a193834757", "fixtures/demo-v4/pages/comic-a.jpg", "final PAGE_B: Muse-text comic with 3 bubbles + caption"),
+    "zion-limit": ("4b1912cbcd74", r"L:\naqsh-review\demo-v3\sources\Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.jpg", "final LIMITS: Zion WPA poster (PD)"),
 }
 
 
@@ -105,7 +108,7 @@ def build(name: str, job_id: str, fixture: str, note: str) -> dict:
                 "fallback_suppressed": bool((background.get("counts") or {}).get("fallback_suppressed")),
             }
 
-    fixture_path = FIXTURES / fixture
+    fixture_path = Path(fixture) if Path(fixture).is_absolute() else (REPO / fixture if (REPO / fixture).exists() else FIXTURES / fixture)
     entry = {
         "name": name,
         "note": note,
