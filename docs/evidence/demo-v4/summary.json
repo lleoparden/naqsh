@@ -1,0 +1,92 @@
+{
+  "pages": [
+    {
+      "id": "comic-a",
+      "expected": 4,
+      "detected": 4,
+      "recall": 0.75,
+      "cer": 0.0,
+      "splits": 1,
+      "bubbles": 3,
+      "seconds": 32.0,
+      "cost_usd": 0.03,
+      "plate_diff_outside": 6.678,
+      "verify": {
+        "t1": "clean beige shape, no text",
+        "t2": "clean beige shape, no text",
+        "t3": "clean beige shape, no text",
+        "t4": "clean orange band, no text"
+      },
+      "result": "L:\\naqsh-review\\demo-v4\\results\\comic-a.png"
+    },
+    {
+      "id": "shop-a",
+      "expected": 2,
+      "detected": 2,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "bubbles": 0,
+      "seconds": 42.0,
+      "cost_usd": 0.0381,
+      "plate_diff_outside": 10.951,
+      "verify": {
+        "t1": "letter outline fragments top and partial BOX center",
+        "t2": "partial BOX middle and clipped bottom lettering"
+      },
+      "result": "L:\\naqsh-review\\demo-v4\\results\\shop-a.png"
+    },
+    {
+      "id": "label-a",
+      "expected": 2,
+      "detected": 2,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "bubbles": 0,
+      "seconds": 44.4,
+      "cost_usd": 0.0411,
+      "plate_diff_outside": 5.273,
+      "verify": {
+        "t1": "only thin dark border line at top, no text-like marks",
+        "t2": "row of dark block fragments along bottom edge, likely cropped letter tops"
+      },
+      "result": "L:\\naqsh-review\\demo-v4\\results\\label-a.png"
+    },
+    {
+      "id": "postcard-a",
+      "expected": 2,
+      "detected": 2,
+      "recall": 0.5,
+      "cer": 0.0,
+      "splits": 1,
+      "bubbles": 0,
+      "seconds": 48.8,
+      "cost_usd": 0.0404,
+      "plate_diff_outside": 2.147,
+      "verify": {
+        "t1": "SEASIDE POSTCARD fragments top and bottom",
+        "t2": "WISH YOU WERE HERE bold lettering"
+      },
+      "result": "L:\\naqsh-review\\demo-v4\\results\\postcard-a.png"
+    },
+    {
+      "id": "phase1-baker",
+      "expected": 3,
+      "detected": 3,
+      "recall": 1.0,
+      "cer": 0.0,
+      "splits": 0,
+      "bubbles": 2,
+      "seconds": 35.7,
+      "cost_usd": 0.0287,
+      "plate_diff_outside": 9.058,
+      "verify": {
+        "t1": "empty caption box, no text",
+        "t2": "empty speech bubble, no text",
+        "t3": "empty speech bubble, no text"
+      },
+      "result": "L:\\naqsh-review\\demo-v4\\results\\phase1-baker.png"
+    }
+  ]
+}
