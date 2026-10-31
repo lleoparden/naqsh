@@ -222,11 +222,7 @@ judges' technical rubric (thumbnail 1280×720 or the gallery's required size, no
 unlicensed art); script per `submission-notes.md`; record at 1080p with captions;
 upload unlisted; verify the link in a private window; trim to ≤3:00.
 
-**Public demo URL (scoped, not built):** a small hosted deployment running in labelled
-demo mode only, with the model key server-side and live mode staying local. Scope and
-cost it now (one small container + static bundle; expects to fit a free/low tier), but
-**do not build or deploy it until the live-URL question is answered** (PENDING,
-Discord #questions 2026-10-27).
+**Public demo URL — NOT NEEDED** (organizer answer, Discord #questions, 2026-10-31): a public live URL is not required; judges run the project from the README and watch the 3-minute video. No deployment is planned.
 
 **Gate:** video link works logged out, shows only hackathon work, shows the full
 pipeline, the editor, and the layered export. **Fallback:** the Phase 7 backup
