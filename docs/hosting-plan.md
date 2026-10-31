@@ -1,4 +1,7 @@
-# Hosting plan (scoped, not built)
+# Hosting plan — NOT NEEDED (organizer answer 2026-10-31)
+
+**Status: NOT NEEDED.** A public live URL is not required; judges run the project from the
+README and watch the 3-minute video. This plan is kept only as an optional appendix.
 
 Relayed by the owner from Cerebral Valley: **a hosted URL is better for judges** than a
 video-only submission. This is a plan; nothing is deployed. Do not deploy until the

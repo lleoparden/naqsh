@@ -538,9 +538,21 @@ until the owner confirms.
 
 ## Organizer answers (verbatim)
 
-### Discord #questions — 2026-10-28 21:49 Cairo
+### Discord #questions — 2026-10-31
 
-Quoted exactly as received:
+- **Live URL:** "A public live URL is not required. Judges need a project that runs from
+  the public repo's setup instructions, plus the 3-minute demo video. A hosted version is
+  optional, so you can deploy it, but judging doesn't depend on it."
+- **Video:** "The demo video should show the working product with the live Meta model
+  calls visible, and judges can test with their own keys if needed. Recorded sample runs
+  are only a fallback, so if your public deployment runs in demo mode, make sure the repo
+  still runs live from its setup instructions and the README explains how to use the demo
+  mode."
+
+**PENDING — no answer yet, do not assume:** whether outside AI coding tools (DeepSeek,
+Claude) are allowed. (The owner will paste the exact text when available.)
+
+### Discord #questions — 2026-10-28 21:49 Cairo
 
 - Muse Image is an allowed model, so demo artwork generated with it may be used in the
   video and repo. The rules only exclude assets I don't have rights to. No on-screen
@@ -554,197 +566,10 @@ Quoted exactly as received:
   submission, through Nov 8 EOD. No hashtag is required. Posting anytime during the event
   is allowed. The Community Vote is separate.
 
-**PENDING — no answer yet, do not assume:**
-
-- whether outside AI coding tools (DeepSeek, Claude) are allowed;
-- whether a live public URL is required (CV said a hosted URL is better for judges).
-
 ### Discord #questions — 2026-10-27
 
-Quoted exactly as received:
-
 1. **Demo video link:** any accessible link that lets judges watch works (unlisted YouTube is fine).
 2. **Submissions can be edited until the deadline**, so the X post link can be added later.
 3. **Most Viral is separate from the Community Vote**: highest total likes + reposts + comments on the X post linked in the submission, counted through Nov 8 EOD. Posting anytime during the event is allowed, and build-in-public posts don't affect eligibility.
 4. **Community Vote is on the public gallery**, one vote per verified account, winner announced Nov 16.
 
-Implications recorded in the plan: Phase 10 submits on 3 Nov with all fields and edits in
-the X link before the deadline; after the deadline no edits are possible, so the X post
-must exist before that. Phase 9 writes the public-gallery title, tagline, description and
-thumbnail; build-in-public before/after clips are saved as they are made. Muse Image
-assets are cleared for the video and repo with no on-screen credit; the "use of Meta
-products" answer describes the use.
-
-## Media worth using (screenshots / clips)
-
-Collect as we go; each entry says what it proves.
-
-**Build-in-public clips:** save a short before/after clip as each feature lands. The
-pipeline already writes `before-after.png` per job, and the editor can export the
-current page; keep clips next to the evidence they belong to. Posting anytime during
-the event is allowed and build-in-public posts do not affect Most Viral eligibility
-(organizer answer, 2026-10-27).
-
-| Date | File | Shows |
-| --- | --- | --- |
-| 2026-10-27 | `assets/generated/test-panel.png` | The generated, rights-clean test page (before) |
-| 2026-10-27 | `assets/generated/test-panel-speech-bubble-masks.png` | SAM 3.1 masks landing exactly on both speech bubbles |
-| 2026-10-27 | `assets/generated/test-panel-caption-masks.png` | A box prompt turning Spark's bbox into a precise caption mask |
-| 2026-10-27 | `assets/generated/test-panel-cleaned.png` | Lettering erased, artwork intact (the clean plate) |
-| 2026-10-27 | `assets/generated/test-panel-before-after.png` | The before/after pair — strong X-post candidate |
-| 2026-10-27 | `docs/evidence/phase-2/before-after-egyptian.png` | Phase 2 end-to-end: generated page → Arabic page |
-| 2026-10-27 | `docs/evidence/phase-2/masks-overlay.png` | SAM masks over the page: what became editable layers |
-| 2026-10-27 | `docs/evidence/phase-2/clean-plate-composite.png` | The plate after registration and masked compositing |
-| 2026-10-27 | `docs/evidence/phase-2/failure-ghost-lettering.png` | The honest failure: an edit that left ghost lettering |
-| _pending_ | editor | A region being fixed in the layer editor |
-| _pending_ | export | SVG layers opened somewhere that proves they are editable |
-
-## Demo video outline (3 minutes)
-
-1. **0:00–0:20 — Problem.** Arabic creators localize by hand; RTL tools break.
-   Show a real before (rights-cleared) and say the claim: *X minutes by hand vs.
-   Y with Naqsh*.
-2. **0:20–1:30 — Pipeline.** Upload → SAM masks appear → Spark reads and
-   translates → plate repainted → Arabic typeset RTL. Narration names the model
-   doing each step.
-3. **1:30–2:20 — The editor.** Fix a region: change text, drag position, switch
-   font, resize; show it fitting the bubble.
-4. **2:20–2:50 — Export.** Layered SVG + PNG; open the SVG and show selectable
-   text layers.
-5. **2:50–3:00 — Who it's for / close.** One sentence on audience and the
-   measured time saved.
-
-Rules: only what was built during the hackathon; no third-party copyrighted
-pages; captions for the Arabic; record at 1080p; upload unlisted to YouTube.
-
-## Submission checklist (Phase 9 owns this)
-
-- [ ] Repo public, no secrets in history (`git log -p` scan + GitHub secret scan)
-- [ ] README "What's new" section accurate
-- [ ] ASSETS.md complete, every asset licensed
-- [ ] Demo video unlisted, link opens in a private window, ≤ 3:00
-- [ ] Form fields filled, description proofread, X post linked (optional track)
-- [ ] Submitted on 3 Nov (buffer before 4 Nov 21:00 ET)
-- [ ] Submission confirmation screenshot saved in `docs/`
-
-## Rules relayed by the owner (screenshot pending)
-
-Relayed from Cerebral Valley by the owner on 2026-10-28. **Marked relayed, screenshot
-pending** until the owner saves the evidence in L:\\naqsh-review\\rules-evidence\\.
-
-- The video must **demo the product that was built**, not slides.
-- It should run **3:00** and be **understandable in English**.
-- An editor who does not touch the build **does not need to be a participant**.
-
-These are recorded, not yet confirmed by screenshot; no submission decision depends on them
-until the owner confirms.
-
-## Organizer answers (verbatim)
-
-Discord **#questions**, **2026-10-27**. Quoted exactly as received:
-
-1. **Demo video link:** any accessible link that lets judges watch works (unlisted YouTube is fine).
-2. **Submissions can be edited until the deadline**, so the X post link can be added later.
-3. **Most Viral is separate from the Community Vote**: highest total likes + reposts + comments on the X post linked in the submission, counted through Nov 8 EOD. Posting anytime during the event is allowed, and build-in-public posts don't affect eligibility.
-4. **Community Vote is on the public gallery**, one vote per verified account, winner announced Nov 16.
-
-**PENDING — no answer yet, do not assume:**
-
-- whether Muse Image outputs are allowed as demo assets and whether the model must be credited;
-- whether outside AI coding tools (DeepSeek, Claude) are allowed;
-- whether a public live URL is required.
-
-Implications recorded in the plan: Phase 10 submits early on 3 Nov and edits in the X
-link before the deadline; Phase 9 writes the public-gallery title, tagline,
-description and thumbnail; build-in-public before/after clips are saved as they are
-made.
-
-## Media worth using (screenshots / clips)
-
-Collect as we go; each entry says what it proves.
-
-**Build-in-public clips:** save a short before/after clip as each feature lands. The
-pipeline already writes `before-after.png` per job, and the editor can export the
-current page; keep clips next to the evidence they belong to. Posting anytime during
-the event is allowed and build-in-public posts do not affect Most Viral eligibility
-(organizer answer, 2026-10-27).
-
-| Date | File | Shows |
-| --- | --- | --- |
-| 2026-10-27 | `assets/generated/test-panel.png` | The generated, rights-clean test page (before) |
-| 2026-10-27 | `assets/generated/test-panel-speech-bubble-masks.png` | SAM 3.1 masks landing exactly on both speech bubbles |
-| 2026-10-27 | `assets/generated/test-panel-caption-masks.png` | A box prompt turning Spark's bbox into a precise caption mask |
-| 2026-10-27 | `assets/generated/test-panel-cleaned.png` | Lettering erased, artwork intact (the clean plate) |
-| 2026-10-27 | `assets/generated/test-panel-before-after.png` | The before/after pair — strong X-post candidate |
-| 2026-10-27 | `docs/evidence/phase-2/before-after-egyptian.png` | Phase 2 end-to-end: generated page → Arabic page |
-| 2026-10-27 | `docs/evidence/phase-2/masks-overlay.png` | SAM masks over the page: what became editable layers |
-| 2026-10-27 | `docs/evidence/phase-2/clean-plate-composite.png` | The plate after registration and masked compositing |
-| 2026-10-27 | `docs/evidence/phase-2/failure-ghost-lettering.png` | The honest failure: an edit that left ghost lettering |
-| _pending_ | editor | A region being fixed in the layer editor |
-| _pending_ | export | SVG layers opened somewhere that proves they are editable |
-
-## Demo video outline (3 minutes)
-
-1. **0:00–0:20 — Problem.** Arabic creators localize by hand; RTL tools break.
-   Show a real before (rights-cleared) and say the claim: *X minutes by hand vs.
-   Y with Naqsh*.
-2. **0:20–1:30 — Pipeline.** Upload → SAM masks appear → Spark reads and
-   translates → plate repainted → Arabic typeset RTL. Narration names the model
-   doing each step.
-3. **1:30–2:20 — The editor.** Fix a region: change text, drag position, switch
-   font, resize; show it fitting the bubble.
-4. **2:20–2:50 — Export.** Layered SVG + PNG; open the SVG and show selectable
-   text layers.
-5. **2:50–3:00 — Who it's for / close.** One sentence on audience and the
-   measured time saved.
-
-Rules: only what was built during the hackathon; no third-party copyrighted
-pages; captions for the Arabic; record at 1080p; upload unlisted to YouTube.
-
-## Submission checklist (Phase 9 owns this)
-
-- [ ] Repo public, no secrets in history (`git log -p` scan + GitHub secret scan)
-- [ ] README "What's new" section accurate
-- [ ] ASSETS.md complete, every asset licensed
-- [ ] Demo video unlisted, link opens in a private window, ≤ 3:00
-- [ ] Form fields filled, description proofread, X post linked (optional track)
-- [ ] Submitted on 3 Nov (buffer before 4 Nov 21:00 ET)
-- [ ] Submission confirmation screenshot saved in `docs/`
-
-## Rules relayed by the owner (screenshot pending)
-
-Relayed from Cerebral Valley by the owner on 2026-10-28. **Marked relayed, screenshot
-pending** until the owner saves the evidence in L:\\naqsh-review\\rules-evidence\\.
-
-- The video must **demo the product that was built**, not slides.
-- It should run **3:00** and be **understandable in English**.
-- An editor who does not touch the build **does not need to be a participant**.
-
-These are recorded, not yet confirmed by screenshot; no submission decision depends on them
-until the owner confirms.
-
-## Organizer answers (verbatim)
-
-Discord **#questions**, answered **2026-10-27** (quoted as received):
-
-1. **Demo video link:** any accessible link that lets judges watch works (unlisted
-   YouTube is fine).
-2. **Editing after submit:** submissions can be edited until the deadline, so the X
-   post link can be added later.
-3. **Most Viral vs Community Vote:** Most Viral is separate from the Community Vote:
-   highest total likes + reposts + comments on the X post linked in the submission,
-   counted through Nov 8 EOD. Posting anytime during the event is allowed, and
-   build-in-public posts don't affect eligibility.
-4. **Community Vote:** on the public gallery, one vote per verified account, winner
-   announced Nov 16.
-
-**PENDING — no answer yet, do not assume:**
-
-- Muse Image assets and model credit (allowed? required in the video?).
-- Outside AI coding tools (permitted or not).
-- Live URL requirement (is a hosted demo URL required at submission?).
-
-Implications recorded in the plan: Phase 10 submits early on 3 Nov and edits in the X
-link before the deadline; Phase 9 writes the public-gallery title, tagline,
-description and thumbnail; build-in-public before/after clips are saved as they are
-made.
