@@ -21,6 +21,88 @@ businesses still localize by hand. Naqsh is built for them first.
 > [`docs/plan.md`](docs/plan.md) and the honest-limit run
 > `fixtures/demo/label-fail/`.
 
+## Quickstart for judges
+
+Works on Windows, macOS and Linux. Tested on **Python 3.12** and **Node 20+** (Node 24
+tested); no other versions are pinned.
+
+1. **Clone and install the backend**
+
+   ```bash
+   git clone https://github.com/lleoparden/naqsh.git
+   cd naqsh/backend
+   python -m venv .venv
+   # Windows PowerShell:
+   .venv\Scripts\Activate.ps1
+   # macOS/Linux:
+   # source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. **Get a Meta Model API key** at <https://dev.meta.ai> — **a payment method is
+   required** even for the credits. Put it in `.env` at the **repo root**:
+
+   ```bash
+   cp ../.env.example ../.env        # then edit MODEL_API_KEY=...
+   ```
+
+   `.env` is gitignored. Never commit it.
+
+3. **Install and build the frontend**
+
+   ```bash
+   cd ../frontend
+   npm install
+   npm run build
+   ```
+
+4. **Try demo mode first (no key, no spend).** Start the backend and preview:
+
+   ```bash
+   # terminal 1 (repo root/backend). PowerShell:
+   $env:DEMO_MODE='1'; $env:LIVE_MODE='0'
+   uvicorn app.main:app --port 8000
+
+   # terminal 2
+   cd frontend && npm run preview -- --port 4174
+   ```
+
+   Open <http://localhost:4174/?clean=1> and upload
+   `assets/generated/fixtures/01-comic-flat.png`. The **Demo mode** badge means the page
+   replays a recorded real run; timings and cost are the recorded ones and no model API is
+   called. macOS/Linux: `DEMO_MODE=1 LIVE_MODE=0 uvicorn app.main:app --port 8000`.
+
+5. **Run live.** Stop the backend, then (PowerShell):
+
+   ```bash
+   $env:DEMO_MODE='0'; $env:LIVE_MODE='1'
+   uvicorn app.main:app --port 8000
+   ```
+
+   Upload a page. Paid calls are blocked unless `LIVE_MODE=1`; the startup banner says
+   **LIVE MODE**. Expected cost is about **$0.03 per comic page** and about **$0.05 per
+   menu page**, from the receipts in `fixtures/demo/*/receipt.json` (comic $0.0280,
+   menu $0.0391) and the live variance receipts in `docs/evidence/`.
+
+6. **Run the tests offline** (no key, no spend):
+
+   ```bash
+   cd backend && pytest -q
+   cd ../frontend && npm run typecheck && npm run build
+   ```
+
+**Troubleshooting**
+
+- `8010` vs `8000`: the Vite dev/preview proxy targets `http://127.0.0.1:8000`. Keep the
+  backend on 8000, or set `NAQSH_API=http://127.0.0.1:8010` before `npm run dev`.
+- PowerShell does not accept `DEMO_MODE=1 uvicorn ...`; use `$env:DEMO_MODE='1'` first.
+- `Activate.ps1` may be blocked: run `Set-ExecutionPolicy -Scope Process Bypass` first.
+- `npm install` may warn that esbuild postinstall scripts were skipped; `npm run dev`
+  still worked in testing. If the build fails, run `npm approve-scripts esbuild`.
+- A 500 from `/api/health` in the browser means the backend is not on the port Vite
+  proxies; start it on 8000.
+- `MODEL_API_KEY` missing → 503; `Live mode is off` → set `LIVE_MODE=1` and restart.
+
 ## What's new / built during the hackathon
 
 This repository is **new work written during the Meta Global AI Developer
@@ -104,11 +186,12 @@ assets/             rights-cleared media (see ASSETS.md)
 ## Local setup
 
 ```bash
-# backend
+# backend (PowerShell shown; macOS/Linux use source .venv/bin/activate)
 cd backend
-python -m venv .venv && .venv/Scripts/activate    # Windows
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-cp ../.env.example ../.env                         # then paste your key
+cp ../.env.example ../.env    # then paste MODEL_API_KEY
 uvicorn app.main:app --reload --port 8000
 
 # frontend
@@ -127,17 +210,18 @@ pre-generated or shortened.
 
 ```bash
 # backend with replay on (the cached runs need no API key)
-DEMO_MODE=1 uvicorn app.main:app --port 8010
+$env:DEMO_MODE='1'; $env:LIVE_MODE='0'; uvicorn app.main:app --port 8000
+# macOS/Linux: DEMO_MODE=1 LIVE_MODE=0 uvicorn app.main:app --port 8000
 ```
 
-- A byte-for-byte match for a cached fixture is replayed; **anything else goes live**.
+- A byte-for-byte match for a cached fixture is replayed; anything else needs `LIVE_MODE=1`, otherwise the request is refused with a clear error.
 - The UI always shows a **“Demo mode: replaying recorded run”** badge; it cannot be
   hidden by `?clean=1`.
 - Re-translate replays the cached Egyptian/MSA line, with cost $0 and no model call.
 - Turn it off by unsetting `DEMO_MODE` (or `DEMO_MODE=0`) and restarting the backend.
 - The cache lives in `fixtures/demo/` (receipt, document, plate, source, masks);
   rebuild it from the recorded jobs with `python backend/scripts/build_demo_cache.py`.
-- **Honest-use rule:** the final video must include at least one live run.
+- **Video rule:** show live model calls; use the labelled demo replay only as a fallback.
 
 Recording checklist: [`docs/recording-guide.md`](docs/recording-guide.md).
 
