@@ -36,12 +36,13 @@ needs no key; it is a fallback, not the main path. Offline tests: `pytest -q`,
 
 | What | Range | Source |
 |---|---|---|
-| Live comic page | 61.7–93.0 s; $0.0395–$0.0436 | fresh clone 2026-10-31; `docs/evidence/test-suite/summary.json` |
-| Demo receipt comic | 39.8 s; $0.0280 | `fixtures/demo/comic/receipt.json` |
-| Demo receipt menu | 90.3 s; $0.0391 | `fixtures/demo/menu/receipt.json` |
-| Demo candidates | 45.2–93.6 s; $0.0251–$0.0459 | `docs/evidence/demo-candidates.json` |
+| Comic page, live | **≈ 29–62 s; $0.026–0.040** | demo receipt $0.0280/39.8 s; fresh-clone runs 48.7 s/$0.027682 and 61.7 s/$0.039521 (`docs/evidence/live-ui-fresh-clone.json`, `docs/evidence/fresh-clone-2026-10-31.md`); variance `docs/evidence/phase-8/variance-summary.json` |
+| Menu page, live | **≈ 62–122 s; $0.037–0.066** | `fixtures/demo/menu/receipt.json` (90.3 s/$0.0391); variance `docs/evidence/phase-8/variance-summary.json` |
+| Demo candidates v2 | 32.4–63.9 s; $0.0232–$0.0417 | `docs/evidence/demo-v2/summary.json` |
 | Recall (English suite, pass pages) | 0.71–1.00, mean 0.97 | `docs/evidence/test-suite/summary.json` |
 | Read CER | 0.0–0.794 | same |
+
+Waits are wall-clock; video takes may cut them with an on-screen “sped up”/“cut” label.
 
 ## Use of Meta products
 
