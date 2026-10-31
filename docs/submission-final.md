@@ -1,0 +1,62 @@
+# Submission — final package (2026-10-31)
+
+Every number is a range from the cited receipt; no time-saved ratio is claimed (owner
+decision 2026-10-29). Live URL is **not required** (organizer answer 2026-10-31).
+
+## Form fields
+
+| Field | Value |
+|---|---|
+| Team name | **Naqsh** |
+| Team member | Mostafa Eid (Lleoparden) |
+| Track | Indie Developer |
+| Problem statement | Build for Your World |
+| Public repo | `https://github.com/lleoparden/naqsh` (public, MIT) |
+| Demo video | 3:00 English, live-first; link to be added when recorded |
+| X post link | to be added before the deadline |
+| Hosting | **not required**; no deployment |
+
+## One-paragraph description
+
+Naqsh is an Arabic-first visual localizer: upload a comic page, poster or menu; Muse Spark
+reads and translates the lettering, SAM 3.1 segments it, Muse Image repaints the plate,
+Arabic is typeset right-to-left, and a layer editor exposes scenery, bubbles and text for
+editing before layered SVG/PNG/ZIP export.
+
+## How judges can run it
+
+Follow **README → “Quickstart for judges”**: clone, Python venv + `pip install`, Node
+`npm install && npm run build`, put `MODEL_API_KEY` in `.env` (a payment method is required
+at dev.meta.ai), then run the backend with `LIVE_MODE=1` and the preview server.
+Demo mode (`DEMO_MODE=1`, `LIVE_MODE=0`) replays recorded runs with a visible badge and
+needs no key; it is a fallback, not the main path. Offline tests: `pytest -q`,
+`npm run typecheck && npm run build`.
+
+## Measured numbers (ranges, cited)
+
+| What | Range | Source |
+|---|---|---|
+| Live comic page | 61.7–93.0 s; $0.0395–$0.0436 | fresh clone 2026-10-31; `docs/evidence/test-suite/summary.json` |
+| Demo receipt comic | 39.8 s; $0.0280 | `fixtures/demo/comic/receipt.json` |
+| Demo receipt menu | 90.3 s; $0.0391 | `fixtures/demo/menu/receipt.json` |
+| Demo candidates | 45.2–93.6 s; $0.0251–$0.0459 | `docs/evidence/demo-candidates.json` |
+| Recall (English suite, pass pages) | 0.71–1.00, mean 0.97 | `docs/evidence/test-suite/summary.json` |
+| Read CER | 0.0–0.794 | same |
+
+## Use of Meta products
+
+Muse Spark vision reads/checks, Muse Spark text translates, SAM 3.1 segments, Muse Image
+repaints. Muse Image outputs are allowed with no on-screen credit (organizer answer
+2026-10-28, Discord #questions); prompts/model/source are in `ASSETS.md`.
+
+## Honest limits
+
+Photographed/painted textures can defeat the plate (`fixtures/demo/label-fail/`); curved
+headlines are read but set straight; about 0.4% of browser-vs-server SVG pixels differ
+(`docs/evidence/phase-6/parity.json`). No time-saved ratio.
+
+## What is still open
+
+- Record the live-first 3:00 video and add its link.
+- Post on X and add the link before the deadline.
+- Outside AI coding tools remain PENDING; it does not change the repo or the video.
