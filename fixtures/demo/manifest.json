@@ -575,7 +575,7 @@
   {
     "name": "zion-limit",
     "note": "final LIMITS: Zion WPA poster (PD)",
-    "fixture": "L:\\naqsh-review\\demo-v3\\sources\\Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.jpg",
+    "fixture": "fixtures/demo-v3/zion.jpg",
     "sha256": "2b546919cbfbb24c02e539354fee8b6353f010fc4165fc3b2e759ff572bd01a9",
     "job_id": "4b1912cbcd74",
     "width": 1920,

@@ -45,7 +45,7 @@ CURATED = {
     "label-fail": ("f6d1bc33524b", "05-label-kraft.png", "photo label, plate failure (honest limit)"),
     "phase1-baker": ("4fca92652b05", "assets/generated/test-panel.png", "final PAGE_A: Phase 1 baker comic"),
     "comic-v4": ("81a193834757", "fixtures/demo-v4/pages/comic-a.jpg", "final PAGE_B: Muse-text comic with 3 bubbles + caption"),
-    "zion-limit": ("4b1912cbcd74", r"L:\naqsh-review\demo-v3\sources\Zion_National_Park__Ranger_Naturalist_Service_LCCN2007676134.jpg", "final LIMITS: Zion WPA poster (PD)"),
+    "zion-limit": ("4b1912cbcd74", "fixtures/demo-v3/zion.jpg", "final LIMITS: Zion WPA poster (PD)"),
 }
 
 
