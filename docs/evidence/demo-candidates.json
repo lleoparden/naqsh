@@ -1,0 +1,49 @@
+{
+  "candidates": [
+    {
+      "id": "comic-bakery",
+      "source": "L:\\naqsh-review\\demo-candidates\\sources\\comic-bakery.jpg",
+      "result": "L:\\naqsh-review\\demo-candidates\\results\\comic-bakery.png",
+      "regions": 4,
+      "seconds": 71.1,
+      "cost_usd": 0.0459,
+      "prompt": "Flat vector comic page, original artwork: bakery counter at dusk, three EMPTY speech bubbles and one EMPTY caption banner, cream/teal/terracotta, no lettering, no text, portrait."
+    },
+    {
+      "id": "bakery-poster",
+      "source": "L:\\naqsh-review\\demo-candidates\\sources\\bakery-poster.jpg",
+      "result": "L:\\naqsh-review\\demo-candidates\\results\\bakery-poster.png",
+      "regions": 3,
+      "seconds": 74.2,
+      "cost_usd": 0.0455,
+      "prompt": "Warm flat-vector bakery poster background, original artwork: wheat, bread and a sun, large empty area at the top, no lettering, no text, portrait."
+    },
+    {
+      "id": "cafe-menu",
+      "source": "L:\\naqsh-review\\demo-candidates\\sources\\cafe-menu.jpg",
+      "result": "L:\\naqsh-review\\demo-candidates\\results\\cafe-menu.png",
+      "regions": 5,
+      "seconds": 45.2,
+      "cost_usd": 0.0251,
+      "prompt": "Printed cafe menu paper texture, original artwork: cream paper, thin border, empty columns, no lettering, no text, portrait."
+    },
+    {
+      "id": "honey-label",
+      "source": "L:\\naqsh-review\\demo-candidates\\sources\\honey-label.jpg",
+      "result": "L:\\naqsh-review\\demo-candidates\\results\\honey-label.png",
+      "regions": 4,
+      "seconds": 51.4,
+      "cost_usd": 0.0368,
+      "prompt": "Flat vector product label illustration, original artwork: honey jar on a wooden table, blank cream label, warm light, no lettering, no text, portrait."
+    },
+    {
+      "id": "night-market",
+      "source": "L:\\naqsh-review\\demo-candidates\\sources\\night-market.jpg",
+      "result": "L:\\naqsh-review\\demo-candidates\\results\\night-market.png",
+      "regions": 3,
+      "seconds": 93.6,
+      "cost_usd": 0.045,
+      "prompt": "Retro travel poster background, original artwork: night market with lanterns, large empty sky area, no lettering, no text, portrait."
+    }
+  ]
+}
