@@ -1,100 +1,63 @@
-# Demo script — 3:00, English
+# Demo script — live-first, 3:00, English
 
-Only features that exist and are tested appear here. Every number traces to a receipt in
-`fixtures/demo/*/receipt.json`. **No time-saved ratio is claimed** — the manual baseline is
-still PENDING (`docs/time-saved.md`), so the video must not state one.
+All main takes are **live** (`LIVE_MODE=1`), with the LIVE banner, stage progress and the
+receipt visible. Demo replay appears only as a labelled fallback. Every number cites a
+receipt; no time-saved ratio (owner decision 2026-10-29; “faster” only).
 
-## Numbers used (from the demo receipts)
+## Numbers
 
-| Page | Regions | Recorded total | Recorded cost | Receipt |
-|---|---|---|---|---|
-| comic `01-comic-flat` | 3 | **39.8 s** | **$0.0280** | `fixtures/demo/comic/receipt.json` |
-| menu `03-menu-paper` | 16 | **90.3 s** | **$0.0391** | `fixtures/demo/menu/receipt.json` |
-| label `05-label-kraft` (honest limit) | 3 | **39.7 s** | **$0.0269** | `fixtures/demo/label-fail/receipt.json` |
+| Source | Number |
+|---|---|
+| Fresh-clone live comic, 2026-10-31 (`docs/evidence/fresh-clone-2026-10-31.md`) | **61.7 s**, **$0.039521** |
+| Live comic receipt (`docs/evidence/test-suite/summary.json`) | **93.0 s**, $0.0436 (3 bubbles) |
+| Demo receipt comic (`fixtures/demo/comic/receipt.json`) | 39.8 s, $0.0280 |
+| Demo receipt menu (`fixtures/demo/menu/receipt.json`) | 90.3 s, $0.0391 |
+| Demo candidates (`docs/evidence/demo-candidates.json`) | 45.2–93.6 s, $0.0251–$0.0459 |
 
-These are replay receipts of real runs; the demo badge says so. Do not read them as live
-waiting time.
+Waits are recorded in real time; cuts carry a **“sped up”** or **“cut”** label and a timer.
 
-## Shot list and narration
+## Shot list / narration
 
-### 0:00–0:20 — Hook
+### 0:00–0:15 — Hook (live result already on screen)
+**Shot:** the live comic result from take 1, LIVE banner visible.
+**Narration:** “Arabic localization is still hand work. Naqsh turns one page into editable
+Arabic layers — and this is a live run, not a recording.”
 
-**Shot:** home page (`/?clean=1`), slow push on the headline “Turn any page into editable
-Arabic layers”. Cursor over the drop zone.
+### 0:15–0:50 — Live upload (real wait, cut with label)
+**Shot:** terminal banner `LIVE MODE`; upload the comic; stages tick.
+**Narration:** “Live model calls: Muse Spark reads and translates, SAM segments, Muse Image
+repaints. This take took 61.7 seconds and cost 3.9 cents; the receipt is on screen.”
 
-**Narration:** “Arabic comics and menus are still localized by hand: erase the lettering,
-redraw the background, retype every line in Arabic, hope nothing moves. Naqsh turns one
-page into editable Arabic layers — and gives every region back to you.”
+### 0:50–1:25 — Layers are real
+**Shot:** Layers panel: Scenery, bubbles, text; hide/show, rename, lock/drag; slider.
+**Narration:** “Scenery, speech bubbles and text are separate layers — hide a bubble,
+rename, reorder, lock it. Nothing is baked into a flat PNG.”
 
-### 0:20–0:45 — Upload the comic (demo replay)
+### 1:25–1:55 — Edit and export
+**Shot:** change one line, switch Arabic style, draw a cover, open Export, download ZIP,
+show `layers.json` and `layers/`.
+**Narration:** “Every fix is a layer edit. Export gives real SVG groups and a ZIP with the
+layer manifest and scene/bubble assets — not a flattened image.”
 
-**Shot:** upload `01-comic-flat.png`. Badge appears: **Demo mode — replaying a recorded
-run**. Result shows before/after. Open the editor.
+### 1:55–2:25 — Live menu (second page type)
+**Shot:** live menu upload; show prices/digits and the receipt.
+**Narration:** “A dense menu: sixteen regions, prices and times. The receipt shows the real
+seconds and cost.”
 
-**Narration:** “This is a recorded run: three lettering regions, 39.8 seconds, 2.8 cents.
-The badge stays on screen — the demo never pretends a replay is a live call.”
-
-### 0:45–1:15 — Layers are real
-
-**Shot:** Layers panel: **Scenery**, **2 bubbles**, **3 text**. Hide one bubble — the hole
-in the scenery is visible; show it again. Rename the title. Drag a text layer above
-another. Lock a layer and try to drag it.
-
-**Narration:** “The background is not one image. Scenery, speech bubbles and text are
-separate layers. Hide a bubble, rename a layer, reorder, lock it. Nothing here is baked
-into a flat PNG.”
-
-### 1:15–1:45 — Fix a line, draw a cover
-
-**Shot:** select a text region, change one Arabic line, switch Arabic style, reset to the
-AI result. Draw an ellipse cover patch with the colour control; undo.
-
-**Narration:** “The editor is the product: fix a translation, change the register, or cover
-artwork the model should not touch — every change is a layer edit, not a repaint.”
-
-### 1:45–2:10 — Menu page
-
-**Shot:** upload `03-menu-paper.png` (demo). Show 16 regions and **Scenery + text only** —
-no invented bubbles. Point at prices keeping their numerals.
-
-**Narration:** “A dense menu: sixteen regions, 90.3 seconds, 3.9 cents. No bubbles on this
-page, so it gets scenery and text only — the rule is scene-aware, not one-size.”
-
-### 2:10–2:30 — Export
-
-**Shot:** Export menu: Layered SVG, Outlined SVG, PNG, Bundle (ZIP). Run PNG; show the
-size toast. Open the ZIP: `layers.json`, `layers/scene.png`, `layers/bubble-*.png`, SVGs.
-
-**Narration:** “Export is layered: SVG groups and a ZIP with a layers manifest and the
-scene/bubble assets, so the page can go back into a design tool — not a flattened image.”
-
-### 2:30–2:50 — Honest limit
-
-**Shot:** upload `05-label-kraft.png`. The plate is not clean on the photographed label.
-
-**Narration:** “This is where it still fails: a photographed label. The plate smears. I
-show it because the editor is how you take over — and because a localizer that hides its
-failures is not useful.”
+### 2:25–2:50 — Honest limit (only if using demo fallback, say so)
+**Shot:** label page; badge visible if demo.
+**Narration:** “This is where it still fails: photographed labels. The editor is how you
+take over — and a demo badge would mean this clip is a replay, not live.”
 
 ### 2:50–3:00 — Close
+**Shot:** repo, README quickstart, tests.
+**Narration:** “Naqsh runs from the public repo: clone, key, LIVE_MODE=1. Built with Muse
+Spark, SAM 3.1 and Muse Image.”
 
-**Shot:** repo, test count, demo badge.
+## What NOT to say
 
-**Narration:** “Naqsh: Arabic-first layers, scenery, bubbles and text, editable and
-exportable. Built with Meta Muse Spark, SAM 3.1 and Muse Image.”
-
-## What the narration must NOT say
-
-- No time-saved ratio or multiplier. Saying **“faster”** is allowed; a number is not.
+- No time-saved ratio or “N× faster”; say **faster** at most.
 - No “fully automatic”, “no editing needed”, “any language”.
-- No “live model call” while the demo badge is on.
-- No clean-plate success claim for the label page.
-- No claim that the before/after divider is pixel-verified in the demo cache; it predates
-  the frame-offset fix.
-
-## Marked unverified (do not put on screen)
-
-- Manual baseline and time-saved results — BLOCKED ON OWNER (#9).
-- Live public URL requirement — PENDING (CV said a hosted URL is better).
-- Outside AI coding tools — PENDING.
-- The clean-plate gate (#3) — BLOCKED ON OWNER.
+- No “live” claim over a demo badge.
+- No clean-plate success on the photo label.
+- No slides.
