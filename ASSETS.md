@@ -97,6 +97,11 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | `L:\naqsh-review\mascot-assets\v2\reaction-clips\**` | 13 reaction clips (alpha WebM/ProRes) | Encoded from code-drawn state/gesture frames | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\v2\previews\**` | Contact sheets and 16 GIFs | Rendered from the code-drawn frames | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\v2\presenter\sample-10s-presenter.mov` | 10 s presenter sample, alpha | Code-drawn frames + generated test WAV; no model | Project-owned (MIT); generated audio | 2026-11-01 |
+| `assets/mascot/favicon.svg` | Mascot favicon source | Code-drawn copy of `naqsh.svg`; no model | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\frames\<state>\*.png` | Mascot 12 fps PNG sequences (alpha) | Rendered from the SVG with Playwright; code-drawn | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\video\*.webm` | Mascot alpha WebM (VP9, 512) | Encoded from the PNG sequences with ffmpeg/libvpx-vp9, yuva420p | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\video\*.mp4` | Mascot green-screen MP4 (H.264, 1024) | Encoded from the PNG sequences; chroma #00FF00 | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\brand\*.png` | Brand exports (favicon 32, README header, X avatar, X banner) | Rendered from the SVG + OFL Inter/IBM Plex Sans Arabic | Project-owned (MIT); fonts OFL | 2026-11-01 |
 
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
