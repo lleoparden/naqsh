@@ -1,0 +1,12 @@
+﻿import { chromium } from "playwright-core";
+const browser = await chromium.launch({ executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", headless: true });
+const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+await page.goto("http://127.0.0.1:8099/preview-v2.html", { waitUntil: "networkidle" });
+const buttons = await page.locator("#states button").count();
+await page.getByRole("button", { name: "talking", exact: true }).click();
+await page.waitForTimeout(500);
+const counter = await page.locator("#counter").textContent();
+await page.getByRole("button", { name: "12 fps" }).click();
+const label = await page.locator("#fpsLabel").textContent();
+console.log(JSON.stringify({ buttons, counter, label }));
+await browser.close();
