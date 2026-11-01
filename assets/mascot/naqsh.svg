@@ -65,7 +65,7 @@
       55% { transform: rotate(-4deg) translateY(0); }
       66%, 100% { transform: rotate(0deg) translateY(0); }
     }
-    .state-wave #top-pebble { animation: wave-rock 1.5s steps(1, end) 1; transform: rotate(-8deg); }
+    .state-wave #top-pebble { animation: wave-rock 1.5s steps(1, end) 1; }
 
     /* happy: once, 1.5 s; closed eyes + bounce. */
     @keyframes happy-bounce {

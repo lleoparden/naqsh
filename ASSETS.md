@@ -90,6 +90,12 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | `assets/mascot/preview.html` | Mascot state preview page | Hand-authored HTML/SVG demo; source: code-drawn | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\static\naqsh-*.png` | Mascot static poses (512 px states, 1024 px idle) | Rendered from the SVG with Playwright, transparent | Project-owned (MIT) | 2026-11-01 |
 
+| `assets/mascot/favicon.svg` | Mascot favicon source | Code-drawn copy of `naqsh.svg`; no model | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\frames\<state>\*.png` | Mascot 12 fps PNG sequences (alpha) | Rendered from the SVG with Playwright; code-drawn | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\video\*.webm` | Mascot alpha WebM (VP9, 512) | Encoded from the PNG sequences with ffmpeg/libvpx-vp9, yuva420p | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\video\*.mp4` | Mascot green-screen MP4 (H.264, 1024) | Encoded from the PNG sequences; chroma #00FF00 | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\brand\*.png` | Brand exports (favicon 32, README header, X avatar, X banner) | Rendered from the SVG + OFL Inter/IBM Plex Sans Arabic | Project-owned (MIT); fonts OFL | 2026-11-01 |
+
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
 | `assets/fonts/IBMPlexSansArabic-Regular.ttf` | UI Arabic (chrome, samples) | [google/fonts · ofl/ibmplexsansarabic](https://github.com/google/fonts/tree/main/ofl/ibmplexsansarabic) | OFL 1.1 (`OFL-IBMPlexSansArabic.txt`) | 2026-10-28 |
