@@ -44,22 +44,24 @@
 /* Design tokens: docs/ui-design-brief.md. Legacy names map to the dark palette so
    existing utilities (bg-paper, text-ink, border-sand, bg-nile, text-lacquer) flip. */
 @theme {
-  --color-bg: #0e0f12;
-  --color-panel: #16181d;
-  --color-raised: #1d2026;
-  --color-border: #2a2e36;
-  --color-fg: #e6e8ee;
-  --color-muted: #9aa1ad;
-  --color-accent: #5b6cff;
-  --color-accent-strong: #3b47c4;
-  --color-danger: #e5484d;
-  --color-success: #3fb950;
+  --color-bg: #1b1b1f;
+  --color-panel: #202024;
+  --color-raised: #242428;
+  --color-border: #3a3335;
+  --color-fg: #f3eee8;
+  --color-muted: #c6bfb7;
+  --color-accent: #a94a4a;
+  --color-accent-light: #e07c7b;
+  --color-accent-deep: #8b3a3a;
+  --color-accent-strong: #8b3a3a;
+  --color-danger: #e2665c;
+  --color-success: #7f9a6d;
 
-  --color-ink: #e6e8ee;
-  --color-paper: #0e0f12;
-  --color-sand: #2a2e36;
-  --color-nile: #3b47c4;
-  --color-lacquer: #a32a2f;
+  --color-ink: #f3eee8;
+  --color-paper: #1b1b1f;
+  --color-sand: #3a3335;
+  --color-nile: #8b3a3a;
+  --color-lacquer: #a94a4a;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-arabic: "IBM Plex Sans Arabic", "Inter", sans-serif;

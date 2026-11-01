@@ -86,3 +86,13 @@ next action. No "eyebrow" labels and no middle-dot meta strings.
 
 Mobile/responsive layout, light theme, custom illustration, animations beyond
 action feedback (toast, menu, drag), a marketing landing page.
+
+
+## Palette update (2026-11-01, owner)
+
+The owner directed the project to use the Vectr UI colour template. Tokens:
+background `#1b1b1f`, panel `#202024`, raised `#242428`, border `#3a3335`,
+text `#f3eee8`, muted `#c6bfb7`, accent `#a94a4a`, accent-deep `#8b3a3a`,
+accent-light `#e07c7b`, danger `#e2665c`. This supersedes the earlier
+`#5B6CFF` accent decision. A muted sage `#7f9a6d` is used for success because
+Vectr has no success token.
