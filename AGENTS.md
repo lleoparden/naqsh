@@ -180,6 +180,19 @@ owner judges images.
 - Never start a live-mode server (`LIVE_MODE=1`) without telling the owner first.
   Demo mode is the default; paid model calls are blocked unless `LIVE_MODE=1`.
 
+### Owner approval and freeze rules
+
+- **Never merge** a PR that touches `frontend/src` or `backend/app`, or that is labeled
+  `needs owner approval`, without the owner's explicit approval in chat. Opening the PR
+  is not approval; passing CI is not approval.
+- **Always branch from `main` and verify the merge-base before opening a PR.** Run
+  `git merge-base --is-ancestor main HEAD` and `git log --oneline main..HEAD`; if the
+  branch contains unrelated work, stop and re-cut it.
+- **After the freeze tag**, no merges at all except a real bug found during recording,
+  and only after the owner approves that specific fix.
+- One issue, one branch, one PR per work item; do not bundle unrelated items.
+
+
 ### Budget
 
 If the mandated work cannot fit under the task's API budget cap, stop and ask before
