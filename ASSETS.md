@@ -81,6 +81,11 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | mascot expression: layers thinking | Exploration only | Muse Image edit (`muse-image-1.0`) of the concept, prompt in `backend/scripts/build_mascot_expressions.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
 | mascot expression: layers happy | Exploration only | Muse Image edit (`muse-image-1.0`) of the concept, prompt in `backend/scripts/build_mascot_expressions.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
 
+| mascot dot-b variant: dotb-vectr-brick | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
+| mascot dot-b variant: dotb-vectr-rose | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
+| mascot dot-b variant: dotb-vectr-charcoal | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
+| mascot dot-b variant: dotb-vectr-cream | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
+
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
 | `assets/fonts/IBMPlexSansArabic-Regular.ttf` | UI Arabic (chrome, samples) | [google/fonts · ofl/ibmplexsansarabic](https://github.com/google/fonts/tree/main/ofl/ibmplexsansarabic) | OFL 1.1 (`OFL-IBMPlexSansArabic.txt`) | 2026-10-28 |

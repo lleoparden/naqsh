@@ -137,5 +137,39 @@
       "file": "L:\\naqsh-review\\mascot\\expressions\\layers-happy.png",
       "cost_usd": 0.01
     }
+  ],
+  "dotb_variants": [
+    {
+      "name": "dotb-vectr-brick",
+      "base": "dot-b",
+      "palette": "brick red #a94a4a body, cream #f3eee8 top dot, dark #1b1b1f outline, cream #f3eee8 background",
+      "prompt": "Original flat-vector mascot: two stacked rounded pebble dots, the smaller sitting on top of the larger like an Arabic nuqta; the larger pebble has two tiny dot eyes and a small calm smile; no arms, no legs, no blocky pixel body, no crab shape, no orange or coral body, smooth rounded shapes, thick soft shapes, centered on a plain background, no text, no letters, no logo, no shadow, readable at 32 px. Palette strictly: brick red #a94a4a body, cream #f3eee8 top dot, dark #1b1b1f outline, cream #f3eee8 background.",
+      "file": "L:\\naqsh-review\\mascot\\dot-b-vectr\\dotb-vectr-brick.png",
+      "cost_usd": 0.01
+    },
+    {
+      "name": "dotb-vectr-rose",
+      "base": "dot-b",
+      "palette": "muted rose #e07c7b body, brick red #a94a4a top dot, dark #1b1b1f outline, cream #f3eee8 background",
+      "prompt": "Original flat-vector mascot: two stacked rounded pebble dots, the smaller sitting on top of the larger like an Arabic nuqta; the larger pebble has two tiny dot eyes and a small calm smile; no arms, no legs, no blocky pixel body, no crab shape, no orange or coral body, smooth rounded shapes, thick soft shapes, centered on a plain background, no text, no letters, no logo, no shadow, readable at 32 px. Palette strictly: muted rose #e07c7b body, brick red #a94a4a top dot, dark #1b1b1f outline, cream #f3eee8 background.",
+      "file": "L:\\naqsh-review\\mascot\\dot-b-vectr\\dotb-vectr-rose.png",
+      "cost_usd": 0.01
+    },
+    {
+      "name": "dotb-vectr-charcoal",
+      "base": "dot-b",
+      "palette": "charcoal #1b1b1f body, muted rose #e07c7b top dot, cream #f3eee8 outline, warm grey #242428 background",
+      "prompt": "Original flat-vector mascot: two stacked rounded pebble dots, the smaller sitting on top of the larger like an Arabic nuqta; the larger pebble has two tiny dot eyes and a small calm smile; no arms, no legs, no blocky pixel body, no crab shape, no orange or coral body, smooth rounded shapes, thick soft shapes, centered on a plain background, no text, no letters, no logo, no shadow, readable at 32 px. Palette strictly: charcoal #1b1b1f body, muted rose #e07c7b top dot, cream #f3eee8 outline, warm grey #242428 background.",
+      "file": "L:\\naqsh-review\\mascot\\dot-b-vectr\\dotb-vectr-charcoal.png",
+      "cost_usd": 0.01
+    },
+    {
+      "name": "dotb-vectr-cream",
+      "base": "dot-b",
+      "palette": "cream #f3eee8 body, brick red #a94a4a top dot, charcoal #1b1b1f outline, charcoal #202024 background",
+      "prompt": "Original flat-vector mascot: two stacked rounded pebble dots, the smaller sitting on top of the larger like an Arabic nuqta; the larger pebble has two tiny dot eyes and a small calm smile; no arms, no legs, no blocky pixel body, no crab shape, no orange or coral body, smooth rounded shapes, thick soft shapes, centered on a plain background, no text, no letters, no logo, no shadow, readable at 32 px. Palette strictly: cream #f3eee8 body, brick red #a94a4a top dot, charcoal #1b1b1f outline, charcoal #202024 background.",
+      "file": "L:\\naqsh-review\\mascot\\dot-b-vectr\\dotb-vectr-cream.png",
+      "cost_usd": 0.01
+    }
   ]
 }
