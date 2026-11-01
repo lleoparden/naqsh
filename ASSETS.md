@@ -86,6 +86,10 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | mascot dot-b variant: dotb-vectr-charcoal | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
 | mascot dot-b variant: dotb-vectr-cream | Exploration only | Muse Image (`muse-image-1.0`), prompt in `backend/scripts/build_mascot_dotb_vectr.py` | Generated output, project-owned; Muse Image terms (organizer-confirmed allowed) | 2026-11-01 |
 
+| `assets/mascot/naqsh.svg` | Mascot core asset (dotb-vectr-rose) | Hand-authored SVG/CSS; source: code-drawn; no model | Project-owned (MIT); original design, no third-party character reference | 2026-11-01 |
+| `assets/mascot/preview.html` | Mascot state preview page | Hand-authored HTML/SVG demo; source: code-drawn | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\static\naqsh-*.png` | Mascot static poses (512 px states, 1024 px idle) | Rendered from the SVG with Playwright, transparent | Project-owned (MIT) | 2026-11-01 |
+
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
 | `assets/fonts/IBMPlexSansArabic-Regular.ttf` | UI Arabic (chrome, samples) | [google/fonts · ofl/ibmplexsansarabic](https://github.com/google/fonts/tree/main/ofl/ibmplexsansarabic) | OFL 1.1 (`OFL-IBMPlexSansArabic.txt`) | 2026-10-28 |

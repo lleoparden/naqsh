@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Naqsh mascot — states</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 48px; font: 14px/1.5 Inter, system-ui, sans-serif; background: #1b1b1f; color: #f3eee8; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+  p { color: #c6bfb7; margin: 0 0 28px; max-width: 720px; }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; }
+  .cell { text-align: center; }
+  .frame { width: 180px; height: 180px; border-radius: 14px; border: 1px solid #3a3335; background: #202024; display: grid; place-items: center; }
+  .frame.light { background: #f3eee8; }
+  .frame svg { width: 140px; height: 140px; }
+  .small .frame { width: 56px; height: 56px; }
+  .small .frame svg { width: 32px; height: 32px; }
+  .label { margin-top: 8px; color: #c6bfb7; font-size: 12px; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 28px; }
+  button { background: #242428; color: #f3eee8; border: 1px solid #3a3335; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+  button:hover { border-color: #e07c7b; }
+  code { color: #e07c7b; }
+</style>
+<h1>Naqsh mascot</h1>
+<p>Click a state. Serve this folder over HTTP (e.g. <code>python -m http.server</code>) so the SVG can be inlined. Decorative only; no text inside the art.</p>
+<div class="controls" id="controls"></div>
+<div class="row" id="row"></div>
+<div class="row small" style="margin-top:28px" id="small"></div>
+<script>
+  const states = ["idle", "thinking", "wave", "happy", "sad"];
+  const row = document.getElementById("row");
+  const small = document.getElementById("small");
+  const controls = document.getElementById("controls");
+  let svgText = "";
+  async function load() {
+    svgText = await (await fetch("naqsh.svg")).text();
+    for (const state of states) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.innerHTML = `<div class="frame" data-state="${state}"></div><div class="label">${state}</div>`;
+      cell.querySelector(".frame").innerHTML = svgText;
+      cell.querySelector("svg").setAttribute("class", `mascot-svg state-${state}`);
+      row.appendChild(cell);
+      const light = cell.cloneNode(true);
+      light.querySelector(".frame").classList.add("light");
+      light.querySelector("svg").setAttribute("class", `mascot-svg state-${state}`);
+      row.appendChild(light);
+      const tiny = document.createElement("div");
+      tiny.className = "cell small";
+      tiny.innerHTML = `<div class="frame light" data-state="${state}">${svgText}</div><div class="label">32 px</div>`;
+      tiny.querySelector("svg").setAttribute("class", `mascot-svg state-${state}`);
+      small.appendChild(tiny);
+      const button = document.createElement("button");
+      button.textContent = state;
+      button.onclick = () => {
+        document.querySelectorAll("svg.mascot-svg").forEach((svg) => svg.setAttribute("class", `mascot-svg state-${state}`));
+      };
+      controls.appendChild(button);
+    }
+  }
+  load();
+</script>
+</html>
