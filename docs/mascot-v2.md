@@ -37,9 +37,12 @@ claimed here.
 
 ## Transitions
 
-30 blends, 10 frames each at 24 fps (8–12 allowed): idle→talking, talking→idle, and
-idle→/←each other state. They are **crossfades**, not pose interpolation; use them to
-avoid a hard cut, then cut to the state clip.
+30 state blends plus **26 reaction blends**, 10 frames each at 24 fps (8–12 allowed).
+State blends cover idle→talking, talking→idle, and idle→/←each state. Reaction blends
+cover **idle→each of the 13 reaction clips and back to idle** (nod, shake, shrug,
+point-left, point-right, thumbs-up, thinking, loading, success, error, wave-hello,
+wave-goodbye, surprise). They are **crossfades**, not pose interpolation; use them to
+avoid a hard cut, then cut to the reaction clip.
 
 ## Exports
 
@@ -75,8 +78,10 @@ This is **amplitude-driven, not true lip sync**. Test:
 
 ## Reaction pack
 
-13 clips, 1–1.5 s, 768, 24 fps, alpha WebM + ProRes in
-`L:\naqsh-review\mascot-assets\v2\reaction-clips\`; frames in `reactions\`.
+13 longer clips — **2 s** each, **3 s** for thinking-loop and loading-loop — 768,
+24 fps, alpha WebM + ProRes in `L:\naqsh-review\mascot-assets\v2\reaction-clips-long\`;
+frames in `reactions-long\`. Each has a 10-frame idle→reaction and reaction→idle blend in
+`L:\naqsh-review\mascot-assets\v2\reaction-transition-clips\`.
 
 | Clip | Use when |
 |---|---|

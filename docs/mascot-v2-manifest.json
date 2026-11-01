@@ -126,67 +126,132 @@
     {
       "name": "nod",
       "use_when": "yes / agreement / acknowledgement",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-nod",
+        "nod-to-idle"
+      ]
     },
     {
       "name": "shake",
       "use_when": "no / disagreement",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-shake",
+        "shake-to-idle"
+      ]
     },
     {
       "name": "shrug",
       "use_when": "uncertainty / 'I don't know'",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-shrug",
+        "shrug-to-idle"
+      ]
     },
     {
       "name": "point-left",
       "use_when": "direct attention left (lean equivalent; no arms)",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-point-left",
+        "point-left-to-idle"
+      ]
     },
     {
       "name": "point-right",
       "use_when": "direct attention right (lean equivalent; no arms)",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-point-right",
+        "point-right-to-idle"
+      ]
     },
     {
       "name": "thumbs-up",
       "use_when": "approval (proud pose equivalent; no arms)",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-thumbs-up",
+        "thumbs-up-to-idle"
+      ]
     },
     {
       "name": "thinking-loop",
       "use_when": "processing / thinking",
-      "frames": 36
+      "frames": 72,
+      "seconds": 3,
+      "transitions": [
+        "idle-to-thinking-loop",
+        "thinking-loop-to-idle"
+      ]
     },
     {
       "name": "loading-loop",
       "use_when": "waiting / working",
-      "frames": 36
+      "frames": 72,
+      "seconds": 3,
+      "transitions": [
+        "idle-to-loading-loop",
+        "loading-loop-to-idle"
+      ]
     },
     {
       "name": "success-pop",
       "use_when": "export or task succeeded",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-success-pop",
+        "success-pop-to-idle"
+      ]
     },
     {
       "name": "error-shake",
       "use_when": "something failed",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-error-shake",
+        "error-shake-to-idle"
+      ]
     },
     {
       "name": "wave-hello",
       "use_when": "intro / greeting",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-wave-hello",
+        "wave-hello-to-idle"
+      ]
     },
     {
       "name": "wave-goodbye",
       "use_when": "outro / goodbye",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-wave-goodbye",
+        "wave-goodbye-to-idle"
+      ]
     },
     {
       "name": "surprise",
       "use_when": "unexpected result",
-      "frames": 24
+      "frames": 48,
+      "seconds": 2,
+      "transitions": [
+        "idle-to-surprise",
+        "surprise-to-idle"
+      ]
     }
   ],
   "presenter": {
@@ -194,5 +259,11 @@
     "fps": 30,
     "drive": "smoothed WAV amplitude, not true lip sync",
     "sample": "L:\\naqsh-review\\mascot-assets\\v2\\presenter\\sample-10s-presenter.mov"
+  },
+  "reaction_transitions": {
+    "count": 26,
+    "frames_each": 10,
+    "fps": 24,
+    "method": "crossfade"
   }
 }

@@ -103,6 +103,9 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | `L:\naqsh-review\mascot-assets\video\*.mp4` | Mascot green-screen MP4 (H.264, 1024) | Encoded from the PNG sequences; chroma #00FF00 | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\brand\*.png` | Brand exports (favicon 32, README header, X avatar, X banner) | Rendered from the SVG + OFL Inter/IBM Plex Sans Arabic | Project-owned (MIT); fonts OFL | 2026-11-01 |
 
+| `L:\naqsh-review\mascot-assets\v2\reaction-clips-long\**` | 13 reaction clips, 2 s (3 s loops), alpha WebM/ProRes | Encoded from the code-drawn reaction frames | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\reaction-transition-clips\**` | 26 idle<->reaction blend clips | Crossfades of code-drawn frames | Project-owned (MIT) | 2026-11-01 |
+
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
 | `assets/fonts/IBMPlexSansArabic-Regular.ttf` | UI Arabic (chrome, samples) | [google/fonts · ofl/ibmplexsansarabic](https://github.com/google/fonts/tree/main/ofl/ibmplexsansarabic) | OFL 1.1 (`OFL-IBMPlexSansArabic.txt`) | 2026-10-28 |
