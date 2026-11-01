@@ -176,10 +176,3 @@ a {
   width: 38%;
   animation: export-slide 1.1s ease-in-out infinite;
 }
-
-.mascot svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-

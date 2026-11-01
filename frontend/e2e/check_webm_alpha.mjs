@@ -1,0 +1,20 @@
+﻿import { chromium } from "playwright-core";
+const browser = await chromium.launch({ executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", headless: true });
+const page = await browser.newPage();
+const file = "file:///L:/naqsh-review/mascot-assets/video/naqsh-idle-2s-24f-alpha.webm";
+await page.setContent(`<video id="v" muted src="${file}"></video><canvas id="c" width="512" height="512"></canvas>`);
+await page.waitForFunction(() => document.getElementById("v").readyState >= 2, { timeout: 10000 });
+const result = await page.evaluate(async () => {
+  const v = document.getElementById("v");
+  v.currentTime = 0.04;
+  await new Promise((resolve) => v.addEventListener("seeked", resolve, { once: true }));
+  const c = document.getElementById("c");
+  const ctx = c.getContext("2d");
+  ctx.clearRect(0, 0, 512, 512);
+  ctx.drawImage(v, 0, 0, 512, 512);
+  const corner = ctx.getImageData(2, 2, 1, 1).data[3];
+  const center = ctx.getImageData(256, 380, 1, 1).data[3];
+  return { corner, center };
+});
+console.log(JSON.stringify(result));
+await browser.close();
