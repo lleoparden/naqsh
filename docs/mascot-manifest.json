@@ -1,0 +1,77 @@
+{
+  "concepts": [
+    {
+      "name": "dot-a",
+      "category": "dot-a",
+      "prompt": "A single rounded blob shaped like a soft teardrop dot with one tiny flat side, like an Arabic nuqta; two tiny dot eyes and a small calm smile. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\dot-a.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "dot-b",
+      "category": "dot-b",
+      "prompt": "A pair of stacked rounded pebble-dots, the smaller resting on the larger like a punctuation mark; the larger has two tiny dot eyes and a small smile. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\dot-b.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "ink-a",
+      "category": "ink-a",
+      "prompt": "A friendly ink drop with a rounded bulb and a soft pointed top, a glossy highlight, tiny dot eyes and a small smile; indigo ink with a cool grey rim. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\ink-a.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "ink-b",
+      "category": "ink-b",
+      "prompt": "A plump ink drop sitting in a shallow round inkwell, the drop's face peeking over the rim; tiny dot eyes, no limbs. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\ink-b.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "nib",
+      "category": "nib",
+      "prompt": "A rounded calligraphy pen nib character standing upright, a soft heart-shaped nib body with a slit, tiny dot eyes on the nib, no arms. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\nib.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "stamp",
+      "category": "stamp",
+      "prompt": "A chunky rounded stamp/seal character with a soft handle and a wide base, tiny dot eyes on the base, a small carved imprint pattern of simple dots, no letters. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\stamp.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "layers",
+      "category": "layers",
+      "prompt": "A character made of three stacked translucent rounded sheets, slightly offset, with tiny dot eyes on the front sheet and a small smile; indigo with cool grey edges. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\layers.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "name": "knot",
+      "category": "knot",
+      "prompt": "A free-choice character: a soft rounded loop of ribbon folded like an Arabic calligraphic knot, with a tiny dot eye pair and a small smile, no letters. Original flat-vector mascot concept, single cute character, smooth rounded shapes, tiny dot eyes, no mouth or a tiny simple mouth, no arms or legs, no blocky pixel body, no crab shape, no orange or coral body, palette #5B6CFF indigo plus cool grey/cream neutral, thick soft shapes, centered on a plain very light cool-grey background, no text, no letters, no logo, no shadow, readable as a tiny icon, portrait.",
+      "file": "L:\\naqsh-review\\mascot\\concepts\\knot.png",
+      "cost_usd": 0.01,
+      "width": 1280,
+      "height": 1920
+    }
+  ],
+  "expressions": []
+}
