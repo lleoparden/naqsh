@@ -73,5 +73,69 @@
       "height": 1920
     }
   ],
-  "expressions": []
+  "expressions": [
+    {
+      "base": "dot-a",
+      "state": "idle",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a calm idle expression with two tiny dot eyes and a small neutral smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\dot-a-idle.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "dot-a",
+      "state": "thinking",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a thinking expression: eyes looking slightly up, a small flat mouth, and three tiny simple dots floating above the head (no text). No letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\dot-a-thinking.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "dot-a",
+      "state": "happy",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a happy expression: closed smiling eyes (two small arcs) and a small open smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\dot-a-happy.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "ink-a",
+      "state": "idle",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a calm idle expression with two tiny dot eyes and a small neutral smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\ink-a-idle.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "ink-a",
+      "state": "thinking",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a thinking expression: eyes looking slightly up, a small flat mouth, and three tiny simple dots floating above the head (no text). No letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\ink-a-thinking.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "ink-a",
+      "state": "happy",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a happy expression: closed smiling eyes (two small arcs) and a small open smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\ink-a-happy.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "layers",
+      "state": "idle",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a calm idle expression with two tiny dot eyes and a small neutral smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\layers-idle.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "layers",
+      "state": "thinking",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a thinking expression: eyes looking slightly up, a small flat mouth, and three tiny simple dots floating above the head (no text). No letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\layers-thinking.png",
+      "cost_usd": 0.01
+    },
+    {
+      "base": "layers",
+      "state": "happy",
+      "prompt": "Keep this exact mascot character completely unchanged: same silhouette, same colours, same pose, same plain background, same flat vector style. Change only the face to a happy expression: closed smiling eyes (two small arcs) and a small open smile. No text, no letters, no logo, no extra objects.",
+      "file": "L:\\naqsh-review\\mascot\\expressions\\layers-happy.png",
+      "cost_usd": 0.01
+    }
+  ]
 }
