@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Mascot from "./Mascot";
+import { Image as ImageIcon } from "lucide-react";
 
 /**
  * One state illustration for loading, empty, success and error.
@@ -29,12 +29,10 @@ export default function StateIllustration({
         : "border-border bg-panel";
   const size = compact ? "px-4 py-3" : "px-6 py-8";
   const iconBox = compact ? "h-8 w-8" : "h-12 w-12";
-  const mascotState =
-    kind === "loading" ? "thinking" : kind === "success" ? "happy" : kind === "error" ? "sad" : "idle";
   return (
     <section role="status" className={`rounded-xl border ${tone} ${size} text-center`}>
       <div className={`mx-auto flex ${iconBox} items-center justify-center rounded-full border border-border bg-raised text-ink/70`}>
-        <Mascot state={mascotState} size={compact ? 24 : 36} />
+        <ImageIcon size={compact ? 16 : 22} aria-hidden />
       </div>
       <h3 className="mt-3 text-sm font-semibold text-fg">{title}</h3>
       {detail && <p className="mx-auto mt-1 max-w-sm text-xs leading-relaxed text-ink/70">{detail}</p>}
