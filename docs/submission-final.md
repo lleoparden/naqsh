@@ -42,6 +42,11 @@ reads and translates the lettering, SAM 3.1 segments it, Muse Image repaints the
 Arabic is typeset right-to-left, and a layer editor exposes scenery, bubbles and text for
 editing before layered SVG/PNG/ZIP export.
 
+The product UI uses the Vectr-derived palette (charcoal/brick/rose). The mascot is
+decorative only: she reacts to loading/empty/success/error and waves on hover, is never an
+assistant or a chat character, and is used in the video only as a face for the owner's
+voiceover. Mascot video assets are separate from the runtime and listed in `ASSETS.md`.
+
 ## How judges can run it
 
 Follow **README → “Quickstart for judges”**: clone, Python venv + `pip install`, Node

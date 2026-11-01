@@ -125,6 +125,23 @@ older project. In particular:
   [`ASSETS.md`](ASSETS.md).
 - **Layered background:** the cleaned plate is split into a Scenery layer and one layer per speech bubble (SAM 3.1), each named, toggleable, lockable and reorderable in the editor and present as separate groups in the SVG/ZIP exports. Bubbles are built in the pipeline (one SAM pass per page) **when the Background layers switch is on — it is off by default for speed**; zero detections means scenery only, and a box fallback is allowed only for dialogue. Eight demo entries now live in the cache (the original five plus the final phase1-baker, comic-v4 and zion-limit pages), about **32 MiB** in total.
 
+## Mascot (product + video)
+
+The mascot is **decorative**, never an assistant and never a chat character. In the
+product she appears in the header (hover plays a hello wave) and in the single
+state-illustration slot: loading → thinking, empty → idle, success → happy, error → sad.
+She is `aria-hidden`, fixed-size, and never covers the editor canvas. Disable her with
+`?mascot=off` or a build with `VITE_MASCOT=off`.
+
+The same character is the **face cam** for the demo video, where she is a face for the
+owner's voiceover — not a speaking assistant. Source is
+[`assets/mascot/naqsh-v2.svg`](assets/mascot/naqsh-v2.svg) (16 states, 12/24 fps, CSS
+steps/reduced motion); video exports (ProRes 4444 alpha, WebM alpha, green MP4, reaction
+clips and transitions) live outside the repo in `L:\naqsh-review\mascot-assets\v2\`. The
+voice-driven presenter is `backend/scripts/mascot_presenter.py` (amplitude-driven, not true
+lip sync). All mascot assets and licenses are listed in [`ASSETS.md`](ASSETS.md); the art
+is original and contains no text or logo.
+
 ## The pipeline
 
 1. **Upload** — any page image (comic page, poster, menu).

@@ -105,6 +105,11 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 
 | `L:\naqsh-review\mascot-assets\v2\reaction-clips-long\**` | 13 reaction clips, 2 s (3 s loops), alpha WebM/ProRes | Encoded from the code-drawn reaction frames | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\v2\reaction-transition-clips\**` | 26 idle<->reaction blend clips | Crossfades of code-drawn frames | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\frames\reaction-transitions\**` | PNG frames for the 26 reaction blends | Crossfades of code-drawn frames | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\reactions-long\**` | Extended reaction frame sequences | Code-drawn frames, repeated for duration | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\presenter\sample-voice.wav` | Generated test voice for the presenter sample | Synthesised sine/modulation; no model | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot\contact-sheet.jpg` | Exploration contact sheet (8 concepts + 9 expressions) | Rendered from Muse Image exploration outputs | Project-owned; Muse Image terms | 2026-11-01 |
+| `L:\naqsh-review\mascot\dot-b-vectr\sheet.jpg` | dot-b Vectr-palette variant sheet | Rendered from Muse Image variants | Project-owned; Muse Image terms | 2026-11-01 |
 
 
 | `assets/fonts/Inter-Variable.ttf` | UI sans (Latin chrome) | [google/fonts · ofl/inter](https://github.com/google/fonts/tree/main/ofl/inter) | OFL 1.1 (`OFL-Inter.txt`) | 2026-10-28 |
