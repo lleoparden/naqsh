@@ -1,0 +1,198 @@
+{
+  "version": 2,
+  "character": "dotb-vectr-rose",
+  "palette": {
+    "rose": "#e07c7b",
+    "brick": "#a94a4a",
+    "ink": "#1b1b1f",
+    "cream": "#f3eee8"
+  },
+  "source": "assets/mascot/naqsh-v2.svg",
+  "states": {
+    "idle": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "talking": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "thinking": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "laughing": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "sleepy": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "working": {
+      "24": 36,
+      "12": 18,
+      "loop": true
+    },
+    "blink": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "curious": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "surprised": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "confused": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "happy": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "excited": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "proud": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "sad": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "wave-hello": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    },
+    "wave-goodbye": {
+      "24": 24,
+      "12": 12,
+      "loop": false
+    }
+  },
+  "transitions": {
+    "count": 30,
+    "frames_each": 10,
+    "fps": 24,
+    "method": "crossfade, not pose interpolation"
+  },
+  "exports": {
+    "768": {
+      "formats": [
+        "prores4444-alpha",
+        "webm-vp9-alpha",
+        "mp4-h264-green"
+      ],
+      "fps": [
+        24,
+        12
+      ]
+    },
+    "1080": {
+      "formats": [
+        "prores4444-alpha",
+        "webm-vp9-alpha",
+        "mp4-h264-green"
+      ],
+      "hero_states": [
+        "idle",
+        "talking",
+        "happy",
+        "excited"
+      ]
+    }
+  },
+  "reactions": [
+    {
+      "name": "nod",
+      "use_when": "yes / agreement / acknowledgement",
+      "frames": 24
+    },
+    {
+      "name": "shake",
+      "use_when": "no / disagreement",
+      "frames": 24
+    },
+    {
+      "name": "shrug",
+      "use_when": "uncertainty / 'I don't know'",
+      "frames": 24
+    },
+    {
+      "name": "point-left",
+      "use_when": "direct attention left (lean equivalent; no arms)",
+      "frames": 24
+    },
+    {
+      "name": "point-right",
+      "use_when": "direct attention right (lean equivalent; no arms)",
+      "frames": 24
+    },
+    {
+      "name": "thumbs-up",
+      "use_when": "approval (proud pose equivalent; no arms)",
+      "frames": 24
+    },
+    {
+      "name": "thinking-loop",
+      "use_when": "processing / thinking",
+      "frames": 36
+    },
+    {
+      "name": "loading-loop",
+      "use_when": "waiting / working",
+      "frames": 36
+    },
+    {
+      "name": "success-pop",
+      "use_when": "export or task succeeded",
+      "frames": 24
+    },
+    {
+      "name": "error-shake",
+      "use_when": "something failed",
+      "frames": 24
+    },
+    {
+      "name": "wave-hello",
+      "use_when": "intro / greeting",
+      "frames": 24
+    },
+    {
+      "name": "wave-goodbye",
+      "use_when": "outro / goodbye",
+      "frames": 24
+    },
+    {
+      "name": "surprise",
+      "use_when": "unexpected result",
+      "frames": 24
+    }
+  ],
+  "presenter": {
+    "script": "backend/scripts/mascot_presenter.py",
+    "fps": 30,
+    "drive": "smoothed WAV amplitude, not true lip sync",
+    "sample": "L:\\naqsh-review\\mascot-assets\\v2\\presenter\\sample-10s-presenter.mov"
+  }
+}
