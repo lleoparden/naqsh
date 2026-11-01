@@ -119,7 +119,8 @@ def main() -> None:
             sway(image, t).save(tmp_path / f"frame-{index:04d}.png")
         import imageio_ffmpeg
 
-        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()        out = Path(args.out)
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+        out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [ffmpeg, "-y", "-hide_banner", "-loglevel", "error", "-framerate", str(FPS), "-i", str(tmp_path / "frame-%04d.png"),
