@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Naqsh mascot v2 — presenter states</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; padding:32px; background:#1b1b1f; color:#f3eee8; font:14px/1.5 Inter, system-ui, sans-serif; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  p { color:#c6bfb7; margin:0 0 20px; max-width:760px; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; align-items:center; }
+  button { background:#242428; color:#f3eee8; border:1px solid #3a3335; border-radius:8px; padding:8px 11px; cursor:pointer; }
+  button:hover { border-color:#e07c7b; }
+  button[aria-pressed="true"] { background:#8b3a3a; border-color:#e07c7b; }
+  .stage { width:420px; height:420px; border:1px solid #3a3335; border-radius:16px; background:#202024; display:grid; place-items:center; }
+  .stage svg { width:360px; height:360px; display:block; }
+  .meta { display:flex; gap:24px; margin-top:12px; color:#c6bfb7; font-variant-numeric:tabular-nums; }
+  code { color:#e07c7b; }
+  .states { display:flex; gap:6px; flex-wrap:wrap; max-width:900px; margin-bottom:16px; }
+  .states button { font-size:12px; padding:5px 8px; }
+</style>
+<h1>Naqsh mascot v2</h1>
+<p>Presenter states, 12 fps / 24 fps preview. Serve this folder over HTTP so the SVG can be inlined. The video exports are the source of truth; this page is a quick review.</p>
+<div class="bar">
+  <button id="play">Pause</button>
+  <button id="fps12">12 fps</button>
+  <button id="fps24">24 fps</button>
+  <button id="reset">Restart state</button>
+  <span id="counter">frame 0</span>
+</div>
+<div class="states" id="states"></div>
+<div class="stage"><div id="mount"></div></div>
+<div class="meta"><span id="stateLabel">idle</span><span id="fpsLabel">24 fps</span></div>
+<script>
+  const STATES = ["idle","blink","talking","thinking","curious","surprised","confused","happy","excited","laughing","proud","sad","sleepy","wave-hello","wave-goodbye","working"];
+  const mount = document.getElementById("mount");
+  const counter = document.getElementById("counter");
+  const stateLabel = document.getElementById("stateLabel");
+  const fpsLabel = document.getElementById("fpsLabel");
+  let svg = null, current = "idle", fps = 24, playing = true;
+  const buttons = new Map();
+
+  function animations() { return svg ? svg.getAnimations({ subtree: true }) : []; }
+  function setFps(next) {
+    fps = next;
+    fpsLabel.textContent = `${fps} fps`;
+    for (const animation of animations()) animation.playbackRate = fps / 24;
+  }
+  function setState(name) {
+    current = name;
+    for (const [key, button] of buttons) button.setAttribute("aria-pressed", String(key === name));
+    svg.setAttribute("class", `mascot-v2 state-${name}`);
+    for (const animation of animations()) { animation.currentTime = 0; if (playing) animation.play(); }
+    stateLabel.textContent = name;
+  }
+  function toggle() {
+    playing = !playing;
+    document.getElementById("play").textContent = playing ? "Pause" : "Play";
+    for (const animation of animations()) playing ? animation.play() : animation.pause();
+  }
+  function tick() {
+    const list = animations();
+    if (list.length) {
+      const ms = Number(list[0].currentTime) || 0;
+      counter.textContent = `frame ${Math.floor((ms / 1000) * fps)}`;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  async function load() {
+    const text = await (await fetch("naqsh-v2.svg")).text();
+    mount.innerHTML = text;
+    svg = mount.querySelector("svg");
+    const states = document.getElementById("states");
+    for (const name of STATES) {
+      const button = document.createElement("button");
+      button.textContent = name;
+      button.onclick = () => setState(name);
+      states.appendChild(button);
+      buttons.set(name, button);
+    }
+    document.getElementById("play").onclick = toggle;
+    document.getElementById("fps12").onclick = () => setFps(12);
+    document.getElementById("fps24").onclick = () => setFps(24);
+    document.getElementById("reset").onclick = () => setState(current);
+    setState("idle");
+    setFps(24);
+    tick();
+  }
+  load();
+</script>
+</html>

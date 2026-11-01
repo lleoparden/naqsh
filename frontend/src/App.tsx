@@ -4,6 +4,7 @@ import DemoBadge from "./DemoBadge";
 import Editor from "./editor/Editor";
 import { useLang } from "./i18n";
 import StateIllustration from "./StateIllustration";
+import Mascot from "./Mascot";
 
 const REGISTERS = ["egyptian", "msa"] as const;
 
@@ -97,6 +98,7 @@ function Home() {
   return (
     <main className="mx-auto flex min-h-full max-w-5xl flex-col gap-8 px-6 py-10 text-start">
       <header className="flex flex-wrap items-start justify-between gap-6 border-b border-sand pb-6">
+        <Mascot state="idle" size={44} hoverWave className="mt-1" />
         <div className="max-w-2xl">
           <p className="text-xs tracking-[0.35em] text-accent-light">{t("brand")}</p>
           <h1 className="mt-2 font-arabic text-4xl leading-tight">{t("headline")}</h1>

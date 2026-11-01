@@ -90,6 +90,13 @@ generated with it may be used in the video and repo; no on-screen credit is requ
 | `assets/mascot/preview.html` | Mascot state preview page | Hand-authored HTML/SVG demo; source: code-drawn | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\static\naqsh-*.png` | Mascot static poses (512 px states, 1024 px idle) | Rendered from the SVG with Playwright, transparent | Project-owned (MIT) | 2026-11-01 |
 
+| `assets/mascot/naqsh-v2.svg` | Mascot v2 presenter source, 16 states | Hand-authored SVG/CSS; code-drawn; no model | Project-owned (MIT); original design | 2026-11-01 |
+| `assets/mascot/preview-v2.html` | Mascot v2 preview page | Hand-authored HTML/CSS/JS; code-drawn | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\frames\**` | v2 PNG sequences (16 states, 24/12 fps, transitions, 1080 heroes) | Rendered from `naqsh-v2.svg` with Playwright; code-drawn | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\video\**` | ProRes 4444 alpha, WebM VP9 alpha, green MP4 | Encoded from the code-drawn frames with ffmpeg | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\reaction-clips\**` | 13 reaction clips (alpha WebM/ProRes) | Encoded from code-drawn state/gesture frames | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\previews\**` | Contact sheets and 16 GIFs | Rendered from the code-drawn frames | Project-owned (MIT) | 2026-11-01 |
+| `L:\naqsh-review\mascot-assets\v2\presenter\sample-10s-presenter.mov` | 10 s presenter sample, alpha | Code-drawn frames + generated test WAV; no model | Project-owned (MIT); generated audio | 2026-11-01 |
 | `assets/mascot/favicon.svg` | Mascot favicon source | Code-drawn copy of `naqsh.svg`; no model | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\frames\<state>\*.png` | Mascot 12 fps PNG sequences (alpha) | Rendered from the SVG with Playwright; code-drawn | Project-owned (MIT) | 2026-11-01 |
 | `L:\naqsh-review\mascot-assets\video\*.webm` | Mascot alpha WebM (VP9, 512) | Encoded from the PNG sequences with ffmpeg/libvpx-vp9, yuva420p | Project-owned (MIT) | 2026-11-01 |
