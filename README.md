@@ -82,10 +82,11 @@ tested); no other versions are pinned. The demo-mode smoke test runs in CI on
 
    Upload a page. Paid calls are blocked unless `LIVE_MODE=1`; the startup banner says
    **LIVE MODE**. Costs and waits vary by page and model latency:
-   **comic ≈ $0.026–0.040 and ≈ 29–62 s; menu ≈ $0.037–0.066 and ≈ 62–122 s**.
+   **comic ≈ $0.026–0.041 and ≈ 29–75 s; menu ≈ $0.037–0.066 and ≈ 62–122 s**.
    Sources: `fixtures/demo/comic/receipt.json`, `fixtures/demo/menu/receipt.json`,
    `docs/evidence/phase-8/variance-summary.json`,
-   `docs/evidence/live-ui-fresh-clone.json`, and
+   `docs/evidence/live-ui-fresh-clone.json`,
+   `docs/evidence/final-freeze-v1.1.json`, and
    `docs/evidence/fresh-clone-2026-10-31.md`. Budget for retries in a video take.
 
 6. **Run the tests offline** (no key, no spend):

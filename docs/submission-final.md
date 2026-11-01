@@ -15,9 +15,10 @@ original” — coverage = mask ∪ ink ∪ reading box, dilated; max diff **0**
 (`docs/evidence/ui/after-alignment.json`). The raw Muse Image plate is a full-page
 re-render and is **not** identical.
 
-Costs/waits: comic **≈29–62 s / $0.026–0.040**; menu **≈62–122 s / $0.037–0.066**
+Costs/waits: comic **≈29–75 s / $0.026–0.041**; menu **≈62–122 s / $0.037–0.066**
 (receipts in `fixtures/demo/*/receipt.json`, `docs/evidence/phase-8/variance-summary.json`,
-fresh-clone runs).
+- the 73.7 s / $0.040345 fresh-clone run in `docs/evidence/final-freeze-v1.1.json`; the
+latest menu receipt is 90.3 s / $0.0391, inside the range).
 
 **Disclosure:** “AI coding assistants were used during development; every runtime model
 call is a Meta model.”
@@ -60,7 +61,7 @@ needs no key; it is a fallback, not the main path. Offline tests: `pytest -q`,
 
 | What | Range | Source |
 |---|---|---|
-| Comic page, live | **≈ 29–62 s; $0.026–0.040** | demo receipt $0.0280/39.8 s; fresh-clone runs 48.7 s/$0.027682 and 61.7 s/$0.039521 (`docs/evidence/live-ui-fresh-clone.json`, `docs/evidence/fresh-clone-2026-10-31.md`); variance `docs/evidence/phase-8/variance-summary.json` |
+| Comic page, live | **≈ 29–75 s; $0.026–0.041** | demo receipt $0.0280/39.8 s; fresh-clone runs 48.7 s/$0.027682, 61.7 s/$0.039521 and 73.7 s/$0.040345 (`docs/evidence/live-ui-fresh-clone.json`, `docs/evidence/fresh-clone-2026-10-31.md`, `docs/evidence/final-freeze-v1.1.json`); variance `docs/evidence/phase-8/variance-summary.json` |
 | Menu page, live | **≈ 62–122 s; $0.037–0.066** | `fixtures/demo/menu/receipt.json` (90.3 s/$0.0391); variance `docs/evidence/phase-8/variance-summary.json` |
 | Demo candidates v2 | 32.4–63.9 s; $0.0232–$0.0417 | `docs/evidence/demo-v2/summary.json` |
 | Recall (English suite, pass pages) | 0.71–1.00, mean 0.97 | `docs/evidence/test-suite/summary.json` |
