@@ -82,10 +82,11 @@ tested); no other versions are pinned. The demo-mode smoke test runs in CI on
 
    Upload a page. Paid calls are blocked unless `LIVE_MODE=1`; the startup banner says
    **LIVE MODE**. Costs and waits vary by page and model latency:
-   **comic ≈ $0.026–0.040 and ≈ 29–62 s; menu ≈ $0.037–0.066 and ≈ 62–122 s**.
+   **comic ≈ $0.026–0.041 and ≈ 29–75 s; menu ≈ $0.037–0.066 and ≈ 62–122 s**.
    Sources: `fixtures/demo/comic/receipt.json`, `fixtures/demo/menu/receipt.json`,
    `docs/evidence/phase-8/variance-summary.json`,
-   `docs/evidence/live-ui-fresh-clone.json`, and
+   `docs/evidence/live-ui-fresh-clone.json`,
+   `docs/evidence/final-freeze-v1.1.json`, and
    `docs/evidence/fresh-clone-2026-10-31.md`. Budget for retries in a video take.
 
 6. **Run the tests offline** (no key, no spend):
@@ -124,6 +125,23 @@ older project. In particular:
   generated with Muse Image. Every asset and its license is recorded in
   [`ASSETS.md`](ASSETS.md).
 - **Layered background:** the cleaned plate is split into a Scenery layer and one layer per speech bubble (SAM 3.1), each named, toggleable, lockable and reorderable in the editor and present as separate groups in the SVG/ZIP exports. Bubbles are built in the pipeline (one SAM pass per page) **when the Background layers switch is on — it is off by default for speed**; zero detections means scenery only, and a box fallback is allowed only for dialogue. Eight demo entries now live in the cache (the original five plus the final phase1-baker, comic-v4 and zion-limit pages), about **32 MiB** in total.
+
+## Mascot (product + video)
+
+The mascot is **decorative**, never an assistant and never a chat character. In the
+product she appears in the header (hover plays a hello wave) and in the single
+state-illustration slot: loading → thinking, empty → idle, success → happy, error → sad.
+She is `aria-hidden`, fixed-size, and never covers the editor canvas. Disable her with
+`?mascot=off` or a build with `VITE_MASCOT=off`.
+
+The same character is the **face cam** for the demo video, where she is a face for the
+owner's voiceover — not a speaking assistant. Source is
+[`assets/mascot/naqsh-v2.svg`](assets/mascot/naqsh-v2.svg) (16 states, 12/24 fps, CSS
+steps/reduced motion); video exports (ProRes 4444 alpha, WebM alpha, green MP4, reaction
+clips and transitions) live outside the repo in `L:\naqsh-review\mascot-assets\v2\`. The
+voice-driven presenter is `backend/scripts/mascot_presenter.py` (amplitude-driven, not true
+lip sync). All mascot assets and licenses are listed in [`ASSETS.md`](ASSETS.md); the art
+is original and contains no text or logo.
 
 ## The pipeline
 

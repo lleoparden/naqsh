@@ -42,6 +42,18 @@ mascot integration.
 - **Limits:** no visual pass is claimed; an injected 500 for the error-state test appears
   as a console error in that harness only. Live UI reported none.
 
+## Cost reconciliation
+
+- Live receipt: **$0.040345** (`docs/evidence/final-freeze-v1.1.json`, 73.685 s).
+- The spend report’s **+$0.025896** was **not** this run. It is a separate real job,
+  `8ed5420985ee` (35.5 s, created 2026-11-01 21:16), that entered the main cache after the
+  previous report; it was unaccounted before.
+- The live clone run was deleted, so its $0.040345 was missing from the ledger. It has now
+  been appended to `docs/evidence/api-spend.jsonl`.
+- Therefore the apparent $0.014445 gap was two independent facts, not one wrong ledger
+  number: the old job added $0.025896, and the live run still needed its $0.040345 entry.
+  The reconciled total includes both.
+
 ## After the tag
 
 No code changes after `v1.1` except a real bug found during recording and approved by the
