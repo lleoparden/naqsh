@@ -25,6 +25,8 @@ def ink_extent(
     reading_box: BBox,
     *,
     search_pad: int | None = None,
+    search_pad_x: int | None = None,
+    search_pad_y: int | None = None,
     fill_tolerance: float = INK_TOLERANCE,
 ) -> BBox | None:
     """Bounding box of lettering-like pixels around a region, or None."""
@@ -38,12 +40,15 @@ def ink_extent(
 
     # Spark's boxes can be much shorter than the lettering (a display line whose
     # ascenders sit above the box), so search a generous margin around it.
-    if search_pad is None:
-        search_pad = max(72, int(0.6 * max(reading_box.width, reading_box.height)))
-    x1 = max(0, reading_box.x1 - search_pad)
-    y1 = max(0, reading_box.y1 - search_pad)
-    x2 = min(source.width, reading_box.x2 + search_pad)
-    y2 = min(source.height, reading_box.y2 + search_pad)
+    if search_pad is not None:
+        pad_x = pad_y = search_pad
+    else:
+        pad_x = 8 if search_pad_x is None else search_pad_x
+        pad_y = max(72, int(0.6 * max(reading_box.width, reading_box.height))) if search_pad_y is None else search_pad_y
+    x1 = max(0, reading_box.x1 - pad_x)
+    y1 = max(0, reading_box.y1 - pad_y)
+    x2 = min(source.width, reading_box.x2 + pad_x)
+    y2 = min(source.height, reading_box.y2 + pad_y)
 
     crop = canvas[y1:y2, x1:x2]
     crop_luminance = luminance[y1:y2, x1:x2]
@@ -70,13 +75,13 @@ def coverage_for(
     """Mask ∪ nearby ink, dilated for antialiased edges.
 
     The ink search is anchored to the SAM mask, not to Spark's reading box, and only
-    grows the mask by a few pixels. A reading-box search (the old behaviour) could
-    reach a frame line ~20 px above the lettering; the repainted plate there is shifted
-    by the image edit, so the frame moved by several pixels on the after side.
+    grows the mask by a few pixels horizontally. Vertically it searches further: large
+    descenders (e.g. the bottom of "MORNING") can sit 40+ px below the mask, and leaving
+    them outside the coverage leaves letter fragments in the output.
     """
     mask_bbox = mask.getbbox()
     base = BBox(*mask_bbox) if mask_bbox else reading_box
-    extent = ink_extent(source, mask, base, search_pad=8)
+    extent = ink_extent(source, mask, base, search_pad_x=8, search_pad_y=40)
     area = base
     if extent is not None:
         area = BBox(
