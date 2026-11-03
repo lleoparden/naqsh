@@ -192,8 +192,11 @@ def _structural_lines(image: Image.Image) -> np.ndarray:
     """
     gray = np.asarray(image.convert("L"), dtype=np.uint8)
     dark = gray < 70
-    rows = np.where(dark.mean(axis=1) > 0.45)[0]
-    cols = np.where(dark.mean(axis=0) > 0.45)[0]
+    # Only near-full-span runs are structure. A 45% threshold caught rows of large
+    # lettering (e.g. "BREAD?") and restored those letters from the source, leaving
+    # ghosts inside the text mask. Panel/frame lines span nearly the whole image.
+    rows = np.where(dark.mean(axis=1) > 0.72)[0]
+    cols = np.where(dark.mean(axis=0) > 0.72)[0]
     mask = np.zeros_like(dark, dtype=bool)
     if rows.size:
         mask[rows, :] = True
