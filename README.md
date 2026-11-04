@@ -21,6 +21,9 @@ businesses still localize by hand. Naqsh is built for them first.
 > [`docs/plan.md`](docs/plan.md) and the honest-limit run
 > `fixtures/demo/label-fail/`.
 
+**Demo video:** <https://youtu.be/TA6mRnYT-qc>  
+**X post:** <https://x.com/LLeoparden/status/2117985308696560091>
+
 ## Quickstart for judges
 
 Works on Windows, macOS and Linux. Tested on **Python 3.12** and **Node 20+** (Node 24

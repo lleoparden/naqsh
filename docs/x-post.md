@@ -1,5 +1,7 @@
 # X post drafts (true claims only)
 
+**Published:** <https://x.com/LLeoparden/status/2117985308696560091>
+
 No time-saved ratio. No hashtags required. Credit open-license material if shown.
 
 ## 1 — Launch (with PAGE_A result)

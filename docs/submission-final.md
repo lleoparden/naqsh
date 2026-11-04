@@ -32,8 +32,8 @@ call is a Meta model.”
 | Track | Indie Developer |
 | Problem statement | Build for Your World |
 | Public repo | `https://github.com/lleoparden/naqsh` (public, MIT) |
-| Demo video | 3:00 English, live-first; link to be added when recorded |
-| X post link | to be added before the deadline |
+| Demo video | **https://youtu.be/TA6mRnYT-qc** (3:00, English, live-first) |
+| X post link | **https://x.com/LLeoparden/status/2117985308696560091** |
 | Hosting | **not required**; no deployment |
 
 ## One-paragraph description

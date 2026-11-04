@@ -142,3 +142,6 @@
 {"ts": "2026-11-01T18:05:00+00:00", "label": "mascot variant dotb-vectr-charcoal", "cost_usd": 0.01, "kind": "image"}
 {"ts": "2026-11-01T18:05:14+00:00", "label": "mascot variant dotb-vectr-cream", "cost_usd": 0.01, "kind": "image"}
 {"ts": "2026-11-01T19:25:00+00:00", "label": "freeze v1.1 live comic (approved)", "cost_usd": 0.040345, "kind": "pipeline"}
+{"ts": "2026-11-03T15:01:54+00:00", "label": "retranslate 5bc85b87176a/t1", "cost_usd": 0.001422, "kind": "text"}
+{"ts": "2026-11-03T15:02:06+00:00", "label": "retranslate 5bc85b87176a/t1", "cost_usd": 0.002197, "kind": "text"}
+{"ts": "2026-11-03T15:02:24+00:00", "label": "retranslate 5bc85b87176a/t1", "cost_usd": 0.000776, "kind": "text"}
