@@ -14,10 +14,10 @@ Submission form: Cerebral Valley platform, one per project. Deadline **4 Nov
 | Team member | ready | Mostafa Eid (Lleoparden) |
 | Track | ready | Indie Developer |
 | Problem statement | ready | Build for Your World |
-| Most Viral Track (X post link) | pending | Build-in-public clip; media folder below |
+| Most Viral Track (X post link) | ready | https://x.com/LLeoparden/status/2117985308696560091 |
 | Project description | draft | README pitch; tighten to ~150 words for the form |
-| Public GitHub repo | in progress | `https://github.com/lleoparden/naqsh` (public) |
-| 3-minute demo video | pending | Script outline below; backup target 30 Oct |
+| Public GitHub repo | ready | `https://github.com/lleoparden/naqsh` (public) |
+| 3-minute demo video | ready | https://youtu.be/TA6mRnYT-qc |
 | Use of Meta products | draft | Model roles table below |
 | Why Meta's models matter | draft | Below — what each model does that another tool couldn't |
 | Feedback on Meta products | collecting | Friction log below |
